@@ -1,0 +1,22 @@
+{
+  "name": "ascend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Ascend — immersive premium SaaS landing page with a 3D planet hero",
+  "scripts": {
+    "dev": "vite --port 3000 --host",
+    "build": "vite build",
+    "preview": "vite preview --port 3000 --host"
+  },
+  "dependencies": {
+    "lenis": "^1.3.23",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "0.143.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.10"
+  }
+}

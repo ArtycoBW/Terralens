@@ -1,0 +1,117 @@
+[
+  {
+    "file": "ascend.zip",
+    "bytes": 1827883,
+    "sha256": "28a6cdfee418a1201ff2ed2870fc972ab8a0021d2489ec55dfac7e48824a4a16",
+    "members": [
+      {
+        "path": "ascend/",
+        "bytes": 0
+      },
+      {
+        "path": "ascend/index.html",
+        "bytes": 742
+      },
+      {
+        "path": "ascend/HOW_TO_USE.md",
+        "bytes": 916
+      },
+      {
+        "path": "ascend/vite.config.js",
+        "bytes": 323
+      },
+      {
+        "path": "ascend/public/",
+        "bytes": 0
+      },
+      {
+        "path": "ascend/public/assets/",
+        "bytes": 0
+      },
+      {
+        "path": "ascend/public/assets/planet-clouds.png",
+        "bytes": 634184
+      },
+      {
+        "path": "ascend/public/assets/planet.glb",
+        "bytes": 1110036
+      },
+      {
+        "path": "ascend/public/assets/planet-lights.glb",
+        "bytes": 184096
+      },
+      {
+        "path": "ascend/.gitignore",
+        "bytes": 36
+      },
+      {
+        "path": "ascend/package-lock.json",
+        "bytes": 57244
+      },
+      {
+        "path": "ascend/package.json",
+        "bytes": 519
+      },
+      {
+        "path": "ascend/src/",
+        "bytes": 0
+      },
+      {
+        "path": "ascend/src/index.css",
+        "bytes": 14980
+      },
+      {
+        "path": "ascend/src/main.jsx",
+        "bytes": 232
+      },
+      {
+        "path": "ascend/src/App.jsx",
+        "bytes": 10714
+      },
+      {
+        "path": "ascend/src/Planet.jsx",
+        "bytes": 520
+      },
+      {
+        "path": "ascend/src/scene/",
+        "bytes": 0
+      },
+      {
+        "path": "ascend/src/scene/planet.js",
+        "bytes": 34231
+      }
+    ],
+    "crc_error": null
+  },
+  {
+    "file": "test-dataset.csv",
+    "bytes": 8216663,
+    "sha256": "3c5c0e27eef8266bcf6dce09c9b556c073cee3902c065a94e4ea7a59edb00993"
+  },
+  {
+    "file": "train-dataset.zip",
+    "bytes": 4314664,
+    "sha256": "08e4f724f616459c944050aa25c1a46d16055501c785faeda74edd907c665fc6",
+    "members": [
+      {
+        "path": "train_dataset.csv",
+        "bytes": 15182258
+      },
+      {
+        "path": "__MACOSX/._train_dataset.csv",
+        "bytes": 705
+      }
+    ],
+    "crc_error": null
+  },
+  {
+    "file": "критекрии_приёмки.pdf",
+    "bytes": 2077016,
+    "sha256": "bb67c6c3dd31653a34417bfd777921d9d59694d824ed901d737d1bf0b494641e"
+  },
+  {
+    "file": "постановка_задачи.pdf",
+    "bytes": 6995850,
+    "sha256": "f87f012a601ca5234764e04e38f656ca92b792aedd719beddb82779a5a5ca153"
+  }
+]
