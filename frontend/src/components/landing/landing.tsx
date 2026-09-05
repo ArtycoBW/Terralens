@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { IconArrowUpRight, IconArrowRight } from "@tabler/icons-react";
-import { Button } from "@/components/ui/button";
+import { IconArrowUpRight } from "@tabler/icons-react";
 import {
   Accordion,
   AccordionItem,
@@ -14,7 +13,7 @@ import { LandingMotion } from "./motion";
 import { CinematicFooter } from "@/components/ui/motion-footer";
 import { LandingNavbar } from "./navbar";
 import { Outputs } from "./outputs";
-import { PlanetView } from "./planet-view";
+import { HeroStory } from "./hero-story";
 
 export function Landing() {
   return (
@@ -24,64 +23,9 @@ export function Landing() {
       data-landing
     >
       <LandingMotion />
-      <PlanetView />
       <LandingNavbar />
       <main id="main">
-        <section
-          aria-label="TerraLens: спутниковая аналитика"
-          data-hero
-          className="relative z-10 flex min-h-svh flex-col items-center px-5 pt-[clamp(135px,18vh,200px)] pb-24 text-center"
-        >
-          <div className="relative max-w-4xl" data-hero-copy>
-            <p data-intro className="mb-6 font-mono text-xs text-primary">
-              Спутниковая аналитика территорий
-            </p>
-            <h1
-              data-intro
-              className="text-[clamp(1.6rem,8.5vw,2.65rem)] leading-[1.04] tracking-[-.045em] sm:text-[clamp(2.65rem,5.6vw,5rem)]"
-            >
-              Состояние полей.
-              <br />В динамике сезона.
-            </h1>
-            <p
-              data-intro
-              className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-foreground/85 sm:text-lg"
-            >
-              Спутниковая история, погода и восстановленный NDVI для каждого
-              контура.
-            </p>
-            <div
-              data-intro
-              className="mt-8 flex flex-wrap items-center justify-center gap-4"
-            >
-              <Button
-                asChild
-                size="lg"
-                className="h-13 gap-5 rounded-full px-6 text-sm"
-              >
-                <Link href="/app">
-                  Исследовать поле <IconArrowUpRight size={18} />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="h-13 gap-4 rounded-full border-foreground/20 bg-background/60 px-6 text-foreground"
-              >
-                <a href="#workflow">
-                  Как это работает <IconArrowRight size={16} />
-                </a>
-              </Button>
-            </div>
-          </div>
-          <a
-            href="#features"
-            className="mt-auto pt-16 font-mono text-[11px] text-muted-foreground"
-          >
-            Откройте возможности ↓
-          </a>
-        </section>
+        <HeroStory />
 
         <Colonnade />
 

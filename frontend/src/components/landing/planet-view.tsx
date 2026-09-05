@@ -1,22 +1,22 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { useHydrated } from "./motion-preference";
-export function PlanetView() {
+import { useEffect, useRef, useState, type RefObject } from "react";
+import { useHydrated, usePrefersReducedMotion } from "./motion-preference";
+import type { HeroSceneState } from "./hero-story-config";
+export function PlanetView({ scene }: { scene: RefObject<HeroSceneState> }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const [ready, setReady] = useState(false);
   const hydrated = useHydrated();
+  const reducedMotion = usePrefersReducedMotion();
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     let stopped = false,
       initiated = false,
       failed = false,
-      revealTimer: ReturnType<typeof setTimeout> | undefined,
       dispose: (() => void) | undefined;
     const stop = () => {
       dispose?.();
       dispose = undefined;
-      clearTimeout(revealTimer);
       initiated = false;
       setReady(false);
     };
@@ -26,25 +26,30 @@ export function PlanetView() {
         initiated ||
         failed ||
         media.matches ||
-        scrollY > innerHeight * 1.25
+        !scene.current.active
       )
         return;
       initiated = true;
       import("./planet")
         .then(({ initPlanet }) => {
-          if (stopped || !canvas.current || media.matches) return;
+          if (stopped || !canvas.current || media.matches) {
+            initiated = false;
+            return;
+          }
           try {
             dispose = initPlanet(
               canvas.current,
               () => {
-                revealTimer = setTimeout(() => {
-                  if (!stopped) setReady(true);
-                }, 2000);
+                if (!stopped) setReady(true);
               },
               () => {
                 failed = true;
                 stop();
               },
+              () => ({
+                ...scene.current,
+                active: scene.current.active && !media.matches,
+              }),
             );
           } catch {
             failed = true;
@@ -73,22 +78,22 @@ export function PlanetView() {
     inputEvents.forEach((event) =>
       window.addEventListener(event, begin, { passive: true }),
     );
-    const preference = () => {
-      if (media.matches) stop();
-    };
-    media.addEventListener("change", preference);
+    // Смена настройки приостанавливает кадры, сохраняя живой контекст.
+    // forceContextLoss нужен только при окончательном освобождении сцены.
     return () => {
       stopped = true;
-      clearTimeout(revealTimer);
       dispose?.();
       current?.removeEventListener("webglcontextlost", lost);
-      media.removeEventListener("change", preference);
       inputEvents.forEach((event) => window.removeEventListener(event, begin));
     };
-  }, []);
+  }, [scene]);
   return (
-    <div className="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
+    <div
+      className="pointer-events-none absolute inset-0 z-0"
+      aria-hidden="true"
+    >
       <Image
+        data-planet-poster
         src="/assets/earth/planet-poster.webp"
         alt=""
         fill
@@ -100,7 +105,7 @@ export function PlanetView() {
         ref={canvas}
         data-planet
         data-hydrated={hydrated}
-        data-ready={ready}
+        data-ready={ready && !reducedMotion}
         className="absolute inset-0 h-full w-full opacity-0 transition-opacity duration-700 data-[ready=true]:opacity-100"
       />
     </div>

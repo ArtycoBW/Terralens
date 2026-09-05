@@ -1,5 +1,5 @@
 /* ============================================================
-   PLANET — ported verbatim from getlayers-scenes/planet.html into a
+   PLANET — adapted from getlayers-scenes/planet.html into a
    mountable module. A GLTF earth with a day/night-lights/rim/water shader,
    a soft atmosphere halo, three drifting cloud shells, ambient motes, a
    starfield and radar-ping land markers, composited through a bloom +
@@ -22,7 +22,9 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
-export function initPlanet(canvas, onReady = () => {}, onError = () => {}) {
+import { heroPlanetFrame } from "./hero-story-config";
+
+export function initPlanet(canvas, onReady = () => {}, onError = () => {}, getState = () => ({ progress: 0, active: true })) {
   let disposed = false;
   const loadedRoots = [];
   const CONFIG = {
@@ -71,24 +73,6 @@ export function initPlanet(canvas, onReady = () => {}, onError = () => {}) {
   };
 
   const LAYERS = { NONE: 0, TORUS_SCENE: 1, BLOOM_SCENE: 2, ENTIRE_SCENE: 3 };
-  const Lerp = (a, b, t) => a + (b - a) * t;
-  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
-
-  // Piecewise smoothstep interpolation over keyframe stops [{p, v}] (p ascending).
-  function sample(stops, p) {
-    if (p <= stops[0].p) return stops[0].v;
-    for (let i = 1; i < stops.length; i++) {
-      if (p <= stops[i].p) {
-        const a = stops[i - 1],
-          b = stops[i];
-        const t = (p - a.p) / (b.p - a.p);
-        const e = t * t * (3 - 2 * t);
-        return a.v + (b.v - a.v) * e;
-      }
-    }
-    return stops[stops.length - 1].v;
-  }
-
   function hexToVec3(hex) {
     const n = parseInt(hex.slice(1), 16);
     return new THREE.Vector3(
@@ -251,42 +235,8 @@ export function initPlanet(canvas, onReady = () => {}, onError = () => {}) {
   let cloudMat = null;
   let glowMat = null;
   let glowMesh = null;
-  let spinPhase = 0;
-  let entryActive = false;
-  let entryT = 0;
-  const ENTRY_DUR = 1.9;
-  const ENTRY_START_Y = -6.5;
-
-  /* ---------- SCROLL STORYTELLING ----------
-     Scroll progress (0..1 down the page) drives the planet's position + scale
-     through keyframe stops. Beat 0 = hero: a huge globe, low, half below the
-     fold. Then it zooms out and swings side to side (left → right) before
-     settling near the final CTA. Targets are damped per-frame for smoothness. */
-  const STOPS_X = [
-    { p: 0, v: 0 },
-    { p: 0.32, v: -3.1 },
-    { p: 0.64, v: 3.2 },
-    { p: 1, v: 0 },
-  ];
-  // hero globe sits low (more sky above it); nudged a further ~5% of the viewport down
-  const STOPS_Y = [
-    { p: 0, v: -4.5 },
-    { p: 0.32, v: 0.55 },
-    { p: 0.64, v: 0.45 },
-    { p: 1, v: 0.15 },
-  ];
-  const STOPS_S = [
-    { p: 0, v: 2.15 },
-    { p: 0.32, v: 1.0 },
-    { p: 0.64, v: 0.92 },
-    { p: 1, v: 1.12 },
-  ];
-  let curX = STOPS_X[0].v,
-    curY = STOPS_Y[0].v,
-    curS = STOPS_S[0].v,
-    curP = 0;
-  worldGroup.position.set(curX, curY, 0);
-  worldGroup.scale.setScalar(curS);
+  let planetLoaded = false;
+  let announcedReady = false;
 
   function firstMesh(obj) {
     let found = null;
@@ -536,9 +486,7 @@ export function initPlanet(canvas, onReady = () => {}, onError = () => {}) {
             addMarkers(planet);
             addAtmosphereGlow(CONFIG.planetRadius);
             cloudGroup.visible = true;
-            entryActive = true;
-            entryT = 0;
-            onReady();
+            planetLoaded = true;
           },
           undefined,
           onError,
@@ -837,8 +785,8 @@ export function initPlanet(canvas, onReady = () => {}, onError = () => {}) {
 
   /* ---------- RESIZE ---------- */
   function resize() {
-    const w = window.innerWidth,
-      h = window.innerHeight,
+    const w = canvas.clientWidth || window.innerWidth,
+      h = canvas.clientHeight || window.innerHeight,
       dpr = Math.min(window.devicePixelRatio, window.innerWidth < 700 ? 1 : 1.5);
     renderer.setPixelRatio(dpr);
     renderer.setSize(w, h, false);
@@ -852,7 +800,8 @@ export function initPlanet(canvas, onReady = () => {}, onError = () => {}) {
     if (starMat) starMat.uniforms.uRes.value.set(w * dpr, h * dpr);
     if (markerMat) markerMat.uniforms.uRes.value.set(w * dpr, h * dpr);
   }
-  window.addEventListener("resize", resize);
+  const resizeObserver = new ResizeObserver(resize);
+  resizeObserver.observe(canvas);
   resize();
 
   /* ---------- RENDER LOOP ---------- */
@@ -861,7 +810,8 @@ export function initPlanet(canvas, onReady = () => {}, onError = () => {}) {
   function render() {
     if (disposed) return;
     raf = requestAnimationFrame(render);
-    if (document.hidden || window.scrollY > window.innerHeight * 1.25) {
+    const state = getState();
+    if (document.hidden || !state.active) {
       t0 = performance.now() / 1000;
       return;
     }
@@ -872,42 +822,17 @@ export function initPlanet(canvas, onReady = () => {}, onError = () => {}) {
     cloudTime.value += dt / 20;
     starTime.value += dt;
     markerTime.value += dt;
-    spinPhase += dt * CONFIG.spin;
     for (const cl of cloudMeshes) {
       cl.phase += dt * CONFIG[cl.layer.sKey];
       cl.mesh.rotation.y = cl.phase;
     }
 
-    // --- scroll-driven framing ---
-    const maxScroll = Math.max(
-      1,
-      document.documentElement.scrollHeight - window.innerHeight,
-    );
-    const pTarget = clamp(window.scrollY / maxScroll, 0, 1);
-    curP += (pTarget - curP) * Math.min(1, dt * 4.5);
-    // less lateral travel on narrow screens so the planet never leaves frame entirely
-    const sideScale = clamp(window.innerWidth / 1200, 0.5, 1);
-    const tx = sample(STOPS_X, curP) * sideScale;
-    const ty = sample(STOPS_Y, curP);
-    const ts = sample(STOPS_S, curP);
-    const k = Math.min(1, dt * 3.2);
-    curX += (tx - curX) * k;
-    curY += (ty - curY) * k;
-    curS += (ts - curS) * k;
-
-    // one-time float-up entrance, applied on top of the scroll target
-    let entryY = 0;
-    if (entryActive) {
-      entryT = Math.min(1, entryT + dt / ENTRY_DUR);
-      const e = 1 - Math.pow(1 - entryT, 3);
-      entryY = Lerp(ENTRY_START_Y, 0, e);
-      if (entryT >= 1) entryActive = false;
-    }
-    worldGroup.position.set(curX, curY + entryY, 0);
-    worldGroup.scale.setScalar(curS);
-    // base auto-spin + extra rotation coupled to scroll progress (the "turn")
-    planetGroup.rotation.y =
-      CONFIG.initRotation + spinPhase + curP * Math.PI * 1.6;
+    // Текст и Земля используют один прогресс закреплённой секции.
+    // Нет второго сглаживания: обратный скролл возвращает точно тот же ракурс.
+    const frame = heroPlanetFrame(state.progress, canvas.clientWidth, canvas.clientHeight);
+    worldGroup.position.set(frame.x, frame.y, 0);
+    worldGroup.scale.setScalar(frame.scale);
+    planetGroup.rotation.y = CONFIG.initRotation + frame.turn;
 
     controls.update();
     if (glowMesh) glowMesh.quaternion.copy(camera.quaternion);
@@ -918,6 +843,11 @@ export function initPlanet(canvas, onReady = () => {}, onError = () => {}) {
     bloomComposer.render();
     camera.layers.set(LAYERS.ENTIRE_SCENE);
     finalComposer.render();
+    // Готовность означает первый отрисованный кадр модели, а не окончание загрузки.
+    if (planetLoaded && !announcedReady) {
+      announcedReady = true;
+      onReady();
+    }
   }
   render();
 
@@ -925,7 +855,7 @@ export function initPlanet(canvas, onReady = () => {}, onError = () => {}) {
   return function cleanup() {
     disposed = true;
     cancelAnimationFrame(raf);
-    window.removeEventListener("resize", resize);
+    resizeObserver.disconnect();
     controls.dispose();
     torusComposer.dispose?.();
     bloomComposer.dispose?.();
