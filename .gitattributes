@@ -1,5 +1,6 @@
 # Model manifests sign exact bytes. Do not let Windows checkout rewrite them.
 ml/artifacts/** -text
+deliverables/submission.csv -text
 # Shared source and lock hashes must also be portable across platforms.
 uv.lock text eol=lf
 ml/src/**/*.py text eol=lf
