@@ -14,6 +14,18 @@ from scipy.sparse.linalg import spsolve
 
 from .io import SENSORS, canonical_hash
 
+NDVI_SENSORS = ["s2_ndvi", "landsat_ndvi", "modis_ndvi"]
+SENSOR_DYNAMICS = [
+    "left_value",
+    "left_days",
+    "right_value",
+    "right_days",
+    "slope",
+    "primary_bias",
+    "paired_count",
+    "adjusted_estimate",
+]
+
 
 def field_season_segments(frame, season_start_month):
     """Разделить поле и сезон на непрерывные по времени отрезки одной культуры."""
@@ -90,6 +102,8 @@ def residual_features(result, config):
     features["sin_doy"] = np.sin(2 * np.pi * dates.dt.dayofyear / 366)
     features["cos_doy"] = np.cos(2 * np.pi * dates.dt.dayofyear / 366)
     features["fallback"] = result.origin.eq("climatology_fallback").astype(float)
+    if config.get("crop_features", False):
+        features["crop_type"] = result.crop_type.fillna("<unknown>").astype(str)
     columns = []
     if config.get("use_sensors", True):
         columns += SENSORS
@@ -100,6 +114,9 @@ def residual_features(result, config):
         if config.get("context_quality", False):
             features[f"{column}_age"] = np.nan
             features[f"{column}_span"] = np.nan
+        if config.get("sensor_dynamics", False) and column in NDVI_SENSORS:
+            for name in SENSOR_DYNAMICS:
+                features[f"{column}_{name}"] = np.nan
     for part in field_season_segments(result, config["season_start_month"]):
         days = pd.to_datetime(part.date).to_numpy(dtype="datetime64[D]").astype(np.int64)
         if config.get("local_features", False):
@@ -127,6 +144,12 @@ def residual_features(result, config):
             if config.get("context_quality", False):
                 features.loc[part.index, f"{column}_age"] = distance
                 features.loc[part.index, f"{column}_span"] = days[valid][right] - days[valid][left]
+            if config.get("sensor_dynamics", False) and column in NDVI_SENSORS:
+                dynamics = sensor_dynamics_features(
+                    days, np.where(valid, values, np.nan), part.clean_primary.to_numpy(dtype=float), estimate
+                )
+                for name, values in dynamics.items():
+                    features.loc[part.index, f"{column}_{name}"] = values
     if config.get("context_quality", False) and config.get("use_sensors", True):
         ndvi = features[["s2_ndvi", "landsat_ndvi", "modis_ndvi"]]
         features["sensor_count"] = ndvi.count(axis=1)
@@ -134,6 +157,39 @@ def residual_features(result, config):
         features["sensor_std"] = ndvi.std(axis=1, ddof=0)
     # Missing features stay missing: CatBoost handles them explicitly.
     return features
+
+
+def sensor_dynamics_features(days, values, primary, estimate):
+    """Strict calendar neighbors and paired bias from visible data in one crop segment."""
+    valid = np.isfinite(values)
+    x, y = days[valid], values[valid]
+    result = {}
+    for side, positions in [
+        ("left", np.searchsorted(x, days, side="left") - 1),
+        ("right", np.searchsorted(x, days, side="right")),
+    ]:
+        available = (positions >= 0) & (positions < len(x))
+        value, distance = np.full(len(days), np.nan), np.full(len(days), np.nan)
+        value[available] = y[positions[available]]
+        distance[available] = abs(days[available] - x[positions[available]])
+        result[f"{side}_value"], result[f"{side}_days"] = value, distance
+    span = result["left_days"] + result["right_days"]
+    result["slope"] = np.divide(
+        result["right_value"] - result["left_value"],
+        span,
+        out=np.full(len(days), np.nan),
+        where=span > 0,
+    )
+    paired = valid & np.isfinite(primary)
+    eligible = abs(days[:, None] - days[paired][None, :]) <= 60
+    count = eligible.sum(axis=1)
+    differences = np.broadcast_to((primary - values)[paired], eligible.shape).copy()
+    differences[~eligible] = np.nan
+    bias = pd.DataFrame(differences.T).median().to_numpy()
+    bias[count < 3] = np.nan
+    result["primary_bias"], result["paired_count"] = bias, count.astype(float)
+    result["adjusted_estimate"] = estimate + bias
+    return result
 
 
 def local_shape_features(days, values):
@@ -208,7 +264,7 @@ def training_masks(frame, valid, config):
 
 
 def train_booster(features, residual, config):
-    from catboost import CatBoostRegressor
+    from catboost import CatBoostRegressor, Pool
 
     estimator = CatBoostRegressor(
         iterations=config.get("boost_iterations", 160),
@@ -221,10 +277,14 @@ def train_booster(features, residual, config):
         verbose=False,
         allow_writing_files=False,
     )
-    estimator.fit(features, residual)
+    pool = Pool(features, residual, cat_features=["crop_type"]) if config.get("crop_features") else None
+    if pool is None:
+        estimator.fit(features, residual)
+    else:
+        estimator.fit(pool)
     with tempfile.TemporaryDirectory(prefix="terralens-model-") as directory:
         path = Path(directory) / "boost.json"
-        estimator.save_model(str(path), format="json")
+        estimator.save_model(str(path), format="json", pool=pool)
         return json.loads(path.read_text())
 
 

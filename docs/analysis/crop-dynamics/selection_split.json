@@ -1,0 +1,289 @@
+{
+  "config": {
+    "input": "train-dataset.zip",
+    "output": "artifacts/crop-dynamics",
+    "artifact_output": "artifacts/crop-dynamics/model",
+    "prior_split": "docs/analysis/baseline/split_manifest.json",
+    "seed": 42,
+    "folds": 5,
+    "mask_seeds": [
+      42,
+      137
+    ],
+    "mask_fraction": 0.15,
+    "calibration_fields": 5,
+    "assessment_fields": 5,
+    "calibration_level": 0.9,
+    "max_gap_days": 60,
+    "max_edge_days": 14,
+    "season_start_month": 1,
+    "selection_baseline": "current",
+    "assessment_status": "Previously inspected assessment and temporal scopes; reused diagnostics only, never used to select these candidates",
+    "candidates": {
+      "current": {
+        "algorithm": "catboost_residual",
+        "use_weather": false,
+        "local_features": true,
+        "masked_training_priors": true,
+        "boost_iterations": 400,
+        "training_repeats": 5,
+        "training_blocks": true,
+        "cover_training_targets": true,
+        "context_quality": true,
+        "boost_depth": 5,
+        "ensemble_seeds": [
+          42,
+          107,
+          211
+        ]
+      },
+      "crop": {
+        "algorithm": "catboost_residual",
+        "use_weather": false,
+        "local_features": true,
+        "masked_training_priors": true,
+        "boost_iterations": 400,
+        "training_repeats": 5,
+        "training_blocks": true,
+        "cover_training_targets": true,
+        "context_quality": true,
+        "boost_depth": 5,
+        "ensemble_seeds": [
+          42,
+          107,
+          211
+        ],
+        "crop_features": true
+      },
+      "dynamics": {
+        "algorithm": "catboost_residual",
+        "use_weather": false,
+        "local_features": true,
+        "masked_training_priors": true,
+        "boost_iterations": 400,
+        "training_repeats": 5,
+        "training_blocks": true,
+        "cover_training_targets": true,
+        "context_quality": true,
+        "boost_depth": 5,
+        "ensemble_seeds": [
+          42,
+          107,
+          211
+        ],
+        "sensor_dynamics": true
+      },
+      "combined": {
+        "algorithm": "catboost_residual",
+        "use_weather": false,
+        "local_features": true,
+        "masked_training_priors": true,
+        "boost_iterations": 400,
+        "training_repeats": 5,
+        "training_blocks": true,
+        "cover_training_targets": true,
+        "context_quality": true,
+        "boost_depth": 5,
+        "ensemble_seeds": [
+          42,
+          107,
+          211
+        ],
+        "crop_features": true,
+        "sensor_dynamics": true
+      }
+    }
+  },
+  "excluded_previously_inspected_holdout": [
+    "AOI-0008",
+    "AOI-0011",
+    "AOI-0019",
+    "AOI-0048",
+    "AOI-0052",
+    "AOI-0056",
+    "AOI-0063",
+    "AOI-0077"
+  ],
+  "selection_ids": [
+    "AOI-0002",
+    "AOI-0003",
+    "AOI-0004",
+    "AOI-0007",
+    "AOI-0015",
+    "AOI-0021",
+    "AOI-0023",
+    "AOI-0026",
+    "AOI-0030",
+    "AOI-0033",
+    "AOI-0035",
+    "AOI-0037",
+    "AOI-0038",
+    "AOI-0041",
+    "AOI-0043",
+    "AOI-0045",
+    "AOI-0050",
+    "AOI-0053",
+    "AOI-0064",
+    "AOI-0071",
+    "AOI-0075"
+  ],
+  "calibration_ids": [
+    "AOI-0022",
+    "AOI-0040",
+    "AOI-0065",
+    "AOI-0069",
+    "AOI-0076"
+  ],
+  "assessment_ids": [
+    "AOI-0020",
+    "AOI-0027",
+    "AOI-0055",
+    "AOI-0060",
+    "AOI-0070"
+  ],
+  "temporal_year": 2024,
+  "folds": [
+    {
+      "fold": 0,
+      "train_ids": [
+        "AOI-0002",
+        "AOI-0004",
+        "AOI-0007",
+        "AOI-0015",
+        "AOI-0021",
+        "AOI-0026",
+        "AOI-0030",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0037",
+        "AOI-0041",
+        "AOI-0043",
+        "AOI-0045",
+        "AOI-0050",
+        "AOI-0053",
+        "AOI-0064",
+        "AOI-0071"
+      ],
+      "validation_ids": [
+        "AOI-0003",
+        "AOI-0023",
+        "AOI-0038",
+        "AOI-0075"
+      ]
+    },
+    {
+      "fold": 1,
+      "train_ids": [
+        "AOI-0003",
+        "AOI-0004",
+        "AOI-0007",
+        "AOI-0015",
+        "AOI-0023",
+        "AOI-0026",
+        "AOI-0030",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0038",
+        "AOI-0041",
+        "AOI-0043",
+        "AOI-0045",
+        "AOI-0050",
+        "AOI-0053",
+        "AOI-0071",
+        "AOI-0075"
+      ],
+      "validation_ids": [
+        "AOI-0002",
+        "AOI-0021",
+        "AOI-0037",
+        "AOI-0064"
+      ]
+    },
+    {
+      "fold": 2,
+      "train_ids": [
+        "AOI-0002",
+        "AOI-0003",
+        "AOI-0004",
+        "AOI-0007",
+        "AOI-0021",
+        "AOI-0023",
+        "AOI-0026",
+        "AOI-0030",
+        "AOI-0037",
+        "AOI-0038",
+        "AOI-0041",
+        "AOI-0043",
+        "AOI-0045",
+        "AOI-0050",
+        "AOI-0064",
+        "AOI-0071",
+        "AOI-0075"
+      ],
+      "validation_ids": [
+        "AOI-0015",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0053"
+      ]
+    },
+    {
+      "fold": 3,
+      "train_ids": [
+        "AOI-0002",
+        "AOI-0003",
+        "AOI-0004",
+        "AOI-0015",
+        "AOI-0021",
+        "AOI-0023",
+        "AOI-0026",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0037",
+        "AOI-0038",
+        "AOI-0043",
+        "AOI-0050",
+        "AOI-0053",
+        "AOI-0064",
+        "AOI-0071",
+        "AOI-0075"
+      ],
+      "validation_ids": [
+        "AOI-0007",
+        "AOI-0030",
+        "AOI-0041",
+        "AOI-0045"
+      ]
+    },
+    {
+      "fold": 4,
+      "train_ids": [
+        "AOI-0002",
+        "AOI-0003",
+        "AOI-0007",
+        "AOI-0015",
+        "AOI-0021",
+        "AOI-0023",
+        "AOI-0030",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0037",
+        "AOI-0038",
+        "AOI-0041",
+        "AOI-0045",
+        "AOI-0053",
+        "AOI-0064",
+        "AOI-0075"
+      ],
+      "validation_ids": [
+        "AOI-0004",
+        "AOI-0026",
+        "AOI-0043",
+        "AOI-0050",
+        "AOI-0071"
+      ]
+    }
+  ],
+  "input_sha256": "08e4f724f616459c944050aa25c1a46d16055501c785faeda74edd907c665fc6",
+  "assessment_status": "Previously inspected assessment and temporal scopes; reused diagnostics only, never used to select these candidates"
+}

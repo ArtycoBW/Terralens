@@ -1,0 +1,15 @@
+{
+  "previous": {
+    "seconds": 3.504679750010837,
+    "input_rows": 57185,
+    "submission_rows": 3112,
+    "model_id": "50efa0dd0ff8d2d7"
+  },
+  "dynamics": {
+    "seconds": 4.436573083978146,
+    "input_rows": 57185,
+    "submission_rows": 3112,
+    "model_id": "131aee618934151e"
+  },
+  "method": "One fresh process each; read CSV, load model and predict; excludes imports/process startup; no concurrent training; illustrative, not a load test"
+}

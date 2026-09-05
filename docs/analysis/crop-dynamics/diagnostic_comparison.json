@@ -1,0 +1,48 @@
+{
+  "keys_and_truth_unchanged": true,
+  "scopes": [
+    {
+      "scope": "assessment_points",
+      "n": 511,
+      "previous_rmse": 0.07267946225194127,
+      "dynamics_rmse": 0.07119360004562389,
+      "relative_rmse_change": -0.020444045130200372
+    },
+    {
+      "scope": "assessment_blocks",
+      "n": 514,
+      "previous_rmse": 0.09052302056735413,
+      "dynamics_rmse": 0.09220583787719679,
+      "relative_rmse_change": 0.018589937667739864
+    },
+    {
+      "scope": "temporal_points",
+      "n": 282,
+      "previous_rmse": 0.0578720961310679,
+      "dynamics_rmse": 0.057632555469009,
+      "relative_rmse_change": -0.00413913920650788
+    },
+    {
+      "scope": "temporal_blocks",
+      "n": 286,
+      "previous_rmse": 0.0789420956134911,
+      "dynamics_rmse": 0.08093570511816764,
+      "relative_rmse_change": 0.025254073750935913
+    },
+    {
+      "scope": "calibration_points",
+      "n": 551,
+      "previous_rmse": 0.06940141078953865,
+      "dynamics_rmse": 0.06822175472547493,
+      "relative_rmse_change": -0.01699758046188804
+    },
+    {
+      "scope": "calibration_blocks",
+      "n": 622,
+      "previous_rmse": 0.09839426093939078,
+      "dynamics_rmse": 0.09639970947642852,
+      "relative_rmse_change": -0.02027101422298272
+    }
+  ],
+  "limitations": "Previously inspected diagnostics; not used for candidate selection or parameter changes"
+}
