@@ -1,0 +1,9 @@
+{
+  "selected_candidate": "local_mixed",
+  "fixed_history_route": "rejected",
+  "guardrail": "The route must not worsen pooled development points or blocks compared with local_mixed",
+  "reason": "Block RMSE increased from 0.101429510009744 to 0.101551103116907 despite a small point improvement",
+  "further_weight_or_threshold_search": false,
+  "assessment_calibration_temporal_used": false,
+  "matched_rows": 8912
+}

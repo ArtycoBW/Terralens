@@ -26,7 +26,7 @@ python3 -m venv .venv-ml
 .venv-ml/bin/python -m terralens_ml validate-submission --input test-dataset.csv --submission artifacts/submission.csv
 ```
 
-В Windows использовать `.venv-ml\Scripts\python.exe` и соответствующий `pip.exe`. После установки инференс не требует сети, Django, БД или Redis. Включённый артефакт — CatBoost residual к M0, выбранный среди 13 вариантов на пяти folds. На одинаковых development folds RMSE: **0,079287** против **0,090611** у M0; отдельная assessment: **0,082415**. На длительных блоках ошибка выше; официальный test RMSE неизвестен. [Протокол, калибровка и ограничения](docs/analysis/model-research/REPORT.md). Готовый [submission](deliverables/submission.csv) содержит 3 112 проверенных строк.
+В Windows использовать `.venv-ml\Scripts\python.exe` и соответствующий `pip.exe`. После установки инференс не требует сети, Django, БД или Redis. Включённый артефакт — CatBoost residual к M0 с локальной формой ряда и обучением на точечных и блочных пропусках. На одинаковых development folds RMSE: **0,072445** вместо **0,079287** у предыдущей модели; на блоках **0,101430** вместо **0,129204**. Повторная assessment: **0,076274 / 0,095032**. Официальный test RMSE неизвестен. [Протокол улучшения, калибровка и ограничения](docs/analysis/model-improvement/REPORT.md). Готовый [submission](deliverables/submission.csv) содержит 3 112 проверенных строк.
 
 Для разработки всего Python workspace: `uv sync --frozen`; команды обучения, проверки и интеграции — в [ML README](ml/README.md) и [backend README](backend/README.md).
 

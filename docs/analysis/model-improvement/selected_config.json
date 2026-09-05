@@ -1,0 +1,13 @@
+{
+  "seed": 42,
+  "max_gap_days": 60,
+  "max_edge_days": 14,
+  "season_start_month": 1,
+  "boost_iterations": 400,
+  "algorithm": "catboost_residual",
+  "use_weather": false,
+  "local_features": true,
+  "masked_training_priors": true,
+  "training_repeats": 3,
+  "training_blocks": true
+}

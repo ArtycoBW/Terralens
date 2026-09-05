@@ -1,0 +1,8 @@
+{
+  "reason": "Restore default algorithm compatibility in research report writer; inference and fitted weights unchanged",
+  "previous_manifest_sha256": "5449e9298e5ab0b073aca7260bca323fdd82b324bd41cf265bde33b78b7f7f40",
+  "model_manifest_sha256": "870a79f52741482afe2a92c2ea3f94dce4b304fed38541568e6d483788634e1b",
+  "model_id": "e156fcdadef59ed0",
+  "weights_unchanged": true,
+  "model_json_sha256": "e1c53e31c478e7d1178ba50ca6920c6f29cf79ad52fd94fa857243c2769d6a81"
+}

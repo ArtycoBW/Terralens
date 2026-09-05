@@ -1,0 +1,32 @@
+{
+  "selected_candidate": "local_mixed",
+  "selected_algorithm": "catboost_residual",
+  "selection_rule": "minimum pooled development_points RMSE among candidates with pooled development_blocks RMSE no greater than selection_baseline; frozen before calibration and assessment",
+  "development_only": true,
+  "split_hash": "9cb6bff2648dce29f81fde827abc9bdf6c68c29200d0c3d263c4f8ac654693b7",
+  "mask_hashes": {
+    "development_points-0-42": "265b0bd5e06a37e804f9445961d2af8d09ecfcb2836ef2d1f3339f0b26f03c95",
+    "development_blocks-0-42": "ac654d6383b0f1a5c595559f4f7195d2b35542c3b8418a32f02511f64e1035ea",
+    "development_points-0-137": "3944a5bf561b61f2fd776a3f002966ce70f9a7e5f18acd8f031bf27e1bcadf6b",
+    "development_blocks-0-137": "f2c55c3875e073e7eafd8823f9e4bb201973d44cc50d98161047ab3bd08d631c",
+    "development_points-1-42": "dbcb2d8b73962c76405c3aee3a1ee9767c32dd48db4c63d4cc3786a453ef721b",
+    "development_blocks-1-42": "7a1b76e5c697e228567ffa2bf732766e4ec290de2c66eb65cc1520948524a2ea",
+    "development_points-1-137": "b068ab86059482ce335d03ebf2335854a077acbd4185659e192bea17ef0ccf93",
+    "development_blocks-1-137": "c38683df399a5f1642cc4857d49dfc62d327aebc34194037a8fd72e657708770",
+    "development_points-2-42": "47943b67529fd49eb4ef269eeaeefbc20a2a024fb302768fc86b9bec2d1625c9",
+    "development_blocks-2-42": "4bdf6c7a0b1ce8ca03f1a77c524d3cf00d12b11bd4e74e3cb7ec914cd8303193",
+    "development_points-2-137": "b1b90668c8a21fb4c3dbd477dc5396979ecf4d94879c90a3880570e704ef95d1",
+    "development_blocks-2-137": "3a5a6dc18726c5e2d34761c70e911055025b936e49b00ce17b039cf5ff2e3305",
+    "development_points-3-42": "d1d05db38c7a859f19559524db7023bd4374bd391488691eafc9c4f60b39a044",
+    "development_blocks-3-42": "cf0efd44630a4f8ed04e4fb076c77d21771d62a41cc48a6f37b800fe4d539e8a",
+    "development_points-3-137": "fd74da53b8e300c69ab0d8ac5df74fe58a7f57d8df8c67d6acac2bbb6e455e5e",
+    "development_blocks-3-137": "6a1007815dc585c626a1bf8bfd190634088b12a12681fe3798f897963477685c",
+    "development_points-4-42": "f9810466fe7aab785e288553fa0aaee21db100989ca0c2a2c94f685ab78d6795",
+    "development_blocks-4-42": "b0cc878be783388936c9d0a179417cefae8e583d1557c7b12597e70f0de41d2b",
+    "development_points-4-137": "935aefcbe305208b8827d06dc7746133c0f23368f6ea9590dc8fd5ac9dc37238",
+    "development_blocks-4-137": "2a1877b984432821b45e986c19cbf0bf2ab188c8978eae38adbf3485cc3f0b9e"
+  },
+  "source_report_sha256": "128a54a91343dde0de424ca7d86780de9762e000da48d78acfac1684b5507726",
+  "immutable_development_predictions": "artifacts/improvement-features/development-predictions.csv",
+  "development_predictions_sha256": "2953bb347d2a2a1e16398df939fcb08e7407f698c54f30b13cf4b6c304ff5444"
+}

@@ -1,0 +1,52 @@
+{
+  "model_id": "e156fcdadef59ed0",
+  "manifest_sha256": "870a79f52741482afe2a92c2ea3f94dce4b304fed38541568e6d483788634e1b",
+  "source_sha256": "36a0445eeca72463132b084f3dc98967b04687a4758c2b0c68a015681a04aa1b",
+  "network_blocked": [
+    "socket.socket.connect",
+    "socket.socket.connect_ex",
+    "socket.create_connection"
+  ],
+  "network_attempts": 0,
+  "seconds": 0.19719633398926817,
+  "fields": {
+    "potsdam": {
+      "sha256": "1ced3b308d40265319951255b8d59c86216855301d28eb7d47455b9413d39159",
+      "summary": {
+        "observed_days": 2,
+        "total_days": 11,
+        "observed_coverage_ratio": 0.18181818181818182,
+        "reconstructed_days": 9,
+        "unavailable_days": 0,
+        "longest_gap_days": 7,
+        "anomaly_period_count": 0,
+        "overall_status": "normal",
+        "summary_rule": "event-max-severity-else-two-clean-days-with-valid-reference-v2",
+        "latest_estimate": {
+          "date": "2024-06-20",
+          "value": 0.6682471057779142,
+          "origin": "extrapolated"
+        }
+      }
+    },
+    "seville": {
+      "sha256": "86ca7e51fabf36b19b7c83cb188400ed890160869c40c6d82fbf306e65ebb171",
+      "summary": {
+        "observed_days": 2,
+        "total_days": 11,
+        "observed_coverage_ratio": 0.18181818181818182,
+        "reconstructed_days": 9,
+        "unavailable_days": 0,
+        "longest_gap_days": 5,
+        "anomaly_period_count": 0,
+        "overall_status": "insufficient_data",
+        "summary_rule": "event-max-severity-else-two-clean-days-with-valid-reference-v2",
+        "latest_estimate": {
+          "date": "2024-06-20",
+          "value": 0.32315501713467926,
+          "origin": "observed"
+        }
+      }
+    }
+  }
+}
