@@ -1,0 +1,13 @@
+{
+  "input_sha256": "f9092eae5c7a95604bd9c601a1ad42a1d07d2c8a443ac063f71ecef680935805",
+  "model_manifest_sha256": "44ab0740659cd872f488ad881ace01594cd4c9b7b6acbd045bd4fe46b9f2924f",
+  "model_id": "131aee618934151e",
+  "reference_history_sha256": null,
+  "output_sha256": "1fabb4ed5df3b8ed404e218de0e69b5ebeb38240ce0ea65c88a3bade4dfdc497",
+  "rows": 2323,
+  "origins": {
+    "interpolated": 2207,
+    "extrapolated": 102,
+    "climatology_fallback": 14
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "evaluation": "local_provided_ground_truth_not_platform_score",
+  "n": 3112,
+  "polygons": 78,
+  "rmse": 0.07503423585213587,
+  "mae": 0.049409536837200715,
+  "gap_score": 7.49,
+  "exact_key_match": true,
+  "sha256": {
+    "input": "3c5c0e27eef8266bcf6dce09c9b556c073cee3902c065a94e4ea7a59edb00993",
+    "submission": "0fd8aebc5297d2e57d9244ca71e401660ac309d4cc2a1a0b2d595963530c02e1",
+    "ground_truth": "189ad1e271352dcb53b2f54cdc09dda4912fa9b442b91fa077bf26ea0f902bdd"
+  }
+}

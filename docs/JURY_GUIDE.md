@@ -49,7 +49,7 @@ docker compose run --rm --no-deps batch predict --input test-dataset.csv --outpu
 docker compose run --rm --no-deps batch validate-submission --input test-dataset.csv --submission artifacts/submission-check.csv
 ```
 
-Проверить 3 112 строк и SHA-256 `0fd8aebc5297d2e57d9244ca71e401660ac309d4cc2a1a0b2d595963530c02e1`. Это проверка воспроизводимости и формата, а не test RMSE: скрытая разметка не предоставлена. Готовые файлы — [deliverables](../deliverables/README.md).
+Проверить 3 112 строк и SHA-256 `0fd8aebc5297d2e57d9244ca71e401660ac309d4cc2a1a0b2d595963530c02e1`. Эти команды проверяют воспроизводимость и формат. Отдельная локальная оценка по позднее предоставленным ответам дала RMSE **0,075034**, GapScore **7,49 / 30**; результат платформы не получен. Для второго входа `test_features.csv` подготовлено 2 323 прогноза без оценки RMSE: приложенные ответы относятся к первому входу. [Соответствие файлов и команды оценки](CASE_AUDIT.md), [готовые файлы](../deliverables/README.md).
 
 Для проверки автономности в отдельном Python 3.12 окружении из корня:
 
@@ -80,7 +80,7 @@ uv run --frozen python scripts/api_smoke.py --reference-years 3 --output artifac
 
 | Вопрос | Материал |
 |---|---|
-| Какие данные получены на входе? | [Dataset checks](analysis/dataset-checks.json), [профиль](analysis/dataset-profile.json) |
+| Какие данные получены на входе? | [Сверка семи вложений](CASE_AUDIT.md), [Dataset checks](analysis/dataset-checks.json), [профиль](analysis/dataset-profile.json) |
 | Как исключены утечки? | [ML README](../ml/README.md), [протокол](analysis/crop-dynamics/PROTOCOL.md), тесты masks/isolation |
 | Как выбрана модель? | [Все кандидаты и метрики](analysis/crop-dynamics/REPORT.md), [решение](analysis/crop-dynamics/publication_decision.json) |
 | Где ухудшения и ограничения? | Assessment/temporal blocks и срезы в том же отчёте; официального test score нет |
