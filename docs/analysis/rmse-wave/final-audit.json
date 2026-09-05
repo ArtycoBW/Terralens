@@ -1,0 +1,24 @@
+{
+  "model_id": "594d4e6509459b08",
+  "model_manifest_sha256": "798e69c845a7b887802f72f8acde1013d7c31e45b8b58eab1a77a89cc6cf7518",
+  "source_and_input_hashes_intact": true,
+  "submissions": {
+    "deliverables/submission.csv": {
+      "valid": true,
+      "rows": 3112,
+      "message": "Submission прошёл проверку"
+    },
+    "deliverables/submission-new-test.csv": {
+      "valid": true,
+      "rows": 2323,
+      "message": "Submission прошёл проверку"
+    }
+  },
+  "new_document_links_valid": true,
+  "preexisting_missing_links": [
+    [
+      "README.md",
+      "docs/FIRST_COMMIT_MESSAGE.txt"
+    ]
+  ]
+}

@@ -1,0 +1,15 @@
+input: train_dataset.csv
+test: test_features.csv
+assessment_labels: private_test_ground_truth.csv
+baseline_model: artifacts/expanded-training/previous-model/manifest.json
+baseline_predictions: artifacts/crop-dynamics/predictions.csv
+baseline_candidate: dynamics
+prior_split: docs/analysis/crop-dynamics/selection_split.json
+output: artifacts/expanded-training
+evidence: docs/analysis/expanded-training
+mask_seeds: [42, 137]
+mask_fraction: 0.15
+calibration_seed: 991
+calibration_level: 0.9
+minimum_relative_gain: 0.01
+minimum_improved_folds: 4

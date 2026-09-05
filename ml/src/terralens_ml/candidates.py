@@ -10,9 +10,10 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy import sparse
+from scipy.interpolate import PchipInterpolator
 from scipy.sparse.linalg import spsolve
 
-from .io import SENSORS, canonical_hash
+from .io import SENSORS, DataError, canonical_hash
 
 NDVI_SENSORS = ["s2_ndvi", "landsat_ndvi", "modis_ndvi"]
 SENSOR_DYNAMICS = [
@@ -92,37 +93,46 @@ def seasonal_history(frame, part, *, minimum_years=3, window=15):
     return result
 
 
-def residual_features(result, config):
+def residual_features(result, config, *, alignment=None):
     """Календарь, локальный контекст и доступные соседние сенсоры/погода, без ID поля."""
     dates = pd.to_datetime(result.date)
-    features = pd.DataFrame(index=result.index)
-    features["base"] = result.reconstructed
-    features["support"] = result.support_count
-    features["gap"] = result.gap_days
-    features["sin_doy"] = np.sin(2 * np.pi * dates.dt.dayofyear / 366)
-    features["cos_doy"] = np.cos(2 * np.pi * dates.dt.dayofyear / 366)
-    features["fallback"] = result.origin.eq("climatology_fallback").astype(float)
+    features = {
+        "base": result.reconstructed.to_numpy(),
+        "support": result.support_count.to_numpy(),
+        "gap": result.gap_days.to_numpy(),
+        "sin_doy": np.sin(2 * np.pi * dates.dt.dayofyear.to_numpy() / 366),
+        "cos_doy": np.cos(2 * np.pi * dates.dt.dayofyear.to_numpy() / 366),
+        "fallback": result.origin.eq("climatology_fallback").to_numpy(dtype=float),
+    }
     if config.get("crop_features", False):
-        features["crop_type"] = result.crop_type.fillna("<unknown>").astype(str)
+        features["crop_type"] = result.crop_type.fillna("<unknown>").astype(str).to_numpy()
     columns = []
     if config.get("use_sensors", True):
         columns += SENSORS
     if config.get("use_weather", True):
         columns += ["era5_temp_c", "era5_precip_mm"]
     for column in columns:
-        features[column] = np.nan
+        features[column] = np.full(len(result), np.nan)
         if config.get("context_quality", False):
-            features[f"{column}_age"] = np.nan
-            features[f"{column}_span"] = np.nan
+            features[f"{column}_age"] = np.full(len(result), np.nan)
+            features[f"{column}_span"] = np.full(len(result), np.nan)
         if config.get("sensor_dynamics", False) and column in NDVI_SENSORS:
             for name in SENSOR_DYNAMICS:
-                features[f"{column}_{name}"] = np.nan
-    for part in field_season_segments(result, config["season_start_month"]):
+                features[f"{column}_{name}"] = np.full(len(result), np.nan)
+    # Один DataFrame в конце вместо тысяч .loc-присваиваний; индекс результата неизменен.
+    for part in field_season_segments(result.reset_index(drop=True), config["season_start_month"]):
+        positions = part.index.to_numpy()
         days = pd.to_datetime(part.date).to_numpy(dtype="datetime64[D]").astype(np.int64)
         if config.get("local_features", False):
-            local = local_shape_features(days, part.clean_primary.to_numpy(dtype=float))
+            local = local_shape_features(
+                days,
+                part.clean_primary.to_numpy(dtype=float),
+                transitions=config.get("transition_features", False),
+            )
             for name, values in local.items():
-                features.loc[part.index, name] = values
+                if name not in features:
+                    features[name] = np.full(len(result), np.nan)
+                features[name][positions] = values
         for column in columns:
             if column not in part:
                 continue
@@ -134,22 +144,33 @@ def residual_features(result, config):
                 valid &= abs(values) <= 2  # bounded clean feature; raw inputs are preserved
             if not valid.any():
                 continue
-            positions = np.searchsorted(days[valid], days)
-            left = np.maximum(positions - 1, 0)
-            right = np.minimum(positions, valid.sum() - 1)
+            neighbors = np.searchsorted(days[valid], days)
+            left = np.maximum(neighbors - 1, 0)
+            right = np.minimum(neighbors, valid.sum() - 1)
             distance = np.minimum(abs(days - days[valid][left]), abs(days[valid][right] - days))
             estimate = np.interp(days, days[valid], values[valid])
             estimate[distance > 14] = np.nan
-            features.loc[part.index, column] = estimate
+            features[column][positions] = estimate
             if config.get("context_quality", False):
-                features.loc[part.index, f"{column}_age"] = distance
-                features.loc[part.index, f"{column}_span"] = days[valid][right] - days[valid][left]
+                features[f"{column}_age"][positions] = distance
+                features[f"{column}_span"][positions] = days[valid][right] - days[valid][left]
             if config.get("sensor_dynamics", False) and column in NDVI_SENSORS:
                 dynamics = sensor_dynamics_features(
                     days, np.where(valid, values, np.nan), part.clean_primary.to_numpy(dtype=float), estimate
                 )
                 for name, values in dynamics.items():
-                    features.loc[part.index, f"{column}_{name}"] = values
+                    features[f"{column}_{name}"][positions] = values
+        if config.get("sensor_alignment", False):
+            if alignment is None:
+                raise DataError("Для межсенсорных признаков нужна обученная калибровка")
+            aligned = alignment_features(part, days, alignment, config.get("alignment_shrinkage", 8))
+            aligned["landsat_as_s2"] = features["landsat_ndvi"][positions] + aligned["s2_landsat_bias"]
+            aligned["s2_as_landsat"] = features["s2_ndvi"][positions] - aligned["s2_landsat_bias"]
+            for name, values in aligned.items():
+                if name not in features:
+                    features[name] = np.full(len(result), np.nan)
+                features[name][positions] = values
+    features = pd.DataFrame(features, index=result.index)
     if config.get("context_quality", False) and config.get("use_sensors", True):
         ndvi = features[["s2_ndvi", "landsat_ndvi", "modis_ndvi"]]
         features["sensor_count"] = ndvi.count(axis=1)
@@ -157,6 +178,46 @@ def residual_features(result, config):
         features["sensor_std"] = ndvi.std(axis=1, ddof=0)
     # Пропуски в признаках сохраняются: CatBoost обрабатывает их явно.
     return features
+
+
+def sensor_pairs(frame):
+    """Independent co-observations; never compare a sensor to primary made from itself."""
+    s2 = frame.get("s2_ndvi", pd.Series(np.nan, index=frame.index))
+    landsat = frame.get("landsat_ndvi", pd.Series(np.nan, index=frame.index))
+    return (s2 - landsat).where(s2.between(-1, 1) & landsat.between(-1, 1))
+
+
+def fit_sensor_alignment(frame):
+    differences = sensor_pairs(frame)
+    medians = differences.groupby(frame.anon_polygon_id).median().dropna()
+    return {
+        "method": "s2_minus_landsat_field_median_v1",
+        "bias": float(medians.median()) if len(medians) else 0.0,
+        "paired_days": int(differences.notna().sum()),
+        "paired_fields": len(medians),
+    }
+
+
+def alignment_features(part, days, alignment, shrinkage):
+    differences = sensor_pairs(part).to_numpy(dtype=float)
+    paired = np.isfinite(differences)
+    distances = abs(days[:, None] - days[paired][None, :])
+    eligible = distances <= 60
+    count = eligible.sum(axis=1).astype(float)
+    matrix = np.where(eligible, differences[paired][None, :], np.nan)
+    local = pd.DataFrame(matrix.T).median().to_numpy()
+    mad = pd.DataFrame(abs(matrix - local[:, None]).T).median().to_numpy()
+    global_bias = alignment["bias"]
+    local = np.where(count > 0, local, global_bias)
+    weight = count / (count + shrinkage)
+    age = np.min(np.where(eligible, distances, np.inf), axis=1, initial=np.inf)
+    age[~np.isfinite(age)] = np.nan
+    return {
+        "s2_landsat_bias": weight * local + (1 - weight) * global_bias,
+        "s2_landsat_pair_count": count,
+        "s2_landsat_pair_age": age,
+        "s2_landsat_pair_mad": mad,
+    }
 
 
 def sensor_dynamics_features(days, values, primary, estimate):
@@ -192,7 +253,7 @@ def sensor_dynamics_features(days, values, primary, estimate):
     return result
 
 
-def local_shape_features(days, values):
+def local_shape_features(days, values, *, transitions=False):
     """Видимые соседи и окна внутри одного сезона поля с расстояниями в календарных днях."""
     valid = np.isfinite(values)
     x, y = days[valid], values[valid]
@@ -221,6 +282,20 @@ def local_shape_features(days, values):
     result["linear_estimate"] = result["left_1_value"] + fraction * (
         result["right_1_value"] - result["left_1_value"]
     )
+    if transitions:
+        # Форму перехода оцениваем только по видимым опорам текущего сегмента.
+        result["left_projected"] = result["left_1_value"] + result["left_slope"] * result["left_1_days"]
+        result["right_projected"] = result["right_1_value"] - result["right_slope"] * result["right_1_days"]
+        result["projection_gap"] = result["right_projected"] - result["left_projected"]
+        result["slope_change"] = result["right_slope"] - result["left_slope"]
+        if len(x) >= 2:
+            pchip = PchipInterpolator(x, y, extrapolate=False)
+            result["pchip_estimate"] = pchip(days)
+            result["pchip_curvature"] = pchip(days, nu=2)
+        else:
+            result["pchip_estimate"] = np.full(len(days), np.nan)
+            result["pchip_curvature"] = np.full(len(days), np.nan)
+        result["pchip_delta_linear"] = result["pchip_estimate"] - result["linear_estimate"]
     distance = abs(days[:, None] - x[None, :])
     for window in [14, 30, 60]:
         weights = distance <= window
@@ -240,13 +315,16 @@ def training_masks(frame, valid, config):
     seasons = dates.dt.year - (dates.dt.month < config["season_start_month"]).astype(int)
     groups = list(frame.loc[valid].groupby([frame.anon_polygon_id, seasons], sort=True))
     partitions = {}
+    partition_count = config.get("coverage_partitions", 5)
     for repeat in range(config.get("training_repeats", 1)):
-        if config.get("cover_training_targets", False) and repeat % 5 == 0:
+        if config.get("cover_training_targets", False) and repeat % partition_count == 0:
             partitions = {
-                key: np.array_split(rng.permutation(part.sort_values("date").index), 5)
+                key: np.array_split(rng.permutation(part.sort_values("date").index), partition_count)
                 for key, part in groups
             }
         for blocks in [False, True] if config.get("training_blocks", False) else [False]:
+            if blocks and repeat >= config.get("training_block_repeats", config.get("training_repeats", 1)):
+                continue
             mask = pd.Series(False, index=frame.index)
             for key, part in groups:
                 if blocks:
@@ -256,20 +334,20 @@ def training_masks(frame, valid, config):
                     width = int(rng.choice([8, 15, 30, 45, 65]))
                     indices = ordered.index[(days >= start) & (days < start + width)]
                 elif config.get("cover_training_targets", False):
-                    indices = partitions[key][repeat % 5]
+                    indices = partitions[key][repeat % partition_count]
                 else:
                     indices = rng.choice(part.index, max(1, round(len(part) * 0.2)), replace=False)
                 mask.loc[indices] = True
             yield mask
 
 
-def train_booster(features, residual, config):
+def train_booster(features, residual, config, *, sample_weight=None):
     from catboost import CatBoostRegressor, Pool
 
     estimator = CatBoostRegressor(
         iterations=config.get("boost_iterations", 160),
         depth=config.get("boost_depth", 4),
-        learning_rate=0.04,
+        learning_rate=config.get("boost_learning_rate", 0.04),
         l2_leaf_reg=config.get("boost_l2", 10),
         loss_function="RMSE",
         random_seed=config["seed"],
@@ -277,9 +355,13 @@ def train_booster(features, residual, config):
         verbose=False,
         allow_writing_files=False,
     )
-    pool = Pool(features, residual, cat_features=["crop_type"]) if config.get("crop_features") else None
+    pool = (
+        Pool(features, residual, cat_features=["crop_type"], weight=sample_weight)
+        if config.get("crop_features")
+        else None
+    )
     if pool is None:
-        estimator.fit(features, residual)
+        estimator.fit(features, residual, sample_weight=sample_weight)
     else:
         estimator.fit(pool)
     with tempfile.TemporaryDirectory(prefix="terralens-model-") as directory:

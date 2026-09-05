@@ -1,0 +1,17 @@
+{
+  "platform": "macOS-26.5-arm64-arm-64bit",
+  "python": "3.12.9",
+  "dependency_lock_sha256": "f296b164924b16532acaf90c076d8e9611a8d2a167667376a9a4bfb826b6cf8a",
+  "packages": {
+    "numpy": "2.5.2",
+    "pandas": "2.3.3",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.0",
+    "catboost": "1.2.10"
+  },
+  "provided_inputs_sha256": {
+    "train_dataset.csv": "a75e530d0fb51581ad6800f84b3875233778801491f02236917862faf9b424ec",
+    "test-dataset.csv": "3c5c0e27eef8266bcf6dce09c9b556c073cee3902c065a94e4ea7a59edb00993",
+    "test_features.csv": "f7ba087818175ea644fc9fe652c6a3874b5bfcde7df197d3e7541cb95876f855"
+  }
+}

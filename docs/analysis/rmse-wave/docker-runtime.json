@@ -1,0 +1,30 @@
+{
+  "ready": {
+    "status": "ready",
+    "checks": {
+      "database": true,
+      "queue": true,
+      "model": true
+    }
+  },
+  "active_model": "594d4e6509459b08",
+  "registry": {
+    "model_id": "594d4e6509459b08",
+    "manifest_sha256": "798e69c845a7b887802f72f8acde1013d7c31e45b8b58eab1a77a89cc6cf7518",
+    "model_sha256": "facf4c98e149b83574845358944c773e3f5ef541c0c5804d52312f4b1d86d865"
+  },
+  "source_sha256": {
+    "backend": {
+      "candidates.py": "1770e837bd4fd2b0a72a0a6ba6a6dd442fa0561ba52a580cf2d4defbd325d388",
+      "model.py": "08ec7eff5ed8bed199b1721c40c07d8d3c0820220bf678d0b1cc6c0598543d84",
+      "uncertainty.py": "7cfb2e85a09fc0e16eaf0b90549725bfbaed300a410f5d4d191671a97f818f41"
+    },
+    "worker": {
+      "candidates.py": "1770e837bd4fd2b0a72a0a6ba6a6dd442fa0561ba52a580cf2d4defbd325d388",
+      "model.py": "08ec7eff5ed8bed199b1721c40c07d8d3c0820220bf678d0b1cc6c0598543d84",
+      "uncertainty.py": "7cfb2e85a09fc0e16eaf0b90549725bfbaed300a410f5d4d191671a97f818f41"
+    }
+  },
+  "matches_working_tree": true,
+  "image_id": "sha256:8ed1a8c07138aa662c39cb2c8117dcea8bf26c86e273828b4eb10925d83c481e"
+}

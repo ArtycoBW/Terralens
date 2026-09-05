@@ -1,0 +1,13 @@
+{
+  "baseline_model_id": "131aee618934151e",
+  "baseline_manifest_sha256": "44ab0740659cd872f488ad881ace01594cd4c9b7b6acbd045bd4fe46b9f2924f",
+  "inputs": {
+    "train_dataset.csv": "a75e530d0fb51581ad6800f84b3875233778801491f02236917862faf9b424ec",
+    "test_features.csv": "f7ba087818175ea644fc9fe652c6a3874b5bfcde7df197d3e7541cb95876f855",
+    "private_test_ground_truth.csv": "50d694a92187b7e8a2fca8a2b72458d9a8042726bd9d85634eb7a85fa5174088"
+  },
+  "private_labels_read": false,
+  "baseline_revision": "31f0d97fdd6d8be3c0cc25e837ee681877526faf",
+  "previous_experiment": "../expanded-training/development-decision.json",
+  "previous_decision_sha256": "c8502ec816c70faab4aae8503561fe3ee746de718a42b407221cbad4128f14d7"
+}

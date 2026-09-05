@@ -1,0 +1,12 @@
+{
+  "original": {
+    "matching_submission_sha256": "22f893a793f4584bb7b0a4e36bb1ab96b92916b1b6c5ea14aa72895b0d9480fe",
+    "rows": 3112,
+    "identical_runs": 4
+  },
+  "new": {
+    "matching_submission_sha256": "54ced3df5e5bedf1c9c03915cb2cef2ef831735d4fc9448d0a2fa0d7d4286f76",
+    "rows": 2323,
+    "identical_runs": 4
+  }
+}

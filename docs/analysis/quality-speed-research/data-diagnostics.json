@@ -1,0 +1,141 @@
+{
+  "public_test": {
+    "rows": 57185,
+    "aoi": 78,
+    "queries": 3112,
+    "visible_primary": 17641,
+    "mask_fraction_of_pre_mask_known": 0.1499542234857611,
+    "query_years": {
+      "2010": 81,
+      "2011": 96,
+      "2012": 73,
+      "2013": 108,
+      "2014": 107,
+      "2015": 102,
+      "2016": 123,
+      "2017": 155,
+      "2018": 123,
+      "2019": 218,
+      "2020": 215,
+      "2021": 171,
+      "2022": 195,
+      "2023": 203,
+      "2024": 217,
+      "2025": 925
+    },
+    "query_gaps": {
+      "0-8": 2059,
+      "31-60": 29,
+      "9-30": 1024
+    },
+    "query_origins": {
+      "climatology_fallback": 7,
+      "extrapolated": 122,
+      "interpolated": 2983
+    },
+    "query_aoi_in_fitted_selection": 247,
+    "query_aoi_in_raw_train": 464,
+    "query_crops": {
+      "зерновые": 678,
+      "озимая пшеница": 2030,
+      "пастбища/зерновые": 322,
+      "подсолнечник": 82
+    }
+  },
+  "development": {
+    "development_blocks": {
+      "n": 4430,
+      "gap_distribution": {
+        "0-8": 176,
+        "31-60": 2003,
+        "9-30": 935,
+        ">60": 1316
+      },
+      "bias": -0.010160939663662674,
+      "rmse": 0.09417293020870814,
+      "top_1pct_count": 45,
+      "top_1pct_squared_error_share": 0.16040901284122433,
+      "per_gap": {
+        "0-8": {
+          "n": 176,
+          "rmse": 0.08213655464373537,
+          "bias": -0.011028483573295056
+        },
+        "31-60": {
+          "n": 2003,
+          "rmse": 0.09133391925805513,
+          "bias": -0.008622065741014637
+        },
+        "9-30": {
+          "n": 935,
+          "rmse": 0.07201776011370706,
+          "bias": 0.003918724064143423
+        },
+        ">60": {
+          "n": 1316,
+          "rmse": 0.11211574055681903,
+          "bias": -0.022390546293197183
+        }
+      }
+    },
+    "development_points": {
+      "n": 4482,
+      "gap_distribution": {
+        "0-8": 2786,
+        "31-60": 59,
+        "9-30": 1637
+      },
+      "bias": -0.0005134610784594533,
+      "rmse": 0.06826028078943545,
+      "top_1pct_count": 45,
+      "top_1pct_squared_error_share": 0.2138788203440687,
+      "per_gap": {
+        "0-8": {
+          "n": 2786,
+          "rmse": 0.06526396637214188,
+          "bias": -0.0012777343256354806
+        },
+        "31-60": {
+          "n": 59,
+          "rmse": 0.07819169658328541,
+          "bias": 0.003912940993892871
+        },
+        "9-30": {
+          "n": 1637,
+          "rmse": 0.07271821710950152,
+          "bias": 0.0006277164074071466
+        }
+      }
+    }
+  },
+  "available_calendar_months": {
+    "train": [
+      "04",
+      "05",
+      "06",
+      "07",
+      "08",
+      "09",
+      "10"
+    ],
+    "test": [
+      "04",
+      "05",
+      "06",
+      "07",
+      "08",
+      "09",
+      "10"
+    ]
+  },
+  "inputs": {
+    "train_sha256": "08e4f724f616459c944050aa25c1a46d16055501c785faeda74edd907c665fc6",
+    "test_sha256": "3c5c0e27eef8266bcf6dce09c9b556c073cee3902c065a94e4ea7a59edb00993",
+    "predictions_path": "artifacts/crop-dynamics/predictions.csv",
+    "predictions_sha256": "2310c0a8906dff027491a7d24af69dc16cec66b17145eb3462f3019c11b5ec8e",
+    "manifest_sha256": "44ab0740659cd872f488ad881ace01594cd4c9b7b6acbd045bd4fe46b9f2924f",
+    "split_sha256": "214fc535fd0935858e63baf8136b129385f4216341344ecfda1ac9fb49c21003",
+    "script_sha256": "1749e2c95f8f0fe79bb06186e5a1a7ad1b7d1abcc57c969c4902a06ddf39ccc9"
+  },
+  "limitations": "Development diagnostics, no new quality experiment or official test labels"
+}

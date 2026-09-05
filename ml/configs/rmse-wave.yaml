@@ -1,0 +1,32 @@
+input: train_dataset.csv
+baseline_model: artifacts/expanded-training/previous-model/manifest.json
+baseline_predictions: artifacts/crop-dynamics/predictions.csv
+baseline_candidate: dynamics
+prior_split: docs/analysis/crop-dynamics/selection_split.json
+output: artifacts/rmse-wave
+evidence: docs/analysis/rmse-wave
+mask_seeds: [42, 137]
+mask_fraction: 0.15
+calibration_seed: 991
+calibration_level: 0.9
+minimum_relative_gain: 0.01
+minimum_improved_folds: 4
+maximum_latency_ratio: 1.25
+candidates:
+  equal_target_weight:
+    normalize_target_weights: true
+  seven_point_parts:
+    coverage_partitions: 7
+    training_repeats: 7
+    training_block_repeats: 5
+  sensor_alignment:
+    sensor_alignment: true
+    alignment_shrinkage: 8
+  longer_boosting:
+    boost_iterations: 800
+    boost_learning_rate: 0.025
+  deeper_regularized:
+    boost_iterations: 600
+    boost_depth: 6
+    boost_learning_rate: 0.03
+    boost_l2: 20

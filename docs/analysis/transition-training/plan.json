@@ -1,0 +1,273 @@
+{
+  "config": {
+    "input": "train_dataset.csv",
+    "test": "test_features.csv",
+    "assessment_labels": "private_test_ground_truth.csv",
+    "baseline_model": "artifacts/expanded-training/previous-model/manifest.json",
+    "baseline_predictions": "artifacts/crop-dynamics/predictions.csv",
+    "baseline_candidate": "dynamics",
+    "prior_split": "docs/analysis/crop-dynamics/selection_split.json",
+    "output": "artifacts/transition-training",
+    "evidence": "docs/analysis/transition-training",
+    "model_overrides": {
+      "transition_features": true
+    },
+    "mask_seeds": [
+      42,
+      137
+    ],
+    "mask_fraction": 0.15,
+    "calibration_seed": 991,
+    "calibration_level": 0.9,
+    "minimum_relative_gain": 0.01,
+    "minimum_improved_folds": 4
+  },
+  "baseline_model_id": "131aee618934151e",
+  "model_config": {
+    "algorithm": "catboost_residual",
+    "max_gap_days": 60,
+    "max_edge_days": 14,
+    "season_start_month": 1,
+    "clip": false,
+    "seed": 42,
+    "quality_filter": true,
+    "smoothing_strength": 20.0,
+    "robust": true,
+    "use_history": true,
+    "use_weather": false,
+    "use_sensors": true,
+    "local_features": true,
+    "masked_training_priors": true,
+    "boost_iterations": 400,
+    "training_repeats": 5,
+    "training_blocks": true,
+    "cover_training_targets": true,
+    "context_quality": true,
+    "boost_depth": 5,
+    "ensemble_seeds": [
+      42,
+      107,
+      211
+    ],
+    "sensor_dynamics": true,
+    "transition_features": true
+  },
+  "calibration_ids": [
+    "AOI-0022",
+    "AOI-0040",
+    "AOI-0065",
+    "AOI-0069",
+    "AOI-0076"
+  ],
+  "training_ids": [
+    "AOI-0002",
+    "AOI-0003",
+    "AOI-0004",
+    "AOI-0007",
+    "AOI-0008",
+    "AOI-0011",
+    "AOI-0015",
+    "AOI-0019",
+    "AOI-0020",
+    "AOI-0021",
+    "AOI-0023",
+    "AOI-0026",
+    "AOI-0027",
+    "AOI-0030",
+    "AOI-0033",
+    "AOI-0035",
+    "AOI-0037",
+    "AOI-0038",
+    "AOI-0041",
+    "AOI-0043",
+    "AOI-0045",
+    "AOI-0048",
+    "AOI-0050",
+    "AOI-0052",
+    "AOI-0053",
+    "AOI-0055",
+    "AOI-0056",
+    "AOI-0060",
+    "AOI-0063",
+    "AOI-0064",
+    "AOI-0070",
+    "AOI-0071",
+    "AOI-0075",
+    "AOI-0077"
+  ],
+  "external_assessment_ids": [
+    "AOI-0005",
+    "AOI-0006",
+    "AOI-0009",
+    "AOI-0012",
+    "AOI-0016",
+    "AOI-0018",
+    "AOI-0024",
+    "AOI-0025",
+    "AOI-0029",
+    "AOI-0034",
+    "AOI-0036",
+    "AOI-0039",
+    "AOI-0042",
+    "AOI-0047",
+    "AOI-0049",
+    "AOI-0054",
+    "AOI-0057",
+    "AOI-0066",
+    "AOI-0072",
+    "AOI-0078"
+  ],
+  "validation_years_before": 2024,
+  "folds": [
+    {
+      "fold": 0,
+      "train_ids": [
+        "AOI-0002",
+        "AOI-0004",
+        "AOI-0007",
+        "AOI-0015",
+        "AOI-0021",
+        "AOI-0026",
+        "AOI-0030",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0037",
+        "AOI-0041",
+        "AOI-0043",
+        "AOI-0045",
+        "AOI-0050",
+        "AOI-0053",
+        "AOI-0064",
+        "AOI-0071"
+      ],
+      "validation_ids": [
+        "AOI-0003",
+        "AOI-0023",
+        "AOI-0038",
+        "AOI-0075"
+      ]
+    },
+    {
+      "fold": 1,
+      "train_ids": [
+        "AOI-0003",
+        "AOI-0004",
+        "AOI-0007",
+        "AOI-0015",
+        "AOI-0023",
+        "AOI-0026",
+        "AOI-0030",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0038",
+        "AOI-0041",
+        "AOI-0043",
+        "AOI-0045",
+        "AOI-0050",
+        "AOI-0053",
+        "AOI-0071",
+        "AOI-0075"
+      ],
+      "validation_ids": [
+        "AOI-0002",
+        "AOI-0021",
+        "AOI-0037",
+        "AOI-0064"
+      ]
+    },
+    {
+      "fold": 2,
+      "train_ids": [
+        "AOI-0002",
+        "AOI-0003",
+        "AOI-0004",
+        "AOI-0007",
+        "AOI-0021",
+        "AOI-0023",
+        "AOI-0026",
+        "AOI-0030",
+        "AOI-0037",
+        "AOI-0038",
+        "AOI-0041",
+        "AOI-0043",
+        "AOI-0045",
+        "AOI-0050",
+        "AOI-0064",
+        "AOI-0071",
+        "AOI-0075"
+      ],
+      "validation_ids": [
+        "AOI-0015",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0053"
+      ]
+    },
+    {
+      "fold": 3,
+      "train_ids": [
+        "AOI-0002",
+        "AOI-0003",
+        "AOI-0004",
+        "AOI-0015",
+        "AOI-0021",
+        "AOI-0023",
+        "AOI-0026",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0037",
+        "AOI-0038",
+        "AOI-0043",
+        "AOI-0050",
+        "AOI-0053",
+        "AOI-0064",
+        "AOI-0071",
+        "AOI-0075"
+      ],
+      "validation_ids": [
+        "AOI-0007",
+        "AOI-0030",
+        "AOI-0041",
+        "AOI-0045"
+      ]
+    },
+    {
+      "fold": 4,
+      "train_ids": [
+        "AOI-0002",
+        "AOI-0003",
+        "AOI-0007",
+        "AOI-0015",
+        "AOI-0021",
+        "AOI-0023",
+        "AOI-0030",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0037",
+        "AOI-0038",
+        "AOI-0041",
+        "AOI-0045",
+        "AOI-0053",
+        "AOI-0064",
+        "AOI-0075"
+      ],
+      "validation_ids": [
+        "AOI-0004",
+        "AOI-0026",
+        "AOI-0043",
+        "AOI-0050",
+        "AOI-0071"
+      ]
+    }
+  ],
+  "hashes": {
+    "input": "a75e530d0fb51581ad6800f84b3875233778801491f02236917862faf9b424ec",
+    "test": "f7ba087818175ea644fc9fe652c6a3874b5bfcde7df197d3e7541cb95876f855",
+    "assessment_labels": "50d694a92187b7e8a2fca8a2b72458d9a8042726bd9d85634eb7a85fa5174088",
+    "baseline_model": "44ab0740659cd872f488ad881ace01594cd4c9b7b6acbd045bd4fe46b9f2924f",
+    "baseline_predictions": "2310c0a8906dff027491a7d24af69dc16cec66b17145eb3462f3019c11b5ec8e",
+    "prior_split": "214fc535fd0935858e63baf8136b129385f4216341344ecfda1ac9fb49c21003"
+  },
+  "protocol_sha256": "2d441ede607d50d6a2d9ab82229a6900d0202446687fd8ce0ca8ea4ccd209f3e",
+  "private_labels_used_for_training_or_selection": false
+}

@@ -1,0 +1,28 @@
+........................................................................ [ 48%]
+........................................................................ [ 96%]
+.....                                                                    [100%]
+=============================== warnings summary ===============================
+backend/tests/test_providers.py: 19 warnings
+  /Users/violin/Projects/Terralens/.venv/lib/python3.12/site-packages/rasterio/transform.py:178: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+    return Affine.translation(west, north) * Affine.scale(xsize, -ysize)
+
+backend/tests/test_providers.py::test_scene_coverage_uses_entire_aoi_even_outside_raster
+backend/tests/test_providers.py::test_scene_coverage_uses_entire_aoi_even_outside_raster
+backend/tests/test_providers.py::test_landsat_masks_cloud_shadow_snow_saturation_aerosol_and_negative_reflectance
+backend/tests/test_providers.py::test_landsat_masks_cloud_shadow_snow_saturation_aerosol_and_negative_reflectance
+backend/tests/test_providers.py::test_invalid_ndvi_pixels_do_not_count_as_coverage
+backend/tests/test_providers.py::test_invalid_ndvi_pixels_do_not_count_as_coverage
+  /Users/violin/Projects/Terralens/.venv/lib/python3.12/site-packages/rasterio/windows.py:360: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+    x, y = transform * (window.col_off or 0.0, window.row_off or 0.0)
+
+backend/tests/test_providers.py::test_scene_coverage_uses_entire_aoi_even_outside_raster
+backend/tests/test_providers.py::test_scene_coverage_uses_entire_aoi_even_outside_raster
+backend/tests/test_providers.py::test_landsat_masks_cloud_shadow_snow_saturation_aerosol_and_negative_reflectance
+backend/tests/test_providers.py::test_landsat_masks_cloud_shadow_snow_saturation_aerosol_and_negative_reflectance
+backend/tests/test_providers.py::test_invalid_ndvi_pixels_do_not_count_as_coverage
+backend/tests/test_providers.py::test_invalid_ndvi_pixels_do_not_count_as_coverage
+  /Users/violin/Projects/Terralens/.venv/lib/python3.12/site-packages/rasterio/windows.py:361: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+    return Affine.translation(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+149 passed, 31 warnings in 10.50s

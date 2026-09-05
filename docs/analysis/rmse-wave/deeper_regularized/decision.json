@@ -1,0 +1,39 @@
+{
+  "candidate": "deeper_regularized",
+  "overrides": {
+    "boost_iterations": 600,
+    "boost_depth": 6,
+    "boost_learning_rate": 0.03,
+    "boost_l2": 20
+  },
+  "accepted": true,
+  "point_rmse": 0.0673569506374031,
+  "block_rmse": 0.09320556160653631,
+  "point_comparison": {
+    "aoi_n": 21,
+    "repetitions": 3000,
+    "seed": 42,
+    "gain_rmse_95_aoi_bootstrap": [
+      0.0005285705233999512,
+      0.0012823378422097736
+    ],
+    "bootstrap_fraction_gain_positive": 1.0,
+    "gain_rmse": 0.0009033301520323528,
+    "relative_rmse_reduction": 0.013233613187424215
+  },
+  "block_comparison": {
+    "aoi_n": 21,
+    "repetitions": 3000,
+    "seed": 42,
+    "gain_rmse_95_aoi_bootstrap": [
+      0.0005612134445393789,
+      0.001369002532781189
+    ],
+    "bootstrap_fraction_gain_positive": 1.0,
+    "gain_rmse": 0.0009673686021718225,
+    "relative_rmse_reduction": 0.010272257643761523
+  },
+  "improved_point_folds": 5,
+  "predictions_sha256": "898e6cb2954b06edf3903ace386f529ce043cd7f5d12ec26a4552c4a7ecfcae0",
+  "plan_sha256": "3ca6a578b610bb6cff4a3fef87d0f1bdaf751cd5066a78167ce0440e268e0f7e"
+}

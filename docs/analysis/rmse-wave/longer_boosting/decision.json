@@ -1,0 +1,37 @@
+{
+  "candidate": "longer_boosting",
+  "overrides": {
+    "boost_iterations": 800,
+    "boost_learning_rate": 0.025
+  },
+  "accepted": true,
+  "point_rmse": 0.06749545538358577,
+  "block_rmse": 0.09310408393052666,
+  "point_comparison": {
+    "aoi_n": 21,
+    "repetitions": 3000,
+    "seed": 42,
+    "gain_rmse_95_aoi_bootstrap": [
+      0.0005163995165916119,
+      0.001031306903583008
+    ],
+    "bootstrap_fraction_gain_positive": 1.0,
+    "gain_rmse": 0.000764825405849684,
+    "relative_rmse_reduction": 0.011204545264162683
+  },
+  "block_comparison": {
+    "aoi_n": 21,
+    "repetitions": 3000,
+    "seed": 42,
+    "gain_rmse_95_aoi_bootstrap": [
+      0.000745583112286639,
+      0.0013811136390966484
+    ],
+    "bootstrap_fraction_gain_positive": 1.0,
+    "gain_rmse": 0.0010688462781814762,
+    "relative_rmse_reduction": 0.011349825006110306
+  },
+  "improved_point_folds": 5,
+  "predictions_sha256": "9fd234ce1848ec5eae07ba75c16b1cd6f2c89c2d4ca6ca52a0cc8230536dda70",
+  "plan_sha256": "3ca6a578b610bb6cff4a3fef87d0f1bdaf751cd5066a78167ce0440e268e0f7e"
+}

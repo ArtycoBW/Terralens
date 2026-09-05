@@ -1,0 +1,29 @@
+{
+  "algorithm": "catboost_residual",
+  "max_gap_days": 60,
+  "max_edge_days": 14,
+  "season_start_month": 1,
+  "clip": false,
+  "seed": 42,
+  "quality_filter": true,
+  "smoothing_strength": 20.0,
+  "robust": true,
+  "use_history": true,
+  "use_weather": false,
+  "use_sensors": true,
+  "local_features": true,
+  "masked_training_priors": true,
+  "boost_iterations": 400,
+  "training_repeats": 5,
+  "training_blocks": true,
+  "cover_training_targets": true,
+  "context_quality": true,
+  "boost_depth": 5,
+  "ensemble_seeds": [
+    42,
+    107,
+    211
+  ],
+  "sensor_dynamics": true,
+  "normalize_target_weights": true
+}

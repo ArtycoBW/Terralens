@@ -1,0 +1,14 @@
+{
+  "previous_model_id": "131aee618934151e",
+  "model_id": "594d4e6509459b08",
+  "manifest_sha256": "798e69c845a7b887802f72f8acde1013d7c31e45b8b58eab1a77a89cc6cf7518",
+  "model_sha256": "facf4c98e149b83574845358944c773e3f5ef541c0c5804d52312f4b1d86d865",
+  "selection_sha256": "7444f80d2e319867eecb5b2cc9f23e62a34d9f4da77a21754918755b795eeb87",
+  "timing_sha256": "ffcc65b4e669ae572da2927d95ee633f02e3aead5582d54e7136a20e94e0508c",
+  "weights_unchanged_since_final_fit": true,
+  "test_labels_used_for_selection": false,
+  "submissions": {
+    "deliverables/submission.csv": "22f893a793f4584bb7b0a4e36bb1ab96b92916b1b6c5ea14aa72895b0d9480fe",
+    "deliverables/submission-new-test.csv": "54ced3df5e5bedf1c9c03915cb2cef2ef831735d4fc9448d0a2fa0d7d4286f76"
+  }
+}

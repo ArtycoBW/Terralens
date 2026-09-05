@@ -1,0 +1,41 @@
+{
+  "method": "3 alternating warm full-reconstruct runs per variant; imports/read/load excluded",
+  "scope": "Research-only monkeypatch; no production source or model changes",
+  "full_frame_parity": true,
+  "checked_rows": 57185,
+  "additional_parity": [
+    "live domain shift",
+    "no calibration",
+    "unavailable/nonfinite",
+    "custom index"
+  ],
+  "model_id": "131aee618934151e",
+  "input_sha256": "3c5c0e27eef8266bcf6dce09c9b556c073cee3902c065a94e4ea7a59edb00993",
+  "manifest_sha256": "44ab0740659cd872f488ad881ace01594cd4c9b7b6acbd045bd4fe46b9f2924f",
+  "script_sha256": "3e9dabaf6d67c53bd6a90cc45614a1ce8d95b243bf3e73e5f5e46ecc9d8ea3e3",
+  "timings": {
+    "current": {
+      "n": 3,
+      "median_seconds": 4.142140041018138,
+      "min_seconds": 4.0887203329766635,
+      "max_seconds": 4.150632000004407,
+      "samples_seconds": [
+        4.0887203329766635,
+        4.142140041018138,
+        4.150632000004407
+      ]
+    },
+    "array_intervals_probe": {
+      "n": 3,
+      "median_seconds": 3.053184666991001,
+      "min_seconds": 3.0133865410170984,
+      "max_seconds": 3.0664387089782394,
+      "samples_seconds": [
+        3.053184666991001,
+        3.0133865410170984,
+        3.0664387089782394
+      ]
+    }
+  },
+  "limitations": "Local microbenchmark; no production p95, network, DB or retraining"
+}

@@ -1,0 +1,232 @@
+{
+  "selected": {
+    "candidate": "deeper_regularized",
+    "overrides": {
+      "boost_iterations": 600,
+      "boost_depth": 6,
+      "boost_learning_rate": 0.03,
+      "boost_l2": 20
+    },
+    "accepted": true,
+    "point_rmse": 0.0673569506374031,
+    "block_rmse": 0.09320556160653631,
+    "point_comparison": {
+      "aoi_n": 21,
+      "repetitions": 3000,
+      "seed": 42,
+      "gain_rmse_95_aoi_bootstrap": [
+        0.0005285705233999512,
+        0.0012823378422097736
+      ],
+      "bootstrap_fraction_gain_positive": 1.0,
+      "gain_rmse": 0.0009033301520323528,
+      "relative_rmse_reduction": 0.013233613187424215
+    },
+    "block_comparison": {
+      "aoi_n": 21,
+      "repetitions": 3000,
+      "seed": 42,
+      "gain_rmse_95_aoi_bootstrap": [
+        0.0005612134445393789,
+        0.001369002532781189
+      ],
+      "bootstrap_fraction_gain_positive": 1.0,
+      "gain_rmse": 0.0009673686021718225,
+      "relative_rmse_reduction": 0.010272257643761523
+    },
+    "improved_point_folds": 5,
+    "predictions_sha256": "898e6cb2954b06edf3903ace386f529ce043cd7f5d12ec26a4552c4a7ecfcae0",
+    "plan_sha256": "3ca6a578b610bb6cff4a3fef87d0f1bdaf751cd5066a78167ce0440e268e0f7e"
+  },
+  "candidates": [
+    {
+      "candidate": "equal_target_weight",
+      "overrides": {
+        "normalize_target_weights": true
+      },
+      "accepted": false,
+      "point_rmse": 0.06779434573303156,
+      "block_rmse": 0.09504406204246311,
+      "point_comparison": {
+        "aoi_n": 21,
+        "repetitions": 3000,
+        "seed": 42,
+        "gain_rmse_95_aoi_bootstrap": [
+          0.0002494770938787468,
+          0.0006925840963223805
+        ],
+        "bootstrap_fraction_gain_positive": 1.0,
+        "gain_rmse": 0.0004659350564038961,
+        "relative_rmse_reduction": 0.0068258590649689825
+      },
+      "block_comparison": {
+        "aoi_n": 21,
+        "repetitions": 3000,
+        "seed": 42,
+        "gain_rmse_95_aoi_bootstrap": [
+          -0.0014586405045875005,
+          -0.0002988123061854659
+        ],
+        "bootstrap_fraction_gain_positive": 0.001,
+        "gain_rmse": -0.0008711318337549789,
+        "relative_rmse_reduction": -0.009250342235548551
+      },
+      "improved_point_folds": 5,
+      "predictions_sha256": "92228dd35da815836d67f6eaa6b5eaa2d670d5c2c6f670aa4829e8c1953cffa6",
+      "plan_sha256": "3ca6a578b610bb6cff4a3fef87d0f1bdaf751cd5066a78167ce0440e268e0f7e"
+    },
+    {
+      "candidate": "seven_point_parts",
+      "overrides": {
+        "coverage_partitions": 7,
+        "training_repeats": 7,
+        "training_block_repeats": 5
+      },
+      "accepted": false,
+      "point_rmse": 0.06835974840576006,
+      "block_rmse": 0.09408659014772991,
+      "point_comparison": {
+        "aoi_n": 21,
+        "repetitions": 3000,
+        "seed": 42,
+        "gain_rmse_95_aoi_bootstrap": [
+          -0.0002619515524665758,
+          6.34572575052437e-05
+        ],
+        "bootstrap_fraction_gain_positive": 0.115,
+        "gain_rmse": -9.946761632460832e-05,
+        "relative_rmse_reduction": -0.00145718147031125
+      },
+      "block_comparison": {
+        "aoi_n": 21,
+        "repetitions": 3000,
+        "seed": 42,
+        "gain_rmse_95_aoi_bootstrap": [
+          -0.0005104886499438785,
+          0.000635206477742107
+        ],
+        "bootstrap_fraction_gain_positive": 0.6183333333333333,
+        "gain_rmse": 8.634006097822666e-05,
+        "relative_rmse_reduction": 0.0009168246202690933
+      },
+      "improved_point_folds": 1,
+      "predictions_sha256": "c086940bf833a4c63c60193497fd67b14abb8f0550bd134b4ef469211107946c",
+      "plan_sha256": "3ca6a578b610bb6cff4a3fef87d0f1bdaf751cd5066a78167ce0440e268e0f7e"
+    },
+    {
+      "candidate": "sensor_alignment",
+      "overrides": {
+        "sensor_alignment": true,
+        "alignment_shrinkage": 8
+      },
+      "accepted": false,
+      "point_rmse": 0.06833130794591082,
+      "block_rmse": 0.09413427665002404,
+      "point_comparison": {
+        "aoi_n": 21,
+        "repetitions": 3000,
+        "seed": 42,
+        "gain_rmse_95_aoi_bootstrap": [
+          -0.0001966062938701312,
+          3.617858504454349e-05
+        ],
+        "bootstrap_fraction_gain_positive": 0.10933333333333334,
+        "gain_rmse": -7.102715647536173e-05,
+        "relative_rmse_reduction": -0.0010405341972509802
+      },
+      "block_comparison": {
+        "aoi_n": 21,
+        "repetitions": 3000,
+        "seed": 42,
+        "gain_rmse_95_aoi_bootstrap": [
+          -0.00046053772137094883,
+          0.0005162032826383885
+        ],
+        "bootstrap_fraction_gain_positive": 0.556,
+        "gain_rmse": 3.865355868409859e-05,
+        "relative_rmse_reduction": 0.0004104529677311061
+      },
+      "improved_point_folds": 1,
+      "predictions_sha256": "d19111d3f39b741432e06c4a8ddc3c5365556583b702699640261e23e57792cc",
+      "plan_sha256": "3ca6a578b610bb6cff4a3fef87d0f1bdaf751cd5066a78167ce0440e268e0f7e"
+    },
+    {
+      "candidate": "longer_boosting",
+      "overrides": {
+        "boost_iterations": 800,
+        "boost_learning_rate": 0.025
+      },
+      "accepted": true,
+      "point_rmse": 0.06749545538358577,
+      "block_rmse": 0.09310408393052666,
+      "point_comparison": {
+        "aoi_n": 21,
+        "repetitions": 3000,
+        "seed": 42,
+        "gain_rmse_95_aoi_bootstrap": [
+          0.0005163995165916119,
+          0.001031306903583008
+        ],
+        "bootstrap_fraction_gain_positive": 1.0,
+        "gain_rmse": 0.000764825405849684,
+        "relative_rmse_reduction": 0.011204545264162683
+      },
+      "block_comparison": {
+        "aoi_n": 21,
+        "repetitions": 3000,
+        "seed": 42,
+        "gain_rmse_95_aoi_bootstrap": [
+          0.000745583112286639,
+          0.0013811136390966484
+        ],
+        "bootstrap_fraction_gain_positive": 1.0,
+        "gain_rmse": 0.0010688462781814762,
+        "relative_rmse_reduction": 0.011349825006110306
+      },
+      "improved_point_folds": 5,
+      "predictions_sha256": "9fd234ce1848ec5eae07ba75c16b1cd6f2c89c2d4ca6ca52a0cc8230536dda70",
+      "plan_sha256": "3ca6a578b610bb6cff4a3fef87d0f1bdaf751cd5066a78167ce0440e268e0f7e"
+    },
+    {
+      "candidate": "deeper_regularized",
+      "overrides": {
+        "boost_iterations": 600,
+        "boost_depth": 6,
+        "boost_learning_rate": 0.03,
+        "boost_l2": 20
+      },
+      "accepted": true,
+      "point_rmse": 0.0673569506374031,
+      "block_rmse": 0.09320556160653631,
+      "point_comparison": {
+        "aoi_n": 21,
+        "repetitions": 3000,
+        "seed": 42,
+        "gain_rmse_95_aoi_bootstrap": [
+          0.0005285705233999512,
+          0.0012823378422097736
+        ],
+        "bootstrap_fraction_gain_positive": 1.0,
+        "gain_rmse": 0.0009033301520323528,
+        "relative_rmse_reduction": 0.013233613187424215
+      },
+      "block_comparison": {
+        "aoi_n": 21,
+        "repetitions": 3000,
+        "seed": 42,
+        "gain_rmse_95_aoi_bootstrap": [
+          0.0005612134445393789,
+          0.001369002532781189
+        ],
+        "bootstrap_fraction_gain_positive": 1.0,
+        "gain_rmse": 0.0009673686021718225,
+        "relative_rmse_reduction": 0.010272257643761523
+      },
+      "improved_point_folds": 5,
+      "predictions_sha256": "898e6cb2954b06edf3903ace386f529ce043cd7f5d12ec26a4552c4a7ecfcae0",
+      "plan_sha256": "3ca6a578b610bb6cff4a3fef87d0f1bdaf751cd5066a78167ce0440e268e0f7e"
+    }
+  ],
+  "plan_sha256": "3ca6a578b610bb6cff4a3fef87d0f1bdaf751cd5066a78167ce0440e268e0f7e",
+  "independent_assessment_available": false
+}

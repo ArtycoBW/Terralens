@@ -54,10 +54,11 @@ def test_sensor_neighbors_are_directional_and_use_calendar_distances():
 
 
 @pytest.mark.parametrize(
-    "crop,dynamics,feature_count", [(True, False, 55), (False, True, 78), (True, True, 79)]
+    "crop,dynamics,transitions,feature_count",
+    [(True, False, False, 55), (False, True, False, 78), (True, True, False, 79), (False, True, True, 85)],
 )
 def test_new_features_are_mask_invariant_and_support_unseen_crops_and_json(
-    tmp_path, crop, dynamics, feature_count
+    tmp_path, crop, dynamics, transitions, feature_count
 ):
     frame = context()
     config = {
@@ -67,6 +68,7 @@ def test_new_features_are_mask_invariant_and_support_unseen_crops_and_json(
         "context_quality": True,
         "crop_features": crop,
         "sensor_dynamics": dynamics,
+        "transition_features": transitions,
         "boost_iterations": 12,
         "training_repeats": 1,
         "masked_training_priors": True,
@@ -74,7 +76,7 @@ def test_new_features_are_mask_invariant_and_support_unseen_crops_and_json(
     }
     model = fit(frame, config)
     assert len(model["feature_names"]) == feature_count
-    assert model["schema_version"] == 3
+    assert model["schema_version"] == (4 if transitions else 3)
     if crop:
         assert model["boosting"]["features_info"]["categorical_features"][0]["feature_id"] == "crop_type"
     query = frame.copy()
@@ -96,9 +98,9 @@ def test_new_features_are_mask_invariant_and_support_unseen_crops_and_json(
         np.testing.assert_array_equal(
             actual.loc[observed, "reconstructed"], query.loc[observed, "primary_ndvi"]
         )
-    model["schema_version"] = 2
+    model["schema_version"] = 3 if transitions else 2
     save_model(model, tmp_path)
-    with pytest.raises(DataError, match="версия артефакта 3"):
+    with pytest.raises(DataError, match=f"версия артефакта {4 if transitions else 3}"):
         load_model(tmp_path / "manifest.json")
 
 
@@ -131,8 +133,28 @@ def test_sensor_features_do_not_cross_fields_seasons_or_crop_changes():
         {"crop_features": 1},
         {"sensor_dynamics": "true"},
         {"sensor_dynamics": True, "use_sensors": False},
+        {"transition_features": "true"},
+        {"transition_features": True, "local_features": False},
     ],
 )
 def test_invalid_feature_flags_fail_cleanly(config):
     with pytest.raises(DataError):
         checked_config(config)
+
+
+def test_transition_projections_and_pchip_do_not_extrapolate():
+    from terralens_ml.candidates import local_shape_features
+
+    features = local_shape_features(
+        np.array([0, 1, 3, 7, 11, 21, 25]),
+        np.array([np.nan, 0.1, 0.2, np.nan, 0.6, 0.9, np.nan]),
+        transitions=True,
+    )
+    assert features["left_projected"][3] == pytest.approx(0.4)
+    assert features["right_projected"][3] == pytest.approx(0.48)
+    assert features["projection_gap"][3] == pytest.approx(0.08)
+    assert features["slope_change"][3] == pytest.approx(-0.02)
+    assert 0.2 <= features["pchip_estimate"][3] <= 0.6
+    assert np.isnan(features["pchip_estimate"][[0, -1]]).all()
+    empty = local_shape_features(np.array([1, 2]), np.array([0.3, np.nan]), transitions=True)
+    assert np.isnan(empty["pchip_estimate"]).all()

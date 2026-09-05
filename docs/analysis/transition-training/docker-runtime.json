@@ -1,0 +1,18 @@
+{
+  "ready": {
+    "status": "ready",
+    "checks": {
+      "database": true,
+      "queue": true,
+      "model": true
+    }
+  },
+  "active_model": "131aee618934151e",
+  "docker_source_sha256": {
+    "candidates.py": "29c7978dacc8b3b2fb07c62b1cb871806641afbf178b274058bbc38b07ab45d8",
+    "model.py": "4242e02418f80a744daa0dc538c6eb96c0218c35864600e9db2d9e2c0bc7bd1a",
+    "uncertainty.py": "7cfb2e85a09fc0e16eaf0b90549725bfbaed300a410f5d4d191671a97f818f41"
+  },
+  "matches_working_tree": true,
+  "image_id": "sha256:b3cd6783d9d7ba6bb88c43aed1fa735c4c0ded2357e42892de572c0f79a2f6b2"
+}

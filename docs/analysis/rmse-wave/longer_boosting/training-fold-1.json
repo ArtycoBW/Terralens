@@ -1,0 +1,32 @@
+{
+  "train_ids": [
+    "AOI-0003",
+    "AOI-0004",
+    "AOI-0007",
+    "AOI-0015",
+    "AOI-0023",
+    "AOI-0026",
+    "AOI-0030",
+    "AOI-0033",
+    "AOI-0035",
+    "AOI-0038",
+    "AOI-0041",
+    "AOI-0043",
+    "AOI-0045",
+    "AOI-0050",
+    "AOI-0053",
+    "AOI-0071",
+    "AOI-0075"
+  ],
+  "validation_ids": [
+    "AOI-0002",
+    "AOI-0021",
+    "AOI-0037",
+    "AOI-0064"
+  ],
+  "training_rows": 12030,
+  "training_examples": 63697,
+  "feature_count": 78,
+  "seconds": 11.722528999998758,
+  "predictions_sha256": "9889defa62084d3eb2fed34dcc2924b884a34559e67e49e5c578d6035357c3f9"
+}

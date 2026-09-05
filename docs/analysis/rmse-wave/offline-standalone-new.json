@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-09-05T21:13:33.716606+00:00",
+  "network_disabled": true,
+  "missing_modules": {
+    "django": true,
+    "celery": true,
+    "redis": true
+  },
+  "input_sha256": "f7ba087818175ea644fc9fe652c6a3874b5bfcde7df197d3e7541cb95876f855",
+  "model_manifest_sha256": "798e69c845a7b887802f72f8acde1013d7c31e45b8b58eab1a77a89cc6cf7518",
+  "submission_sha256": "54ced3df5e5bedf1c9c03915cb2cef2ef831735d4fc9448d0a2fa0d7d4286f76",
+  "identical_runs": 2,
+  "validation": {
+    "valid": true,
+    "rows": 2323,
+    "message": "Submission прошёл проверку"
+  },
+  "dependencies": {
+    "terralens-ml": "0.1.0",
+    "numpy": "2.5.2",
+    "pandas": "2.3.3",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.0",
+    "catboost": "1.2.10"
+  }
+}

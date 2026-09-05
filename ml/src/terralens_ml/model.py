@@ -14,6 +14,7 @@ from scipy.interpolate import PchipInterpolator
 
 from .candidates import (
     field_season_segments,
+    fit_sensor_alignment,
     predict_booster,
     residual_features,
     robust_smooth,
@@ -53,6 +54,8 @@ def checked_config(config=None):
         ("boost_iterations", 160, 1, None),
         ("boost_depth", 4, 1, 10),
         ("training_repeats", 1, 1, 10),
+        ("coverage_partitions", 5, 2, 10),
+        ("training_block_repeats", result.get("training_repeats", 1), 0, result.get("training_repeats", 1)),
     ]:
         value = result.get(name, default)
         if (
@@ -81,13 +84,31 @@ def checked_config(config=None):
         "context_quality",
         "crop_features",
         "sensor_dynamics",
+        "transition_features",
+        "sensor_alignment",
+        "normalize_target_weights",
     ]:
         if name in result and not isinstance(result[name], bool):
             raise DataError(f"{name} должен быть boolean")
-    if result.get("cover_training_targets") and result.get("training_repeats", 1) < 5:
-        raise DataError("Для покрытия обучающих целей требуется не менее пяти повторений")
+    if result.get("cover_training_targets") and result.get("training_repeats", 1) < result.get(
+        "coverage_partitions", 5
+    ):
+        raise DataError("Для покрытия обучающих целей нужно не меньше повторений, чем частей")
     if result.get("sensor_dynamics") and not result["use_sensors"]:
         raise DataError("sensor_dynamics требует use_sensors")
+    if result.get("transition_features") and not result.get("local_features"):
+        raise DataError("transition_features требует local_features")
+    if result.get("sensor_alignment") and not result["use_sensors"]:
+        raise DataError("sensor_alignment требует use_sensors")
+    for name, default in [("boost_learning_rate", 0.04), ("alignment_shrinkage", 8)]:
+        value = result.get(name, default)
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not np.isfinite(value)
+            or value <= 0
+        ):
+            raise DataError(f"{name} должен быть положительным конечным числом")
     l2 = result.get("boost_l2", 10)
     if isinstance(l2, bool) or not isinstance(l2, (int, float)) or not np.isfinite(l2) or l2 < 0:
         raise DataError("boost_l2 должен быть неотрицательным конечным числом")
@@ -128,6 +149,10 @@ def fit(training_context: pd.DataFrame, config=None) -> dict:
             version = 2
         if config.get("crop_features") or config.get("sensor_dynamics"):
             version = 3
+        if config.get("transition_features"):
+            version = 4
+        if config.get("sensor_alignment"):
+            version = 5
     model = {
         "schema_version": version,
         "config": config,
@@ -141,32 +166,29 @@ def fit(training_context: pd.DataFrame, config=None) -> dict:
         "excluded_targets": int(training_context.primary_ndvi.notna().sum() - valid.sum()),
         "supported_modes": ["retrospective"],
     }
+    if config.get("sensor_alignment"):
+        model["sensor_alignment"] = fit_sensor_alignment(training_context)
     if config["algorithm"] == "catboost_residual":
         members, counts = [], []
         used_targets = pd.Series(False, index=training_context.index)
         for seed in config.get("ensemble_seeds", [config["seed"]]):
             member_config = config | {"seed": seed}
-            examples, residuals = [], []
-            member_targets = pd.Series(False, index=training_context.index)
-            for mask in training_masks(training_context, valid, member_config):
-                member_targets |= mask
-                context = mask_context(training_context, mask)
-                base_config = {"algorithm": config.get("residual_base", "neighbor_mean")}
-                base_model = (
-                    fit(context, member_config | base_config)
-                    if config.get("masked_training_priors")
-                    else model
-                )
-                base = reconstruct(context, base_config, base_model)
-                features = residual_features(base, config)
-                examples.append(features.loc[mask])
-                residuals.append(training_context.loc[mask, "primary_ndvi"] - base.loc[mask, "reconstructed"])
-            examples = pd.concat(examples, ignore_index=True)
-            members.append(train_booster(examples, pd.concat(residuals, ignore_index=True), member_config))
+            examples, residuals, target_indices = booster_training_data(
+                training_context, valid, member_config, model
+            )
+            weights = (
+                target_example_weights(target_indices) if config.get("normalize_target_weights") else None
+            )
+            member = (
+                train_booster(examples, residuals, member_config, sample_weight=weights)
+                if weights is not None
+                else train_booster(examples, residuals, member_config)
+            )
+            members.append(member)
             model["feature_names"] = examples.columns.tolist()
-            used_targets |= member_targets
+            used_targets.loc[np.unique(target_indices)] = True
             counts.append(
-                {"seed": seed, "examples": len(examples), "unique_targets": int(member_targets.sum())}
+                {"seed": seed, "examples": len(examples), "unique_targets": len(np.unique(target_indices))}
             )
         model["boosting"] = members[0]
         if len(members) > 1:
@@ -175,6 +197,38 @@ def fit(training_context: pd.DataFrame, config=None) -> dict:
         model["training_examples"] = sum(member["examples"] for member in counts)
         model["training_unique_targets"] = int(used_targets.sum())
     return model
+
+
+def target_example_weights(target_indices):
+    """Equal total loss weight per original target; mean weight stays one for L2."""
+    counts = pd.Series(target_indices).value_counts()
+    weights = 1 / counts.loc[target_indices].to_numpy(dtype=float)
+    return weights / weights.mean()
+
+
+def booster_training_data(training_context, valid, config, model):
+    """Build masked training examples independently of booster hyperparameters."""
+    examples, residuals, target_indices = [], [], []
+    for mask in training_masks(training_context, valid, config):
+        if not mask.any():
+            continue
+        context = mask_context(training_context, mask)
+        base_config = {"algorithm": config.get("residual_base", "neighbor_mean")}
+        base_model = fit(context, config | base_config) if config.get("masked_training_priors") else model
+        base = reconstruct(context, base_config, base_model)
+        features = (
+            residual_features(base, config, alignment=base_model["sensor_alignment"])
+            if config.get("sensor_alignment")
+            else residual_features(base, config)
+        )
+        examples.append(features.loc[mask])
+        residuals.append(training_context.loc[mask, "primary_ndvi"] - base.loc[mask, "reconstructed"])
+        target_indices.append(training_context.index[mask].to_numpy())
+    return (
+        pd.concat(examples, ignore_index=True),
+        pd.concat(residuals, ignore_index=True),
+        np.concatenate(target_indices),
+    )
 
 
 def save_model(model, directory, *, input_path=None, metrics=None, validation_hashes=None):
@@ -232,7 +286,7 @@ def load_model(manifest_path):
     manifest_path = Path(manifest_path)
     try:
         manifest = json.loads(manifest_path.read_text())
-        if manifest.get("schema_version") not in [1, 2, 3] or set(manifest.get("files", {})) != {
+        if manifest.get("schema_version") not in [1, 2, 3, 4, 5] or set(manifest.get("files", {})) != {
             "model.json"
         }:
             raise DataError("Несовместимая схема артефакта модели")
@@ -243,6 +297,29 @@ def load_model(manifest_path):
         if model["schema_version"] != manifest["schema_version"] or not np.isfinite(model["global_median"]):
             raise DataError("Некорректная модель")
         checked_config(model["config"])
+        if model["config"].get("sensor_alignment"):
+            alignment = model["sensor_alignment"]
+            if (
+                alignment["method"] != "s2_minus_landsat_field_median_v1"
+                or not np.isfinite(alignment["bias"])
+                or abs(alignment["bias"]) > 2
+                or any(
+                    isinstance(alignment[key], bool)
+                    or not isinstance(alignment[key], int)
+                    or alignment[key] < 0
+                    for key in ["paired_days", "paired_fields"]
+                )
+                or alignment["paired_fields"] > alignment["paired_days"]
+            ):
+                raise DataError("Некорректная межсенсорная калибровка")
+            if model["config"]["algorithm"] == "catboost_residual" and model["schema_version"] < 5:
+                raise DataError("Для межсенсорных признаков требуется версия артефакта 5")
+        if (
+            model["config"]["algorithm"] == "catboost_residual"
+            and model["config"].get("transition_features")
+            and model["schema_version"] < 4
+        ):
+            raise DataError("Для признаков перехода требуется версия артефакта 4")
         for name in ["monthly", "crop_monthly"]:
             if not isinstance(model[name], dict) or not all(
                 np.isfinite(value) for value in model[name].values()
@@ -387,7 +464,11 @@ def reconstruct(series: pd.DataFrame, config=None, model=None) -> pd.DataFrame:
     frame["reconstructed"], frame["origin"] = values, origins
     frame["support_count"], frame["gap_days"], frame["quality_flags"] = supports, gaps, flags
     if config["algorithm"] == "catboost_residual" and "boosting" in model and len(frame):
-        features = residual_features(frame, config)
+        features = (
+            residual_features(frame, config, alignment=model["sensor_alignment"])
+            if config.get("sensor_alignment")
+            else residual_features(frame, config)
+        )
         correction = predict_booster(model, features[model["feature_names"]])
         missing = frame.origin.ne("observed")
         frame.loc[missing, "reconstructed"] += correction[missing]

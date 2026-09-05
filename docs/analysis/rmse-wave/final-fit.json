@@ -1,0 +1,87 @@
+{
+  "model_id": "594d4e6509459b08",
+  "manifest_sha256": "798e69c845a7b887802f72f8acde1013d7c31e45b8b58eab1a77a89cc6cf7518",
+  "training_scope": {
+    "polygon_ids": [
+      "AOI-0002",
+      "AOI-0003",
+      "AOI-0004",
+      "AOI-0007",
+      "AOI-0015",
+      "AOI-0021",
+      "AOI-0023",
+      "AOI-0026",
+      "AOI-0030",
+      "AOI-0033",
+      "AOI-0035",
+      "AOI-0037",
+      "AOI-0038",
+      "AOI-0041",
+      "AOI-0043",
+      "AOI-0045",
+      "AOI-0050",
+      "AOI-0053",
+      "AOI-0064",
+      "AOI-0071",
+      "AOI-0075"
+    ],
+    "years_before": 2024,
+    "calibration_ids": [
+      "AOI-0022",
+      "AOI-0040",
+      "AOI-0065",
+      "AOI-0069",
+      "AOI-0076"
+    ],
+    "assessment_ids": [
+      "AOI-0020",
+      "AOI-0027",
+      "AOI-0055",
+      "AOI-0060",
+      "AOI-0070"
+    ],
+    "excluded_previously_inspected_holdout": [
+      "AOI-0008",
+      "AOI-0011",
+      "AOI-0019",
+      "AOI-0048",
+      "AOI-0052",
+      "AOI-0056",
+      "AOI-0063",
+      "AOI-0077"
+    ]
+  },
+  "calibration": {
+    "method": "empirical_residual",
+    "level": 0.9,
+    "pooled_radius": 0.13036729001625091,
+    "n": 1173,
+    "minimum_group": 100,
+    "groups": {
+      "edge": {
+        "n": 71,
+        "radius": 0.13036729001625091,
+        "pooled_fallback": true
+      },
+      "long": {
+        "n": 244,
+        "radius": 0.1372309958442622,
+        "pooled_fallback": false
+      },
+      "prior": {
+        "n": 281,
+        "radius": 0.17764574753113982,
+        "pooled_fallback": false
+      },
+      "short": {
+        "n": 577,
+        "radius": 0.09853670505223322,
+        "pooled_fallback": false
+      }
+    },
+    "domain": "anonymous_benchmark",
+    "unit": "masked_observation",
+    "limitations": "Repeated observations within AOI are dependent; no unconditional coverage guarantee"
+  },
+  "test_labels_read": false
+}

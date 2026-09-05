@@ -1,0 +1,30 @@
+{
+  "accepted": false,
+  "point_comparison": {
+    "aoi_n": 21,
+    "repetitions": 3000,
+    "seed": 42,
+    "gain_rmse_95_aoi_bootstrap": [
+      -0.00021172871044990645,
+      0.0005668247270334145
+    ],
+    "bootstrap_fraction_gain_positive": 0.7823333333333333,
+    "gain_rmse": 0.00017072358721213765,
+    "relative_rmse_reduction": 0.0025010677547426716
+  },
+  "block_comparison": {
+    "aoi_n": 21,
+    "repetitions": 3000,
+    "seed": 42,
+    "gain_rmse_95_aoi_bootstrap": [
+      -0.0016532837301693525,
+      0.0019182054513680149
+    ],
+    "bootstrap_fraction_gain_positive": 0.5756666666666667,
+    "gain_rmse": 0.00017436711787650883,
+    "relative_rmse_reduction": 0.001851563049913309
+  },
+  "improved_point_folds": 2,
+  "plan_sha256": "7d5df4c850591cf2c263ccb3059c22f6642c24ae4ef2431d3c90637d8ec64f98",
+  "predictions_sha256": "c6c675e26647ef443b0c93c82ee6dbfdc84d984be2bf61935b85670e11cb6bdc"
+}

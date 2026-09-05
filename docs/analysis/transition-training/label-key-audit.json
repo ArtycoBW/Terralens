@@ -1,0 +1,15 @@
+{
+  "labels_sha256": "50d694a92187b7e8a2fca8a2b72458d9a8042726bd9d85634eb7a85fa5174088",
+  "label_rows": 3112,
+  "label_fields": 78,
+  "duplicate_keys": 0,
+  "matching_synthetic_keys": {
+    "test-dataset.csv": 3112,
+    "test_features.csv": 0
+  },
+  "test_features_queries": 2323,
+  "labels_overlapping_known_train_targets": 0,
+  "original_test_fields_seen_in_fit": 21,
+  "original_test_targets_in_fields_seen_in_fit": 247,
+  "correction": "The frozen development protocols assumed the supplied labels belonged to the new test. Exact-key validation rejected that assumption. No candidate was fitted or selected with labels; both candidates had already failed development gates."
+}

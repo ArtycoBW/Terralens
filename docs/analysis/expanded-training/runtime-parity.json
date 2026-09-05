@@ -1,0 +1,43 @@
+{
+  "method": "Alternating warm full reconstruct; imports/read/load excluded; same model in both runtimes",
+  "baseline_revision": "31f0d97fdd6d8be3c0cc25e837ee681877526faf",
+  "model_id": "131aee618934151e",
+  "model_manifest_sha256": "44ab0740659cd872f488ad881ace01594cd4c9b7b6acbd045bd4fe46b9f2924f",
+  "inputs": {
+    "test-dataset.csv": {
+      "rows": 57185,
+      "sha256": "3c5c0e27eef8266bcf6dce09c9b556c073cee3902c065a94e4ea7a59edb00993",
+      "exact_features_and_full_frame": true,
+      "samples_seconds": {
+        "legacy": [
+          4.013752834000115,
+          4.04027433400006,
+          4.016857666998476
+        ],
+        "optimized": [
+          1.1854682920002233,
+          1.1780602919989178,
+          1.1881834590003564
+        ]
+      }
+    },
+    "test_features.csv": {
+      "rows": 49190,
+      "sha256": "f7ba087818175ea644fc9fe652c6a3874b5bfcde7df197d3e7541cb95876f855",
+      "exact_features_and_full_frame": true,
+      "samples_seconds": {
+        "legacy": [
+          3.426729917000557,
+          3.4017896249988553,
+          3.4322562090001156
+        ],
+        "optimized": [
+          1.0055024170014804,
+          1.00227220799934,
+          1.0224634159985726
+        ]
+      }
+    }
+  },
+  "script_sha256": "29e174ef3d06f1e143239924a8f08b20abbb8a8fb496e87b29e8d4aed1331d2d"
+}

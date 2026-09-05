@@ -1,0 +1,37 @@
+{
+  "candidate": "sensor_alignment",
+  "overrides": {
+    "sensor_alignment": true,
+    "alignment_shrinkage": 8
+  },
+  "accepted": false,
+  "point_rmse": 0.06833130794591082,
+  "block_rmse": 0.09413427665002404,
+  "point_comparison": {
+    "aoi_n": 21,
+    "repetitions": 3000,
+    "seed": 42,
+    "gain_rmse_95_aoi_bootstrap": [
+      -0.0001966062938701312,
+      3.617858504454349e-05
+    ],
+    "bootstrap_fraction_gain_positive": 0.10933333333333334,
+    "gain_rmse": -7.102715647536173e-05,
+    "relative_rmse_reduction": -0.0010405341972509802
+  },
+  "block_comparison": {
+    "aoi_n": 21,
+    "repetitions": 3000,
+    "seed": 42,
+    "gain_rmse_95_aoi_bootstrap": [
+      -0.00046053772137094883,
+      0.0005162032826383885
+    ],
+    "bootstrap_fraction_gain_positive": 0.556,
+    "gain_rmse": 3.865355868409859e-05,
+    "relative_rmse_reduction": 0.0004104529677311061
+  },
+  "improved_point_folds": 1,
+  "predictions_sha256": "d19111d3f39b741432e06c4a8ddc3c5365556583b702699640261e23e57792cc",
+  "plan_sha256": "3ca6a578b610bb6cff4a3fef87d0f1bdaf751cd5066a78167ce0440e268e0f7e"
+}

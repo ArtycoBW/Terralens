@@ -126,6 +126,53 @@ def test_final_model_worker_parity_and_live_interval_scope():
     assert "domain_shift" in daily[1]["quality_flags"]
 
 
+def test_sensor_alignment_worker_matches_batch_when_primary_source_changes():
+    dates = pd.date_range("2023-04-01", periods=30, freq="3D").strftime("%Y-%m-%d")
+    values = 0.4 + 0.2 * np.sin(np.arange(30) / 6)
+    training = pd.DataFrame(
+        {
+            "anon_polygon_id": "training",
+            "date": dates,
+            "crop_type": "unknown",
+            "primary_ndvi": values,
+            "s2_ndvi": values,
+            "landsat_ndvi": values - 0.1,
+        }
+    )
+    model = fit(
+        training,
+        {
+            "algorithm": "catboost_residual",
+            "use_weather": False,
+            "local_features": True,
+            "sensor_dynamics": True,
+            "sensor_alignment": True,
+            "masked_training_priors": True,
+            "boost_iterations": 12,
+        },
+    )
+    frame = pd.DataFrame(
+        {
+            "anon_polygon_id": "field",
+            "date": pd.date_range("2024-06-01", "2024-06-10").strftime("%Y-%m-%d"),
+            "crop_type": "unknown",
+            "primary_ndvi": [0.3] + [np.nan] * 8 + [0.7],
+            "s2_ndvi": [0.3] + [np.nan] * 9,
+            "landsat_ndvi": [0.2] + [np.nan] * 8 + [0.7],
+        }
+    )
+    expected = reconstruct(frame, model=model)
+    observations = [
+        observation("2024-06-01", 0.3),
+        observation("2024-06-01", 0.2, "landsat"),
+        observation("2024-06-10", 0.7, "landsat"),
+    ]
+    daily, _, _ = calculate("field", None, date(2024, 6, 1), date(2024, 6, 10), observations, [], model)
+    np.testing.assert_allclose([row["reconstructed"] for row in daily], expected.reconstructed, atol=1e-12)
+    assert daily[0]["clean_primary"] == 0.3
+    assert daily[-1]["clean_primary"] == 0.7
+
+
 def test_unknown_crop_reduces_event_confidence_before_detection():
     daily, events, _ = calculate(
         "field",

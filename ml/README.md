@@ -1,10 +1,20 @@
 # Вычислительное ядро TerraLens
 
-Python 3.12, автономный CPU-пакет. Для инференса не нужны Django, БД, Redis или сеть. Финальная модель — равновесный ансамбль трёх CatBoost residual моделей к M0: seeds 42/107/211, по 400 деревьев глубины 5, 78 календарных, сенсорных и локальных признаков, без погоды. Артефакт — `ml/artifacts/final/manifest.json`, model_id `131aee618934151e`. Исторический M0 сохранён в `ml/artifacts/baseline`.
+Python 3.12, автономный CPU-пакет. Для инференса не нужны Django, БД, Redis или сеть. Финальная модель — равновесный ансамбль трёх CatBoost residual моделей к M0: seeds 42/107/211, по **600 деревьев глубины 6**, learning rate **0,03**, L2 **20**, 78 календарных, сенсорных и локальных признаков, без погоды. Артефакт — `ml/artifacts/final/manifest.json`, model_id **594d4e6509459b08**. Исторический M0 сохранён в `ml/artifacts/baseline`.
 
-На одинаковых development folds RMSE снизился с **0,069207 до 0,068260** на точках и с **0,095374 до 0,094173** на блоках. Обе метрики улучшились во всех пяти folds. Повторная assessment points/blocks: **0,071194 / 0,092206**; temporal 2024: **0,057633 / 0,080936**. На этих диагностических наборах точки улучшились, блоки ухудшились на 1,86% / 2,53%. Эти данные уже просматривались; нового слепого holdout нет. Официальный test RMSE неизвестен. [Последний протокол и компромиссы](../docs/analysis/crop-dynamics/REPORT.md), [предыдущий этап](../docs/analysis/model-coverage/REPORT.md), [исходные 13 вариантов](../docs/analysis/model-research/REPORT.md).
+На одинаковых development folds point RMSE снизился с **0,068260 до 0,067357** (1,32%), block RMSE — с **0,094173 до 0,093206** (1,03%). Точки улучшились во всех пяти folds. Warm-инференс замедлился на **4–7%** относительно уже ускоренного baseline, в пределах бюджета +25%. Test RMSE и внешнее покрытие интервалов новых весов не измерялись; нового слепого holdout нет. [Текущий протокол и пять экспериментов](../docs/analysis/rmse-wave/REPORT.md), [история динамических признаков](../docs/analysis/crop-dynamics/REPORT.md), [исходные 13 вариантов](../docs/analysis/model-research/REPORT.md).
 
-Позднее предоставленные ответы проверены на неизменённом `deliverables/submission.csv`: локальный RMSE **0,075034**, MAE **0,049410**, GapScore **7,49 / 30**, 3 112 точек. Обучение или выбор модели по этим ответам не выполнялись. Для другого входа `test_features.csv` отдельно построено 2 323 прогноза той же моделью; подходящих ответов к нему нет. [Сверка входов, хеши и воспроизведение оценки](../docs/CASE_AUDIT.md).
+## Последний этап
+
+Последняя волна отдельно сравнила нормировку весов повторяющихся целей, семь покрывающих point-масок, независимые пары S2↔Landsat и два набора параметров CatBoost. Нормировка улучшила points, но ухудшила blocks; новые маски и пары не улучшили основной RMSE. Оба набора параметров деревьев прошли условия, выбран минимум point RMSE. Признаки и состав train сохранены, интервалы откалиброваны заново на прежних пяти calibration AOI. [Полные результаты](../docs/analysis/rmse-wave/REPORT.md).
+
+Подготовка признаков и интервалов продолжает использовать позиционные NumPy-массивы. Предыдущий этап с ускорением примерно в 3,4 раза, отклонённым расширением train и признаками переходов сохранён как [исторический отчёт](../docs/analysis/transition-training/REPORT.md). Точное совпадение с прежним runtime относится к одинаковым весам; новая обученная модель даёт новые прогнозы.
+
+Экспериментальный `transition_features: true` добавляет семь признаков формы, требует `local_features: true` и CatBoost schema v4. `sensor_alignment: true` добавляет шесть признаков независимых сенсорных пар, требует `use_sensors: true` и schema v5 с обученным bias. Оба флага отключены в действующей модели v3; runtime читает v1–v5. `normalize_target_weights`, `coverage_partitions`, `training_block_repeats` управляют экспериментами обучения и также не включены в выбранной конфигурации.
+
+Предоставленный `private_test_ground_truth.csv` соответствует 3 112 пропускам исходного `test-dataset.csv`. Прежние RMSE **0,075034**, MAE **0,049410**, coverage **89,30%** относятся к модели **131aee618934151e**, а не к новым весам. Ответы уже просмотрены; в текущей волне они не читались и не участвовали в выборе. Новый тест содержит 20 отдельных полей и 2 323 запроса без доступных ответов.
+
+Исторический аудит исходных вложений оценивал прежний submission до замены весов: RMSE **0,075034**, MAE **0,049410**, GapScore **7,49 / 30**, 3 112 точек. Его прогнозы и модель были зафиксированы до чтения ответов. Этот результат нельзя приписывать нынешнему `deliverables/submission.csv`; сверять версию следует по [хешам исторической оценки](../docs/analysis/input-review/local-score.json). Подробное обучение текущей модели описано также в [корневом README](../README.md#как-обучалась-текущая-модель).
 
 ## Окружение и команды
 
@@ -22,6 +32,9 @@ uv pip install --python .venv-ml/bin/python --no-deps ./ml
 ```sh
 uv run --frozen python -m terralens_ml audit --input train-dataset.zip
 uv run --frozen python -m terralens_ml audit --input test-dataset.csv
+uv run --frozen python scripts/train_rmse_wave.py --stage develop
+uv run --frozen python scripts/train_rmse_wave.py --stage final
+uv run --frozen python scripts/train_rmse_wave.py --stage benchmark
 uv run --frozen python -m terralens_ml research --config ml/configs/crop-dynamics.yaml --development-only
 uv run --frozen python -m terralens_ml research --config ml/configs/crop-dynamics.yaml
 uv run --frozen python -m terralens_ml predict --input test-dataset.csv --output artifacts/submission.csv --model ml/artifacts/final/manifest.json
@@ -29,7 +42,9 @@ uv run --frozen python -m terralens_ml validate-submission --input test-dataset.
 uv run --frozen pytest ml/tests -q
 ```
 
-`research --development-only` выполняет только folds и выбор кандидата: calibration/assessment не рассчитываются, финальная модель не обучается. `crop-dynamics.yaml` сравнивает прежний ансамбль, культуру, динамику сенсоров и оба набора признаков вместе. Полный запуск фиксирует победителя и только затем проводит fit, калибровку и повторную диагностику; артефакт создаётся в `artifacts/crop-dynamics/model`. Для публикации проверенного артефакта скопировать `model.json` и `manifest.json` в `ml/artifacts/final` либо передать путь операторской команде backend `register_model`. Прежняя версия доступна в Git и registry. Конфигурации прошлых этапов `mask-coverage.yaml` и `mask-ensemble.yaml` сохранены для воспроизведения.
+`train_rmse_wave.py` реализует текущую ограниченную волну; её параметры — `ml/configs/rmse-wave.yaml`. Требуются прежние OOF и backup baseline по путям из config. План защищён от изменения данных/кода/параметров; повторные final fit и benchmark в том же output отклоняются. После синхронизации с обновлённой веткой команды с исходным планом не продолжают завершённый эксперимент: для нового запуска нужны копия config, новые `output`/`evidence` и `PROTOCOL.md` в evidence, как описано в корневом README. Predictions хранятся в `artifacts/rmse-wave`; компактные evidence — в `docs/analysis/rmse-wave`. Восстанавливаемый кеш матриц удалён при очистке, промежуточные результаты сохранены. Условия качества, скорости и проверок были выполнены при установке текущего выпуска.
+
+Команды `research` воспроизводят предыдущие этапы. `research --development-only` выполняет только folds и выбор кандидата: calibration/assessment не рассчитываются, финальная модель не обучается. `crop-dynamics.yaml` сравнивает прежний ансамбль, культуру, динамику сенсоров и оба набора признаков вместе; его артефакт создаётся в `artifacts/crop-dynamics/model`. Конфигурации `mask-coverage.yaml` и `mask-ensemble.yaml` также сохранены как исторические эксперименты.
 
 План, folds и seeds фиксируются до расчёта. Выбор — минимум pooled points RMSE при отсутствии роста blocks RMSE относительно baseline. Для этого этапа условием публикации также стали ≥1% улучшения points, улучшение минимум в четырёх folds и положительная нижняя граница 95% парного AOI-bootstrap интервала. Все условия выполнены. Восемь старых holdout AOI исключены. Сохранены 21 selection, пять calibration и пять assessment; global fit использует только selection до 2024. Refit на calibration/assessment и подбор по повторным диагностическим результатам не выполняются.
 
@@ -53,7 +68,7 @@ uv run --frozen pytest ml/tests -q
 
 ## Интервалы, норма и события
 
-Финальная модель хранит empirical residual quantiles уровня 90% на отдельной calibration выборке, с группами short/long/edge/prior и pooled fallback при N<100. Повторная assessment points coverage — **90,80%**, blocks — **90,08%**; temporal points — **92,91%**, blocks — **94,06%**. Повторные точки внутри AOI зависимы, оценочные данные ранее просматривались: безусловная гарантия покрытия не заявляется.
+Финальная модель хранит заново рассчитанные empirical residual quantiles уровня 90% на **1 173** примерах пяти отдельных calibration AOI, с группами short/long/edge/prior и pooled fallback при N<100. Внешнее покрытие новых весов не измерялось. Прежние assessment/temporal coverage из crop-dynamics относятся к старому артефакту. Повторные точки внутри AOI зависимы; безусловная гарантия покрытия не заявляется.
 
 `reconstruct` возвращает колонку `prediction_interval` (dict lower/upper/level/method). Observed даты и некалиброванные модели возвращают null/not_calibrated. Backend передаёт `config={"interval_domain": "live"}`: method становится `empirical_residual_domain_shift`, добавляется domain_shift. Benchmark-калибровка не подтверждает покрытие реальных регионов.
 

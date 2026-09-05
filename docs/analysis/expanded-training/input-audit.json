@@ -1,0 +1,16 @@
+{
+  "train_normalized_equals_previous": true,
+  "train_rows": 99955,
+  "train_fields": 39,
+  "train_known_targets": 30520,
+  "new_test_rows": 49190,
+  "new_test_fields": 20,
+  "new_test_queries": 2323,
+  "train_test_field_overlap": [],
+  "sources": {
+    "train_dataset.csv": "a75e530d0fb51581ad6800f84b3875233778801491f02236917862faf9b424ec",
+    "test_features.csv": "f7ba087818175ea644fc9fe652c6a3874b5bfcde7df197d3e7541cb95876f855",
+    "private_test_ground_truth.csv": "50d694a92187b7e8a2fca8a2b72458d9a8042726bd9d85634eb7a85fa5174088"
+  },
+  "label_values_read": false
+}

@@ -1,6 +1,6 @@
 .git
 .idea
-.venv
+.venv*
 artifacts
 !ml/artifacts/**
 frontend

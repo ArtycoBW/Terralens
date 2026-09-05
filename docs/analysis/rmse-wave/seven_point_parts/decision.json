@@ -1,0 +1,38 @@
+{
+  "candidate": "seven_point_parts",
+  "overrides": {
+    "coverage_partitions": 7,
+    "training_repeats": 7,
+    "training_block_repeats": 5
+  },
+  "accepted": false,
+  "point_rmse": 0.06835974840576006,
+  "block_rmse": 0.09408659014772991,
+  "point_comparison": {
+    "aoi_n": 21,
+    "repetitions": 3000,
+    "seed": 42,
+    "gain_rmse_95_aoi_bootstrap": [
+      -0.0002619515524665758,
+      6.34572575052437e-05
+    ],
+    "bootstrap_fraction_gain_positive": 0.115,
+    "gain_rmse": -9.946761632460832e-05,
+    "relative_rmse_reduction": -0.00145718147031125
+  },
+  "block_comparison": {
+    "aoi_n": 21,
+    "repetitions": 3000,
+    "seed": 42,
+    "gain_rmse_95_aoi_bootstrap": [
+      -0.0005104886499438785,
+      0.000635206477742107
+    ],
+    "bootstrap_fraction_gain_positive": 0.6183333333333333,
+    "gain_rmse": 8.634006097822666e-05,
+    "relative_rmse_reduction": 0.0009168246202690933
+  },
+  "improved_point_folds": 1,
+  "predictions_sha256": "c086940bf833a4c63c60193497fd67b14abb8f0550bd134b4ef469211107946c",
+  "plan_sha256": "3ca6a578b610bb6cff4a3fef87d0f1bdaf751cd5066a78167ce0440e268e0f7e"
+}

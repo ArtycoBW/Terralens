@@ -1,0 +1,118 @@
+{
+  "method": "Single process; imports/startup/output excluded; warm model and OS cache; no training",
+  "limitations": "Local microbenchmark; 5 repeats do not establish production p95; no network or DB",
+  "created_utc": "2026-09-05T14:58:41.589494+00:00",
+  "git_revision": "31f0d97fdd6d8be3c0cc25e837ee681877526faf",
+  "platform": "macOS-26.5-arm64-arm-64bit",
+  "processor": "arm",
+  "logical_cpus": 12,
+  "python": "3.12.9",
+  "dependencies": {
+    "numpy": "2.5.2",
+    "pandas": "2.3.3",
+    "scipy": "1.18.1",
+    "catboost": "1.2.10"
+  },
+  "input_sha256": "3c5c0e27eef8266bcf6dce09c9b556c073cee3902c065a94e4ea7a59edb00993",
+  "manifest_sha256": "44ab0740659cd872f488ad881ace01594cd4c9b7b6acbd045bd4fe46b9f2924f",
+  "model_id": "131aee618934151e",
+  "input_rows": 57185,
+  "submission_rows": 3112,
+  "polygons": 78,
+  "origins": {
+    "interpolated": 2983,
+    "extrapolated": 122,
+    "climatology_fallback": 7
+  },
+  "first_run": {
+    "read_seconds": 0.33394245797535405,
+    "load_seconds": 0.022169917006976902,
+    "predict_seconds": 6.3029961659922265,
+    "total_seconds": 6.659108540974557
+  },
+  "warm_predict": {
+    "n": 5,
+    "median_seconds": 6.2866681670129765,
+    "min_seconds": 6.250694874994224,
+    "max_seconds": 6.300753208983224,
+    "samples_seconds": [
+      6.250694874994224,
+      6.26065304200165,
+      6.297960541996872,
+      6.300753208983224,
+      6.2866681670129765
+    ]
+  },
+  "stages": {
+    "features": {
+      "n": 5,
+      "median_seconds": 3.8934896249847952,
+      "min_seconds": 3.8813492500048596,
+      "max_seconds": 3.9252230410056654,
+      "samples_seconds": [
+        3.8813492500048596,
+        3.8834999169921502,
+        3.9252230410056654,
+        3.913443166995421,
+        3.8934896249847952
+      ]
+    },
+    "boosters_including_serialization": {
+      "n": 5,
+      "median_seconds": 0.11294083300163038,
+      "min_seconds": 0.1096354580076877,
+      "max_seconds": 0.11695658299140632,
+      "samples_seconds": [
+        0.11216808299650438,
+        0.11695658299140632,
+        0.1096354580076877,
+        0.11294083300163038,
+        0.1138908329885453
+      ]
+    },
+    "intervals": {
+      "n": 5,
+      "median_seconds": 1.5889443329942878,
+      "min_seconds": 1.5836462500155903,
+      "max_seconds": 1.5982254169939552,
+      "samples_seconds": [
+        1.5836462500155903,
+        1.5889443329942878,
+        1.5839459580020048,
+        1.5982254169939552,
+        1.5911819160101004
+      ]
+    }
+  },
+  "paired_probe": {
+    "current": {
+      "n": 5,
+      "median_seconds": 6.413263916998403,
+      "min_seconds": 6.285154000011971,
+      "max_seconds": 6.618300000001909,
+      "samples_seconds": [
+        6.285154000011971,
+        6.618300000001909,
+        6.378923790995032,
+        6.42870262498036,
+        6.413263916998403
+      ]
+    },
+    "preloaded_estimators_probe": {
+      "n": 5,
+      "median_seconds": 6.251776958000846,
+      "min_seconds": 6.232688791991677,
+      "max_seconds": 6.542121500009671,
+      "samples_seconds": [
+        6.251776958000846,
+        6.292132250004215,
+        6.236032208020333,
+        6.232688791991677,
+        6.542121500009671
+      ]
+    }
+  },
+  "probe_submission_identical": true,
+  "probe_scope": "Research script only; production runtime and model artifact unchanged",
+  "script_sha256": "b03a2bf6665e1ad57746182eb07da9f2a5011c929163616f3d8fd07b0374f9b1"
+}

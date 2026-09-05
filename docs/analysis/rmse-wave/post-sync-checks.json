@@ -1,0 +1,56 @@
+{
+  "checked_at": "2026-09-05T21:47:23.296553+00:00",
+  "upstream_revision": "c9bbb33bad702856f69e928f35b5c14b42c1ca0b",
+  "head_revision": "c9bbb33bad702856f69e928f35b5c14b42c1ca0b",
+  "local_changes_preserved": true,
+  "backup_branch": "backup/main-before-sync-20260906",
+  "pytest": {
+    "passed": 186,
+    "warnings": 31,
+    "seconds": 14.84,
+    "log": "pytest-post-sync.txt",
+    "revision_before_final_docs_only_fast_forward": "f6f37a4392d6751764fdbd80146d0b10f9b846f5"
+  },
+  "ruff_check": "passed",
+  "ruff_format": {
+    "passed": true,
+    "files": 96
+  },
+  "model_id": "594d4e6509459b08",
+  "manifest_sha256": "798e69c845a7b887802f72f8acde1013d7c31e45b8b58eab1a77a89cc6cf7518",
+  "model_sha256": "facf4c98e149b83574845358944c773e3f5ef541c0c5804d52312f4b1d86d865",
+  "ml_ast_equal_excluding_docstrings": [
+    "ml/src/terralens_ml/__init__.py",
+    "ml/src/terralens_ml/__main__.py",
+    "ml/src/terralens_ml/anomalies.py",
+    "ml/src/terralens_ml/candidates.py",
+    "ml/src/terralens_ml/cli.py",
+    "ml/src/terralens_ml/io.py",
+    "ml/src/terralens_ml/model.py",
+    "ml/src/terralens_ml/research.py",
+    "ml/src/terralens_ml/uncertainty.py",
+    "ml/src/terralens_ml/validation.py"
+  ],
+  "cli_outputs": {
+    "submission.csv": {
+      "rows": 3112,
+      "sha256": "22f893a793f4584bb7b0a4e36bb1ab96b92916b1b6c5ea14aa72895b0d9480fe",
+      "matches_published": true,
+      "cli_validation_passed": true
+    },
+    "submission-new-test.csv": {
+      "rows": 2323,
+      "sha256": "54ced3df5e5bedf1c9c03915cb2cef2ef831735d4fc9448d0a2fa0d7d4286f76",
+      "matches_published": true,
+      "cli_validation_passed": true
+    }
+  },
+  "model_retrained_during_sync": false,
+  "test_labels_read_during_sync": false,
+  "docker_rebuilt_during_sync": false,
+  "frontend_or_live_source_tests_repeated_during_sync": false,
+  "latest_lfs_demo": {
+    "bytes": 166559180,
+    "sha256": "53ab20214dc2a906b82684944ef527482808d6bbf575323f5968e373bd38b7ca"
+  }
+}

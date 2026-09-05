@@ -1,0 +1,36 @@
+{
+  "candidate": "equal_target_weight",
+  "overrides": {
+    "normalize_target_weights": true
+  },
+  "accepted": false,
+  "point_rmse": 0.06779434573303156,
+  "block_rmse": 0.09504406204246311,
+  "point_comparison": {
+    "aoi_n": 21,
+    "repetitions": 3000,
+    "seed": 42,
+    "gain_rmse_95_aoi_bootstrap": [
+      0.0002494770938787468,
+      0.0006925840963223805
+    ],
+    "bootstrap_fraction_gain_positive": 1.0,
+    "gain_rmse": 0.0004659350564038961,
+    "relative_rmse_reduction": 0.0068258590649689825
+  },
+  "block_comparison": {
+    "aoi_n": 21,
+    "repetitions": 3000,
+    "seed": 42,
+    "gain_rmse_95_aoi_bootstrap": [
+      -0.0014586405045875005,
+      -0.0002988123061854659
+    ],
+    "bootstrap_fraction_gain_positive": 0.001,
+    "gain_rmse": -0.0008711318337549789,
+    "relative_rmse_reduction": -0.009250342235548551
+  },
+  "improved_point_folds": 5,
+  "predictions_sha256": "92228dd35da815836d67f6eaa6b5eaa2d670d5c2c6f670aa4829e8c1953cffa6",
+  "plan_sha256": "3ca6a578b610bb6cff4a3fef87d0f1bdaf751cd5066a78167ce0440e268e0f7e"
+}

@@ -1,0 +1,8 @@
+{
+  "ml/artifacts/final/model.json": "eda7a82a6bdc10abe50e64c03b2b449348e48e24660925de3610320b0c57167e",
+  "ml/artifacts/final/manifest.json": "44ab0740659cd872f488ad881ace01594cd4c9b7b6acbd045bd4fe46b9f2924f",
+  "deliverables/submission.csv": "0fd8aebc5297d2e57d9244ca71e401660ac309d4cc2a1a0b2d595963530c02e1",
+  "deliverables/submission.csv.manifest.json": "e16f7a8d52954324f6123248db30da4095efb064a6f29e4a0a2a94af2630cd64",
+  "deliverables/submission-new-test.csv": "1fabb4ed5df3b8ed404e218de0e69b5ebeb38240ce0ea65c88a3bade4dfdc497",
+  "deliverables/submission-new-test.csv.manifest.json": "b3d1a802c28d6535134085e67e56458f04abb9fdda94335eaf65b7b12361d126"
+}

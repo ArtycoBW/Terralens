@@ -57,27 +57,40 @@ def calibrate(predictions, *, level=0.9, minimum_group=100):
 
 
 def apply_intervals(frame, model, config):
-    frame["prediction_interval"] = [
+    intervals = [
         {"lower": None, "upper": None, "level": None, "method": "not_calibrated"} for _ in range(len(frame))
     ]
     calibration = model.get("calibration")
-    if not calibration:
+    if not calibration or frame.empty:
+        frame["prediction_interval"] = intervals
         return frame
-    for i, row in frame.iterrows():
-        if row.origin in ["observed", "unavailable"] or not np.isfinite(row.reconstructed):
-            continue
-        group = interval_group(row.gap_days, row.origin)
-        radius = calibration["groups"].get(group, {}).get("radius", calibration["pooled_radius"])
-        shifted = config.get("interval_domain", "anonymous_benchmark") != calibration["domain"]
-        method = calibration["method"] + ("_domain_shift" if shifted else "")
-        frame.at[i, "prediction_interval"] = {
-            "lower": float(row.reconstructed - radius),
-            "upper": float(row.reconstructed + radius),
+    values = frame.reconstructed.to_numpy()
+    origins = frame.origin.to_numpy()
+    groups = np.where(
+        origins == "climatology_fallback",
+        "prior",
+        np.where(
+            origins == "extrapolated", "edge", np.where(frame.gap_days.to_numpy() <= 30, "short", "long")
+        ),
+    )
+    usable = ~np.isin(origins, ["observed", "unavailable"]) & np.isfinite(values)
+    shifted = config.get("interval_domain", "anonymous_benchmark") != calibration["domain"]
+    method = calibration["method"] + ("_domain_shift" if shifted else "")
+    flags = frame.quality_flags.to_list() if shifted else None
+    # Позиционные массивы сохраняют исходный индекс и не создают Series для каждой даты.
+    for position in np.flatnonzero(usable):
+        radius = calibration["groups"].get(groups[position], {}).get("radius", calibration["pooled_radius"])
+        intervals[position] = {
+            "lower": float(values[position] - radius),
+            "upper": float(values[position] + radius),
             "level": calibration["level"],
             "method": method,
         }
         if shifted:
-            frame.at[i, "quality_flags"] = list(row.quality_flags) + ["domain_shift"]
+            flags[position] = list(flags[position]) + ["domain_shift"]
+    frame["prediction_interval"] = intervals
+    if shifted:
+        frame["quality_flags"] = flags
     return frame
 
 

@@ -14,6 +14,10 @@ htmlcov/
 .env.*
 !.env.example
 /artifacts/
+# Локальные входы пользователя; train уже поставляется в исходном ZIP.
+/train_dataset.csv
+/test_features.csv
+/private_test_ground_truth.csv
 *.sqlite3
 .DS_Store
 dist/
