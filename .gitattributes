@@ -1,6 +1,9 @@
-# Model manifests sign exact bytes. Do not let Windows checkout rewrite them.
+# Manifests модели фиксируют точные байты; отключаем замену концов строк на Windows.
 ml/artifacts/** -text
 deliverables/*.csv -text
-# Shared source and lock hashes must also be portable across platforms.
+# Сохраняем точные байты контуров, указанные в manifests реального сбора.
+backend/tests/fixtures/*.geojson -text whitespace=cr-at-eol
+docs/analysis/field-cases/PROTOCOL.md text eol=lf
+# Хеши общего исходного кода и lock-файла должны совпадать на разных платформах.
 uv.lock text eol=lf
 ml/src/**/*.py text eol=lf

@@ -1,0 +1,5925 @@
+{
+  "field": "seville",
+  "geometry": {
+    "type": "Feature",
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -5.8244689,
+            37.4615875
+          ],
+          [
+            -5.8239893,
+            37.4615069
+          ],
+          [
+            -5.8229068,
+            37.4618204
+          ],
+          [
+            -5.8227097,
+            37.4619641
+          ],
+          [
+            -5.8229058,
+            37.4626537
+          ],
+          [
+            -5.8226449,
+            37.4627386
+          ],
+          [
+            -5.8215051,
+            37.462748
+          ],
+          [
+            -5.8206325,
+            37.4628943
+          ],
+          [
+            -5.8204541,
+            37.4627161
+          ],
+          [
+            -5.8195395,
+            37.4615488
+          ],
+          [
+            -5.8193036,
+            37.461253
+          ],
+          [
+            -5.8185434,
+            37.4618574
+          ],
+          [
+            -5.8141874,
+            37.4631852
+          ],
+          [
+            -5.8127027,
+            37.4629982
+          ],
+          [
+            -5.8122283,
+            37.4630631
+          ],
+          [
+            -5.8120261,
+            37.4624281
+          ],
+          [
+            -5.8116909,
+            37.4617311
+          ],
+          [
+            -5.8118107,
+            37.4612175
+          ],
+          [
+            -5.8118635,
+            37.4609898
+          ],
+          [
+            -5.8116662,
+            37.4601625
+          ],
+          [
+            -5.8116992,
+            37.459882
+          ],
+          [
+            -5.8122581,
+            37.459184
+          ],
+          [
+            -5.812481,
+            37.45854
+          ],
+          [
+            -5.8124435,
+            37.4582005
+          ],
+          [
+            -5.8121173,
+            37.4575494
+          ],
+          [
+            -5.8131183,
+            37.4577104
+          ],
+          [
+            -5.8141694,
+            37.4578415
+          ],
+          [
+            -5.8152804,
+            37.4580697
+          ],
+          [
+            -5.8161373,
+            37.4583463
+          ],
+          [
+            -5.8165615,
+            37.4584018
+          ],
+          [
+            -5.8173671,
+            37.4585857
+          ],
+          [
+            -5.8182542,
+            37.4583902
+          ],
+          [
+            -5.8187859,
+            37.4584194
+          ],
+          [
+            -5.8195044,
+            37.4586566
+          ],
+          [
+            -5.8198741,
+            37.4586931
+          ],
+          [
+            -5.8206243,
+            37.45886
+          ],
+          [
+            -5.8209341,
+            37.4586186
+          ],
+          [
+            -5.8217068,
+            37.4586479
+          ],
+          [
+            -5.8220698,
+            37.4585633
+          ],
+          [
+            -5.8226496,
+            37.4584777
+          ],
+          [
+            -5.8235138,
+            37.458235
+          ],
+          [
+            -5.8240438,
+            37.4581569
+          ],
+          [
+            -5.8250818,
+            37.4578142
+          ],
+          [
+            -5.8258915,
+            37.4574422
+          ],
+          [
+            -5.8260453,
+            37.4584129
+          ],
+          [
+            -5.826187,
+            37.4591537
+          ],
+          [
+            -5.8264456,
+            37.4606404
+          ],
+          [
+            -5.8254803,
+            37.4608117
+          ],
+          [
+            -5.8254758,
+            37.4609051
+          ],
+          [
+            -5.8256787,
+            37.4617814
+          ],
+          [
+            -5.8267247,
+            37.4616709
+          ],
+          [
+            -5.8269418,
+            37.4623708
+          ],
+          [
+            -5.8264826,
+            37.4625915
+          ],
+          [
+            -5.8260808,
+            37.4625731
+          ],
+          [
+            -5.8255433,
+            37.4624808
+          ],
+          [
+            -5.8244689,
+            37.4615875
+          ]
+        ]
+      ]
+    },
+    "properties": {
+      "name": "Поле у Севильи, Андалусия",
+      "source": "osm",
+      "source_ref": "https://www.openstreetmap.org/way/93682488",
+      "boundary_kind": "mapped_landuse",
+      "crop_type": null,
+      "retrieved_at": "2026-09-05"
+    }
+  },
+  "period": {
+    "from": "2024-06-01",
+    "to": "2024-07-31"
+  },
+  "summary": {
+    "observed_days": 11,
+    "total_days": 61,
+    "observed_coverage_ratio": 0.18032786885245902,
+    "reconstructed_days": 50,
+    "unavailable_days": 0,
+    "longest_gap_days": 9,
+    "anomaly_period_count": 0,
+    "overall_status": "insufficient_data",
+    "summary_rule": "event-max-else-two-clean-days-and-half-period-reference-v3",
+    "latest_estimate": {
+      "date": "2024-07-31",
+      "value": 0.23703564655999002,
+      "origin": "extrapolated"
+    }
+  },
+  "daily": [
+    {
+      "date": "2024-06-01",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.28020304402420165,
+      "origin": "extrapolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.14680816673365876,
+        "upper": 0.41359792131474454,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 26.5,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 1,
+      "gap_days": 3,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "edge_gap",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-02",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2798430009815267,
+      "origin": "extrapolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.1464481236909838,
+        "upper": 0.4132378782720696,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 26.1,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 1,
+      "gap_days": 2,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "edge_gap",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-03",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2816416104565753,
+      "origin": "extrapolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.14824673316603243,
+        "upper": 0.4150364877471182,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 26.3,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 1,
+      "gap_days": 1,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "edge_gap",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-04",
+      "observed_primary": 0.26366384850734104,
+      "clean_primary": 0.26366384850734104,
+      "reconstructed": 0.26366384850734104,
+      "origin": "observed",
+      "source_sensor": "sentinel2",
+      "sensors": {
+        "sentinel2": 0.26366384850734104,
+        "landsat": 0.3112394798900934,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": null,
+        "upper": null,
+        "level": null,
+        "method": "not_calibrated"
+      },
+      "weather": {
+        "temperature_c": 25.4,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 1,
+      "gap_days": 0,
+      "quality_flags": [
+        "crop_history_unknown",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-05",
+      "observed_primary": 0.2186794615280016,
+      "clean_primary": null,
+      "reconstructed": 0.28941587439282423,
+      "origin": "interpolated",
+      "source_sensor": "landsat",
+      "sensors": {
+        "sentinel2": null,
+        "landsat": 0.2186794615280016,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.18939887057796184,
+        "upper": 0.38943287820768663,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 26.4,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "low_pixel_coverage",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-06",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2871215232431088,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.1871045194282464,
+        "upper": 0.3871385270579712,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 28.7,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-07",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2879998453090498,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.18798284149418742,
+        "upper": 0.3880168491239122,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 23.4,
+        "precipitation_mm": 0.1,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-08",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.28942426848152086,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.18940726466665847,
+        "upper": 0.38944127229638326,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 21.1,
+        "precipitation_mm": 0.2,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-09",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2834664202663265,
+      "origin": "interpolated",
+      "source_sensor": "sentinel2",
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.18344941645146412,
+        "upper": 0.3834834240811889,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 21.3,
+        "precipitation_mm": 0.1,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "low_pixel_coverage",
+        "no_valid_pixels",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-10",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2887239354213504,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.188706931606488,
+        "upper": 0.3887409392362128,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 22.0,
+        "precipitation_mm": 0.7,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-11",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2903893333419916,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.19037232952712918,
+        "upper": 0.39040633715685397,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 22.3,
+        "precipitation_mm": 1.5,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-12",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2900827453377664,
+      "origin": "interpolated",
+      "source_sensor": "landsat",
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.190065741522904,
+        "upper": 0.3900997491526288,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 22.7,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "low_pixel_coverage",
+        "no_valid_pixels",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-13",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2925636095382586,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.1925466057233962,
+        "upper": 0.392580613353121,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 24.3,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-14",
+      "observed_primary": 0.25545343102956075,
+      "clean_primary": 0.25545343102956075,
+      "reconstructed": 0.25545343102956075,
+      "origin": "observed",
+      "source_sensor": "sentinel2",
+      "sensors": {
+        "sentinel2": 0.25545343102956075,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": null,
+        "upper": null,
+        "level": null,
+        "method": "not_calibrated"
+      },
+      "weather": {
+        "temperature_c": 26.0,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 1,
+      "gap_days": 0,
+      "quality_flags": [
+        "crop_history_unknown",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-15",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2811610736870884,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.18114406987222603,
+        "upper": 0.3811780775019508,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 25.9,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 6,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-16",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2786275845146022,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.17861058069973978,
+        "upper": 0.37864458832946457,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 24.9,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 6,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-17",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.27839884365372713,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.17838183983886474,
+        "upper": 0.37841584746858953,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 25.9,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 6,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-18",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2775109326096616,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.1774939287947992,
+        "upper": 0.377527936424524,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 21.6,
+        "precipitation_mm": 0.7,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 6,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-19",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.27067146329990255,
+      "origin": "interpolated",
+      "source_sensor": "sentinel2",
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.17065445948504016,
+        "upper": 0.37068846711476494,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 19.4,
+        "precipitation_mm": 3.5,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 6,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "low_pixel_coverage",
+        "no_valid_pixels",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-20",
+      "observed_primary": 0.32315501713467926,
+      "clean_primary": 0.32315501713467926,
+      "reconstructed": 0.32315501713467926,
+      "origin": "observed",
+      "source_sensor": "landsat",
+      "sensors": {
+        "sentinel2": null,
+        "landsat": 0.32315501713467926,
+        "modis": null
+      },
+      "climatology_mean": 0.21081067604847248,
+      "climatology_std": 0.010704935300770003,
+      "zscore": 10.494630554014266,
+      "prediction_interval": {
+        "lower": null,
+        "upper": null,
+        "level": null,
+        "method": "not_calibrated"
+      },
+      "weather": {
+        "temperature_c": 20.5,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 1,
+      "gap_days": 0,
+      "quality_flags": [
+        "crop_history_unknown",
+        "reference_sensor_landsat",
+        "robust_reference"
+      ],
+      "reference_years": 3
+    },
+    {
+      "date": "2024-06-21",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2645645265655148,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.16454752275065243,
+        "upper": 0.3645815303803772,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 24.4,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 4,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-22",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2624293314679965,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.16241232765313413,
+        "upper": 0.3624463352828589,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 4,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-23",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2605044397006902,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.1604874358858278,
+        "upper": 0.3605214435155526,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 29.5,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 4,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-24",
+      "observed_primary": 0.24239805321328056,
+      "clean_primary": 0.24239805321328056,
+      "reconstructed": 0.24239805321328056,
+      "origin": "observed",
+      "source_sensor": "sentinel2",
+      "sensors": {
+        "sentinel2": 0.24239805321328056,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": null,
+        "upper": null,
+        "level": null,
+        "method": "not_calibrated"
+      },
+      "weather": {
+        "temperature_c": 29.1,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 1,
+      "gap_days": 0,
+      "quality_flags": [
+        "crop_history_unknown",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-25",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.24882493050504514,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.14880792669018275,
+        "upper": 0.3488419343199075,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-26",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2462420595694665,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.1462250557546041,
+        "upper": 0.3462590633843289,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 24.2,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-27",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.24646512047422936,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.14644811665936697,
+        "upper": 0.34648212428909175,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 22.4,
+        "precipitation_mm": 0.1,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-28",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.24680486207933577,
+      "origin": "interpolated",
+      "source_sensor": "landsat",
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.14678785826447338,
+        "upper": 0.34682186589419817,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 21.0,
+        "precipitation_mm": 2.5,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "low_pixel_coverage",
+        "no_valid_pixels",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-29",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2392055518568859,
+      "origin": "interpolated",
+      "source_sensor": "sentinel2",
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.13918854804202352,
+        "upper": 0.3392225556717483,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 21.7,
+        "precipitation_mm": 0.5,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "low_pixel_coverage",
+        "no_valid_pixels",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-06-30",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.24514580307939235,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.14512879926452996,
+        "upper": 0.3451628068942547,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 24.1,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-01",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.24455802033334564,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.14454101651848325,
+        "upper": 0.34457502414820806,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 25.4,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-02",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.24470288050028044,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.14468587668541805,
+        "upper": 0.34471988431514283,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 27.8,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-03",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2471610385171018,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.1471440347022394,
+        "upper": 0.3471780423319642,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 30.0,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 10,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-04",
+      "observed_primary": 0.2353481238253656,
+      "clean_primary": 0.2353481238253656,
+      "reconstructed": 0.2353481238253656,
+      "origin": "observed",
+      "source_sensor": "sentinel2",
+      "sensors": {
+        "sentinel2": 0.2353481238253656,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": null,
+        "upper": null,
+        "level": null,
+        "method": "not_calibrated"
+      },
+      "weather": {
+        "temperature_c": 31.6,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 1,
+      "gap_days": 0,
+      "quality_flags": [
+        "crop_history_unknown",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-05",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.23535660561337307,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.13533960179851068,
+        "upper": 0.33537360942823546,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 28.5,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 5,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-06",
+      "observed_primary": 0.37070526186679753,
+      "clean_primary": null,
+      "reconstructed": 0.23261429541106207,
+      "origin": "interpolated",
+      "source_sensor": "landsat",
+      "sensors": {
+        "sentinel2": null,
+        "landsat": 0.37070526186679753,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.13259729159619968,
+        "upper": 0.3326312992259245,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 25.1,
+        "precipitation_mm": 0.6,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 5,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "low_pixel_coverage",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-07",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2326583119034781,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.1326413080886157,
+        "upper": 0.3326753157183405,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 24.5,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 5,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-08",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.23543433199813987,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.13541732818327748,
+        "upper": 0.33545133581300224,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 24.3,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 5,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-09",
+      "observed_primary": 0.22830192125353976,
+      "clean_primary": 0.22830192125353976,
+      "reconstructed": 0.22830192125353976,
+      "origin": "observed",
+      "source_sensor": "sentinel2",
+      "sensors": {
+        "sentinel2": 0.22830192125353976,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": null,
+        "upper": null,
+        "level": null,
+        "method": "not_calibrated"
+      },
+      "weather": {
+        "temperature_c": 25.8,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 1,
+      "gap_days": 0,
+      "quality_flags": [
+        "crop_history_unknown",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-10",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.23125235835304256,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.13123535453818017,
+        "upper": 0.3312693621679049,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 28.6,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 5,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-11",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.22922793168288474,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.12921092786802235,
+        "upper": 0.32924493549774714,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 31.3,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 5,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-12",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.22955180321727361,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.12953479940241122,
+        "upper": 0.329568807032136,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 30.1,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 5,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-13",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.23233735094930735,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.13232034713444496,
+        "upper": 0.33235435476416975,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 26.7,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 5,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-14",
+      "observed_primary": 0.21776191472414236,
+      "clean_primary": 0.21776191472414236,
+      "reconstructed": 0.21776191472414236,
+      "origin": "observed",
+      "source_sensor": "sentinel2",
+      "sensors": {
+        "sentinel2": 0.21776191472414236,
+        "landsat": 0.26826278523547464,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": null,
+        "upper": null,
+        "level": null,
+        "method": "not_calibrated"
+      },
+      "weather": {
+        "temperature_c": 25.3,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 1,
+      "gap_days": 0,
+      "quality_flags": [
+        "crop_history_unknown",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-15",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.23034266936022751,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.13032566554536512,
+        "upper": 0.3303596731750899,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 26.9,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 5,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-16",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2284135410896823,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.1283965372748199,
+        "upper": 0.3284305449045447,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 28.3,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 5,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-17",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.22833922854913632,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.12832222473427393,
+        "upper": 0.3283562323639987,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 28.6,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 5,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-18",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.23160576980787861,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.13158876599301622,
+        "upper": 0.331622773622741,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 29.9,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 5,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-19",
+      "observed_primary": 0.20778250150447455,
+      "clean_primary": 0.20778250150447455,
+      "reconstructed": 0.20778250150447455,
+      "origin": "observed",
+      "source_sensor": "sentinel2",
+      "sensors": {
+        "sentinel2": 0.20778250150447455,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": null,
+        "upper": null,
+        "level": null,
+        "method": "not_calibrated"
+      },
+      "weather": {
+        "temperature_c": 31.2,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 1,
+      "gap_days": 0,
+      "quality_flags": [
+        "crop_history_unknown",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-20",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.23012172426564018,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.13010472045077778,
+        "upper": 0.3301387280805026,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 30.7,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 3,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-21",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.22722429005824357,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.12720728624338118,
+        "upper": 0.32724129387310597,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 28.6,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 3,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-22",
+      "observed_primary": 0.2567211518050024,
+      "clean_primary": 0.2567211518050024,
+      "reconstructed": 0.2567211518050024,
+      "origin": "observed",
+      "source_sensor": "landsat",
+      "sensors": {
+        "sentinel2": null,
+        "landsat": 0.2567211518050024,
+        "modis": null
+      },
+      "climatology_mean": 0.20050266898785987,
+      "climatology_std": 0.033618694171088204,
+      "zscore": 1.6722387410719222,
+      "prediction_interval": {
+        "lower": null,
+        "upper": null,
+        "level": null,
+        "method": "not_calibrated"
+      },
+      "weather": {
+        "temperature_c": 29.0,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 1,
+      "gap_days": 0,
+      "quality_flags": [
+        "crop_history_unknown",
+        "reference_sensor_landsat",
+        "robust_reference"
+      ],
+      "reference_years": 3
+    },
+    {
+      "date": "2024-07-23",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.24443727386026184,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.14442027004539945,
+        "upper": 0.34445427767512427,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 31.4,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 2,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-24",
+      "observed_primary": 0.20259088658998048,
+      "clean_primary": 0.20259088658998048,
+      "reconstructed": 0.20259088658998048,
+      "origin": "observed",
+      "source_sensor": "sentinel2",
+      "sensors": {
+        "sentinel2": 0.20259088658998048,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": null,
+        "upper": null,
+        "level": null,
+        "method": "not_calibrated"
+      },
+      "weather": {
+        "temperature_c": 32.0,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 1,
+      "gap_days": 0,
+      "quality_flags": [
+        "crop_history_unknown",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-25",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2342833663037454,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.13426636248888302,
+        "upper": 0.3343003701186078,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 30.2,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 6,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-26",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.2321118982929555,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.1320948944780931,
+        "upper": 0.33212890210781787,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 28.0,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 6,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-27",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.23203877466208347,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.13202177084722108,
+        "upper": 0.3320557784769459,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 27.5,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 6,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-28",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.23240500601696149,
+      "origin": "interpolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.1323880022020991,
+        "upper": 0.3324220098318239,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 29.5,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 6,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-29",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.22601856655435618,
+      "origin": "interpolated",
+      "source_sensor": "sentinel2",
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.12600156273949378,
+        "upper": 0.3260355703692186,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 31.5,
+        "precipitation_mm": 0.2,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 2,
+      "gap_days": 6,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "input_nan",
+        "insufficient_reference",
+        "low_pixel_coverage",
+        "no_valid_pixels",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    },
+    {
+      "date": "2024-07-30",
+      "observed_primary": 0.2696354679802956,
+      "clean_primary": 0.2696354679802956,
+      "reconstructed": 0.2696354679802956,
+      "origin": "observed",
+      "source_sensor": "landsat",
+      "sensors": {
+        "sentinel2": null,
+        "landsat": 0.2696354679802956,
+        "modis": null
+      },
+      "climatology_mean": 0.2117226601246319,
+      "climatology_std": 0.0386036001267814,
+      "zscore": 1.5001918905352678,
+      "prediction_interval": {
+        "lower": null,
+        "upper": null,
+        "level": null,
+        "method": "not_calibrated"
+      },
+      "weather": {
+        "temperature_c": 29.1,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 1,
+      "gap_days": 0,
+      "quality_flags": [
+        "crop_history_unknown",
+        "reference_sensor_landsat",
+        "robust_reference"
+      ],
+      "reference_years": 3
+    },
+    {
+      "date": "2024-07-31",
+      "observed_primary": null,
+      "clean_primary": null,
+      "reconstructed": 0.23703564655999002,
+      "origin": "extrapolated",
+      "source_sensor": null,
+      "sensors": {
+        "sentinel2": null,
+        "landsat": null,
+        "modis": null
+      },
+      "climatology_mean": null,
+      "climatology_std": null,
+      "zscore": null,
+      "prediction_interval": {
+        "lower": 0.10364076926944712,
+        "upper": 0.3704305238505329,
+        "level": 0.9,
+        "method": "empirical_residual_domain_shift"
+      },
+      "weather": {
+        "temperature_c": 29.8,
+        "precipitation_mm": 0.0,
+        "provider": "open_meteo_era5_seamless"
+      },
+      "support_count": 1,
+      "gap_days": 1,
+      "quality_flags": [
+        "crop_history_unknown",
+        "domain_shift",
+        "edge_gap",
+        "input_nan",
+        "insufficient_reference",
+        "reference_sensor_sentinel2"
+      ],
+      "reference_years": 2
+    }
+  ],
+  "events": [],
+  "observations": [
+    {
+      "scene_id": "S2A_T30STG_20240604T111730_L2A",
+      "date": "2024-06-04",
+      "acquisition_time": "2024-06-04T11:20:59.149000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.2627900932373911,
+      "evi": 0.17978581544316297,
+      "ndwi": -0.024835432081717363,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.10877307334340722,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20240604T111730_L2A",
+      "date": "2024-06-04",
+      "acquisition_time": "2024-06-04T11:21:00.393000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.26366384850734104,
+      "evi": 0.18062016271823716,
+      "ndwi": -0.025041736227045017,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.1092975431800033,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20240609T111627_L2A",
+      "date": "2024-06-09",
+      "acquisition_time": "2024-06-09T11:20:57.444000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20240609T111627_L2A",
+      "date": "2024-06-09",
+      "acquisition_time": "2024-06-09T11:20:58.681000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20240614T110942_L2A",
+      "date": "2024-06-14",
+      "acquisition_time": "2024-06-14T11:21:00.356000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.25448706321904446,
+      "evi": 0.17239222628253575,
+      "ndwi": -0.03965090569432829,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.11030859308316758,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20240614T110942_L2A",
+      "date": "2024-06-14",
+      "acquisition_time": "2024-06-14T11:21:01.601000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.25545343102956075,
+      "evi": 0.1715161969488242,
+      "ndwi": -0.03937654880680479,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.10947999663412213,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20240619T111619_L2A",
+      "date": "2024-06-19",
+      "acquisition_time": "2024-06-19T11:20:56.602000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20240619T111619_L2A",
+      "date": "2024-06-19",
+      "acquisition_time": "2024-06-19T11:20:57.835000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20240624T111001_L2A",
+      "date": "2024-06-24",
+      "acquisition_time": "2024-06-24T11:20:58.251000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.24179255982616893,
+      "evi": 0.16392020837914456,
+      "ndwi": -0.06908705347636791,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.1175176206885965,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20240624T111001_L2A",
+      "date": "2024-06-24",
+      "acquisition_time": "2024-06-24T11:20:59.488000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.24239805321328056,
+      "evi": 0.16293987866512954,
+      "ndwi": -0.06814458990271008,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.11859949145604454,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20240629T110839_L2A",
+      "date": "2024-06-29",
+      "acquisition_time": "2024-06-29T11:20:58.195000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20240629T110839_L2A",
+      "date": "2024-06-29",
+      "acquisition_time": "2024-06-29T11:20:59.433000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20240704T110901_L2A",
+      "date": "2024-07-04",
+      "acquisition_time": "2024-07-04T11:20:57.895000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.23248791997509094,
+      "evi": 0.15787165963652816,
+      "ndwi": -0.06454573728434385,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.10082528417357381,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20240704T110901_L2A",
+      "date": "2024-07-04",
+      "acquisition_time": "2024-07-04T11:20:59.130000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.2353481238253656,
+      "evi": 0.15771949351560716,
+      "ndwi": -0.06228163942485353,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.10450144999781638,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20240709T110837_L2A",
+      "date": "2024-07-09",
+      "acquisition_time": "2024-07-09T11:20:56.830000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.22700603244061446,
+      "evi": 0.15205035743311832,
+      "ndwi": -0.06487592082319983,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.10151263503998308,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20240709T110837_L2A",
+      "date": "2024-07-09",
+      "acquisition_time": "2024-07-09T11:20:58.060000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.22830192125353976,
+      "evi": 0.1523884770638923,
+      "ndwi": -0.06500294154904748,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.10179756114590968,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20240714T111818_L2A",
+      "date": "2024-07-14",
+      "acquisition_time": "2024-07-14T11:20:56.414000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.21797818855837897,
+      "evi": 0.14680330231315888,
+      "ndwi": -0.058769071323564806,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.10096427612904901,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20240714T111818_L2A",
+      "date": "2024-07-14",
+      "acquisition_time": "2024-07-14T11:20:57.643000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.21776191472414236,
+      "evi": 0.14673575497478483,
+      "ndwi": -0.057938805141879574,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.10188090952184288,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20240719T111146_L2A",
+      "date": "2024-07-19",
+      "acquisition_time": "2024-07-19T11:20:57.800000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.20741195343116303,
+      "evi": 0.14790070406017453,
+      "ndwi": -0.06451999783347143,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.07762569096476443,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20240719T111146_L2A",
+      "date": "2024-07-19",
+      "acquisition_time": "2024-07-19T11:20:59.034000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.20778250150447455,
+      "evi": 0.14737595138797727,
+      "ndwi": -0.06286871581717711,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.08060404805335168,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20240724T111800_L2A",
+      "date": "2024-07-24",
+      "acquisition_time": "2024-07-24T11:20:56.539000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.2035546489195751,
+      "evi": 0.13933825974921044,
+      "ndwi": -0.0656668874574462,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.09660232331601713,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20240724T111800_L2A",
+      "date": "2024-07-24",
+      "acquisition_time": "2024-07-24T11:20:57.769000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.20259088658998048,
+      "evi": 0.13901219292677802,
+      "ndwi": -0.06526054103562204,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.09802960541432101,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20240729T110836_L2A",
+      "date": "2024-07-29",
+      "acquisition_time": "2024-07-29T11:20:55.937000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20240729T110836_L2A",
+      "date": "2024-07-29",
+      "acquisition_time": "2024-07-29T11:20:57.164000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20240604_02_T1",
+      "date": "2024-06-04",
+      "acquisition_time": "2024-06-04T11:01:38.187628Z",
+      "sensor": "landsat",
+      "ndvi": 0.3112394798900934,
+      "evi": 0.20780959892213413,
+      "ndwi": 0.014699883244946418,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 653,
+      "pixel_std": 0.09420981117823775,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC09_L2SP_201034_20240605_02_T1",
+      "date": "2024-06-05",
+      "acquisition_time": "2024-06-05T10:55:44.367254Z",
+      "sensor": "landsat",
+      "ndvi": 0.2186794615280016,
+      "evi": 0.170886035660405,
+      "ndwi": 0.008095378274948545,
+      "valid_pixel_fraction": 0.2784615384615385,
+      "pixel_count": 181,
+      "pixel_std": 0.027209938288460873,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage"
+      ],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC09_L2SP_202034_20240612_02_T1",
+      "date": "2024-06-12",
+      "acquisition_time": "2024-06-12T11:01:50.286365Z",
+      "sensor": "landsat",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20240620_02_T1",
+      "date": "2024-06-20",
+      "acquisition_time": "2024-06-20T11:01:46.100724Z",
+      "sensor": "landsat",
+      "ndvi": 0.32315501713467926,
+      "evi": 0.21309286380716788,
+      "ndwi": 0.009201955720156639,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 653,
+      "pixel_std": 0.110566806486199,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC09_L2SP_202034_20240628_02_T1",
+      "date": "2024-06-28",
+      "acquisition_time": "2024-06-28T11:01:38.562566Z",
+      "sensor": "landsat",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20240706_02_T1",
+      "date": "2024-07-06",
+      "acquisition_time": "2024-07-06T11:01:54.234820Z",
+      "sensor": "landsat",
+      "ndvi": 0.37070526186679753,
+      "evi": 0.24416293699727706,
+      "ndwi": 0.030200862115222916,
+      "valid_pixel_fraction": 0.19448698315467075,
+      "pixel_count": 127,
+      "pixel_std": 0.06266780850721167,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage"
+      ],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC09_L2SP_202034_20240714_02_T1",
+      "date": "2024-07-14",
+      "acquisition_time": "2024-07-14T11:01:59.244338Z",
+      "sensor": "landsat",
+      "ndvi": 0.26826278523547464,
+      "evi": 0.17596899782150735,
+      "ndwi": -0.03030247624619847,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 653,
+      "pixel_std": 0.08402025156856827,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20240722_02_T1",
+      "date": "2024-07-22",
+      "acquisition_time": "2024-07-22T11:02:09.350161Z",
+      "sensor": "landsat",
+      "ndvi": 0.2567211518050024,
+      "evi": 0.17203882983280494,
+      "ndwi": -0.02727933729777451,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 653,
+      "pixel_std": 0.08253906779311768,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC09_L2SP_202034_20240730_02_T1",
+      "date": "2024-07-30",
+      "acquisition_time": "2024-07-30T11:02:01.915327Z",
+      "sensor": "landsat",
+      "ndvi": 0.2696354679802956,
+      "evi": 0.18257862141076164,
+      "ndwi": -0.02215790342096578,
+      "valid_pixel_fraction": 0.9693721286370597,
+      "pixel_count": 633,
+      "pixel_std": 0.06800540243623575,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    }
+  ],
+  "history": [
+    {
+      "scene_id": "S2A_T30STG_20230521T110921_L2A",
+      "date": "2023-05-21",
+      "acquisition_time": "2023-05-21T11:20:57.043000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20230521T110921_L2A",
+      "date": "2023-05-21",
+      "acquisition_time": "2023-05-21T11:20:58.284000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20230526T110840_L2A",
+      "date": "2023-05-26",
+      "acquisition_time": "2023-05-26T11:20:59.025000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.1654929577464789,
+      "evi": 0.13609871031746026,
+      "ndwi": -0.02889718891291531,
+      "valid_pixel_fraction": 0.24639423076923078,
+      "pixel_count": 1435,
+      "pixel_std": 0.23112446737009995,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20230526T110840_L2A",
+      "date": "2023-05-26",
+      "acquisition_time": "2023-05-26T11:21:00.264000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.16176967240797024,
+      "evi": 0.1337238920020378,
+      "ndwi": -0.02773722627737225,
+      "valid_pixel_fraction": 0.2409122085048011,
+      "pixel_count": 1405,
+      "pixel_std": 0.23974533767282394,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20230531T111708_L2A",
+      "date": "2023-05-31",
+      "acquisition_time": "2023-05-31T11:20:58.206000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.19065357263799526,
+      "evi": 0.13490846352918626,
+      "ndwi": -0.10990502035278162,
+      "valid_pixel_fraction": 0.0571771978021978,
+      "pixel_count": 333,
+      "pixel_std": 0.28545561987163426,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20230531T111708_L2A",
+      "date": "2023-05-31",
+      "acquisition_time": "2023-05-31T11:20:59.448000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.19493774740389874,
+      "evi": 0.1348975495663265,
+      "ndwi": -0.10845820438649229,
+      "valid_pixel_fraction": 0.061042524005486966,
+      "pixel_count": 356,
+      "pixel_std": 0.2799422751566263,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20230605T111628_L2A",
+      "date": "2023-06-05",
+      "acquisition_time": "2023-06-05T11:20:58.801000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.18546361828447638,
+      "evi": 0.11287475635390919,
+      "ndwi": -0.1243518606549584,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.21173806995535335,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20230605T111628_L2A",
+      "date": "2023-06-05",
+      "acquisition_time": "2023-06-05T11:21:00.038000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.18545716727195044,
+      "evi": 0.11264700478519671,
+      "ndwi": -0.12536365825835577,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.2117508615327096,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20230610T111704_L2A",
+      "date": "2023-06-10",
+      "acquisition_time": "2023-06-10T11:20:58.229000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.21259842519685046,
+      "evi": 0.14114026477064703,
+      "ndwi": -0.0852072816276579,
+      "valid_pixel_fraction": 0.7079326923076923,
+      "pixel_count": 4123,
+      "pixel_std": 0.22231613296712413,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20230610T111704_L2A",
+      "date": "2023-06-10",
+      "acquisition_time": "2023-06-10T11:20:59.471000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.21238987997364828,
+      "evi": 0.1413823025366186,
+      "ndwi": -0.08424195016180729,
+      "valid_pixel_fraction": 0.7122770919067215,
+      "pixel_count": 4154,
+      "pixel_std": 0.22295308400033234,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20230615T111915_L2A",
+      "date": "2023-06-15",
+      "acquisition_time": "2023-06-15T11:20:59.289000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.20753789719642113,
+      "evi": 0.13236919425906118,
+      "ndwi": -0.11421526930651232,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.19213187025763342,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20230615T111915_L2A",
+      "date": "2023-06-15",
+      "acquisition_time": "2023-06-15T11:21:00.526000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.2082643340154215,
+      "evi": 0.1336010229793234,
+      "ndwi": -0.11485919625703192,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.19143665820369943,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20230620T111744_L2A",
+      "date": "2023-06-20",
+      "acquisition_time": "2023-06-20T11:20:58.259000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20230620T111744_L2A",
+      "date": "2023-06-20",
+      "acquisition_time": "2023-06-20T11:20:59.497000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20230625T110839_L2A",
+      "date": "2023-06-25",
+      "acquisition_time": "2023-06-25T11:20:58.769000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.2228054939216299,
+      "evi": 0.14777819622178157,
+      "ndwi": -0.1129627188109961,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.14185937855923206,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20230625T110839_L2A",
+      "date": "2023-06-25",
+      "acquisition_time": "2023-06-25T11:21:00.003000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.22275924314218487,
+      "evi": 0.1477752005480653,
+      "ndwi": -0.11355364329821539,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.14335343756014796,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20230630T111632_L2A",
+      "date": "2023-06-30",
+      "acquisition_time": "2023-06-30T11:20:58.742000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.23502215864600978,
+      "evi": 0.1577863977219887,
+      "ndwi": -0.1175342027873092,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.10261241059376064,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20230630T111632_L2A",
+      "date": "2023-06-30",
+      "acquisition_time": "2023-06-30T11:20:59.979000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.23525388265717972,
+      "evi": 0.15728432010901205,
+      "ndwi": -0.11781323381268728,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.10311293631172036,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20230705T110840_L2A",
+      "date": "2023-07-05",
+      "acquisition_time": "2023-07-05T11:20:59.729000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.2127100040012465,
+      "evi": 0.14225689489100501,
+      "ndwi": -0.12645777309710377,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.10447141587476134,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20230705T110840_L2A",
+      "date": "2023-07-05",
+      "acquisition_time": "2023-07-05T11:21:00.964000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.21298033787637444,
+      "evi": 0.1422740624765982,
+      "ndwi": -0.12643985405023023,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.1045942185729911,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20230710T110833_L2A",
+      "date": "2023-07-10",
+      "acquisition_time": "2023-07-10T11:20:59.583000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.20744978165115643,
+      "evi": 0.1278532133133478,
+      "ndwi": -0.12340570415869728,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.09852799840315854,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20230710T110833_L2A",
+      "date": "2023-07-10",
+      "acquisition_time": "2023-07-10T11:21:00.823000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.20643018442169547,
+      "evi": 0.12857639334222154,
+      "ndwi": -0.12273116414640581,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.09598053535047404,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20230715T110844_L2A",
+      "date": "2023-07-15",
+      "acquisition_time": "2023-07-15T11:20:59.389000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.1924617092119866,
+      "evi": 0.12421979966176593,
+      "ndwi": -0.14009583554463834,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.08906299133127424,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20230715T110844_L2A",
+      "date": "2023-07-15",
+      "acquisition_time": "2023-07-15T11:21:00.622000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.19239388642373711,
+      "evi": 0.12385641757196295,
+      "ndwi": -0.140682181876535,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.08922070238419692,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20230720T110926_L2A",
+      "date": "2023-07-20",
+      "acquisition_time": "2023-07-20T11:20:58.207000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.20167970634038695,
+      "evi": 0.1296746175586512,
+      "ndwi": -0.12411439864179241,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.07861635137788307,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20230720T110926_L2A",
+      "date": "2023-07-20",
+      "acquisition_time": "2023-07-20T11:20:59.440000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.20224982732166674,
+      "evi": 0.13002492446479003,
+      "ndwi": -0.12386782939288046,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.07796009885385977,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20230725T110841_L2A",
+      "date": "2023-07-25",
+      "acquisition_time": "2023-07-25T11:21:00.294000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.20960712670557227,
+      "evi": 0.1377273878998627,
+      "ndwi": -0.11439981712713854,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.06438571909172361,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20230725T110841_L2A",
+      "date": "2023-07-25",
+      "acquisition_time": "2023-07-25T11:21:01.531000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.2096711497873354,
+      "evi": 0.13774897977305162,
+      "ndwi": -0.11456483791981002,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.06479216215475127,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20230730T110927_L2A",
+      "date": "2023-07-30",
+      "acquisition_time": "2023-07-30T11:20:59.623000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.19142166896628407,
+      "evi": 0.1190230054795928,
+      "ndwi": -0.14784166376665925,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.046112454251889125,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20230730T110927_L2A",
+      "date": "2023-07-30",
+      "acquisition_time": "2023-07-30T11:21:00.862000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.19148936170212766,
+      "evi": 0.11878872673359915,
+      "ndwi": -0.1480620586424564,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.046360641667970555,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20230804T110839_L2A",
+      "date": "2023-08-04",
+      "acquisition_time": "2023-08-04T11:20:59.018000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.19481142657726153,
+      "evi": 0.12803421331113657,
+      "ndwi": -0.13424048818965528,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.03951848047743402,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20230804T110839_L2A",
+      "date": "2023-08-04",
+      "acquisition_time": "2023-08-04T11:21:00.250000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.1951054897677516,
+      "evi": 0.127828879501126,
+      "ndwi": -0.13432643517869397,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.03985591841431586,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20230809T110926_L2A",
+      "date": "2023-08-09",
+      "acquisition_time": "2023-08-09T11:20:58.442000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20230809T110926_L2A",
+      "date": "2023-08-09",
+      "acquisition_time": "2023-08-09T11:20:59.675000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20230814T111730_L2A",
+      "date": "2023-08-14",
+      "acquisition_time": "2023-08-14T11:20:59.926000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.19513260518574968,
+      "evi": 0.12781347380617947,
+      "ndwi": -0.1352159367155454,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.040207454159103054,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20230814T111730_L2A",
+      "date": "2023-08-14",
+      "acquisition_time": "2023-08-14T11:21:01.164000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.19513121099320335,
+      "evi": 0.1262831432522634,
+      "ndwi": -0.13589778247058407,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.04244267814436623,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20230517_02_T1",
+      "date": "2023-05-17",
+      "acquisition_time": "2023-05-17T11:01:48.563671Z",
+      "sensor": "landsat",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC09_L2SP_202034_20230525_02_T1",
+      "date": "2023-05-25",
+      "acquisition_time": "2023-05-25T11:02:01.857193Z",
+      "sensor": "landsat",
+      "ndvi": 0.2524736276236035,
+      "evi": 0.14781697750575348,
+      "ndwi": -0.04916673788565086,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 653,
+      "pixel_std": 0.17472617284697817,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20230602_02_T1",
+      "date": "2023-06-02",
+      "acquisition_time": "2023-06-02T11:01:52.238216Z",
+      "sensor": "landsat",
+      "ndvi": 0.24636950700897772,
+      "evi": 0.15472557249509386,
+      "ndwi": -0.09717884565611257,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 653,
+      "pixel_std": 0.17859415206001486,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC09_L2SP_201034_20230603_02_T1",
+      "date": "2023-06-03",
+      "acquisition_time": "2023-06-03T10:55:50.298714Z",
+      "sensor": "landsat",
+      "ndvi": 0.23875109642983786,
+      "evi": 0.15039906329432864,
+      "ndwi": -0.10136508400061565,
+      "valid_pixel_fraction": 0.98,
+      "pixel_count": 637,
+      "pixel_std": 0.1773291691876323,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC09_L2SP_202034_20230610_02_T1",
+      "date": "2023-06-10",
+      "acquisition_time": "2023-06-10T11:01:57.049626Z",
+      "sensor": "landsat",
+      "ndvi": 0.24670692741550562,
+      "evi": 0.14780169177028063,
+      "ndwi": -0.07003581489912111,
+      "valid_pixel_fraction": 0.1562021439509954,
+      "pixel_count": 102,
+      "pixel_std": 0.04961253319321984,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage"
+      ],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20230618_02_T1",
+      "date": "2023-06-18",
+      "acquisition_time": "2023-06-18T11:02:01.511044Z",
+      "sensor": "landsat",
+      "ndvi": 0.2690596478097258,
+      "evi": 0.17314082421352983,
+      "ndwi": -0.08306387730985486,
+      "valid_pixel_fraction": 0.9846860643185299,
+      "pixel_count": 643,
+      "pixel_std": 0.13907513519872947,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC09_L2SP_202034_20230626_02_T1",
+      "date": "2023-06-26",
+      "acquisition_time": "2023-06-26T11:01:53.639302Z",
+      "sensor": "landsat",
+      "ndvi": 0.2710354432870338,
+      "evi": 0.1719995576016825,
+      "ndwi": -0.08379001854974506,
+      "valid_pixel_fraction": 0.9954058192955589,
+      "pixel_count": 650,
+      "pixel_std": 0.11662465773061265,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20230704_02_T1",
+      "date": "2023-07-04",
+      "acquisition_time": "2023-07-04T11:02:12.185138Z",
+      "sensor": "landsat",
+      "ndvi": 0.2589178006352165,
+      "evi": 0.16040148182777647,
+      "ndwi": -0.09136005442485395,
+      "valid_pixel_fraction": 0.9908116385911179,
+      "pixel_count": 647,
+      "pixel_std": 0.0959540398983619,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC09_L2SP_202034_20230712_02_T1",
+      "date": "2023-07-12",
+      "acquisition_time": "2023-07-12T11:02:08.962394Z",
+      "sensor": "landsat",
+      "ndvi": 0.24566298196435185,
+      "evi": 0.1493513992070519,
+      "ndwi": -0.0990363787094072,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 653,
+      "pixel_std": 0.08451281155662922,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20230720_02_T1",
+      "date": "2023-07-20",
+      "acquisition_time": "2023-07-20T11:02:14.987945Z",
+      "sensor": "landsat",
+      "ndvi": 0.24368713421796379,
+      "evi": 0.15116486582952082,
+      "ndwi": -0.08935265258326551,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 653,
+      "pixel_std": 0.06934478534520078,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC09_L2SP_202034_20230728_02_T1",
+      "date": "2023-07-28",
+      "acquisition_time": "2023-07-28T11:02:11.989028Z",
+      "sensor": "landsat",
+      "ndvi": 0.2413014882257357,
+      "evi": 0.14995636471998922,
+      "ndwi": -0.09774526990267789,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 653,
+      "pixel_std": 0.036049457492255195,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20230805_02_T1",
+      "date": "2023-08-05",
+      "acquisition_time": "2023-08-05T11:02:24.928310Z",
+      "sensor": "landsat",
+      "ndvi": 0.23421937515961527,
+      "evi": 0.14336727189527534,
+      "ndwi": -0.10143435994848299,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 653,
+      "pixel_std": 0.034178734569254854,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC09_L2SP_202034_20230813_02_T1",
+      "date": "2023-08-13",
+      "acquisition_time": "2023-08-13T11:02:19.840054Z",
+      "sensor": "landsat",
+      "ndvi": 0.22880771513035852,
+      "evi": 0.13878225262325217,
+      "ndwi": -0.1048712961567168,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 653,
+      "pixel_std": 0.03442892957009351,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20220530_02_T1",
+      "date": "2022-05-30",
+      "acquisition_time": "2022-05-30T11:02:31.379499Z",
+      "sensor": "landsat",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC09_L2SP_202034_20220607_02_T1",
+      "date": "2022-06-07",
+      "acquisition_time": "2022-06-07T11:02:05.479522Z",
+      "sensor": "landsat",
+      "ndvi": 0.22435418488196485,
+      "evi": 0.16482342968890792,
+      "ndwi": -0.05077687638727927,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 653,
+      "pixel_std": 0.12509479319149197,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC09_L2SP_202034_20220623_02_T1",
+      "date": "2022-06-23",
+      "acquisition_time": "2022-06-23T11:02:24.125859Z",
+      "sensor": "landsat",
+      "ndvi": 0.1767512037349362,
+      "evi": 0.11415005576611437,
+      "ndwi": -0.11997040289025704,
+      "valid_pixel_fraction": 0.31546707503828486,
+      "pixel_count": 206,
+      "pixel_std": 0.08724064821301945,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20220701_02_T1",
+      "date": "2022-07-01",
+      "acquisition_time": "2022-07-01T11:02:48.069584Z",
+      "sensor": "landsat",
+      "ndvi": 0.2035902961073083,
+      "evi": 0.15243940354935404,
+      "ndwi": -0.040319123262779824,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 653,
+      "pixel_std": 0.0769395734876346,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC09_L2SP_202034_20220709_02_T1",
+      "date": "2022-07-09",
+      "acquisition_time": "2022-07-09T11:02:23.451033Z",
+      "sensor": "landsat",
+      "ndvi": 0.20050266898785987,
+      "evi": 0.14634191955714032,
+      "ndwi": -0.05800760650707909,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 653,
+      "pixel_std": 0.05596768579710968,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC09_L2SP_202034_20220810_02_T1",
+      "date": "2022-08-10",
+      "acquisition_time": "2022-08-10T11:02:43.174933Z",
+      "sensor": "landsat",
+      "ndvi": 0.2117226601246319,
+      "evi": 0.1538201595266484,
+      "ndwi": -0.069578602781531,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 653,
+      "pixel_std": 0.03357041729820885,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20210521T111449_L2A",
+      "date": "2021-05-21",
+      "acquisition_time": "2021-05-21T11:20:54.765000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20210521T111449_L2A",
+      "date": "2021-05-21",
+      "acquisition_time": "2021-05-21T11:20:55.996000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20210526T110935_L2A",
+      "date": "2021-05-26",
+      "acquisition_time": "2021-05-26T11:20:54.783000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.1784582893347414,
+      "evi": 0.12831885827259237,
+      "ndwi": -0.1077433781152,
+      "valid_pixel_fraction": 0.8526785714285714,
+      "pixel_count": 4966,
+      "pixel_std": 0.12443935067983578,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20210526T110935_L2A",
+      "date": "2021-05-26",
+      "acquisition_time": "2021-05-26T11:20:56.020000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.18286109438856019,
+      "evi": 0.13148514953743584,
+      "ndwi": -0.10410775652089972,
+      "valid_pixel_fraction": 0.9087791495198903,
+      "pixel_count": 5300,
+      "pixel_std": 0.12571495609865802,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20210531T111450_L2A",
+      "date": "2021-05-31",
+      "acquisition_time": "2021-05-31T11:20:55.162000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.17858089181618597,
+      "evi": 0.12002920477042003,
+      "ndwi": -0.14309848404408218,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.11305836017409679,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20210531T111450_L2A",
+      "date": "2021-05-31",
+      "acquisition_time": "2021-05-31T11:20:56.393000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.17954545454545462,
+      "evi": 0.12026385581449708,
+      "ndwi": -0.14341058685774585,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.11261660128869072,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20210605T111526_L2A",
+      "date": "2021-06-05",
+      "acquisition_time": "2021-06-05T11:20:55.332000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20210605T111526_L2A",
+      "date": "2021-06-05",
+      "acquisition_time": "2021-06-05T11:20:56.568000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20210610T111434_L2A",
+      "date": "2021-06-10",
+      "acquisition_time": "2021-06-10T11:20:54.978000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.16983716722667358,
+      "evi": 0.11864173282444707,
+      "ndwi": -0.12594987631699328,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.10552658173617857,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20210610T111434_L2A",
+      "date": "2021-06-10",
+      "acquisition_time": "2021-06-10T11:20:56.207000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.17018666522052528,
+      "evi": 0.11925119195922622,
+      "ndwi": -0.12517735585174242,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.10505365450620986,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20210615T111721_L2A",
+      "date": "2021-06-15",
+      "acquisition_time": "2021-06-15T11:20:55.325000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.15867158671586704,
+      "evi": 0.11274208851928345,
+      "ndwi": -0.049977621960316236,
+      "valid_pixel_fraction": 0.5987293956043956,
+      "pixel_count": 3487,
+      "pixel_std": 0.12289568669709701,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20210615T111721_L2A",
+      "date": "2021-06-15",
+      "acquisition_time": "2021-06-15T11:20:56.561000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.1836734693877551,
+      "evi": 0.1341223899111019,
+      "ndwi": -0.04910714285714287,
+      "valid_pixel_fraction": 0.5948216735253772,
+      "pixel_count": 3469,
+      "pixel_std": 0.08901040608385076,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20210620T111025_L2A",
+      "date": "2021-06-20",
+      "acquisition_time": "2021-06-20T11:20:54.948000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.15565120035239707,
+      "evi": 0.10606477543736767,
+      "ndwi": -0.13001199317661472,
+      "valid_pixel_fraction": 0.9491758241758241,
+      "pixel_count": 5528,
+      "pixel_std": 0.1361372940496725,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20210620T111025_L2A",
+      "date": "2021-06-20",
+      "acquisition_time": "2021-06-20T11:20:56.174000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.15607785530664697,
+      "evi": 0.10565935062579351,
+      "ndwi": -0.13055701985591275,
+      "valid_pixel_fraction": 0.9442729766803841,
+      "pixel_count": 5507,
+      "pixel_std": 0.13687159051775458,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20210625T110935_L2A",
+      "date": "2021-06-25",
+      "acquisition_time": "2021-06-25T11:20:54.871000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.14604980511500826,
+      "evi": 0.10655043320042146,
+      "ndwi": -0.1333376528011749,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.1534098215601685,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20210625T110935_L2A",
+      "date": "2021-06-25",
+      "acquisition_time": "2021-06-25T11:20:56.104000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.14559590213047213,
+      "evi": 0.10571237949582468,
+      "ndwi": -0.13358743663054232,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.15429059601605352,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20210630T111118_L2A",
+      "date": "2021-06-30",
+      "acquisition_time": "2021-06-30T11:20:56.262000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.1434355850215233,
+      "evi": 0.106684094753731,
+      "ndwi": -0.12833162326414133,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.1610430641471543,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20210630T111118_L2A",
+      "date": "2021-06-30",
+      "acquisition_time": "2021-06-30T11:20:57.492000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.14340702571776795,
+      "evi": 0.10639841593614346,
+      "ndwi": -0.12837034835066968,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.1612352160468495,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20210705T110816_L2A",
+      "date": "2021-07-05",
+      "acquisition_time": "2021-07-05T11:20:55.808000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.12422296132461673,
+      "evi": 0.09277865668230723,
+      "ndwi": -0.13318825955612443,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.17037318021055203,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20210705T110816_L2A",
+      "date": "2021-07-05",
+      "acquisition_time": "2021-07-05T11:20:56.851000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.1243792688230429,
+      "evi": 0.09260681984514976,
+      "ndwi": -0.1337217062769363,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.17042247808002833,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20210710T111452_L2A",
+      "date": "2021-07-10",
+      "acquisition_time": "2021-07-10T11:20:57.253000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20210710T111452_L2A",
+      "date": "2021-07-10",
+      "acquisition_time": "2021-07-10T11:20:58.486000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage",
+        "no_valid_pixels"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20210715T110933_L2A",
+      "date": "2021-07-15",
+      "acquisition_time": "2021-07-15T11:20:56.368000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.12352443515477246,
+      "evi": 0.08617181383030371,
+      "ndwi": -0.13518101650565412,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.14460767839618668,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20210715T110933_L2A",
+      "date": "2021-07-15",
+      "acquisition_time": "2021-07-15T11:20:57.605000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.122988922594994,
+      "evi": 0.08502041607640998,
+      "ndwi": -0.13429495730570346,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.14660851461429408,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20210720T111452_L2A",
+      "date": "2021-07-20",
+      "acquisition_time": "2021-07-20T11:20:57.690000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.13319769209922566,
+      "evi": 0.08556809713618804,
+      "ndwi": -0.14505211904723442,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.14704991620439176,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20210720T111452_L2A",
+      "date": "2021-07-20",
+      "acquisition_time": "2021-07-20T11:20:58.924000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.13223381304877746,
+      "evi": 0.08459058398047774,
+      "ndwi": -0.1463266689086679,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.14912759931495964,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20210725T110933_L2A",
+      "date": "2021-07-25",
+      "acquisition_time": "2021-07-25T11:20:56.318000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.11441264200733275,
+      "evi": 0.07270255937121482,
+      "ndwi": -0.1657206081811512,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.14921443781263657,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20210725T110933_L2A",
+      "date": "2021-07-25",
+      "acquisition_time": "2021-07-25T11:20:57.554000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.11505180908549738,
+      "evi": 0.07283259739396479,
+      "ndwi": -0.1659390521008222,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.14920150145334132,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20210730T111452_L2A",
+      "date": "2021-07-30",
+      "acquisition_time": "2021-07-30T11:20:57.599000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.1309192996049041,
+      "evi": 0.08349008550273632,
+      "ndwi": -0.15197692067966156,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.1326619905348269,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20210730T111452_L2A",
+      "date": "2021-07-30",
+      "acquisition_time": "2021-07-30T11:20:58.834000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.12699589526533545,
+      "evi": 0.07943583579750983,
+      "ndwi": -0.1533926852046623,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.1407692098631945,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20210804T111529_L2A",
+      "date": "2021-08-04",
+      "acquisition_time": "2021-08-04T11:20:55.658000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.10960985973023116,
+      "evi": 0.06909586910330548,
+      "ndwi": -0.16477046895967312,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.14330263840750354,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20210804T111529_L2A",
+      "date": "2021-08-04",
+      "acquisition_time": "2021-08-04T11:20:56.891000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.11007668431860501,
+      "evi": 0.06904982031030835,
+      "ndwi": -0.16501871005995128,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.14343424956736014,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T30STG_20210809T110944_L2A",
+      "date": "2021-08-09",
+      "acquisition_time": "2021-08-09T11:20:56.930000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.11547575125849888,
+      "evi": 0.07255083137074125,
+      "ndwi": -0.16568961561412282,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5824,
+      "pixel_std": 0.12432813254721252,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T29SQB_20210809T110944_L2A",
+      "date": "2021-08-09",
+      "acquisition_time": "2021-08-09T11:20:58.160000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.10988097769764373,
+      "evi": 0.06698687450160973,
+      "ndwi": -0.16738125190533198,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 5832,
+      "pixel_std": 0.13627495547973564,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T30STG_20210814T110935_L2A",
+      "date": "2021-08-14",
+      "acquisition_time": "2021-08-14T11:20:54.503000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.13287422823823786,
+      "evi": 0.08252956500631009,
+      "ndwi": -0.11802730803918535,
+      "valid_pixel_fraction": 0.9783653846153846,
+      "pixel_count": 5698,
+      "pixel_std": 0.1201301622780677,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T29SQB_20210814T110935_L2A",
+      "date": "2021-08-14",
+      "acquisition_time": "2021-08-14T11:20:55.736000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.13011152416356872,
+      "evi": 0.0795388207822534,
+      "ndwi": -0.11830421082784305,
+      "valid_pixel_fraction": 0.973079561042524,
+      "pixel_count": 5675,
+      "pixel_std": 0.1242132077867819,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-full-aoi-v2",
+      "spatial_resolution_m": 10,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20210612_02_T1",
+      "date": "2021-06-12",
+      "acquisition_time": "2021-06-12T11:02:22.665302Z",
+      "sensor": "landsat",
+      "ndvi": 0.22109980323670914,
+      "evi": 0.1548992131076857,
+      "ndwi": -0.08808501095413056,
+      "valid_pixel_fraction": 0.9846860643185299,
+      "pixel_count": 643,
+      "pixel_std": 0.09517014246923552,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20210628_02_T1",
+      "date": "2021-06-28",
+      "acquisition_time": "2021-06-28T11:02:26.730618Z",
+      "sensor": "landsat",
+      "ndvi": 0.20052154886023582,
+      "evi": 0.13743441890121771,
+      "ndwi": -0.11293179639981649,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 653,
+      "pixel_std": 0.13794342096745546,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20210714_02_T1",
+      "date": "2021-07-14",
+      "acquisition_time": "2021-07-14T11:02:27.941656Z",
+      "sensor": "landsat",
+      "ndvi": 0.1792842574999565,
+      "evi": 0.11707038866752466,
+      "ndwi": -0.11644672146924087,
+      "valid_pixel_fraction": 0.9663093415007658,
+      "pixel_count": 631,
+      "pixel_std": 0.09594562969356066,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20210730_02_T1",
+      "date": "2021-07-30",
+      "acquisition_time": "2021-07-30T11:02:36.011652Z",
+      "sensor": "landsat",
+      "ndvi": 0.17637008334762594,
+      "evi": 0.109980677127686,
+      "ndwi": -0.11920418092158092,
+      "valid_pixel_fraction": 0.9892802450229708,
+      "pixel_count": 646,
+      "pixel_std": 0.10814515376772535,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "LC08_L2SP_202034_20210815_02_T1",
+      "date": "2021-08-15",
+      "acquisition_time": "2021-08-15T11:02:42.188611Z",
+      "sensor": "landsat",
+      "ndvi": 0.1923171841263978,
+      "evi": 0.12330454654884239,
+      "ndwi": -0.07542271714162169,
+      "valid_pixel_fraction": 0.8238897396630934,
+      "pixel_count": 538,
+      "pixel_std": 0.0245969597546652,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "landsat89-t1-median-qa63-radsat-aerosol-scale-v1",
+      "spatial_resolution_m": 30,
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    }
+  ],
+  "weather": [
+    {
+      "date": "2024-06-01",
+      "temperature_c": 26.5,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-02",
+      "temperature_c": 26.1,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-03",
+      "temperature_c": 26.3,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-04",
+      "temperature_c": 25.4,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-05",
+      "temperature_c": 26.4,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-06",
+      "temperature_c": 28.7,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-07",
+      "temperature_c": 23.4,
+      "precipitation_mm": 0.1,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-08",
+      "temperature_c": 21.1,
+      "precipitation_mm": 0.2,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-09",
+      "temperature_c": 21.3,
+      "precipitation_mm": 0.1,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-10",
+      "temperature_c": 22.0,
+      "precipitation_mm": 0.7,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-11",
+      "temperature_c": 22.3,
+      "precipitation_mm": 1.5,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-12",
+      "temperature_c": 22.7,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-13",
+      "temperature_c": 24.3,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-14",
+      "temperature_c": 26.0,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-15",
+      "temperature_c": 25.9,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-16",
+      "temperature_c": 24.9,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-17",
+      "temperature_c": 25.9,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-18",
+      "temperature_c": 21.6,
+      "precipitation_mm": 0.7,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-19",
+      "temperature_c": 19.4,
+      "precipitation_mm": 3.5,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-20",
+      "temperature_c": 20.5,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-21",
+      "temperature_c": 24.4,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-22",
+      "temperature_c": 28.1,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-23",
+      "temperature_c": 29.5,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-24",
+      "temperature_c": 29.1,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-25",
+      "temperature_c": 28.1,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-26",
+      "temperature_c": 24.2,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-27",
+      "temperature_c": 22.4,
+      "precipitation_mm": 0.1,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-28",
+      "temperature_c": 21.0,
+      "precipitation_mm": 2.5,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-29",
+      "temperature_c": 21.7,
+      "precipitation_mm": 0.5,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-06-30",
+      "temperature_c": 24.1,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-01",
+      "temperature_c": 25.4,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-02",
+      "temperature_c": 27.8,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-03",
+      "temperature_c": 30.0,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-04",
+      "temperature_c": 31.6,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-05",
+      "temperature_c": 28.5,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-06",
+      "temperature_c": 25.1,
+      "precipitation_mm": 0.6,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-07",
+      "temperature_c": 24.5,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-08",
+      "temperature_c": 24.3,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-09",
+      "temperature_c": 25.8,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-10",
+      "temperature_c": 28.6,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-11",
+      "temperature_c": 31.3,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-12",
+      "temperature_c": 30.1,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-13",
+      "temperature_c": 26.7,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-14",
+      "temperature_c": 25.3,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-15",
+      "temperature_c": 26.9,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-16",
+      "temperature_c": 28.3,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-17",
+      "temperature_c": 28.6,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-18",
+      "temperature_c": 29.9,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-19",
+      "temperature_c": 31.2,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-20",
+      "temperature_c": 30.7,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-21",
+      "temperature_c": 28.6,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-22",
+      "temperature_c": 29.0,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-23",
+      "temperature_c": 31.4,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-24",
+      "temperature_c": 32.0,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-25",
+      "temperature_c": 30.2,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-26",
+      "temperature_c": 28.0,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-27",
+      "temperature_c": 27.5,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-28",
+      "temperature_c": 29.5,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-29",
+      "temperature_c": 31.5,
+      "precipitation_mm": 0.2,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-30",
+      "temperature_c": 29.1,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    },
+    {
+      "date": "2024-07-31",
+      "temperature_c": 29.8,
+      "precipitation_mm": 0.0,
+      "provider": "open_meteo_era5_seamless"
+    }
+  ],
+  "evidence": {
+    "geometry_sha256": "a037aa7d788b5e143c2bebc2a223bca129c307951097beb9b5e190b7d2f1f72a",
+    "geometry": "backend/tests/fixtures/seville.geojson",
+    "sources": [
+      {
+        "period": {
+          "from": "2024-06-01",
+          "to": "2024-07-31"
+        },
+        "label": "current",
+        "sensor": "sentinel2",
+        "path": "current-sentinel2.json",
+        "sha256": "04f19c8812c4844f8254a397071eb4ec9401ebfbf0e62ae3009398164e09cc96",
+        "retrieved_at": "2026-09-05T20:20:01.929528+00:00",
+        "resumed_snapshot": false,
+        "duration_seconds": 61.742,
+        "observations": 24,
+        "usable_observations": 16,
+        "warnings": []
+      },
+      {
+        "period": {
+          "from": "2024-06-01",
+          "to": "2024-07-31"
+        },
+        "label": "current",
+        "sensor": "landsat",
+        "path": "current-landsat.json",
+        "sha256": "c8ef2cc720df6cc124d71937247ccd435aadb55ed545947163e1713fb1da08b1",
+        "retrieved_at": "2026-09-05T20:20:15.841747+00:00",
+        "resumed_snapshot": false,
+        "duration_seconds": 14.168,
+        "observations": 9,
+        "usable_observations": 5,
+        "warnings": []
+      },
+      {
+        "period": {
+          "from": "2023-05-17",
+          "to": "2023-08-15"
+        },
+        "label": "history-1",
+        "sensor": "sentinel2",
+        "path": "history-1-sentinel2.json",
+        "sha256": "a4601eff3a7a337842b3c92804f9b471bfb119463dbce33b06bc2e943b0bc8eb",
+        "retrieved_at": "2026-09-05T20:21:48.923552+00:00",
+        "resumed_snapshot": false,
+        "duration_seconds": 92.985,
+        "observations": 36,
+        "usable_observations": 26,
+        "warnings": []
+      },
+      {
+        "period": {
+          "from": "2023-05-17",
+          "to": "2023-08-15"
+        },
+        "label": "history-1",
+        "sensor": "landsat",
+        "path": "history-1-landsat.json",
+        "sha256": "eb29740c225ca05e29fd12fce4b4fcdc799d1bab48628c1ff23a32a241d91aa3",
+        "retrieved_at": "2026-09-05T20:22:12.296609+00:00",
+        "resumed_snapshot": false,
+        "duration_seconds": 23.2,
+        "observations": 13,
+        "usable_observations": 11,
+        "warnings": []
+      },
+      {
+        "period": {
+          "from": "2022-05-17",
+          "to": "2022-08-15"
+        },
+        "label": "history-2",
+        "sensor": "sentinel2",
+        "path": "history-2-sentinel2.json",
+        "sha256": "dd3a1b8db3ae6ea6a1857d12afa053eb1766538e1b846266005e86560d2c968c",
+        "retrieved_at": "2026-09-05T20:22:13.716169+00:00",
+        "resumed_snapshot": false,
+        "duration_seconds": 1.348,
+        "observations": 0,
+        "usable_observations": 0,
+        "warnings": []
+      },
+      {
+        "period": {
+          "from": "2022-05-17",
+          "to": "2022-08-15"
+        },
+        "label": "history-2",
+        "sensor": "landsat",
+        "path": "history-2-landsat.json",
+        "sha256": "df753f33354dd809741814297b3f16b6f99ff21f531e05a18734e2a6ed5cde24",
+        "retrieved_at": "2026-09-05T20:22:26.369413+00:00",
+        "resumed_snapshot": false,
+        "duration_seconds": 12.721,
+        "observations": 6,
+        "usable_observations": 5,
+        "warnings": [
+          {
+            "code": "scene_unavailable",
+            "scene_id": "LC09_L2SP_202034_20220522_02_T1",
+            "provider": "planetary_computer_landsat",
+            "reason": "RasterioIOError"
+          }
+        ]
+      },
+      {
+        "period": {
+          "from": "2021-05-17",
+          "to": "2021-08-15"
+        },
+        "label": "history-3",
+        "sensor": "sentinel2",
+        "path": "history-3-sentinel2.json",
+        "sha256": "91af555a5f9cf1d152d51d6bd70b5c8c937b425834bac849acf0b2015b234477",
+        "retrieved_at": "2026-09-05T20:24:07.717900+00:00",
+        "resumed_snapshot": false,
+        "duration_seconds": 101.636,
+        "observations": 36,
+        "usable_observations": 30,
+        "warnings": []
+      },
+      {
+        "period": {
+          "from": "2021-05-17",
+          "to": "2021-08-15"
+        },
+        "label": "history-3",
+        "sensor": "landsat",
+        "path": "history-3-landsat.json",
+        "sha256": "ff5231512ce4af679ed9ad69bf621b1692dfa085c5d9e0f707b25c81f9b1a750",
+        "retrieved_at": "2026-09-05T20:24:17.905494+00:00",
+        "resumed_snapshot": false,
+        "duration_seconds": 9.881,
+        "observations": 5,
+        "usable_observations": 5,
+        "warnings": []
+      }
+    ],
+    "weather_sha256": "23a79c78020a51ae51efe85290826718dc20de9b6931ee2031f8ea8d8dc8008d",
+    "observations": 33,
+    "usable_observations": 21,
+    "weather_days": 61,
+    "history_observations": 96,
+    "history_usable_observations": 77,
+    "warnings": [
+      {
+        "code": "scene_unavailable",
+        "scene_id": "LC09_L2SP_202034_20220522_02_T1",
+        "provider": "planetary_computer_landsat",
+        "reason": "RasterioIOError"
+      }
+    ]
+  },
+  "predictions": [
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 0,
+      "model": "final",
+      "date": "2024-06-04",
+      "sensor": "sentinel2",
+      "truth": 0.26366384850734104,
+      "prediction": 0.272176388053294,
+      "origin": "extrapolated",
+      "gap_days": 10,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 0,
+      "model": "baseline",
+      "date": "2024-06-04",
+      "sensor": "sentinel2",
+      "truth": 0.26366384850734104,
+      "prediction": 0.25545343102956075,
+      "origin": "extrapolated",
+      "gap_days": 10,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 1,
+      "model": "final",
+      "date": "2024-06-14",
+      "sensor": "sentinel2",
+      "truth": 0.25545343102956075,
+      "prediction": 0.277291767007772,
+      "origin": "interpolated",
+      "gap_days": 16,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 1,
+      "model": "baseline",
+      "date": "2024-06-14",
+      "sensor": "sentinel2",
+      "truth": 0.25545343102956075,
+      "prediction": 0.2934094328210102,
+      "origin": "interpolated",
+      "gap_days": 16,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 2,
+      "model": "final",
+      "date": "2024-06-20",
+      "sensor": "landsat",
+      "truth": 0.32315501713467926,
+      "prediction": 0.2514196119266582,
+      "origin": "interpolated",
+      "gap_days": 10,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 2,
+      "model": "baseline",
+      "date": "2024-06-20",
+      "sensor": "landsat",
+      "truth": 0.32315501713467926,
+      "prediction": 0.24892574212142066,
+      "origin": "interpolated",
+      "gap_days": 10,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 3,
+      "model": "final",
+      "date": "2024-06-24",
+      "sensor": "sentinel2",
+      "truth": 0.24239805321328056,
+      "prediction": 0.24781043197700087,
+      "origin": "interpolated",
+      "gap_days": 14,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 3,
+      "model": "baseline",
+      "date": "2024-06-24",
+      "sensor": "sentinel2",
+      "truth": 0.24239805321328056,
+      "prediction": 0.2792515704800224,
+      "origin": "interpolated",
+      "gap_days": 14,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 4,
+      "model": "final",
+      "date": "2024-07-04",
+      "sensor": "sentinel2",
+      "truth": 0.2353481238253656,
+      "prediction": 0.23626672744128396,
+      "origin": "interpolated",
+      "gap_days": 15,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 4,
+      "model": "baseline",
+      "date": "2024-07-04",
+      "sensor": "sentinel2",
+      "truth": 0.2353481238253656,
+      "prediction": 0.23534998723341016,
+      "origin": "interpolated",
+      "gap_days": 15,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 5,
+      "model": "final",
+      "date": "2024-07-09",
+      "sensor": "sentinel2",
+      "truth": 0.22830192125353976,
+      "prediction": 0.22213789649471236,
+      "origin": "interpolated",
+      "gap_days": 10,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 5,
+      "model": "baseline",
+      "date": "2024-07-09",
+      "sensor": "sentinel2",
+      "truth": 0.22830192125353976,
+      "prediction": 0.22655501927475397,
+      "origin": "interpolated",
+      "gap_days": 10,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 6,
+      "model": "final",
+      "date": "2024-07-14",
+      "sensor": "sentinel2",
+      "truth": 0.21776191472414236,
+      "prediction": 0.2291344125848801,
+      "origin": "interpolated",
+      "gap_days": 10,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 6,
+      "model": "baseline",
+      "date": "2024-07-14",
+      "sensor": "sentinel2",
+      "truth": 0.21776191472414236,
+      "prediction": 0.21804221137900714,
+      "origin": "interpolated",
+      "gap_days": 10,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 7,
+      "model": "final",
+      "date": "2024-07-19",
+      "sensor": "sentinel2",
+      "truth": 0.20778250150447455,
+      "prediction": 0.22460577720730257,
+      "origin": "interpolated",
+      "gap_days": 8,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 7,
+      "model": "baseline",
+      "date": "2024-07-19",
+      "sensor": "sentinel2",
+      "truth": 0.20778250150447455,
+      "prediction": 0.23724153326457237,
+      "origin": "interpolated",
+      "gap_days": 8,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 8,
+      "model": "final",
+      "date": "2024-07-22",
+      "sensor": "landsat",
+      "truth": 0.2567211518050024,
+      "prediction": 0.2289405930244107,
+      "origin": "interpolated",
+      "gap_days": 5,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 8,
+      "model": "baseline",
+      "date": "2024-07-22",
+      "sensor": "landsat",
+      "truth": 0.2567211518050024,
+      "prediction": 0.2051866940472275,
+      "origin": "interpolated",
+      "gap_days": 5,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 9,
+      "model": "final",
+      "date": "2024-07-24",
+      "sensor": "sentinel2",
+      "truth": 0.20259088658998048,
+      "prediction": 0.233113189501647,
+      "origin": "interpolated",
+      "gap_days": 8,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 9,
+      "model": "baseline",
+      "date": "2024-07-24",
+      "sensor": "sentinel2",
+      "truth": 0.20259088658998048,
+      "prediction": 0.263178309892649,
+      "origin": "interpolated",
+      "gap_days": 8,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 10,
+      "model": "final",
+      "date": "2024-07-30",
+      "sensor": "landsat",
+      "truth": 0.2696354679802956,
+      "prediction": 0.20529183177977947,
+      "origin": "extrapolated",
+      "gap_days": 6,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "points",
+      "mask": 10,
+      "model": "baseline",
+      "date": "2024-07-30",
+      "sensor": "landsat",
+      "truth": 0.2696354679802956,
+      "prediction": 0.20259088658998048,
+      "origin": "extrapolated",
+      "gap_days": 6,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 0,
+      "model": "final",
+      "date": "2024-06-04",
+      "sensor": "sentinel2",
+      "truth": 0.26366384850734104,
+      "prediction": 0.35691623254721117,
+      "origin": "climatology_fallback",
+      "gap_days": 16,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 0,
+      "model": "final",
+      "date": "2024-06-14",
+      "sensor": "sentinel2",
+      "truth": 0.25545343102956075,
+      "prediction": 0.2924346770937478,
+      "origin": "extrapolated",
+      "gap_days": 6,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 0,
+      "model": "baseline",
+      "date": "2024-06-04",
+      "sensor": "sentinel2",
+      "truth": 0.26366384850734104,
+      "prediction": 0.5170818671454219,
+      "origin": "climatology_fallback",
+      "gap_days": 16,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 0,
+      "model": "baseline",
+      "date": "2024-06-14",
+      "sensor": "sentinel2",
+      "truth": 0.25545343102956075,
+      "prediction": 0.32315501713467926,
+      "origin": "extrapolated",
+      "gap_days": 6,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 1,
+      "model": "final",
+      "date": "2024-06-20",
+      "sensor": "landsat",
+      "truth": 0.32315501713467926,
+      "prediction": 0.24469237050205941,
+      "origin": "interpolated",
+      "gap_days": 20,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 1,
+      "model": "final",
+      "date": "2024-06-24",
+      "sensor": "sentinel2",
+      "truth": 0.24239805321328056,
+      "prediction": 0.23453283571539152,
+      "origin": "interpolated",
+      "gap_days": 20,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 1,
+      "model": "baseline",
+      "date": "2024-06-20",
+      "sensor": "landsat",
+      "truth": 0.32315501713467926,
+      "prediction": 0.2454007774274632,
+      "origin": "interpolated",
+      "gap_days": 20,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 1,
+      "model": "baseline",
+      "date": "2024-06-24",
+      "sensor": "sentinel2",
+      "truth": 0.24239805321328056,
+      "prediction": 0.2454007774274632,
+      "origin": "interpolated",
+      "gap_days": 20,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 2,
+      "model": "final",
+      "date": "2024-07-04",
+      "sensor": "sentinel2",
+      "truth": 0.2353481238253656,
+      "prediction": 0.23068791794308965,
+      "origin": "interpolated",
+      "gap_days": 20,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 2,
+      "model": "final",
+      "date": "2024-07-09",
+      "sensor": "sentinel2",
+      "truth": 0.22830192125353976,
+      "prediction": 0.23305658923250178,
+      "origin": "interpolated",
+      "gap_days": 20,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 2,
+      "model": "baseline",
+      "date": "2024-07-04",
+      "sensor": "sentinel2",
+      "truth": 0.2353481238253656,
+      "prediction": 0.23007998396871146,
+      "origin": "interpolated",
+      "gap_days": 20,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 2,
+      "model": "baseline",
+      "date": "2024-07-09",
+      "sensor": "sentinel2",
+      "truth": 0.22830192125353976,
+      "prediction": 0.23007998396871146,
+      "origin": "interpolated",
+      "gap_days": 20,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 3,
+      "model": "final",
+      "date": "2024-07-14",
+      "sensor": "sentinel2",
+      "truth": 0.21776191472414236,
+      "prediction": 0.23198212492197642,
+      "origin": "interpolated",
+      "gap_days": 13,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 3,
+      "model": "final",
+      "date": "2024-07-19",
+      "sensor": "sentinel2",
+      "truth": 0.20778250150447455,
+      "prediction": 0.23184513438994445,
+      "origin": "interpolated",
+      "gap_days": 13,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 3,
+      "model": "baseline",
+      "date": "2024-07-14",
+      "sensor": "sentinel2",
+      "truth": 0.21776191472414236,
+      "prediction": 0.24251153652927107,
+      "origin": "interpolated",
+      "gap_days": 13,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 3,
+      "model": "baseline",
+      "date": "2024-07-19",
+      "sensor": "sentinel2",
+      "truth": 0.20778250150447455,
+      "prediction": 0.24251153652927107,
+      "origin": "interpolated",
+      "gap_days": 13,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 4,
+      "model": "final",
+      "date": "2024-07-22",
+      "sensor": "landsat",
+      "truth": 0.2567211518050024,
+      "prediction": 0.23129000545131248,
+      "origin": "interpolated",
+      "gap_days": 11,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 4,
+      "model": "final",
+      "date": "2024-07-24",
+      "sensor": "sentinel2",
+      "truth": 0.20259088658998048,
+      "prediction": 0.2249610754047358,
+      "origin": "interpolated",
+      "gap_days": 11,
+      "interval_contains_truth": true
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 4,
+      "model": "baseline",
+      "date": "2024-07-22",
+      "sensor": "landsat",
+      "truth": 0.2567211518050024,
+      "prediction": 0.23870898474238506,
+      "origin": "interpolated",
+      "gap_days": 11,
+      "interval_contains_truth": null
+    },
+    {
+      "field": "seville",
+      "scenario": "blocks",
+      "mask": 4,
+      "model": "baseline",
+      "date": "2024-07-24",
+      "sensor": "sentinel2",
+      "truth": 0.20259088658998048,
+      "prediction": 0.23870898474238506,
+      "origin": "interpolated",
+      "gap_days": 11,
+      "interval_contains_truth": null
+    }
+  ],
+  "metrics": {
+    "points": {
+      "final": {
+        "targets": 11,
+        "predicted": 11,
+        "unavailable": 0,
+        "rmse": 0.03305547367622256,
+        "mae": 0.02412941448427195,
+        "interval_n": 11,
+        "interval_coverage": 1.0
+      },
+      "baseline": {
+        "targets": 11,
+        "predicted": 11,
+        "unavailable": 0,
+        "rmse": 0.042713435093311776,
+        "mae": 0.03344579707288924,
+        "interval_n": 0,
+        "interval_coverage": null
+      }
+    },
+    "blocks": {
+      "final": {
+        "targets": 10,
+        "predicted": 10,
+        "unavailable": 0,
+        "rmse": 0.042725385745293505,
+        "mae": 0.03120605463475532,
+        "interval_n": 10,
+        "interval_coverage": 1.0
+      },
+      "baseline": {
+        "targets": 10,
+        "predicted": 10,
+        "unavailable": 0,
+        "rmse": 0.0885084485860024,
+        "mae": 0.0522531693281371,
+        "interval_n": 0,
+        "interval_coverage": null
+      }
+    }
+  },
+  "evaluation_status": "evaluated",
+  "agronomic_ground_truth": false,
+  "limitations": [
+    "Культура и история севооборота не подтверждены",
+    "Причины негативных отклонений остаются гипотезами",
+    "Маски внутри поля зависимы; число точек не равно числу независимых полей",
+    "Три выбранных поля не представляют все регионы"
+  ]
+}

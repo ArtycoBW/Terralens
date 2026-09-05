@@ -1,0 +1,263 @@
+{
+  "evaluated_at": "2026-09-05T20:34:00.020265+00:00",
+  "model_manifests": {
+    "final": {
+      "path": "ml/artifacts/final/manifest.json",
+      "sha256": "44ab0740659cd872f488ad881ace01594cd4c9b7b6acbd045bd4fe46b9f2924f"
+    },
+    "baseline": {
+      "path": "ml/artifacts/baseline/manifest.json",
+      "sha256": "28d48a9f4434f188810ab2326867b47fbe6fb25ce93976c51bacb872e6c5edf0"
+    }
+  },
+  "protocol_sha256": "d0e77b9d34044b2a89ea76b6c91e81cf195e0568eda616070d006d2f5dd55dc2",
+  "fields": [
+    {
+      "field": "potsdam",
+      "period": {
+        "from": "2024-06-01",
+        "to": "2024-07-31"
+      },
+      "summary": {
+        "observed_days": 15,
+        "total_days": 61,
+        "observed_coverage_ratio": 0.2459016393442623,
+        "reconstructed_days": 46,
+        "unavailable_days": 0,
+        "longest_gap_days": 10,
+        "anomaly_period_count": 0,
+        "overall_status": "insufficient_data",
+        "summary_rule": "event-max-else-two-clean-days-and-half-period-reference-v3",
+        "latest_estimate": {
+          "date": "2024-07-31",
+          "value": 0.5547897217472366,
+          "origin": "extrapolated"
+        }
+      },
+      "metrics": {
+        "points": {
+          "final": {
+            "targets": 15,
+            "predicted": 15,
+            "unavailable": 0,
+            "rmse": 0.048085627679246394,
+            "mae": 0.036867286578130126,
+            "interval_n": 15,
+            "interval_coverage": 1.0
+          },
+          "baseline": {
+            "targets": 15,
+            "predicted": 15,
+            "unavailable": 0,
+            "rmse": 0.03436795755847914,
+            "mae": 0.029809316361643006,
+            "interval_n": 0,
+            "interval_coverage": null
+          }
+        },
+        "blocks": {
+          "final": {
+            "targets": 14,
+            "predicted": 14,
+            "unavailable": 0,
+            "rmse": 0.05372416677848668,
+            "mae": 0.04542046380635585,
+            "interval_n": 14,
+            "interval_coverage": 0.9285714285714286
+          },
+          "baseline": {
+            "targets": 14,
+            "predicted": 14,
+            "unavailable": 0,
+            "rmse": 0.0620348655334887,
+            "mae": 0.057347914740473786,
+            "interval_n": 0,
+            "interval_coverage": null
+          }
+        }
+      },
+      "evaluation_status": "evaluated"
+    },
+    {
+      "field": "seville",
+      "period": {
+        "from": "2024-06-01",
+        "to": "2024-07-31"
+      },
+      "summary": {
+        "observed_days": 11,
+        "total_days": 61,
+        "observed_coverage_ratio": 0.18032786885245902,
+        "reconstructed_days": 50,
+        "unavailable_days": 0,
+        "longest_gap_days": 9,
+        "anomaly_period_count": 0,
+        "overall_status": "insufficient_data",
+        "summary_rule": "event-max-else-two-clean-days-and-half-period-reference-v3",
+        "latest_estimate": {
+          "date": "2024-07-31",
+          "value": 0.23703564655999002,
+          "origin": "extrapolated"
+        }
+      },
+      "metrics": {
+        "points": {
+          "final": {
+            "targets": 11,
+            "predicted": 11,
+            "unavailable": 0,
+            "rmse": 0.03305547367622256,
+            "mae": 0.02412941448427195,
+            "interval_n": 11,
+            "interval_coverage": 1.0
+          },
+          "baseline": {
+            "targets": 11,
+            "predicted": 11,
+            "unavailable": 0,
+            "rmse": 0.042713435093311776,
+            "mae": 0.03344579707288924,
+            "interval_n": 0,
+            "interval_coverage": null
+          }
+        },
+        "blocks": {
+          "final": {
+            "targets": 10,
+            "predicted": 10,
+            "unavailable": 0,
+            "rmse": 0.042725385745293505,
+            "mae": 0.03120605463475532,
+            "interval_n": 10,
+            "interval_coverage": 1.0
+          },
+          "baseline": {
+            "targets": 10,
+            "predicted": 10,
+            "unavailable": 0,
+            "rmse": 0.0885084485860024,
+            "mae": 0.0522531693281371,
+            "interval_n": 0,
+            "interval_coverage": null
+          }
+        }
+      },
+      "evaluation_status": "evaluated"
+    },
+    {
+      "field": "voronezh",
+      "period": {
+        "from": "2024-06-01",
+        "to": "2024-07-31"
+      },
+      "summary": {
+        "observed_days": 14,
+        "total_days": 61,
+        "observed_coverage_ratio": 0.22950819672131148,
+        "reconstructed_days": 47,
+        "unavailable_days": 0,
+        "longest_gap_days": 8,
+        "anomaly_period_count": 2,
+        "overall_status": "critical",
+        "summary_rule": "event-max-else-two-clean-days-and-half-period-reference-v3",
+        "latest_estimate": {
+          "date": "2024-07-31",
+          "value": 0.8214499700419414,
+          "origin": "observed"
+        }
+      },
+      "metrics": {
+        "points": {
+          "final": {
+            "targets": 14,
+            "predicted": 14,
+            "unavailable": 0,
+            "rmse": 0.06896425076963841,
+            "mae": 0.051364225733562884,
+            "interval_n": 14,
+            "interval_coverage": 0.9285714285714286
+          },
+          "baseline": {
+            "targets": 14,
+            "predicted": 14,
+            "unavailable": 0,
+            "rmse": 0.036440133259374105,
+            "mae": 0.02922685537081249,
+            "interval_n": 0,
+            "interval_coverage": null
+          }
+        },
+        "blocks": {
+          "final": {
+            "targets": 14,
+            "predicted": 14,
+            "unavailable": 0,
+            "rmse": 0.08894241763653116,
+            "mae": 0.0682373473014889,
+            "interval_n": 14,
+            "interval_coverage": 0.8571428571428571
+          },
+          "baseline": {
+            "targets": 14,
+            "predicted": 14,
+            "unavailable": 0,
+            "rmse": 0.07990609923986967,
+            "mae": 0.05639925247045179,
+            "interval_n": 0,
+            "interval_coverage": null
+          }
+        }
+      },
+      "evaluation_status": "evaluated"
+    }
+  ],
+  "pooled": {
+    "points": {
+      "final": {
+        "targets": 40,
+        "predicted": 40,
+        "unavailable": 0,
+        "rmse": 0.05321834081362516,
+        "mae": 0.0384383004567206,
+        "interval_n": 40,
+        "interval_coverage": 0.975
+      },
+      "baseline": {
+        "targets": 40,
+        "predicted": 40,
+        "unavailable": 0,
+        "rmse": 0.03754215193644029,
+        "mae": 0.030605487210445037,
+        "interval_n": 0,
+        "interval_coverage": null
+      }
+    },
+    "blocks": {
+      "final": {
+        "targets": 38,
+        "predicted": 38,
+        "unavailable": 0,
+        "rmse": 0.06677005757899235,
+        "mae": 0.050086050048878415,
+        "interval_n": 38,
+        "interval_coverage": 0.9210526315789473
+      },
+      "baseline": {
+        "targets": 38,
+        "predicted": 38,
+        "unavailable": 0,
+        "rmse": 0.07636542756548749,
+        "mae": 0.05565768511142971,
+        "interval_n": 0,
+        "interval_coverage": null
+      }
+    }
+  },
+  "fit_or_selection_performed": false,
+  "summary_rule_update": {
+    "rule": "event-max-else-two-clean-days-and-half-period-reference-v3",
+    "reason": "Оценка нормы на нескольких датах не характеризует весь период",
+    "reconstruction_and_events_unchanged": true,
+    "metrics_unchanged": true
+  }
+}

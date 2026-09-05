@@ -1,0 +1,30 @@
+{
+  "network_disabled": true,
+  "model_id": "131aee618934151e",
+  "fields": [
+    {
+      "field": "potsdam",
+      "daily_equal": true,
+      "events_equal": true,
+      "summary_equal": true,
+      "metrics_recomputed": true,
+      "observed_days": 15
+    },
+    {
+      "field": "seville",
+      "daily_equal": true,
+      "events_equal": true,
+      "summary_equal": true,
+      "metrics_recomputed": true,
+      "observed_days": 11
+    },
+    {
+      "field": "voronezh",
+      "daily_equal": true,
+      "events_equal": true,
+      "summary_equal": true,
+      "metrics_recomputed": true,
+      "observed_days": 14
+    }
+  ]
+}
