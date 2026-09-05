@@ -46,10 +46,10 @@ def make_mask(frame, seed, fraction=0.15, *, blocks=False):
             continue
         if blocks:
             # Целые календарные окна, включая длинные и краевые разрывы.
-            days = pd.to_datetime(known.date)
-            start = days.iloc[int(rng.integers(len(days)))]
+            days = pd.to_datetime(known.date).to_numpy(dtype="datetime64[D]").astype(np.int64)
+            start = days[int(rng.integers(len(days)))]
             width = int(rng.choice([8, 15, 30, 45, 65]))
-            selected = known.index[(days >= start) & (days < start + pd.Timedelta(days=width))]
+            selected = known.index[(days >= start) & (days < start + width)]
         else:
             selected = rng.choice(
                 known.index.to_numpy(), size=max(1, round(len(known) * fraction)), replace=False

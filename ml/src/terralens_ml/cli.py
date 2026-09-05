@@ -22,6 +22,12 @@ def main(argv=None):
     for command in ["train", "evaluate", "research"]:
         sub = commands.add_parser(command)
         sub.add_argument("--config", required=True)
+        if command == "research":
+            sub.add_argument(
+                "--development-only",
+                action="store_true",
+                help="Только development folds и выбор; без финальной модели и assessment",
+            )
     predict = commands.add_parser("predict")
     predict.add_argument("--input", required=True)
     predict.add_argument("--output", required=True)
@@ -41,7 +47,9 @@ def main(argv=None):
                 result = save_model(fit(frame, config), config["output"], input_path=config["input"])
             else:
                 report = (
-                    run_research(frame, config) if args.command == "research" else evaluate(frame, config)
+                    run_research(frame, config, development_only=args.development_only)
+                    if args.command == "research"
+                    else evaluate(frame, config)
                 )
                 result = {
                     "selected_algorithm": report["selected_algorithm"],

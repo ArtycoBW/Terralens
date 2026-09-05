@@ -11,12 +11,94 @@ import pandas as pd
 from sklearn.model_selection import GroupKFold
 
 from .io import KEY, DataError, atomic_write, canonical_hash, sha256, write_json
-from .model import fit, save_model
+from .model import DEFAULT_CONFIG, fit, save_model
 from .uncertainty import calibrate, coverage
 from .validation import _score_context, make_mask, metrics, summarize
 
+DEFAULT_ASSESSMENT_STATUS = "Post-selection assessment; these source AOIs appeared in the earlier baseline study, not a new blind holdout"
+DEFAULT_ASSESSMENT_LIMITATION = (
+    "Remaining AOIs previously appeared in baseline development; assessment is not newly blind data"
+)
 
-def run_research(frame, config):
+
+def _write_results(
+    output,
+    predictions,
+    *,
+    selected,
+    selected_config,
+    selection_metrics,
+    timings,
+    plan,
+    mask_hashes,
+    selection_rule,
+    selection_guardrail,
+    assessment_limitations,
+    development_only=False,
+    evaluation=None,
+    calibration=None,
+):
+    report = {
+        "selected_candidate": selected,
+        "selected_algorithm": selected_config.get("algorithm", DEFAULT_CONFIG["algorithm"]),
+        "selection_rule": selection_rule,
+        "selection_guardrail": selection_guardrail,
+        "development_only": development_only,
+        "assessment_status": plan["assessment_status"],
+        "development": selection_metrics,
+        "elapsed_candidate_seconds": timings,
+        "scopes": {
+            f"{scope}/{candidate}": summarize(part)
+            for (scope, candidate), part in predictions.groupby(["scope", "candidate"])
+        },
+        "interval_assessment": {}
+        if evaluation is None
+        else {scope: coverage(part, calibration) for scope, part in evaluation.groupby("scope")},
+        "calibration": calibration,
+        "split_hash": canonical_hash(plan),
+        "mask_hashes": mask_hashes,
+        "limitations": [
+            "Official test labels unavailable; no official RMSE",
+            "Previously inspected 8 holdout AOIs excluded entirely",
+            *assessment_limitations,
+            "Calibration points within AOI and repeated masks are dependent; empirical intervals have no unconditional guarantee",
+            "Benchmark has no geography; live regional transfer and agronomic causes remain unvalidated",
+            *(
+                [
+                    "Development-only run: no final fit, calibration, assessment, temporal scoring or model artifact"
+                ]
+                if development_only
+                else []
+            ),
+        ],
+    }
+    rows = [
+        {"scope": scope, "candidate": candidate, **metrics(part.truth, part.reconstructed)}
+        for (scope, candidate), part in predictions.groupby(["scope", "candidate"])
+    ]
+    atomic_write(output / "predictions.csv", predictions.to_csv(index=False))
+    atomic_write(output / "metrics.csv", pd.DataFrame(rows).to_csv(index=False))
+    write_json(output / "report.json", report)
+    return report
+
+
+def run_research(frame, config, *, development_only=False):
+    baseline = config.get("selection_baseline")
+    if baseline is not None and (not isinstance(baseline, str) or baseline not in config["candidates"]):
+        raise DataError("selection_baseline должен указывать существующего кандидата")
+    assessment_status = config.get("assessment_status", DEFAULT_ASSESSMENT_STATUS)
+    if not isinstance(assessment_status, str) or not assessment_status.strip():
+        raise DataError("assessment_status должен быть непустой строкой")
+    assessment_limitations = config.get(
+        "assessment_limitations",
+        [
+            assessment_status if "assessment_status" in config else DEFAULT_ASSESSMENT_LIMITATION,
+        ],
+    )
+    if not isinstance(assessment_limitations, list) or any(
+        not isinstance(item, str) or not item.strip() for item in assessment_limitations
+    ):
+        raise DataError("assessment_limitations должен быть списком непустых строк")
     output = Path(config["output"])
     old_plan = json.loads(Path(config["prior_split"]).read_text())
     excluded = old_plan["locked_holdout_ids"]
@@ -52,7 +134,7 @@ def run_research(frame, config):
         "temporal_year": final_year,
         "folds": folds,
         "input_sha256": sha256(config["input"]),
-        "assessment_status": "Post-selection assessment; these source AOIs appeared in the earlier baseline study, not a new blind holdout",
+        "assessment_status": assessment_status,
     }
     manifest_path = output / "split_manifest.json"
     if manifest_path.exists() and canonical_hash(json.loads(manifest_path.read_text())) != canonical_hash(
@@ -101,10 +183,49 @@ def run_research(frame, config):
         name: summarize(part)
         for name, part in development.loc[development.scope.eq("development_points")].groupby("candidate")
     }
-    selected = min(selection_metrics, key=lambda name: selection_metrics[name]["rmse"])
+    eligible = list(selection_metrics)
+    selection_rule = "minimum pooled development_points RMSE, all raw masked targets; frozen before calibration and assessment"
+    selection_guardrail = None
+    if baseline is not None:
+        block_rmse = {
+            name: metrics(part.truth, part.reconstructed)["rmse"]
+            for name, part in development.loc[development.scope.eq("development_blocks")].groupby("candidate")
+        }
+        limit = block_rmse.get(baseline)
+        if limit is None or not np.isfinite(limit):
+            raise DataError("У selection_baseline нет конечной development_blocks RMSE")
+        eligible = [
+            name for name in eligible if block_rmse.get(name) is not None and block_rmse[name] <= limit
+        ]
+        selection_rule = (
+            "minimum pooled development_points RMSE among candidates with pooled development_blocks RMSE "
+            "no greater than selection_baseline; frozen before calibration and assessment"
+        )
+        selection_guardrail = {
+            "baseline": baseline,
+            "maximum_blocks_rmse": limit,
+            "blocks_rmse": block_rmse,
+            "eligible_candidates": eligible,
+        }
+    if not eligible or any(selection_metrics[name]["rmse"] is None for name in eligible):
+        raise DataError("Нет кандидата с конечной development RMSE")
+    selected = min(eligible, key=lambda name: selection_metrics[name]["rmse"])
     # The model and hyperparameters are frozen before any calibration/assessment predictions.
     selected_config = base | config["candidates"][selected]
     write_json(output / "selected_config.json", selected_config)
+    report_options = {
+        "selected": selected,
+        "selected_config": selected_config,
+        "selection_metrics": selection_metrics,
+        "timings": timings,
+        "plan": plan,
+        "mask_hashes": mask_hashes,
+        "selection_rule": selection_rule,
+        "selection_guardrail": selection_guardrail,
+        "assessment_limitations": assessment_limitations,
+    }
+    if development_only:
+        return _write_results(output, development, development_only=True, **report_options)
     model = fit(selection, selected_config)
     model["training_scope"] = {
         "polygon_ids": selection_ids,
@@ -144,37 +265,13 @@ def run_research(frame, config):
     evaluation = pd.concat([calibration_predictions, *assessment_predictions], ignore_index=True)
     evaluation["candidate"] = selected
     all_predictions = pd.concat([development, evaluation], ignore_index=True)
-    report = {
-        "selected_candidate": selected,
-        "selected_algorithm": model["config"]["algorithm"],
-        "selection_rule": "minimum pooled development_points RMSE, all raw masked targets; frozen before calibration and assessment",
-        "development": selection_metrics,
-        "elapsed_candidate_seconds": timings,
-        "scopes": {
-            f"{scope}/{candidate}": summarize(part)
-            for (scope, candidate), part in all_predictions.groupby(["scope", "candidate"])
-        },
-        "interval_assessment": {
-            scope: coverage(part, model["calibration"]) for scope, part in evaluation.groupby("scope")
-        },
-        "calibration": model["calibration"],
-        "split_hash": canonical_hash(plan),
-        "mask_hashes": mask_hashes,
-        "limitations": [
-            "Official test labels unavailable; no official RMSE",
-            "Previously inspected 8 holdout AOIs excluded entirely",
-            "Remaining AOIs previously appeared in baseline development; assessment is not newly blind data",
-            "Calibration points within AOI and repeated masks are dependent; empirical intervals have no unconditional guarantee",
-            "Benchmark has no geography; live regional transfer and agronomic causes remain unvalidated",
-        ],
-    }
-    rows = [
-        {"scope": scope, "candidate": candidate, **metrics(part.truth, part.reconstructed)}
-        for (scope, candidate), part in all_predictions.groupby(["scope", "candidate"])
-    ]
-    atomic_write(output / "predictions.csv", all_predictions.to_csv(index=False))
-    atomic_write(output / "metrics.csv", pd.DataFrame(rows).to_csv(index=False))
-    write_json(output / "report.json", report)
+    report = _write_results(
+        output,
+        all_predictions,
+        evaluation=evaluation,
+        calibration=model["calibration"],
+        **report_options,
+    )
     save_model(
         model,
         config["artifact_output"],

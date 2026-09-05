@@ -3,9 +3,9 @@ import json
 import numpy as np
 import pandas as pd
 import pytest
-from terralens_ml.candidates import residual_features
+from terralens_ml.candidates import local_shape_features, residual_features, training_masks
 from terralens_ml.io import DataError, mask_context
-from terralens_ml.model import fit, load_model, predict_submission, reconstruct, save_model
+from terralens_ml.model import checked_config, fit, load_model, predict_submission, reconstruct, save_model
 from terralens_ml.uncertainty import calibrate, coverage
 
 
@@ -26,10 +26,44 @@ def seasonal_series():
     )
 
 
-@pytest.mark.parametrize("algorithm", ["robust_smoother", "history_residual", "catboost_residual"])
-def test_candidates_ignore_hidden_values_and_other_fields(algorithm):
+@pytest.mark.parametrize(
+    "config",
+    [
+        {"boost_iterations": 0},
+        {"boost_iterations": True},
+        {"seed": -1},
+        {"seed": "42"},
+        {"max_gap_days": np.nan},
+        {"max_edge_days": None},
+        {"training_repeats": 11},
+        {"season_start_month": False},
+        {"smoothing_strength": "20"},
+    ],
+)
+def test_invalid_numeric_configuration_fails_before_training(config):
+    with pytest.raises(DataError):
+        checked_config(config)
+
+
+@pytest.mark.parametrize(
+    "config",
+    [
+        {"algorithm": "robust_smoother"},
+        {"algorithm": "history_residual"},
+        {"algorithm": "catboost_residual"},
+        {
+            "algorithm": "catboost_residual",
+            "local_features": True,
+            "training_repeats": 2,
+            "training_blocks": True,
+            "masked_training_priors": True,
+            "residual_base": "linear",
+        },
+    ],
+)
+def test_candidates_ignore_hidden_values_and_other_fields(config):
     frame = seasonal_series()
-    model = fit(frame.assign(anon_polygon_id="training"), {"algorithm": algorithm, "boost_iterations": 10})
+    model = fit(frame.assign(anon_polygon_id="training"), config | {"boost_iterations": 10})
     frame["is_synthetic_gap"] = np.arange(len(frame)) % 7 == 0
     expected = reconstruct(frame, model=model)
     changed = frame.copy()
@@ -44,6 +78,51 @@ def test_candidates_ignore_hidden_values_and_other_fields(algorithm):
     )
     visible = ~frame.is_synthetic_gap
     np.testing.assert_array_equal(expected.loc[visible, "reconstructed"], frame.loc[visible, "primary_ndvi"])
+
+
+def test_local_shape_uses_calendar_distances_and_keeps_absent_support_missing():
+    features = local_shape_features(np.array([1, 3, 7, 11, 21]), np.array([0.1, 0.2, np.nan, 0.6, 0.9]))
+    assert features["left_1_days"][2] == 4
+    assert features["right_1_days"][2] == 4
+    assert features["left_slope"][2] == pytest.approx(0.05)
+    assert features["right_slope"][2] == pytest.approx(0.03)
+    assert features["linear_estimate"][2] == pytest.approx(0.4)
+    assert features["window_14_count"][2] == 4
+    assert features["window_14_mean"][2] == pytest.approx(0.45)
+    empty = local_shape_features(np.array([1, 3]), np.array([np.nan, np.nan]))
+    assert np.isnan(empty["left_1_value"]).all()
+    assert np.isnan(empty["window_14_mean"]).all()
+    assert (empty["window_14_count"] == 0).all()
+
+
+def test_new_features_respect_noncalendar_season_and_input_order():
+    frame = seasonal_series().iloc[:5].copy()
+    frame["date"] = ["2023-09-29", "2023-09-30", "2023-10-01", "2023-10-02", "2023-10-04"]
+    frame["primary_ndvi"] = [0.1, np.nan, np.nan, np.nan, 0.7]
+    config = {"local_features": True, "season_start_month": 10}
+    model = fit(seasonal_series(), config)
+    features = residual_features(reconstruct(frame, model=model), model["config"])
+    assert np.isnan(features.loc[1, "right_1_value"])
+    assert np.isnan(features.loc[2, "left_1_value"])
+    assert features.loc[2, "right_1_days"] == 3
+    shuffled = frame.sample(frac=1, random_state=73)
+    expected = reconstruct(frame, model=model).sort_index()
+    pd.testing.assert_frame_equal(expected, reconstruct(shuffled, model=model).sort_index())
+
+
+def test_training_masks_repeat_deterministically_without_using_invalid_targets():
+    frame = seasonal_series()
+    frame.loc[::5, "primary_ndvi"] = np.nan
+    valid = frame.primary_ndvi.notna()
+    config = {"seed": 42, "training_repeats": 3, "training_blocks": True, "season_start_month": 10}
+    first = list(training_masks(frame, valid, config))
+    second = list(training_masks(frame, valid, config))
+    assert len(first) == 6
+    for mask, repeated in zip(first, second, strict=True):
+        assert mask.any()
+        assert not (mask & ~valid).any()
+        pd.testing.assert_series_equal(mask, repeated)
+    assert not first[0].equals(first[2])
 
 
 def test_weather_sensor_features_respect_masks_calendar_and_season():
