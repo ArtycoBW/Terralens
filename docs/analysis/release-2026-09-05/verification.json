@@ -243,5 +243,19 @@
     "browser_passed": 85,
     "browser_skipped": 1,
     "python_passed": 146
+  },
+  "clean_start": {
+    "fresh_git_checkout": true,
+    "fresh_postgis_and_artifact_volumes": true,
+    "docker_build": true,
+    "migration_and_model_registration": true,
+    "http_status": {
+      "ready": 200,
+      "frontend": 200,
+      "session": 200,
+      "models": 200
+    },
+    "active_model_id": "131aee618934151e",
+    "session_cookie_and_csrf": true
   }
 }
