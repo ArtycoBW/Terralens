@@ -1,4 +1,9 @@
-# Batch-результаты
+# Материалы для сдачи
+
+- [Презентация TerraLens](presentation/TerraLens-defense.pptx) — 15 слайдов, 12 основных и три дополнительных; редактируемые диаграммы и таблицы, заметки докладчика.
+- [Сценарий защиты и ответы](../docs/DEFENSE_GUIDE.md), [архитектура](../docs/ARCHITECTURE.md), [три реальных поля и графики](../docs/analysis/field-cases/REPORT.md).
+
+## Batch-результаты
 
 Оба результата получены моделью `131aee618934151e` из `ml/artifacts/final/manifest.json`. Каждый содержит только `anon_polygon_id,date,primary_ndvi_pred` и контрольные строки своего входа, в исходном порядке, без дублей. Рядом лежат manifests с SHA-256 входа, модели и результата.
 
@@ -16,4 +21,4 @@ uv run --frozen python -m terralens_ml predict --input test-dataset.csv --model 
 uv run --frozen python -m terralens_ml validate-submission --input test-dataset.csv --submission deliverables/submission.csv
 ```
 
-Для второго входа — [команды с исходным ZIP](../docs/CASE_AUDIT.md#3-отдельный-результат-для-test_featurescsv). Модель, исследовательские отчёты, frontend и инструкции запуска включены в репозиторий. Финальная презентация в комплекте не найдена.
+Для второго входа — [команды с исходным ZIP](../docs/CASE_AUDIT.md#3-отдельный-результат-для-test_featurescsv). Модель, исследовательские отчёты, frontend, презентация и инструкции запуска включены в репозиторий.

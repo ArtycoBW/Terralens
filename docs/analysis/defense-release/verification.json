@@ -1,0 +1,137 @@
+{
+  "verified_at": "2026-09-05T20:53:02.328934+00:00",
+  "python": {
+    "passed": 161,
+    "warnings": 32,
+    "seconds": 99.15
+  },
+  "frontend_unit": {
+    "passed": 21,
+    "files": 3
+  },
+  "browser": {
+    "total": 100,
+    "expected": 93,
+    "unexpected": 0,
+    "flaky": 0,
+    "skipped": 7,
+    "ok": true
+  },
+  "static_checks": {
+    "typescript": true,
+    "eslint": true,
+    "ruff": true,
+    "ruff_format": true
+  },
+  "production_images": {
+    "backend_built": true,
+    "frontend_built": true,
+    "deployed": true
+  },
+  "live_api": {
+    "period": {
+      "from": "2024-06-20",
+      "to": "2024-06-30"
+    },
+    "sources": [
+      "landsat",
+      "era5_land"
+    ],
+    "reference_years": 3,
+    "state": "partial",
+    "job_state": "succeeded",
+    "attempt": 1,
+    "summary": {
+      "total_days": 11,
+      "summary_rule": "event-max-else-two-clean-days-and-half-period-reference-v3",
+      "observed_days": 2,
+      "overall_status": "critical",
+      "latest_estimate": {
+        "date": "2024-06-30",
+        "value": 0.6699116271064991,
+        "origin": "observed"
+      },
+      "longest_gap_days": 7,
+      "unavailable_days": 0,
+      "reconstructed_days": 9,
+      "anomaly_period_count": 1,
+      "observed_coverage_ratio": 0.18181818181818182
+    },
+    "exports": {
+      "csv": {
+        "sha256": "ec33fa084e70d477884673c1d4bd3485fe9c9c83c668d3b130e3f7b574cf6432",
+        "manifest_downloaded": true,
+        "api_hash_verified": true
+      },
+      "geojson": {
+        "sha256": "7a372a2ef44e3f8fbdd0ad14a1daa6927a97f74382644bf51db49e7249fa00ba",
+        "manifest_downloaded": true,
+        "api_hash_verified": true
+      },
+      "json": {
+        "sha256": "f7be61d63ad110c8b9660d5dcbd1b489368bdc0ddf0e2d5dc40cfefd4728d1f6",
+        "manifest_downloaded": true,
+        "api_hash_verified": true
+      }
+    },
+    "latency": {
+      "requests": 40,
+      "concurrency": 4,
+      "p95_ms": 97.18062499305228,
+      "max_ms": 120.80190004780889,
+      "analysis_post_ms": 726.8995000049472,
+      "scope": "local HTTP smoke, warm small database; not a capacity benchmark"
+    }
+  },
+  "offline_field_replay": {
+    "network_disabled": true,
+    "model_id": "131aee618934151e",
+    "fields": [
+      {
+        "field": "potsdam",
+        "daily_equal": true,
+        "events_equal": true,
+        "summary_equal": true,
+        "metrics_recomputed": true,
+        "observed_days": 15
+      },
+      {
+        "field": "seville",
+        "daily_equal": true,
+        "events_equal": true,
+        "summary_equal": true,
+        "metrics_recomputed": true,
+        "observed_days": 11
+      },
+      {
+        "field": "voronezh",
+        "daily_equal": true,
+        "events_equal": true,
+        "summary_equal": true,
+        "metrics_recomputed": true,
+        "observed_days": 14
+      }
+    ]
+  },
+  "presentation": {
+    "path": "deliverables/presentation/TerraLens-defense.pptx",
+    "sha256": "e9f45ac2d3d0ddc0195256c47551d495073042ea893938ed5d523c5ac72c50b6",
+    "slides": 15,
+    "native_tables": 5,
+    "native_charts": 3,
+    "notes_slides": 15,
+    "package_pass": true,
+    "layout_findings": 0,
+    "portable_charts_pass": true,
+    "final_import_pass": true,
+    "all_slides_visually_reviewed": true,
+    "native_powerpoint_opened": false
+  },
+  "frozen_artifacts": {
+    "ml/artifacts/final/model.json": "eda7a82a6bdc10abe50e64c03b2b449348e48e24660925de3610320b0c57167e",
+    "ml/artifacts/final/manifest.json": "44ab0740659cd872f488ad881ace01594cd4c9b7b6acbd045bd4fe46b9f2924f",
+    "deliverables/submission.csv": "0fd8aebc5297d2e57d9244ca71e401660ac309d4cc2a1a0b2d595963530c02e1",
+    "deliverables/submission-test-features.csv": "1fabb4ed5df3b8ed404e218de0e69b5ebeb38240ce0ea65c88a3bade4dfdc497"
+  },
+  "training_performed": false
+}

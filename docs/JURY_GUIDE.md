@@ -88,3 +88,6 @@ uv run --frozen python scripts/api_smoke.py --reference-years 3 --output artifac
 | Что было проверено сейчас? | [Verification](VERIFICATION.md), GitHub Actions |
 | Какие источники реально проверялись? | [Live validation](analysis/live-validation/REPORT.md) |
 | Какие лицензии и материалы использованы? | [Атрибуция](ATTRIBUTION.md) |
+| Где материалы для защиты? | [Презентация, 15 слайдов](../deliverables/presentation/TerraLens-defense.pptx), [сценарий и ответы](DEFENSE_GUIDE.md) |
+| Есть ли реальные примеры из России и измеренная точность? | [Три поля, негативный период и все сравнения с M0](analysis/field-cases/REPORT.md); смешанные результаты, без заявления всемирной точности |
+| Можно ли проверить полевые результаты без сети? | [Воспроизведение рядов, событий и метрик](analysis/field-cases/REPORT.md#воспроизведение) |
