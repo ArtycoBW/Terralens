@@ -9,6 +9,15 @@ export default defineConfig({
   use: {
     baseURL: process.env.E2E_BASE_URL || "http://localhost:3001",
     channel: process.env.CI ? undefined : "chrome",
+    launchOptions: process.env.CI
+      ? {
+          args: [
+            "--use-gl=angle",
+            "--use-angle=swiftshader",
+            "--enable-unsafe-swiftshader",
+          ],
+        }
+      : undefined,
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
     reducedMotion: "reduce",

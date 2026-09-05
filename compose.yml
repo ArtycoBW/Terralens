@@ -101,6 +101,17 @@ services:
     volumes: [".:/data"]
     entrypoint: ["python", "-m", "terralens_ml"]
     command: ["--help"]
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        API_INTERNAL_URL: http://backend:8000
+    image: terralens-frontend:local
+    ports: ["127.0.0.1:${FRONTEND_PORT:-3001}:3000"]
+    depends_on:
+      backend: {condition: service_healthy}
+    restart: unless-stopped
+
 volumes:
   postgres-data:
   artifacts-data:
