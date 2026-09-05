@@ -1,0 +1,422 @@
+{
+  "inputs": {
+    "baseline": {
+      "path": "artifacts/crop-dynamics/predictions.csv",
+      "candidate": "current",
+      "sha256": "2310c0a8906dff027491a7d24af69dc16cec66b17145eb3462f3019c11b5ec8e"
+    },
+    "candidate": {
+      "path": "artifacts/crop-dynamics/predictions.csv",
+      "candidate": "dynamics",
+      "sha256": "2310c0a8906dff027491a7d24af69dc16cec66b17145eb3462f3019c11b5ec8e"
+    }
+  },
+  "allowed_scopes": [
+    "development_points",
+    "development_blocks"
+  ],
+  "comparison_keys": [
+    "scope",
+    "fold",
+    "mask_seed",
+    "anon_polygon_id",
+    "date"
+  ],
+  "matched_rows": 8912,
+  "truth_and_gap_days_identical": true,
+  "routing_rule": null,
+  "selection": "No fitting, threshold search, weight search or model selection performed",
+  "scopes": {
+    "development_blocks": {
+      "metrics": {
+        "baseline": {
+          "n": 4430,
+          "rmse": 0.09537379368484204,
+          "mae": 0.06891159864358598,
+          "bias": -0.010185235643859838,
+          "p95_absolute_error": 0.2003319784556966
+        },
+        "candidate": {
+          "n": 4430,
+          "rmse": 0.09417293020870814,
+          "mae": 0.06807186702239752,
+          "bias": -0.010160939663662674,
+          "p95_absolute_error": 0.202746685044965
+        }
+      },
+      "comparisons": {
+        "candidate_vs_baseline": {
+          "aoi_n": 21,
+          "repetitions": 3000,
+          "seed": 42,
+          "gain_rmse_95_aoi_bootstrap": [
+            0.00019675387922582187,
+            0.0020639670330068515
+          ],
+          "bootstrap_fraction_gain_positive": 0.9893333333333333,
+          "gain_rmse": 0.0012008634761339065,
+          "relative_rmse_reduction": 0.012591126238535715
+        }
+      }
+    },
+    "development_points": {
+      "metrics": {
+        "baseline": {
+          "n": 4482,
+          "rmse": 0.0692072111249384,
+          "mae": 0.04828239729895505,
+          "bias": -0.0003313012046771457,
+          "p95_absolute_error": 0.1401618099019889
+        },
+        "candidate": {
+          "n": 4482,
+          "rmse": 0.06826028078943545,
+          "mae": 0.047690948752884536,
+          "bias": -0.0005134610784594533,
+          "p95_absolute_error": 0.13646358228663583
+        }
+      },
+      "comparisons": {
+        "candidate_vs_baseline": {
+          "aoi_n": 21,
+          "repetitions": 3000,
+          "seed": 42,
+          "gain_rmse_95_aoi_bootstrap": [
+            0.0006491738934658646,
+            0.001260519843136246
+          ],
+          "bootstrap_fraction_gain_positive": 1.0,
+          "gain_rmse": 0.0009469303355029435,
+          "relative_rmse_reduction": 0.013682538569477522
+        }
+      }
+    }
+  },
+  "folds": {
+    "0": {
+      "aoi_ids": [
+        "AOI-0003",
+        "AOI-0023",
+        "AOI-0038",
+        "AOI-0075"
+      ],
+      "scopes": {
+        "development_blocks": {
+          "baseline": {
+            "n": 925,
+            "rmse": 0.08988472563845673,
+            "mae": 0.06752007454738682,
+            "bias": -0.0001071502273399932,
+            "p95_absolute_error": 0.19201806391729834
+          },
+          "candidate": {
+            "n": 925,
+            "rmse": 0.08906945924874476,
+            "mae": 0.06632871729150489,
+            "bias": 3.792537374640893e-05,
+            "p95_absolute_error": 0.188682642917064
+          }
+        },
+        "development_points": {
+          "baseline": {
+            "n": 922,
+            "rmse": 0.06884090688850669,
+            "mae": 0.049693093535042164,
+            "bias": -0.00043684707930533734,
+            "p95_absolute_error": 0.14074715320926218
+          },
+          "candidate": {
+            "n": 922,
+            "rmse": 0.06736597928881699,
+            "mae": 0.04864688422069531,
+            "bias": -0.0003398457964517145,
+            "p95_absolute_error": 0.1367076710899732
+          }
+        }
+      }
+    },
+    "1": {
+      "aoi_ids": [
+        "AOI-0002",
+        "AOI-0021",
+        "AOI-0037",
+        "AOI-0064"
+      ],
+      "scopes": {
+        "development_blocks": {
+          "baseline": {
+            "n": 843,
+            "rmse": 0.09685524846458361,
+            "mae": 0.07077814531458892,
+            "bias": -0.007641642685050736,
+            "p95_absolute_error": 0.21334558409397084
+          },
+          "candidate": {
+            "n": 843,
+            "rmse": 0.09547004379040012,
+            "mae": 0.0696580611897377,
+            "bias": -0.009394878698924435,
+            "p95_absolute_error": 0.20804823190693028
+          }
+        },
+        "development_points": {
+          "baseline": {
+            "n": 886,
+            "rmse": 0.07257657581733039,
+            "mae": 0.04862024025713823,
+            "bias": 0.0010412188994798628,
+            "p95_absolute_error": 0.14940893413488038
+          },
+          "candidate": {
+            "n": 886,
+            "rmse": 0.07113383111253029,
+            "mae": 0.04785057247169313,
+            "bias": 0.001311922070248962,
+            "p95_absolute_error": 0.1448397327395804
+          }
+        }
+      }
+    },
+    "2": {
+      "aoi_ids": [
+        "AOI-0015",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0053"
+      ],
+      "scopes": {
+        "development_blocks": {
+          "baseline": {
+            "n": 941,
+            "rmse": 0.09568822002809793,
+            "mae": 0.06619643783186152,
+            "bias": -0.012450074703672225,
+            "p95_absolute_error": 0.21083533285888129
+          },
+          "candidate": {
+            "n": 941,
+            "rmse": 0.09464886337777245,
+            "mae": 0.06589487248297796,
+            "bias": -0.011363387138365738,
+            "p95_absolute_error": 0.2116011519763757
+          }
+        },
+        "development_points": {
+          "baseline": {
+            "n": 942,
+            "rmse": 0.06819287918851473,
+            "mae": 0.04551535434467884,
+            "bias": 0.0037325931057155455,
+            "p95_absolute_error": 0.13211704049688935
+          },
+          "candidate": {
+            "n": 942,
+            "rmse": 0.06761052798031367,
+            "mae": 0.04492339878064425,
+            "bias": 0.004113551427924931,
+            "p95_absolute_error": 0.13074293926989083
+          }
+        }
+      }
+    },
+    "3": {
+      "aoi_ids": [
+        "AOI-0007",
+        "AOI-0030",
+        "AOI-0041",
+        "AOI-0045"
+      ],
+      "scopes": {
+        "development_blocks": {
+          "baseline": {
+            "n": 783,
+            "rmse": 0.09890528603331522,
+            "mae": 0.0687365223654449,
+            "bias": -0.018714016867894936,
+            "p95_absolute_error": 0.1981407986515479
+          },
+          "candidate": {
+            "n": 783,
+            "rmse": 0.09717130293771938,
+            "mae": 0.06814261468784434,
+            "bias": -0.0182106231914612,
+            "p95_absolute_error": 0.20283707696231762
+          }
+        },
+        "development_points": {
+          "baseline": {
+            "n": 804,
+            "rmse": 0.06224228543415674,
+            "mae": 0.04528820320592734,
+            "bias": -0.002795702245700085,
+            "p95_absolute_error": 0.12500675632880162
+          },
+          "candidate": {
+            "n": 804,
+            "rmse": 0.061866273081097975,
+            "mae": 0.044989198500146786,
+            "bias": -0.003840385378033322,
+            "p95_absolute_error": 0.12781528030435738
+          }
+        }
+      }
+    },
+    "4": {
+      "aoi_ids": [
+        "AOI-0004",
+        "AOI-0026",
+        "AOI-0043",
+        "AOI-0050",
+        "AOI-0071"
+      ],
+      "scopes": {
+        "development_blocks": {
+          "baseline": {
+            "n": 938,
+            "rmse": 0.09596894817052763,
+            "mae": 0.07147632358489289,
+            "bias": -0.013018101977392888,
+            "p95_absolute_error": 0.19419321631996111
+          },
+          "candidate": {
+            "n": 938,
+            "rmse": 0.09487152707187406,
+            "mae": 0.07049021271275666,
+            "bias": -0.012981125459948287,
+            "p95_absolute_error": 0.19710964312692122
+          }
+        },
+        "development_points": {
+          "baseline": {
+            "n": 928,
+            "rmse": 0.07292771584316321,
+            "mae": 0.0519611642419506,
+            "bias": -0.0035269364625256246,
+            "p95_absolute_error": 0.1529862310451438
+          },
+          "candidate": {
+            "n": 928,
+            "rmse": 0.07216656523700267,
+            "mae": 0.05173883685726557,
+            "bias": -0.004243160867170113,
+            "p95_absolute_error": 0.14378403753940033
+          }
+        }
+      }
+    }
+  },
+  "gap_slices": {
+    "development_blocks/0-8": {
+      "baseline": {
+        "n": 176,
+        "rmse": 0.08110816878733323,
+        "mae": 0.0527621334995392,
+        "bias": -0.011512218853133449,
+        "p95_absolute_error": 0.16739817857894196
+      },
+      "candidate": {
+        "n": 176,
+        "rmse": 0.08213655464373537,
+        "mae": 0.053392348787258445,
+        "bias": -0.011028483573295056,
+        "p95_absolute_error": 0.17009632083068327
+      }
+    },
+    "development_blocks/9-30": {
+      "baseline": {
+        "n": 935,
+        "rmse": 0.07318515320144861,
+        "mae": 0.052657167038790774,
+        "bias": 0.004976933476272591,
+        "p95_absolute_error": 0.1563069906706455
+      },
+      "candidate": {
+        "n": 935,
+        "rmse": 0.07201776011370706,
+        "mae": 0.05186418717737373,
+        "bias": 0.003918724064143423,
+        "p95_absolute_error": 0.14965320032984641
+      }
+    },
+    "development_blocks/31-60": {
+      "baseline": {
+        "n": 2003,
+        "rmse": 0.09220088694515668,
+        "mae": 0.06813586139282878,
+        "bias": -0.009203218391666372,
+        "p95_absolute_error": 0.19228392326405097
+      },
+      "candidate": {
+        "n": 2003,
+        "rmse": 0.09133391925805513,
+        "mae": 0.06732760783077689,
+        "bias": -0.008622065741014637,
+        "p95_absolute_error": 0.19208634436462071
+      }
+    },
+    "development_blocks/>60": {
+      "baseline": {
+        "n": 1316,
+        "rmse": 0.11400000169793363,
+        "mae": 0.08380065725232644,
+        "bias": -0.022274946615467122,
+        "p95_absolute_error": 0.23634576368627266
+      },
+      "candidate": {
+        "n": 1316,
+        "rmse": 0.11211574055681903,
+        "mae": 0.08268320974678799,
+        "bias": -0.022390546293197183,
+        "p95_absolute_error": 0.23498720569627146
+      }
+    },
+    "development_points/0-8": {
+      "baseline": {
+        "n": 2786,
+        "rmse": 0.0660628303564353,
+        "mae": 0.045251515744541705,
+        "bias": -0.0015502892449001826,
+        "p95_absolute_error": 0.13428627585355798
+      },
+      "candidate": {
+        "n": 2786,
+        "rmse": 0.06526396637214188,
+        "mae": 0.044793993266125876,
+        "bias": -0.0012777343256354806,
+        "p95_absolute_error": 0.13089835076904735
+      }
+    },
+    "development_points/9-30": {
+      "baseline": {
+        "n": 1637,
+        "rmse": 0.07375934981759384,
+        "mae": 0.053123841877881293,
+        "bias": 0.0014211730039970668,
+        "p95_absolute_error": 0.14559578632636
+      },
+      "candidate": {
+        "n": 1637,
+        "rmse": 0.07271821710950152,
+        "mae": 0.05235070284635861,
+        "bias": 0.0006277164074071466,
+        "p95_absolute_error": 0.14128523445948576
+      }
+    },
+    "development_points/31-60": {
+      "baseline": {
+        "n": 59,
+        "rmse": 0.08256705654183248,
+        "mae": 0.05707207924629976,
+        "bias": 0.00860599371840244,
+        "p95_absolute_error": 0.16805790608389973
+      },
+      "candidate": {
+        "n": 59,
+        "rmse": 0.07819169658328541,
+        "mae": 0.05519773748326765,
+        "bias": 0.003912940993892871,
+        "p95_absolute_error": 0.1706872543101651
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "checked_at": "2026-09-05T12:22:47.357048+00:00",
+  "model_id": "131aee618934151e",
+  "model_manifest_sha256": "44ab0740659cd872f488ad881ace01594cd4c9b7b6acbd045bd4fe46b9f2924f",
+  "schema_version": 3,
+  "source_sha256_matches_runtime": true,
+  "source_sha256": "fc911010fab39e6c2d92eb27a6c10407414302c394a747f7d4942755f7141640",
+  "pytest_passed": 139,
+  "warnings": 31,
+  "warning_source": "rasterio/affine pending deprecations",
+  "docker_active_model_id": "131aee618934151e",
+  "readiness": {
+    "status": "ready",
+    "checks": {
+      "database": true,
+      "queue": true,
+      "model": true
+    }
+  },
+  "standalone_network_disabled": true,
+  "submission_rows": 3112,
+  "linux_macos_standalone_sha256": "0fd8aebc5297d2e57d9244ca71e401660ac309d4cc2a1a0b2d595963530c02e1",
+  "frontend_benchmark_all_points_verified": true,
+  "baseline_predictions_unchanged": true
+}

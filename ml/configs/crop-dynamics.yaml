@@ -1,0 +1,39 @@
+input: train-dataset.zip
+output: artifacts/crop-dynamics
+artifact_output: artifacts/crop-dynamics/model
+prior_split: docs/analysis/baseline/split_manifest.json
+seed: 42
+folds: 5
+mask_seeds: [42, 137]
+mask_fraction: 0.15
+calibration_fields: 5
+assessment_fields: 5
+calibration_level: 0.9
+max_gap_days: 60
+max_edge_days: 14
+season_start_month: 1
+selection_baseline: current
+assessment_status: Previously inspected assessment and temporal scopes; reused diagnostics only, never used to select these candidates
+candidates:
+  current: &current
+    algorithm: catboost_residual
+    use_weather: false
+    local_features: true
+    masked_training_priors: true
+    boost_iterations: 400
+    training_repeats: 5
+    training_blocks: true
+    cover_training_targets: true
+    context_quality: true
+    boost_depth: 5
+    ensemble_seeds: [42, 107, 211]
+  crop:
+    <<: *current
+    crop_features: true
+  dynamics:
+    <<: *current
+    sensor_dynamics: true
+  combined:
+    <<: *current
+    crop_features: true
+    sensor_dynamics: true

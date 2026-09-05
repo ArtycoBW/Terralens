@@ -79,11 +79,15 @@ def checked_config(config=None):
         "masked_training_priors",
         "cover_training_targets",
         "context_quality",
+        "crop_features",
+        "sensor_dynamics",
     ]:
         if name in result and not isinstance(result[name], bool):
             raise DataError(f"{name} должен быть boolean")
     if result.get("cover_training_targets") and result.get("training_repeats", 1) < 5:
         raise DataError("Для покрытия обучающих целей требуется не менее пяти повторений")
+    if result.get("sensor_dynamics") and not result["use_sensors"]:
+        raise DataError("sensor_dynamics требует use_sensors")
     l2 = result.get("boost_l2", 10)
     if isinstance(l2, bool) or not isinstance(l2, (int, float)) or not np.isfinite(l2) or l2 < 0:
         raise DataError("boost_l2 должен быть неотрицательным конечным числом")
@@ -118,10 +122,14 @@ def fit(training_context: pd.DataFrame, config=None) -> dict:
     if frame.empty:
         raise DataError("В train нет пригодных известных целей для обучения prior")
     frame["month"] = pd.to_datetime(frame.date).dt.month
+    version = 1
+    if config["algorithm"] == "catboost_residual":
+        if config.get("ensemble_seeds"):
+            version = 2
+        if config.get("crop_features") or config.get("sensor_dynamics"):
+            version = 3
     model = {
-        "schema_version": 2
-        if config["algorithm"] == "catboost_residual" and config.get("ensemble_seeds")
-        else 1,
+        "schema_version": version,
         "config": config,
         "global_median": float(frame.primary_ndvi.median()),
         "monthly": {str(k): float(v) for k, v in frame.groupby("month").primary_ndvi.median().items()},
@@ -224,7 +232,9 @@ def load_model(manifest_path):
     manifest_path = Path(manifest_path)
     try:
         manifest = json.loads(manifest_path.read_text())
-        if manifest.get("schema_version") not in [1, 2] or set(manifest.get("files", {})) != {"model.json"}:
+        if manifest.get("schema_version") not in [1, 2, 3] or set(manifest.get("files", {})) != {
+            "model.json"
+        }:
             raise DataError("Несовместимая схема артефакта модели")
         path = manifest_path.parent / "model.json"
         if path.is_symlink() or sha256(path) != manifest["files"]["model.json"]:
@@ -246,8 +256,14 @@ def load_model(manifest_path):
             if model["config"]["algorithm"] == "catboost_residual"
             else 0
         )
-        if expected_members and model["schema_version"] != 2:
-            raise DataError("Для ансамбля требуется версия артефакта 2")
+        if expected_members and model["schema_version"] < 2:
+            raise DataError("Для ансамбля требуется версия артефакта 2 или новее")
+        if (
+            model["config"]["algorithm"] == "catboost_residual"
+            and (model["config"].get("crop_features") or model["config"].get("sensor_dynamics"))
+            and model["schema_version"] < 3
+        ):
+            raise DataError("Для признаков культуры и динамики требуется версия артефакта 3")
         if (
             not isinstance(members, list)
             or len(members) != expected_members

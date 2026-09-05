@@ -1,0 +1,11 @@
+{
+  "started_at": "2026-09-05T11:57:58.649892+00:00",
+  "base_git_revision": "74d458e3789fd3a8bb41d1980b67e7e685050c7f",
+  "baseline_manifest_sha256": "204a0fb37dae6c83e9660fbc56c73a8283ffbeb66ed13171bcf15ce1c6f5716a",
+  "baseline_model_id": "50efa0dd0ff8d2d7",
+  "config_sha256": "a990fd43151b895c8b0c60cd03f4a45f27bda2b6ac09f742ad5945a18c25e85a",
+  "protocol_sha256": "4a2fa56384982a1454e338b0556550ba23871046e758ae229b460ac18133e23c",
+  "source_sha256": "fc911010fab39e6c2d92eb27a6c10407414302c394a747f7d4942755f7141640",
+  "input_sha256": "08e4f724f616459c944050aa25c1a46d16055501c785faeda74edd907c665fc6",
+  "development_only": true
+}

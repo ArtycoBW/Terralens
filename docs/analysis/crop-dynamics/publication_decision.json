@@ -1,0 +1,39 @@
+{
+  "accepted": true,
+  "selected": "dynamics",
+  "criteria": {
+    "point_relative_gain_at_least_1pct": true,
+    "no_block_regression": true,
+    "point_improved_folds_at_least4": true,
+    "point_bootstrap_lower_bound_positive": true
+  },
+  "point_improved_folds": 5,
+  "point_comparison": {
+    "aoi_n": 21,
+    "repetitions": 3000,
+    "seed": 42,
+    "gain_rmse_95_aoi_bootstrap": [
+      0.0006491738934658646,
+      0.001260519843136246
+    ],
+    "bootstrap_fraction_gain_positive": 1.0,
+    "gain_rmse": 0.0009469303355029435,
+    "relative_rmse_reduction": 0.013682538569477522
+  },
+  "block_comparison": {
+    "aoi_n": 21,
+    "repetitions": 3000,
+    "seed": 42,
+    "gain_rmse_95_aoi_bootstrap": [
+      0.00019675387922582187,
+      0.0020639670330068515
+    ],
+    "bootstrap_fraction_gain_positive": 0.9893333333333333,
+    "gain_rmse": 0.0012008634761339065,
+    "relative_rmse_reduction": 0.012591126238535715
+  },
+  "baseline_predictions_unchanged": true,
+  "assessment_used_for_selection": false,
+  "development_predictions_sha256": "2310c0a8906dff027491a7d24af69dc16cec66b17145eb3462f3019c11b5ec8e",
+  "development_report_sha256": "31e2f42ae365c4896ee9ff55606040b85773a34f939ccd6959720c89860be5d4"
+}
