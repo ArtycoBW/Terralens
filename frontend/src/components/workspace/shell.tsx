@@ -66,7 +66,12 @@ function Navigation({ mobile = false }: { mobile?: boolean }) {
           href={href}
           label={title}
           icon={<Icon size={21} stroke={1.6} />}
-          active={href === "/app" ? path === href : path.startsWith(href)}
+          active={
+            href === "/app"
+              ? path === href
+              : path.startsWith(href) ||
+                (href === "/app/polygons" && path.startsWith("/app/analyses/"))
+          }
           mobile={mobile}
         />
       ))}
@@ -78,7 +83,9 @@ function WorkspaceChrome({ children }: { children: React.ReactNode }) {
   const { open } = useSidebar();
   const { session } = useWorkspace();
   const current =
-    nav.find(([href]) => href !== "/app" && path.startsWith(href))?.[1] ||
+    (path.startsWith("/app/analyses/")
+      ? "Анализ"
+      : nav.find(([href]) => href !== "/app" && path.startsWith(href))?.[1]) ||
     "Карта";
   const brand = (
     <Link
