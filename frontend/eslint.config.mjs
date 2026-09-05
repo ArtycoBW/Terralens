@@ -10,7 +10,7 @@ export default defineConfig([
     "playwright-report/**",
     "test-results/**",
     "src/lib/api-schema.ts",
-    "src/components/landing/planet.js",
     "public/**",
+    "src/components/landing/planet.js",
   ]),
 ]);

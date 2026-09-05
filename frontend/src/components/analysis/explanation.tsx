@@ -15,7 +15,7 @@ export function Explanation({ value }: { value: unknown }) {
   const data = value as Record<string, unknown>;
   return (
     <div className="explanation">
-      <p className="small mt-3">
+      <p className="text-sm leading-relaxed mt-3">
         {typeof data.summary === "string" ? data.summary : ""}
       </p>
       {[
@@ -27,8 +27,10 @@ export function Explanation({ value }: { value: unknown }) {
         ([key, title]) =>
           Array.isArray(data[key]) && (
             <div className="mt-3" key={key}>
-              <h4 className="micro uppercase text-primary">{title}</h4>
-              <ul className="explanation-list">
+              <h4 className="text-xs leading-relaxed uppercase text-primary">
+                {title}
+              </h4>
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground">
                 {(data[key] as unknown[])
                   .filter((v) => typeof v === "string")
                   .map((v, i) => (

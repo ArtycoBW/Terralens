@@ -1,14 +1,17 @@
 import type { Point, Anomaly } from "./api";
 export const chartBase = {
   backgroundColor: "transparent",
-  textStyle: { color: "#a5b6cf", fontFamily: "Arial" },
+  textStyle: {
+    color: "#a6a69a",
+    fontFamily: "Golos Text Variable, sans-serif",
+  },
   tooltip: {
     trigger: "axis",
-    backgroundColor: "#101e30",
-    borderColor: "#3a4f68",
-    textStyle: { color: "#f3f6ff" },
+    backgroundColor: "#25271e",
+    borderColor: "#5d6054",
+    textStyle: { color: "#f4f3e8" },
   },
-  legend: { textStyle: { color: "#a5b6cf" }, top: 0 },
+  legend: { textStyle: { color: "#a6a69a" }, top: 0 },
   grid: { left: 48, right: 30, top: 65, bottom: 65 },
   dataZoom: [
     { type: "inside" },
@@ -16,8 +19,8 @@ export const chartBase = {
       type: "slider",
       height: 18,
       bottom: 15,
-      borderColor: "#2a3b51",
-      textStyle: { color: "#99acc7" },
+      borderColor: "#404139",
+      textStyle: { color: "#a6a69a" },
     },
   ],
   aria: {
@@ -29,14 +32,14 @@ export const chartBase = {
   },
   yAxis: {
     type: "value",
-    splitLine: { lineStyle: { color: "#213148" } },
-    axisLabel: { color: "#93a9c6" },
+    splitLine: { lineStyle: { color: "#35382c" } },
+    axisLabel: { color: "#a6a69a" },
   },
   xAxis: {
     type: "category",
     boundaryGap: false,
-    axisLabel: { color: "#93a9c6" },
-    axisLine: { lineStyle: { color: "#304259" } },
+    axisLabel: { color: "#a6a69a" },
+    axisLine: { lineStyle: { color: "#404139" } },
   },
 };
 export function ndviOption(
@@ -67,8 +70,8 @@ export function ndviOption(
         data: values((p) => p.reconstructed),
         showSymbol: false,
         connectNulls: false,
-        lineStyle: { color: "#5df0a8", width: 2, type: "dashed" },
-        itemStyle: { color: "#5df0a8" },
+        lineStyle: { color: "#d5e78b", width: 2, type: "dashed" },
+        itemStyle: { color: "#d5e78b" },
         markArea: {
           silent: true,
           data: anomalies.map((a) => [
@@ -87,22 +90,22 @@ export function ndviOption(
         type: "scatter",
         data: values((p) => p.clean_primary),
         symbolSize: 6,
-        itemStyle: { color: "#5df0a8" },
+        itemStyle: { color: "#d5e78b" },
       },
       {
         name: "Исходный NDVI",
         type: "scatter",
         data: values((p) => p.observed_primary),
         symbolSize: 4,
-        itemStyle: { color: "#c2cddb" },
+        itemStyle: { color: "#deddd0" },
       },
       {
         name: "Сезонная норма",
         type: "line",
         data: values((p) => p.climatology_mean),
         showSymbol: false,
-        lineStyle: { color: "#93a9c6", type: "dotted" },
-        itemStyle: { color: "#93a9c6" },
+        lineStyle: { color: "#a6a69a", type: "dotted" },
+        itemStyle: { color: "#a6a69a" },
       },
       {
         name: "Нижняя граница нормы (±σ)",

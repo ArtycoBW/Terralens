@@ -23,6 +23,7 @@ const evidence = {
 page.on("pageerror", (error) => evidence.errors.push(error.message));
 try {
   await page.goto(`${base}/app`);
+  await page.getByRole("tab", { name: "Создать", exact: true }).click();
   await page
     .getByRole("textbox", { name: "Название", exact: true })
     .fill("Севилья · сквозная проверка");
@@ -34,9 +35,16 @@ try {
     .getByRole("button", { name: "Сохранить поле", exact: true })
     .click();
   await page.getByRole("link", { name: "Открыть анализ" }).click();
-  await page.getByLabel("Начало периода").fill("2024-06-01");
-  await page.getByLabel("Конец периода").fill("2024-06-10");
-  await page.getByLabel("Предыдущих сезонов для нормы").selectOption("0");
+  await page
+    .getByRole("textbox", { name: "Начало периода", exact: true })
+    .fill("2024-06-01");
+  await page
+    .getByRole("textbox", { name: "Конец периода", exact: true })
+    .fill("2024-06-10");
+  await page
+    .getByRole("combobox", { name: "Предыдущих сезонов для нормы" })
+    .click();
+  await page.getByRole("option", { name: /Без сезонной нормы/ }).click();
   await page
     .getByRole("button", { name: /Запустить спутниковый анализ/ })
     .click();
@@ -70,7 +78,10 @@ try {
   });
   for (const format of ["csv", "geojson", "json"]) {
     await page.getByRole("tab", { name: "Экспорт", exact: true }).click();
-    await page.getByLabel("Формат", { exact: true }).selectOption(format);
+    await page.getByRole("combobox", { name: "Формат", exact: true }).click();
+    await page
+      .getByRole("option", { name: new RegExp(`^${format} ·`, "i") })
+      .click();
     const request = page.waitForResponse(
       (r) =>
         r.url().endsWith("/api/v1/exports") && r.request().method() === "POST",

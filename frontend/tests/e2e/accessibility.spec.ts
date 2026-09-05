@@ -51,17 +51,19 @@ test("лендинг работает без JavaScript", async ({ browser, base
     "Состояние полей",
   );
   await expect(
-    page.getByRole("link", { name: "Исследовать поле" }),
+    page.getByRole("link", { name: "Исследовать поле" }).first(),
   ).toHaveAttribute("href", "/app");
   await context.close();
 });
 test("выход доступен и отменяем на любом экране", async ({ page }) => {
   await mockApi(page);
   await page.goto("/app/polygons");
-  page.once("dialog", (dialog) => dialog.dismiss());
   await page
     .getByRole("button", { name: "Завершить сессию", exact: true })
     .filter({ visible: true })
     .click();
+  await expect(page.getByRole("alertdialog")).toBeVisible();
+  await page.getByRole("button", { name: "Отмена", exact: true }).click();
+  await expect(page.getByRole("alertdialog")).not.toBeVisible();
   await expect(page.getByRole("link", { name: /Тестовое поле/ })).toBeVisible();
 });

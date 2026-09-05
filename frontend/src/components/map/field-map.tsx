@@ -70,8 +70,8 @@ export function FieldMap({
               type: "raster",
               source: "osm",
               paint: {
-                "raster-saturation": -0.75,
-                "raster-brightness-max": 0.62,
+                "raster-saturation": -0.45,
+                "raster-brightness-max": 0.9,
               },
             },
           ],
@@ -106,7 +106,7 @@ export function FieldMap({
         type: "fill",
         source: "fields",
         paint: {
-          "fill-color": ["case", ["get", "candidate"], "#dcb969", "#5df0a8"],
+          "fill-color": ["case", ["get", "candidate"], "#dcb969", "#d5e78b"],
           "fill-opacity": 0.2,
         },
       });
@@ -115,7 +115,7 @@ export function FieldMap({
         type: "line",
         source: "fields",
         paint: {
-          "line-color": ["case", ["get", "candidate"], "#dcb969", "#5df0a8"],
+          "line-color": ["case", ["get", "candidate"], "#dcb969", "#d5e78b"],
           "line-width": 2,
         },
       });
@@ -198,8 +198,11 @@ export function FieldMap({
       const id = e.features?.[0]?.properties?.id;
       if (id) callbacks.current.onSelect(String(id));
     });
+    const resizing = new ResizeObserver(() => map.resize());
+    if (container.current) resizing.observe(container.current);
     return () => {
       drawRef.current?.stop();
+      resizing.disconnect();
       drawRef.current = null;
       map.remove();
       mapRef.current = null;
@@ -255,14 +258,15 @@ export function FieldMap({
       );
   }, [focus, ready]);
   return (
-    <div className="map-wrap">
+    <div className="map-wrap relative h-[65dvh] min-h-[430px] overflow-hidden rounded-2xl border border-border/70 bg-secondary min-[801px]:h-[calc(100dvh-185px)] [&_.maplibregl-ctrl-attrib_a]:underline!">
       <div
         ref={container}
-        className="map-canvas"
+        data-map-canvas
+        className="absolute! inset-0! h-full! w-full!"
         role="region"
         aria-label="Карта полей"
       />
-      <div className="map-tools">
+      <div className="absolute top-4 right-14 left-4 flex flex-wrap items-start gap-2">
         <Button
           disabled={!ready}
           onClick={() => {
@@ -291,7 +295,7 @@ export function FieldMap({
           </Button>
         )}
         {drawing && (
-          <span className="map-hint">
+          <span className="max-w-[260px] rounded-md border border-border bg-card/95 p-3 text-xs leading-relaxed">
             Добавляйте вершины кликом. Нажмите первую точку, чтобы замкнуть
             контур. Enter — завершить, Esc — сбросить, Ctrl+Z — отменить
             вершину.
@@ -299,17 +303,20 @@ export function FieldMap({
         )}
       </div>
       {error && (
-        <div className="map-error" role="status">
+        <div
+          className="absolute top-20 left-4 max-w-[260px] rounded-md border border-warning/30 bg-card/95 p-3 text-xs leading-relaxed text-warning"
+          role="status"
+        >
           {error}
         </div>
       )}
-      <div className="map-legend">
+      <div className="map-legend absolute right-4 bottom-8 flex gap-4 rounded-md border border-border bg-card/95 px-3 py-2 text-xs [&_i]:mr-1.5 [&_i]:inline-block [&_i]:size-2 [&_i]:border [&_i]:border-primary [&_i]:bg-primary/20">
         <span>
           <i />
           Ваши поля
         </span>
         <span>
-          <i className="candidate" />
+          <i className="border-warning! bg-warning/20!" />
           Контуры OSM
         </span>
       </div>

@@ -1,4 +1,21 @@
 "use client";
+import { Badge } from "@/components/ui/badge";
+
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from "@/components/ui/table";
+
+import { Input } from "@/components/ui/input";
+
+import { SelectControl, SelectOption } from "@/components/ui/select-control";
+
+import { Label } from "@/components/ui/label";
+
 import Link from "next/link";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -61,12 +78,14 @@ export function FieldList() {
           state),
   );
   return (
-    <div className="page-pad">
-      <div className="page-heading">
+    <div className="min-w-0 px-4 py-7 sm:px-7 lg:px-10 lg:py-9 [&_h1]:text-[clamp(1.65rem,2.5vw,2.25rem)] [&_h1]:font-normal [&_h1]:leading-tight [&_h1]:tracking-[-0.035em] [&_h2]:text-xl [&_h2]:font-medium [&_h2]:tracking-tight">
+      <div className="mb-7 flex flex-wrap items-start justify-between gap-5 [&>div:first-child]:min-w-0 [&_h1]:mb-2">
         <div>
-          <p className="eyebrow">Ваши территории</p>
+          <p className="mb-2 text-xs font-medium text-muted-foreground">
+            Ваши территории
+          </p>
           <h1>Мои поля</h1>
-          <p className="small muted">
+          <p className="text-sm leading-relaxed text-muted-foreground">
             Контуры, культуры и история спутниковых наблюдений.
           </p>
         </div>
@@ -74,17 +93,17 @@ export function FieldList() {
           <Link href="/app">+ Добавить поле</Link>
         </Button>
       </div>
-      <div className="panel stack">
-        <div className="filter-row">
-          <label className="field">
+      <div className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6 grid min-w-0 gap-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-[1fr_1.2fr_1fr_1fr]">
+          <Label className="grid min-w-0 gap-2 text-sm font-normal text-muted-foreground">
             Статус анализа
-            <select
+            <SelectControl
               aria-label="Статус анализа"
               value={state}
-              onChange={(e) => setState(e.target.value)}
+              onValueChange={(value) => setState(value)}
             >
-              <option value="">Все статусы</option>
-              <option value="none">Ещё не запущен</option>
+              <SelectOption value="">Все статусы</SelectOption>
+              <SelectOption value="none">Ещё не запущен</SelectOption>
               {[
                 "queued",
                 "running",
@@ -94,46 +113,52 @@ export function FieldList() {
                 "failed",
                 "cancelled",
               ].map((value) => (
-                <option key={value} value={value}>
+                <SelectOption key={value} value={value}>
                   {label[value] || value}
-                </option>
+                </SelectOption>
               ))}
-            </select>
-          </label>
-          <label className="field">
+            </SelectControl>
+          </Label>
+          <Label className="grid min-w-0 gap-2 text-sm font-normal text-muted-foreground">
             Поиск
-            <input
+            <Input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Название поля"
             />
-          </label>
-          <label className="field">
+          </Label>
+          <Label className="grid min-w-0 gap-2 text-sm font-normal text-muted-foreground">
             Культура
-            <select value={crop} onChange={(e) => setCrop(e.target.value)}>
-              <option value="">Все культуры</option>
+            <SelectControl
+              value={crop}
+              onValueChange={(value) => setCrop(value)}
+            >
+              <SelectOption value="">Все культуры</SelectOption>
               {Array.from(
                 new Set(query.data?.map((p) => p.crop_type || "unknown")),
               ).map((c) => (
-                <option key={c} value={c}>
+                <SelectOption key={c} value={c}>
                   {c === "unknown" ? "Неизвестна" : c}
-                </option>
+                </SelectOption>
               ))}
-            </select>
-          </label>
-          <label className="field">
+            </SelectControl>
+          </Label>
+          <Label className="grid min-w-0 gap-2 text-sm font-normal text-muted-foreground">
             Регион
-            <select value={region} onChange={(e) => setRegion(e.target.value)}>
-              <option value="">Все регионы</option>
+            <SelectControl
+              value={region}
+              onValueChange={(value) => setRegion(value)}
+            >
+              <SelectOption value="">Все регионы</SelectOption>
               {Array.from(
                 new Set(query.data?.map((p) => p.region_id || "manual")),
               ).map((c) => (
-                <option key={c} value={c}>
+                <SelectOption key={c} value={c}>
                   {c === "manual" ? "Без привязки к региону" : c}
-                </option>
+                </SelectOption>
               ))}
-            </select>
-          </label>
+            </SelectControl>
+          </Label>
         </div>
         <ErrorNotice
           error={query.error || latest.error}
@@ -145,50 +170,50 @@ export function FieldList() {
         {query.isPending || (!!state && latest.isPending) ? (
           <p>Загружаем поля…</p>
         ) : !rows?.length ? (
-          <div className="empty">
+          <div className="flex min-h-40 flex-col items-center justify-center gap-4 rounded-md border border-dashed border-border px-6 py-12 text-center text-sm leading-relaxed text-muted-foreground">
             {query.data?.length
               ? "Нет полей по выбранным фильтрам"
               : "Добавьте первое поле на карте"}
           </div>
         ) : (
-          <div className="scroll-table">
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Поле</th>
-                  <th>Площадь</th>
-                  <th>Культура</th>
-                  <th>Контур</th>
-                  <th>Последний анализ</th>
-                </tr>
-              </thead>
-              <tbody>
+          <div className="max-w-full overflow-auto">
+            <Table className="text-sm">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Поле</TableHead>
+                  <TableHead>Площадь</TableHead>
+                  <TableHead>Культура</TableHead>
+                  <TableHead>Контур</TableHead>
+                  <TableHead>Последний анализ</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {rows.map((p) => (
-                  <tr key={p.id}>
-                    <td>
+                  <TableRow key={p.id}>
+                    <TableCell>
                       <Link
                         className="text-primary"
                         href={`/app/polygons/${p.id}`}
                       >
                         {p.name} ↗
                       </Link>
-                      <p className="micro muted">
+                      <p className="text-xs leading-relaxed text-muted-foreground">
                         Обновлено{" "}
                         {new Date(p.updated_at).toLocaleDateString("ru-RU")}
                       </p>
-                    </td>
-                    <td>{number(p.area_ha, 2)} га</td>
-                    <td>{p.crop_type || "Неизвестна"}</td>
-                    <td>
-                      <span className="pill">
+                    </TableCell>
+                    <TableCell>{number(p.area_ha, 2)} га</TableCell>
+                    <TableCell>{p.crop_type || "Неизвестна"}</TableCell>
+                    <TableCell>
+                      <Badge className="w-fit max-w-full shrink-0 border-border bg-secondary text-xs font-normal text-secondary-foreground">
                         {p.source} · v{p.current_version}
-                      </span>
-                    </td>
-                    <td>
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
                       {p.latest_run_id && latest.data?.[p.latest_run_id] && (
-                        <div className="stack mb-2">
+                        <div className="grid min-w-0 gap-4 mb-2">
                           <Status value={latest.data[p.latest_run_id].state} />
-                          <span className="micro muted">
+                          <span className="text-xs leading-relaxed text-muted-foreground">
                             {new Date(
                               latest.data[p.latest_run_id].created_at,
                             ).toLocaleDateString("ru-RU")}
@@ -203,13 +228,15 @@ export function FieldList() {
                           Открыть результат →
                         </Link>
                       ) : (
-                        <span className="muted">Ещё не запущен</span>
+                        <span className="text-muted-foreground">
+                          Ещё не запущен
+                        </span>
                       )}
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         )}
       </div>

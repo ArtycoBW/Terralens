@@ -1,4 +1,13 @@
 "use client";
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from "@/components/ui/table";
+
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -36,34 +45,36 @@ export function QualityOverview() {
     queryFn: () => api<Capabilities>("capabilities"),
   });
   return (
-    <div className="page-pad">
-      <div className="page-heading">
+    <div className="min-w-0 px-4 py-7 sm:px-7 lg:px-10 lg:py-9 [&_h1]:text-[clamp(1.65rem,2.5vw,2.25rem)] [&_h1]:font-normal [&_h1]:leading-tight [&_h1]:tracking-[-0.035em] [&_h2]:text-xl [&_h2]:font-medium [&_h2]:tracking-tight">
+      <div className="mb-7 flex flex-wrap items-start justify-between gap-5 [&>div:first-child]:min-w-0 [&_h1]:mb-2">
         <div>
-          <p className="eyebrow">Данные с происхождением</p>
+          <p className="mb-2 text-xs font-medium text-muted-foreground">
+            Данные с происхождением
+          </p>
           <h1>Качество наблюдений</h1>
-          <p className="muted small">
+          <p className="text-muted-foreground text-sm leading-relaxed">
             Покрытие, пропуски и версии данных по каждому анализу.
           </p>
         </div>
       </div>
       <ErrorNotice error={fields.error || runs.error || caps.error} />
-      <section className="panel">
-        <div className="scroll-table">
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Поле / период</th>
-                <th>Состояние</th>
-                <th>Покрытие QA</th>
-                <th>Восстановлено</th>
-                <th>Пропуск</th>
-                <th>Источники</th>
-              </tr>
-            </thead>
-            <tbody>
+      <section className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6">
+        <div className="max-w-full overflow-auto">
+          <Table className="text-sm">
+            <TableHeader>
+              <TableRow>
+                <TableHead>Поле / период</TableHead>
+                <TableHead>Состояние</TableHead>
+                <TableHead>Покрытие QA</TableHead>
+                <TableHead>Восстановлено</TableHead>
+                <TableHead>Пропуск</TableHead>
+                <TableHead>Источники</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {runs.data?.map((r) => (
-                <tr key={r.id}>
-                  <td>
+                <TableRow key={r.id}>
+                  <TableCell>
                     <Link
                       className="text-primary"
                       href={`/app/analyses/${r.id}`}
@@ -72,14 +83,14 @@ export function QualityOverview() {
                         "Поле"}{" "}
                       ↗
                     </Link>
-                    <p className="micro muted">
+                    <p className="text-xs leading-relaxed text-muted-foreground">
                       {r.period.from} — {r.period.to}
                     </p>
-                  </td>
-                  <td>
+                  </TableCell>
+                  <TableCell>
                     <Status value={r.state} />
-                  </td>
-                  <td>
+                  </TableCell>
+                  <TableCell>
                     {number(
                       r.summary
                         ? 100 * r.summary.observed_coverage_ratio
@@ -87,53 +98,62 @@ export function QualityOverview() {
                       1,
                     )}
                     %
-                  </td>
-                  <td>{number(r.summary?.reconstructed_days, 0)} дн.</td>
-                  <td>{number(r.summary?.longest_gap_days, 0)} дн.</td>
-                  <td>
+                  </TableCell>
+                  <TableCell>
+                    {number(r.summary?.reconstructed_days, 0)} дн.
+                  </TableCell>
+                  <TableCell>
+                    {number(r.summary?.longest_gap_days, 0)} дн.
+                  </TableCell>
+                  <TableCell>
                     {r.snapshots.map((s) => (
-                      <p className="micro" key={s.id}>
+                      <p className="text-xs leading-relaxed" key={s.id}>
                         {s.provider} · {s.status} ·{" "}
                         {new Date(s.retrieved_at).toLocaleDateString("ru-RU")}
                       </p>
                     ))}
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
         {!runs.isPending && !runs.data?.length && (
-          <div className="empty">
+          <div className="flex min-h-40 flex-col items-center justify-center gap-4 rounded-md border border-dashed border-border px-6 py-12 text-center text-sm leading-relaxed text-muted-foreground">
             Пока нет анализов. Качество появится после получения спутниковых
             наблюдений.
           </div>
         )}
       </section>
-      <div className="grid-2 mt-5">
-        <section className="panel stack">
+      <div className="grid min-w-0 gap-6 xl:grid-cols-2 mt-5">
+        <section className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6 grid min-w-0 gap-4">
           <h2>Как читать качество</h2>
-          <p className="small muted">
+          <p className="text-sm leading-relaxed text-muted-foreground">
             Покрытие — доля календарных дней с пригодным спутниковым наблюдением
             после маски облаков, теней и проверки пикселей. Восстановленные дни
             не увеличивают покрытие.
           </p>
-          <p className="small muted">
+          <p className="text-sm leading-relaxed text-muted-foreground">
             Норма требует минимум трёх пригодных прошлых сезонов. Отсутствующая
             норма или погода снижают уверенность, а отсутствие наблюдений не
             означает здоровое поле.
           </p>
-          <p className="small muted">
+          <p className="text-sm leading-relaxed text-muted-foreground">
             S2 и Landsat сохраняются раздельно. Для объединённого ряда приоритет
             имеет Sentinel-2; переключения сенсора отмечаются флагом качества.
           </p>
         </section>
-        <section className="panel stack">
+        <section className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6 grid min-w-0 gap-4">
           <h2>Подключённые источники</h2>
           {caps.data?.providers.map((p) => (
-            <div className="history-row" key={p.id}>
+            <div
+              className="flex flex-wrap items-center justify-between gap-3 border-b border-border/60 py-4 text-sm last:border-0"
+              key={p.id}
+            >
               <span>{p.id}</span>
-              <span className="micro muted">{p.provider}</span>
+              <span className="text-xs leading-relaxed text-muted-foreground">
+                {p.provider}
+              </span>
             </div>
           ))}
           <JsonDetails

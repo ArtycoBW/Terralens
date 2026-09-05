@@ -1,4 +1,20 @@
 "use client";
+import { DateField } from "@/components/ui/date-field";
+import { Badge } from "@/components/ui/badge";
+
+import { SelectControl, SelectOption } from "@/components/ui/select-control";
+
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from "@/components/ui/table";
+
+import { Label } from "@/components/ui/label";
+
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
@@ -28,7 +44,11 @@ import { Explanation, readableMessage } from "./explanation";
 import { Exports } from "./exports";
 const Chart = dynamic(() => import("./chart").then((m) => m.Chart), {
   ssr: false,
-  loading: () => <div className="empty">Загружаем график…</div>,
+  loading: () => (
+    <div className="flex min-h-40 flex-col items-center justify-center gap-4 rounded-md border border-dashed border-border px-6 py-12 text-center text-sm leading-relaxed text-muted-foreground">
+      Загружаем график…
+    </div>
+  ),
 });
 export function AnalysisDetail({ id }: { id: string }) {
   const client = useQueryClient();
@@ -74,10 +94,15 @@ export function AnalysisDetail({ id }: { id: string }) {
   const visible = anomalies.data?.filter(
     (a) => !severity || a.severity === severity,
   );
-  if (run.isPending) return <div className="page-pad">Загружаем анализ…</div>;
+  if (run.isPending)
+    return (
+      <div className="min-w-0 px-4 py-7 sm:px-7 lg:px-10 lg:py-9 [&_h1]:text-[clamp(1.65rem,2.5vw,2.25rem)] [&_h1]:font-normal [&_h1]:leading-tight [&_h1]:tracking-[-0.035em] [&_h2]:text-xl [&_h2]:font-medium [&_h2]:tracking-tight">
+        Загружаем анализ…
+      </div>
+    );
   if (!run.data)
     return (
-      <div className="page-pad">
+      <div className="min-w-0 px-4 py-7 sm:px-7 lg:px-10 lg:py-9 [&_h1]:text-[clamp(1.65rem,2.5vw,2.25rem)] [&_h1]:font-normal [&_h1]:leading-tight [&_h1]:tracking-[-0.035em] [&_h2]:text-xl [&_h2]:font-medium [&_h2]:tracking-tight">
         <ErrorNotice error={run.error} />
         <Link href="/app/polygons">Вернуться к полям</Link>
       </div>
@@ -85,17 +110,20 @@ export function AnalysisDetail({ id }: { id: string }) {
   const r = run.data,
     s = r.summary;
   return (
-    <div className="page-pad">
-      <Link className="small muted" href={`/app/polygons/${r.polygon_id}`}>
+    <div className="min-w-0 px-4 py-7 sm:px-7 lg:px-10 lg:py-9 [&_h1]:text-[clamp(1.65rem,2.5vw,2.25rem)] [&_h1]:font-normal [&_h1]:leading-tight [&_h1]:tracking-[-0.035em] [&_h2]:text-xl [&_h2]:font-medium [&_h2]:tracking-tight">
+      <Link
+        className="text-sm leading-relaxed text-muted-foreground"
+        href={`/app/polygons/${r.polygon_id}`}
+      >
         ← Паспорт поля
       </Link>
-      <div className="page-heading">
+      <div className="mb-7 flex flex-wrap items-start justify-between gap-5 [&>div:first-child]:min-w-0 [&_h1]:mb-2">
         <div>
-          <p className="eyebrow mt-5">
+          <p className="mb-2 text-xs font-medium text-muted-foreground mt-5">
             Спутниковая аналитика / версия контура {r.polygon_version}
           </p>
           <h1>{polygon.data?.name || "Анализ поля"}</h1>
-          <p className="small muted">
+          <p className="text-sm leading-relaxed text-muted-foreground">
             {r.period.from} — {r.period.to} · Ретроспективный режим
           </p>
         </div>
@@ -105,7 +133,7 @@ export function AnalysisDetail({ id }: { id: string }) {
         error={run.error || points.error || anomalies.error || quality.error}
       />
       {polygon.data && polygon.data.current_version !== r.polygon_version && (
-        <div className="notice mb-5">
+        <div className="rounded-md border border-warning/25 bg-warning/5 px-4 py-3 text-sm leading-relaxed break-words text-warning mb-5">
           Этот анализ относится к предыдущей версии контура. Геометрия поля с
           тех пор изменилась.
         </div>
@@ -116,50 +144,63 @@ export function AnalysisDetail({ id }: { id: string }) {
           onRetry={() => client.invalidateQueries({ queryKey: ["run", id] })}
         />
       )}
-      <div className="stack">
+      <div className="grid min-w-0 gap-4">
         {r.warnings.map((w, i) => (
-          <div className="notice" key={i}>
+          <div
+            className="rounded-md border border-warning/25 bg-warning/5 px-4 py-3 text-sm leading-relaxed break-words text-warning"
+            key={i}
+          >
             {readableMessage(w)}
           </div>
         ))}
       </div>
       {s && (
-        <div className="metrics mt-5">
-          <div className="panel">
-            <p className="metric-label">Последняя оценка NDVI</p>
-            <p className="metric">{number(s.latest_estimate?.value)}</p>
-            <p className="micro muted">
+        <div className="mb-6 grid grid-cols-2 gap-3 xl:grid-cols-4 [&>div]:border-0 [&>div]:border-l [&>div]:border-border [&>div]:bg-transparent [&>div]:py-3 mt-5">
+          <div className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6">
+            <p className="text-sm text-muted-foreground">
+              Последняя оценка NDVI
+            </p>
+            <p className="mt-2 font-mono text-3xl font-normal tracking-[-0.055em]">
+              {number(s.latest_estimate?.value)}
+            </p>
+            <p className="text-xs leading-relaxed text-muted-foreground">
               {s.latest_estimate
                 ? `${s.latest_estimate.date} · ${label[s.latest_estimate.origin]}`
                 : "Нет пригодных значений"}
             </p>
           </div>
-          <div className="panel">
-            <p className="metric-label">Покрытие наблюдениями</p>
-            <p className="metric">
+          <div className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6">
+            <p className="text-sm text-muted-foreground">
+              Покрытие наблюдениями
+            </p>
+            <p className="mt-2 font-mono text-3xl font-normal tracking-[-0.055em]">
               {number(s.observed_coverage_ratio * 100, 1)}
               <span className="text-base">%</span>
             </p>
-            <p className="micro muted">
+            <p className="text-xs leading-relaxed text-muted-foreground">
               {s.observed_days} из {s.total_days} дней после QA
             </p>
           </div>
-          <div className="panel">
-            <p className="metric-label">Максимальный пропуск</p>
-            <p className="metric">
+          <div className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6">
+            <p className="text-sm text-muted-foreground">
+              Максимальный пропуск
+            </p>
+            <p className="mt-2 font-mono text-3xl font-normal tracking-[-0.055em]">
               {s.longest_gap_days}
               <span className="text-base"> дн.</span>
             </p>
-            <p className="micro muted">
+            <p className="text-xs leading-relaxed text-muted-foreground">
               Восстановлено {s.reconstructed_days} дней
             </p>
           </div>
-          <div className="panel">
-            <p className="metric-label">Состояние за период</p>
+          <div className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6">
+            <p className="text-sm text-muted-foreground">Состояние за период</p>
             <div className="my-3">
               <Status value={s.overall_status} />
             </div>
-            <p className="micro muted">Сигналов: {s.anomaly_period_count}</p>
+            <p className="text-xs leading-relaxed text-muted-foreground">
+              Сигналов: {s.anomaly_period_count}
+            </p>
           </div>
         </div>
       )}
@@ -174,11 +215,11 @@ export function AnalysisDetail({ id }: { id: string }) {
             <TabsTrigger value="export">Экспорт</TabsTrigger>
           </TabsList>
           <TabsContent value="dynamics">
-            <section className="panel">
-              <div className="page-heading">
+            <section className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6">
+              <div className="mb-7 flex flex-wrap items-start justify-between gap-5 [&>div:first-child]:min-w-0 [&_h1]:mb-2">
                 <div>
                   <h2>Растительность в контексте сезона</h2>
-                  <p className="small muted">
+                  <p className="text-sm leading-relaxed text-muted-foreground">
                     Точки — спутниковые наблюдения; пунктир — восстановленный
                     ряд
                   </p>
@@ -192,30 +233,31 @@ export function AnalysisDetail({ id }: { id: string }) {
                 </Button>
               </div>
               {points.isPending ? (
-                <div className="empty">Загружаем ежедневный ряд…</div>
+                <div className="flex min-h-40 flex-col items-center justify-center gap-4 rounded-md border border-dashed border-border px-6 py-12 text-center text-sm leading-relaxed text-muted-foreground">
+                  Загружаем ежедневный ряд…
+                </div>
               ) : !points.data?.length ? (
-                <div className="empty">Нет значений за этот период</div>
+                <div className="flex min-h-40 flex-col items-center justify-center gap-4 rounded-md border border-dashed border-border px-6 py-12 text-center text-sm leading-relaxed text-muted-foreground">
+                  Нет значений за этот период
+                </div>
               ) : (
                 <Chart option={chart} onDate={setDate} />
               )}
-              <p className="micro muted">
+              <p className="text-xs leading-relaxed text-muted-foreground">
                 Разброс сезонной нормы (±σ) и интервал прогноза — разные
                 величины. Интервал откалиброван на benchmark; для реальных
                 территорий покрытие не подтверждено.
               </p>
-              <div className="actions mt-5">
-                <label className="field">
-                  Выбрать дату (клавиатура)
-                  <input
-                    type="date"
-                    min={r.period.from}
-                    max={r.period.to}
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                  />
-                </label>
+              <div className="flex flex-wrap items-end gap-3 mt-5">
+                <DateField
+                  label="Выбрать дату (клавиатура)"
+                  min={r.period.from}
+                  max={r.period.to}
+                  value={date}
+                  onValueChange={(value) => setDate(value)}
+                />
                 {selected && (
-                  <p className="small">
+                  <p className="text-sm leading-relaxed">
                     {label[selected.origin]} · NDVI{" "}
                     {number(selected.reconstructed)} ·{" "}
                     {selected.source_sensor || "Источник отсутствует"} · пропуск{" "}
@@ -230,9 +272,9 @@ export function AnalysisDetail({ id }: { id: string }) {
                 />
               )}
             </section>
-            <section className="panel mt-5">
+            <section className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6 mt-5">
               <h2>Температура и осадки</h2>
-              <p className="small muted">
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 Погода в центре поля · °C и мм на отдельных осях
               </p>
               {points.data && (
@@ -275,81 +317,82 @@ export function AnalysisDetail({ id }: { id: string }) {
                 />
               )}
             </section>
-            <section className="panel mt-5">
+            <section className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6 mt-5">
               <h2>Значения и наличие источников</h2>
-              <p className="small muted">
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 Полный ежедневный ряд; «—» означает отсутствие данных
               </p>
-              <div className="scroll-table max-h-[440px]">
-                <table className="data-table">
-                  <thead>
-                    <tr>
-                      <th>Дата</th>
-                      <th>Raw</th>
-                      <th>После QA</th>
-                      <th>Оценка</th>
-                      <th>Происхождение</th>
-                      <th>S2</th>
-                      <th>Landsat</th>
-                      <th>Норма</th>
-                      <th>Z-score</th>
-                      <th>Флаги</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+              <div className="max-w-full overflow-auto max-h-[440px]">
+                <Table className="text-sm">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Дата</TableHead>
+                      <TableHead>Raw</TableHead>
+                      <TableHead>После QA</TableHead>
+                      <TableHead>Оценка</TableHead>
+                      <TableHead>Происхождение</TableHead>
+                      <TableHead>S2</TableHead>
+                      <TableHead>Landsat</TableHead>
+                      <TableHead>Норма</TableHead>
+                      <TableHead>Z-score</TableHead>
+                      <TableHead>Флаги</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
                     {points.data?.map((p) => (
-                      <tr key={p.date} data-selected={p.date === date}>
-                        <td>
-                          <button
+                      <TableRow key={p.date} data-selected={p.date === date}>
+                        <TableCell>
+                          <Button
+                            variant="ghost"
                             className="text-primary"
                             onClick={() => setDate(p.date)}
                           >
                             {p.date}
-                          </button>
-                        </td>
-                        <td>{number(p.observed_primary)}</td>
-                        <td>{number(p.clean_primary)}</td>
-                        <td>{number(p.reconstructed)}</td>
-                        <td>{label[p.origin]}</td>
-                        <td>{number(p.sensors.sentinel2)}</td>
-                        <td>{number(p.sensors.landsat)}</td>
-                        <td>{number(p.climatology_mean)}</td>
-                        <td>{number(p.zscore)}</td>
-                        <td className="micro">
+                          </Button>
+                        </TableCell>
+                        <TableCell>{number(p.observed_primary)}</TableCell>
+                        <TableCell>{number(p.clean_primary)}</TableCell>
+                        <TableCell>{number(p.reconstructed)}</TableCell>
+                        <TableCell>{label[p.origin]}</TableCell>
+                        <TableCell>{number(p.sensors.sentinel2)}</TableCell>
+                        <TableCell>{number(p.sensors.landsat)}</TableCell>
+                        <TableCell>{number(p.climatology_mean)}</TableCell>
+                        <TableCell>{number(p.zscore)}</TableCell>
+                        <TableCell className="text-xs leading-relaxed">
                           {p.quality_flags.join(", ") || "—"}
-                        </td>
-                      </tr>
+                        </TableCell>
+                      </TableRow>
                     ))}
-                  </tbody>
-                </table>
+                  </TableBody>
+                </Table>
               </div>
             </section>
           </TabsContent>
           <TabsContent value="anomalies">
-            <section className="panel stack">
-              <div className="page-heading">
+            <section className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6 grid min-w-0 gap-4">
+              <div className="mb-7 flex flex-wrap items-start justify-between gap-5 [&>div:first-child]:min-w-0 [&_h1]:mb-2">
                 <div>
                   <h2>Обнаруженные отклонения</h2>
-                  <p className="small muted">
+                  <p className="text-sm leading-relaxed text-muted-foreground">
                     Алгоритмический сигнал требует проверки на месте
                   </p>
                 </div>
-                <label className="field">
+                <Label className="grid min-w-0 gap-2 text-sm font-normal text-muted-foreground">
                   Уровень
-                  <select
+                  <SelectControl
                     value={severity}
-                    onChange={(e) => setSeverity(e.target.value)}
+                    onValueChange={(value) => setSeverity(value)}
                   >
-                    <option value="">Все уровни</option>
-                    <option value="stress">Стресс</option>
-                    <option value="critical">Критично</option>
-                  </select>
-                </label>
+                    <SelectOption value="">Все уровни</SelectOption>
+                    <SelectOption value="stress">Стресс</SelectOption>
+                    <SelectOption value="critical">Критично</SelectOption>
+                  </SelectControl>
+                </Label>
               </div>
               {anomalies.isPending ? (
                 <p>Загружаем события…</p>
               ) : !visible?.length ? (
-                <div className="empty">
+                <div className="flex min-h-40 flex-col items-center justify-center gap-4 rounded-md border border-dashed border-border px-6 py-12 text-center text-sm leading-relaxed text-muted-foreground">
                   {s?.overall_status === "insufficient_data" ||
                   r.state === "no_data"
                     ? "Недостаточно данных для надёжного поиска аномалий"
@@ -359,13 +402,16 @@ export function AnalysisDetail({ id }: { id: string }) {
                 </div>
               ) : (
                 visible.map((a) => (
-                  <article className="anomaly-card" key={a.id}>
-                    <div className="actions">
+                  <article
+                    className="rounded-md border border-border bg-secondary/20 p-5"
+                    key={a.id}
+                  >
+                    <div className="flex flex-wrap items-end gap-3">
                       <Status value={a.severity} />
-                      <span className="pill">
+                      <Badge className="w-fit max-w-full shrink-0 border-border bg-secondary text-xs font-normal text-secondary-foreground">
                         Уверенность: {label[a.confidence]}
-                      </span>
-                      <span className="micro muted">
+                      </Badge>
+                      <span className="text-xs leading-relaxed text-muted-foreground">
                         {a.event_kind === "single_observation_alert"
                           ? "Единичное наблюдение"
                           : "Устойчивый период"}
@@ -374,7 +420,7 @@ export function AnalysisDetail({ id }: { id: string }) {
                     <h3 className="mt-3">
                       {a.start_date} — {a.end_date}
                     </h3>
-                    <p className="small muted">
+                    <p className="text-sm leading-relaxed text-muted-foreground">
                       Пик: {a.peak_date} · Z-score {number(a.min_z)} ·
                       Подтверждающих наблюдений: {a.observed_evidence_count} ·
                       Восстановлено {number(a.reconstructed_fraction * 100, 1)}%
@@ -384,7 +430,7 @@ export function AnalysisDetail({ id }: { id: string }) {
                       value={a.causes}
                       title="Возможные объяснения (гипотезы)"
                     />
-                    <p className="micro muted mt-2">
+                    <p className="text-xs leading-relaxed text-muted-foreground mt-2">
                       Проверьте агротехнические работы, культуру и полевые
                       наблюдения. По спутниковому сигналу нельзя установить
                       причину однозначно.
@@ -407,15 +453,15 @@ export function AnalysisDetail({ id }: { id: string }) {
             </section>
           </TabsContent>
           <TabsContent value="quality">
-            <section className="panel stack">
+            <section className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6 grid min-w-0 gap-4">
               <h2>Достоверность результата</h2>
-              <p className="small muted">
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 Модель {r.model_version} · Конфигурация {r.config_version} ·
                 Результат {r.result_version || "не опубликован"}
               </p>
               {quality.data && (
                 <>
-                  <p className="small">
+                  <p className="text-sm leading-relaxed">
                     {quality.data.observed_days_definition}
                   </p>
                   <JsonDetails
@@ -434,30 +480,33 @@ export function AnalysisDetail({ id }: { id: string }) {
               )}
               <h3>Снимки источников</h3>
               {r.snapshots.map((snapshot) => (
-                <div key={snapshot.id} className="history-row">
+                <div
+                  key={snapshot.id}
+                  className="flex flex-wrap items-center justify-between gap-3 border-b border-border/60 py-4 text-sm last:border-0"
+                >
                   <div>
                     <p>{snapshot.provider}</p>
-                    <p className="micro muted">
+                    <p className="text-xs leading-relaxed text-muted-foreground">
                       Получено{" "}
                       {new Date(snapshot.retrieved_at).toLocaleString("ru-RU")}
                     </p>
-                    <p className="micro muted break-all">
+                    <p className="text-xs leading-relaxed text-muted-foreground break-all">
                       SHA-256 {snapshot.checksum}
                     </p>
                   </div>
                   <Status value={snapshot.status} />
                 </div>
               ))}
-              <p className="micro muted">
+              <p className="text-xs leading-relaxed text-muted-foreground">
                 Анализ относится к сохранённым снимкам данных. Повтор с
                 обновлением источников может дать другой результат.
               </p>
             </section>
           </TabsContent>
           <TabsContent value="export">
-            <section className="panel stack">
+            <section className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6 grid min-w-0 gap-4">
               <h2>Экспорт исследования</h2>
-              <p className="small muted">
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 {r.period.from} — {r.period.to} · Это данные реального поля;
                 конкурсный submission формируется отдельно.
               </p>
@@ -467,7 +516,7 @@ export function AnalysisDetail({ id }: { id: string }) {
         </Tabs>
       )}
       {!complete && terminalRun(r.state) && (
-        <div className="empty mt-5">
+        <div className="flex min-h-40 flex-col items-center justify-center gap-4 rounded-md border border-dashed border-border px-6 py-12 text-center text-sm leading-relaxed text-muted-foreground mt-5">
           Результат не опубликован. Откройте паспорт поля для нового анализа.
         </div>
       )}

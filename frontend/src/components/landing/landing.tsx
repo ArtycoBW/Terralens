@@ -1,288 +1,201 @@
 import Link from "next/link";
+import { IconArrowUpRight, IconArrowRight } from "@tabler/icons-react";
+import { Button } from "@/components/ui/button";
 import {
-  Leaf,
-  ArrowUpRight,
-  ArrowRight,
-  Satellite,
-  ChartNoAxesCombined,
-  ScanLine,
-  Layers3,
-  ShieldCheck,
-  CloudSun,
-} from "lucide-react";
-import { PlanetView } from "./planet-view";
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
+import { Colonnade } from "./colonnade";
+import { DataFlow } from "./data-flow";
+import { TerrainView } from "./terrain-view";
 import { LandingMotion } from "./motion";
-const features = [
-  {
-    Icon: Satellite,
-    title: "Наблюдать с орбиты",
-    text: "Sentinel-2 и Landsat дают историю растительности. Система сама находит и обрабатывает доступные снимки.",
-  },
-  {
-    Icon: ChartNoAxesCombined,
-    title: "Восстановить пропуски",
-    text: "Модель дополняет временной ряд между наблюдениями. Измерения и оценки всегда различимы.",
-  },
-  {
-    Icon: ScanLine,
-    title: "Заметить отклонение",
-    text: "Сравнение с прошлыми сезонами помогает найти периоды стресса и оценить подтверждающие наблюдения.",
-  },
-  {
-    Icon: CloudSun,
-    title: "Добавить контекст",
-    text: "Температура и осадки помогают интерпретировать сигнал. Возможные причины остаются гипотезами.",
-  },
-  {
-    Icon: Layers3,
-    title: "Сопоставить сезоны",
-    text: "До четырёх анализов на одной временной оси. Разные культуры и качество данных видны в контексте.",
-  },
-  {
-    Icon: ShieldCheck,
-    title: "Проверить каждый вывод",
-    text: "Версии контуров, снимки источников, модель и контрольные суммы сохраняются вместе с результатом.",
-  },
-];
+import { CinematicFooter } from "@/components/ui/motion-footer";
+import { LandingNavbar } from "./navbar";
+import { Outputs } from "./outputs";
+import { PlanetView } from "./planet-view";
+
 export function Landing() {
   return (
-    <div className="marketing" id="top">
-      <PlanetView />
+    <div
+      className="relative isolate overflow-clip bg-background text-foreground"
+      id="top"
+      data-landing
+    >
       <LandingMotion />
-      <header className="marketing-nav">
-        <Link href="/" className="brand">
-          <span className="brand-icon">
-            <Leaf size={21} />
-          </span>
-          TerraLens
-        </Link>
-        <nav aria-label="Навигация по проекту">
-          <a href="#features">Возможности</a>
-          <a href="#workflow">Как это работает</a>
-          <a href="#method">Методология</a>
-        </nav>
-        <Link className="marketing-nav-cta" href="/app">
-          Открыть платформу <ArrowUpRight size={14} />
-        </Link>
-      </header>
+      <PlanetView />
+      <LandingNavbar />
       <main id="main">
-        <section className="marketing-hero">
-          <div className="hero-copy">
-            <p className="eyebrow" data-intro>
-              <span className="status-dot" /> ЗЕМЛЯ МЕНЯЕТСЯ. УВИДЬТЕ КАК.
+        <section
+          aria-label="TerraLens: спутниковая аналитика"
+          data-hero
+          className="relative z-10 flex min-h-svh flex-col items-center px-5 pt-[clamp(135px,18vh,200px)] pb-24 text-center"
+        >
+          <div className="relative max-w-4xl" data-hero-copy>
+            <p data-intro className="mb-6 font-mono text-xs text-primary">
+              Спутниковая аналитика территорий
             </p>
-            <h1 data-intro>
-              Состояние полей —<br />в контексте
-              <br />
-              <em>сезона.</em>
+            <h1
+              data-intro
+              className="text-[clamp(1.6rem,8.5vw,2.65rem)] leading-[1.04] tracking-[-.045em] sm:text-[clamp(2.65rem,5.6vw,5rem)]"
+            >
+              Состояние полей.
+              <br />В динамике сезона.
             </h1>
-            <p className="hero-lead" data-intro>
-              Спутниковые наблюдения и погода помогают восстановить динамику
-              растительности и увидеть то, что скрыто между снимками.
+            <p
+              data-intro
+              className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-foreground/85 sm:text-lg"
+            >
+              Спутниковая история, погода и восстановленный NDVI для каждого
+              контура.
             </p>
-            <div className="hero-buttons" data-intro>
-              <Link className="marketing-button" href="/app">
-                Исследовать поле <ArrowUpRight size={18} />
-              </Link>
-              <a className="marketing-button secondary" href="#workflow">
-                Как это работает <ArrowRight size={16} />
-              </a>
+            <div
+              data-intro
+              className="mt-8 flex flex-wrap items-center justify-center gap-4"
+            >
+              <Button
+                asChild
+                size="lg"
+                className="h-13 gap-5 rounded-full px-6 text-sm"
+              >
+                <Link href="/app">
+                  Исследовать поле <IconArrowUpRight size={18} />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="h-13 gap-4 rounded-full border-foreground/20 bg-background/60 px-6 text-foreground"
+              >
+                <a href="#workflow">
+                  Как это работает <IconArrowRight size={16} />
+                </a>
+              </Button>
             </div>
-            <p className="hero-footnote" data-intro>
-              Открытые источники. Объяснимые сигналы. Ваш контур.
-            </p>
           </div>
-          <div className="orbit-caption">
-            <span className="orbit-line" />
-            <p>
-              EARTH OBSERVATION<small>От планеты к отдельному полю</small>
-            </p>
-          </div>
-          <div className="source-strip">
-            <p>ИСТОЧНИКИ ДАННЫХ</p>
-            <span>Sentinel-2</span>
-            <span>Landsat 8/9</span>
-            <span>ERA5</span>
-            <span>OpenStreetMap</span>
-            <small>Открытые данные, а не партнёрские заявления</small>
-          </div>
-        </section>
-        <section className="marketing-section" id="features">
-          <div className="marketing-section-head" data-reveal>
-            <p className="eyebrow">01 / ОТ СНИМКА К ПОНИМАНИЮ</p>
-            <h2>
-              Каждый сигнал.
-              <br />
-              <span>В общей картине.</span>
-            </h2>
-            <p>
-              Данные из разных источников становятся историей конкретного поля —
-              с пропусками, неопределённостью и контекстом.
-            </p>
-          </div>
-          <div className="marketing-features">
-            {features.map(({ Icon, title, text }, i) => (
-              <article className="marketing-card" data-reveal key={title}>
-                <div className="feature-top">
-                  <Icon size={24} />
-                  <span>0{i + 1}</span>
-                </div>
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-        <section className="marketing-section workflow-section" id="workflow">
-          <div className="workflow-copy" data-reveal>
-            <p className="eyebrow">02 / ВАШ ПЕРВЫЙ АНАЛИЗ</p>
-            <h2>
-              Выберите поле.
-              <br />
-              <span>
-                Остальное —<br />в его истории.
-              </span>
-            </h2>
-            <p>
-              Без ручного поиска снимков и загрузки таблиц. Вы задаёте
-              территорию и период, TerraLens собирает доступные наблюдения.
-            </p>
-            <Link className="marketing-button" href="/app">
-              Перейти к карте <ArrowUpRight size={17} />
-            </Link>
-          </div>
-          <ol className="workflow-steps">
-            <li data-reveal>
-              <span>01</span>
-              <div>
-                <h3>Обозначьте территорию</h3>
-                <p>
-                  Найдите регион, выберите контур OpenStreetMap или нарисуйте
-                  своё поле.
-                </p>
-              </div>
-              <ScanLine size={22} />
-            </li>
-            <li data-reveal>
-              <span>02</span>
-              <div>
-                <h3>Задайте период наблюдения</h3>
-                <p>
-                  Выберите даты, спутниковые источники и историю для сезонной
-                  нормы.
-                </p>
-              </div>
-              <Satellite size={22} />
-            </li>
-            <li data-reveal>
-              <span>03</span>
-              <div>
-                <h3>Изучите динамику</h3>
-                <p>
-                  Посмотрите NDVI, погоду и отклонения. Проверьте, какие выводы
-                  подтверждены данными.
-                </p>
-              </div>
-              <ChartNoAxesCombined size={22} />
-            </li>
-            <li data-reveal>
-              <span>04</span>
-              <div>
-                <h3>Сохраните исследование</h3>
-                <p>
-                  Сравните поля и выгрузите результат с манифестом источников и
-                  версии модели.
-                </p>
-              </div>
-              <ArrowUpRight size={22} />
-            </li>
-          </ol>
-        </section>
-        <section className="marketing-section methodology" id="method">
-          <div className="marketing-section-head" data-reveal>
-            <p className="eyebrow">03 / ЧЕСТНАЯ АНАЛИТИКА</p>
-            <h2>
-              Уверенность начинается
-              <br />
-              <span>с понимания ограничений.</span>
-            </h2>
-          </div>
-          <div className="method-grid">
-            <article data-reveal>
-              <span className="method-number">01</span>
-              <h3>Наблюдение ≠ оценка</h3>
-              <p>
-                Восстановленный NDVI не становится спутниковым измерением. На
-                графике всегда видно происхождение значения.
-              </p>
-            </article>
-            <article data-reveal>
-              <span className="method-number">02</span>
-              <h3>Сигнал ≠ диагноз</h3>
-              <p>
-                Изменение может быть связано с погодой, уборкой или качеством
-                снимка. Причину нужно проверять на месте.
-              </p>
-            </article>
-            <article data-reveal>
-              <span className="method-number">03</span>
-              <h3>Отсутствие ≠ норма</h3>
-              <p>
-                Если наблюдений недостаточно, система сообщает об этом. Пустой
-                ряд не означает здоровую растительность.
-              </p>
-            </article>
-          </div>
-          <div className="method-note" data-reveal>
-            <p>
-              TerraLens — прототип для хакатона. Ретроспективный анализ
-              доступных спутниковых данных, воспроизводимая Python-модель и
-              открытая методология.
-            </p>
-            <Link href="/app/models">
-              Посмотреть валидацию <ArrowUpRight size={15} />
-            </Link>
-          </div>
-        </section>
-        <section className="marketing-section final-cta" data-reveal>
-          <p className="eyebrow">ОТКРОЙТЕ НОВЫЙ МАСШТАБ</p>
-          <h2>
-            У каждого поля
-            <br />
-            <em>есть история.</em>
-          </h2>
-          <p>Начните с контура. Посмотрите, что расскажут данные.</p>
-          <Link className="marketing-button" href="/app">
-            Открыть TerraLens <ArrowUpRight size={18} />
-          </Link>
-        </section>
-      </main>
-      <footer className="marketing-footer">
-        <div>
-          <Link href="/" className="brand">
-            <Leaf size={20} />
-            TerraLens
-          </Link>
-          <p>Увидеть состояние. Понять изменение.</p>
-        </div>
-        <div className="footer-links">
-          <a href="#features">Возможности</a>
-          <Link href="/app/benchmark">Бенчмарк</Link>
-          <Link href="/app/models">Модели</Link>
           <a
-            href="https://github.com/ArtycoBW/Terralens"
-            target="_blank"
-            rel="noreferrer"
+            href="#features"
+            className="mt-auto pt-16 font-mono text-[11px] text-muted-foreground"
           >
-            Исходный код ↗
+            Откройте возможности ↓
           </a>
-        </div>
-        <div className="footer-meta">
-          <span>TerraLens · 2026</span>
-          <span>Спутниковые сигналы требуют проверки на месте</span>
-          <a href="#top">Наверх ↑</a>
-        </div>
-      </footer>
+        </section>
+
+        <Colonnade />
+
+        <section
+          id="workflow"
+          className="relative z-10 mx-auto flex min-h-svh flex-col justify-center bg-background px-5 py-24 sm:px-10 lg:px-[max(64px,calc((100vw-1312px)/2))]"
+        >
+          <div data-reveal className="max-w-3xl">
+            <h2 className="text-[clamp(2.2rem,4.4vw,4rem)] leading-[1.06] tracking-[-.045em]">
+              Несколько источников.
+              <br />
+              История одного поля.
+            </h2>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+              TerraLens собирает доступные наблюдения, дополняет пропуски и
+              сохраняет происхождение каждого значения.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-12 lg:grid-cols-[1.25fr_1fr] lg:items-center lg:gap-20">
+            <DataFlow />
+            <ol className="space-y-8" aria-label="Как получить анализ">
+              {[
+                [
+                  "Обозначьте территорию",
+                  "Найдите регион, выберите готовый контур или нарисуйте поле на карте.",
+                ],
+                [
+                  "Задайте период",
+                  "Выберите даты и источники. Ход сбора сохранится, даже если вы закроете страницу.",
+                ],
+                [
+                  "Изучите результат",
+                  "Сопоставьте наблюдения, оценки и погоду. Выгрузите CSV, GeoJSON или полный JSON.",
+                ],
+              ].map(([title, text]) => (
+                <li key={title} data-reveal className="grid gap-3">
+                  <h3 className="text-xl font-normal tracking-tight">
+                    {title}
+                  </h3>
+                  <p className="max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
+                    {text}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section
+          id="method"
+          className="relative z-10 flex min-h-svh items-center border-y border-border/60 bg-background"
+        >
+          <div className="mx-auto grid w-full max-w-[1440px] items-center gap-8 px-5 py-20 sm:px-10 lg:grid-cols-[.85fr_1.15fr] lg:gap-12 lg:px-16 lg:py-24">
+            <div data-reveal>
+              <h2 className="text-[clamp(2.2rem,4vw,3.75rem)] leading-[1.06] tracking-[-.045em]">
+                За каждым выводом
+                <br />
+                видны данные.
+              </h2>
+              <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">
+                Понимать изменения можно, когда наблюдения, оценки модели и
+                неопределённость различимы.
+              </p>
+              <Accordion
+                type="single"
+                collapsible
+                defaultValue="observations"
+                className="mt-8"
+              >
+                {[
+                  [
+                    "observations",
+                    "Наблюдения и оценки",
+                    "Точки на графике получены со спутника. Восстановленные значения показаны отдельно, а отсутствие данных остаётся видимым.",
+                  ],
+                  [
+                    "signals",
+                    "Сигнал требует контекста",
+                    "Падение NDVI может совпасть с уборкой, погодой или облаками. Возможные причины остаются гипотезами и требуют проверки на месте.",
+                  ],
+                  [
+                    "provenance",
+                    "Результат можно проверить",
+                    "Снимки источников, версия контура, модель и контрольные суммы сохраняются вместе с исследованием.",
+                  ],
+                ].map(([id, title, text]) => (
+                  <AccordionItem
+                    key={id}
+                    value={id}
+                    className="border-border/60"
+                  >
+                    <AccordionTrigger className="py-5 text-base font-normal hover:no-underline">
+                      {title}
+                    </AccordionTrigger>
+                    <AccordionContent className="max-w-md text-sm leading-relaxed text-muted-foreground">
+                      {text}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+              <Link
+                href="/app/models"
+                className="mt-7 inline-flex items-center gap-3 py-2 text-sm text-primary"
+              >
+                Посмотреть валидацию
+                <IconArrowUpRight size={16} />
+              </Link>
+            </div>
+            <TerrainView />
+          </div>
+        </section>
+        <Outputs />
+      </main>
+      <CinematicFooter />
     </div>
   );
 }

@@ -1,4 +1,8 @@
 "use client";
+import { SelectControl, SelectOption } from "@/components/ui/select-control";
+
+import { Label } from "@/components/ui/label";
+
 import { useRef, useState, useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { api, type Schema } from "@/lib/api";
@@ -54,20 +58,20 @@ export function Exports({ runId }: { runId: string }) {
         : 2000,
   });
   return (
-    <div className="stack">
-      <div className="actions">
-        <label className="field">
+    <div className="grid min-w-0 gap-4">
+      <div className="flex flex-wrap items-end gap-3">
+        <Label className="grid min-w-0 gap-2 text-sm font-normal text-muted-foreground">
           Формат
-          <select
+          <SelectControl
             aria-label="Формат"
             value={format}
-            onChange={(e) => setFormat(e.target.value)}
+            onValueChange={(value) => setFormat(value)}
           >
-            <option value="csv">CSV · временной ряд</option>
-            <option value="geojson">GeoJSON · контур и итог</option>
-            <option value="json">JSON · полный результат</option>
-          </select>
-        </label>
+            <SelectOption value="csv">CSV · временной ряд</SelectOption>
+            <SelectOption value="geojson">GeoJSON · контур и итог</SelectOption>
+            <SelectOption value="json">JSON · полный результат</SelectOption>
+          </SelectControl>
+        </Label>
         <Button
           variant="outline"
           disabled={start.isPending}
@@ -92,7 +96,7 @@ export function Exports({ runId }: { runId: string }) {
           }}
         />
       )}
-      <div className="actions">
+      <div className="flex flex-wrap items-end gap-3">
         {exported.data?.download_url && (
           <Button asChild>
             <a href={exported.data.download_url} download>
@@ -113,7 +117,7 @@ export function Exports({ runId }: { runId: string }) {
         )}
       </div>
       {exported.data && (
-        <p className="micro muted break-all">
+        <p className="text-xs leading-relaxed text-muted-foreground break-all">
           Ссылка действует до{" "}
           {new Date(exported.data.expires_at).toLocaleString("ru-RU")} ·
           SHA-256: {exported.data.hash || "готовится"}

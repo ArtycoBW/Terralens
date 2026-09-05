@@ -29,7 +29,7 @@ test("рисование контура мышью передаёт валидн
   await page
     .getByRole("button", { name: "Нарисовать контур", exact: true })
     .click();
-  const box = await page.locator(".map-canvas").boundingBox();
+  const box = await page.locator("[data-map-canvas]").boundingBox();
   if (!box) throw new Error("Карта отсутствует");
   const corners = [
     [0.3, 0.45],
@@ -74,6 +74,7 @@ test("недоступный WebGL оставляет рабочую альте�
   ).toBeVisible();
   if (isMobile)
     await page.getByRole("button", { name: "Показать панель" }).click();
+  await page.getByRole("tab", { name: "Создать", exact: true }).click();
   await page.getByText("Контур GeoJSON / ввод без карты").click();
   await expect(
     page.getByRole("textbox", { name: "Геометрия GeoJSON" }),
@@ -85,9 +86,12 @@ test("лендинг доступен без WebGL и без движения", 
     "Состояние полей",
   );
   await expect(
-    page.getByRole("link", { name: "Исследовать поле" }),
+    page.getByRole("link", { name: "Исследовать поле" }).first(),
   ).toBeVisible();
-  await expect(page.locator(".planet-canvas")).not.toHaveClass(/ready/);
+  await expect(page.locator("[data-terrain]")).not.toHaveAttribute(
+    "data-ready",
+    "true",
+  );
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,
@@ -102,9 +106,11 @@ test("пустое пространство и доступный ввод GeoJS
   await page.goto("/app");
   if (isMobile)
     await page.getByRole("button", { name: "Показать панель" }).click();
+  await page.getByRole("tab", { name: "Поля", exact: true }).click();
   await expect(
     page.getByText("Пока нет полей.", { exact: false }),
   ).toBeVisible();
+  await page.getByRole("tab", { name: "Создать", exact: true }).click();
   await page.getByText("Контур GeoJSON / ввод без карты").click();
   await expect(
     page.getByRole("textbox", { name: "Геометрия GeoJSON" }),
@@ -159,8 +165,12 @@ test("не допускает анализ только погоды", async ({ 
 test("отклоняет перевёрнутый период", async ({ page }) => {
   await mockApi(page);
   await page.goto(`/app/polygons/${polygon.id}`);
-  await page.getByLabel("Начало периода").fill("2024-07-01");
-  await page.getByLabel("Конец периода").fill("2024-06-01");
+  await page
+    .getByRole("textbox", { name: "Начало периода", exact: true })
+    .fill("2024-07-01");
+  await page
+    .getByRole("textbox", { name: "Конец периода", exact: true })
+    .fill("2024-06-01");
   await page
     .getByRole("button", { name: /Запустить спутниковый анализ/ })
     .click();
@@ -171,7 +181,10 @@ test("отклоняет перевёрнутый период", async ({ page }
 test("показывает прогресс и отмену задачи", async ({ page }) => {
   await mockApi(page, { state: "running" });
   await page.goto(`/app/analyses/${run.id}`);
-  await expect(page.getByRole("progressbar")).toHaveAttribute("value", "0.3");
+  await expect(page.getByRole("progressbar")).toHaveAttribute(
+    "aria-valuenow",
+    "30",
+  );
   await page.getByRole("button", { name: "Отменить задачу" }).click();
   await expect(
     page.getByText("Отмена запрошена", { exact: false }),
@@ -196,7 +209,9 @@ test("дневная таблица отличает ноль от отсутс�
   await expect(
     page.getByRole("cell", { name: "Недоступно", exact: true }),
   ).toBeVisible();
-  await page.getByLabel("Выбрать дату (клавиатура)").fill("2024-06-02");
+  await page
+    .getByRole("textbox", { name: "Выбрать дату (клавиатура)", exact: true })
+    .fill("2024-06-02");
   await expect(page.getByText("Все значения за 2024-06-02")).toBeVisible();
 });
 test("нет данных не обозначается нормальным состоянием", async ({ page }) => {
@@ -227,7 +242,8 @@ test("сравнение восстанавливается из URL", async ({ 
   await page.goto(`/app/compare?runs=${run.id}&alignment=calendar`);
   await expect(page.getByRole("checkbox")).toBeChecked();
   await expect(page.getByRole("columnheader", { name: "Ряд 1" })).toBeVisible();
-  await page.getByLabel("Совмещение рядов").selectOption("day_of_year");
+  await page.getByRole("combobox", { name: "Совмещение рядов" }).click();
+  await page.getByRole("option", { name: "Месяц и день (сезоны)" }).click();
   await expect(page).toHaveURL(/alignment=day_of_year/);
 });
 test("метрики не подменяют официальный score", async ({ page }) => {
@@ -310,9 +326,11 @@ test("черновик контура восстанавливается пос�
   await page.goto("/app");
   if (isMobile)
     await page.getByRole("button", { name: "Показать панель" }).click();
+  await page.getByRole("tab", { name: "Создать", exact: true }).click();
   await page
     .getByRole("textbox", { name: "Название", exact: true })
     .fill("Черновик поля");
+  await page.getByRole("tab", { name: "Создать", exact: true }).click();
   await page.getByText("Контур GeoJSON / ввод без карты").click();
   await page
     .getByRole("textbox", { name: "Геометрия GeoJSON" })

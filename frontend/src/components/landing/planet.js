@@ -26,9 +26,9 @@ export function initPlanet(canvas, onReady = () => {}, onError = () => {}) {
   let disposed = false;
   const loadedRoots = [];
   const CONFIG = {
-    rimColor: "#c1faff",
+    rimColor: "#ecf0c5",
     rimPower: 2.4,
-    nightLights: 10,
+    nightLights: 5,
     terrainDepth: 0.33,
     terrainShade: 1.3,
     oceanGlint: 0.45,
@@ -36,8 +36,8 @@ export function initPlanet(canvas, onReady = () => {}, onError = () => {}) {
     oceanFlow: 3,
     oceanFlowSpeed: 0.8,
     oceanFlowScale: 2.1,
-    glowColor: "#3a6cff",
-    glowIntensity: 3.35,
+    glowColor: "#89975b",
+    glowIntensity: 1.8,
     planetRadius: 1.95,
     spin: 0.03,
     initRotation: 2.07,
@@ -52,19 +52,19 @@ export function initPlanet(canvas, onReady = () => {}, onError = () => {}) {
     cloud3Height: 1.075,
     cloud3Opacity: 0.5,
     cloud3Spin: 0.1,
-    bgColor: "#040a1e",
-    flameColor: "#3a6cff",
-    flameColor2: "#c1faff",
-    flameAmt: 0.15,
-    atmoColor: "#9fc4ff",
+    bgColor: "#13140e",
+    flameColor: "#89975b",
+    flameColor2: "#ecf0c5",
+    flameAmt: 0.025,
+    atmoColor: "#c6cd9a",
     atmoCount: 320,
     atmoSize: 22,
     atmoSpeed: 0.8,
-    starColor: "#cfe0ff",
-    starCount: 1400,
+    starColor: "#ecebdb",
+    starCount: 550,
     starSize: 1.6,
     starFlicker: 1,
-    markerColor: "#ffd27a",
+    markerColor: "#ebfc72",
     markerCount: 60,
     markerSize: 16,
     markerSpeed: 0.5,
@@ -861,7 +861,7 @@ export function initPlanet(canvas, onReady = () => {}, onError = () => {}) {
   function render() {
     if (disposed) return;
     raf = requestAnimationFrame(render);
-    if (document.hidden) {
+    if (document.hidden || window.scrollY > window.innerHeight * 1.25) {
       t0 = performance.now() / 1000;
       return;
     }
@@ -931,6 +931,7 @@ export function initPlanet(canvas, onReady = () => {}, onError = () => {}) {
     bloomComposer.dispose?.();
     finalComposer.dispose?.();
     renderer.dispose();
+    renderer.forceContextLoss();
     loadedRoots.forEach(disposeObject);
     disposeObject(scene);
     draco.dispose();

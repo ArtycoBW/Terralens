@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "@fontsource-variable/inter";
+import "@fontsource-variable/golos-text";
+import "@fontsource-variable/jetbrains-mono";
 export const metadata: Metadata = {
   title: {
     default: "TerraLens — увидеть состояние поля",
@@ -15,9 +16,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru">
+    <html lang="ru" className="dark">
       <body>
-        <a className="skip-link" href="#main">
+        <a
+          className="fixed -top-20 left-4 z-[100] rounded-md bg-primary px-4 py-3 text-primary-foreground focus:top-3"
+          href="#main"
+        >
           К содержимому
         </a>
         {children}

@@ -1,4 +1,24 @@
 "use client";
+import { DateField } from "@/components/ui/date-field";
+import { Textarea } from "@/components/ui/textarea";
+
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from "@/components/ui/table";
+
+import { SelectControl, SelectOption } from "@/components/ui/select-control";
+
+import { Checkbox } from "@/components/ui/checkbox";
+
+import { Input } from "@/components/ui/input";
+
+import { Label } from "@/components/ui/label";
+
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -20,6 +40,7 @@ import {
   bounds,
   type FieldGeometry,
 } from "@/lib/geometry";
+import { ConfirmAction } from "@/components/ui/confirm-action";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -57,8 +78,7 @@ export function FieldDetail({ id }: { id: string }) {
     [to, setTo] = useState("2024-06-30"),
     [years, setYears] = useState(3),
     [sources, setSources] = useState(["sentinel2", "landsat", "era5_land"]),
-    [refresh, setRefresh] = useState(false),
-    [validation, setValidation] = useState<Error | null>(null);
+    [refresh, setRefresh] = useState(false);
   const key = useRef<{ body: string; key: string } | null>(null);
   const analyse = useMutation({
     mutationFn: () => {
@@ -113,27 +133,35 @@ export function FieldDetail({ id }: { id: string }) {
       router.push("/app/polygons");
     },
   });
-  if (polygon.isPending) return <div className="page-pad">Загружаем поле…</div>;
+  if (polygon.isPending)
+    return (
+      <div className="min-w-0 px-4 py-7 sm:px-7 lg:px-10 lg:py-9 [&_h1]:text-[clamp(1.65rem,2.5vw,2.25rem)] [&_h1]:font-normal [&_h1]:leading-tight [&_h1]:tracking-[-0.035em] [&_h2]:text-xl [&_h2]:font-medium [&_h2]:tracking-tight">
+        Загружаем поле…
+      </div>
+    );
   if (!polygon.data)
     return (
-      <div className="page-pad">
+      <div className="min-w-0 px-4 py-7 sm:px-7 lg:px-10 lg:py-9 [&_h1]:text-[clamp(1.65rem,2.5vw,2.25rem)] [&_h1]:font-normal [&_h1]:leading-tight [&_h1]:tracking-[-0.035em] [&_h2]:text-xl [&_h2]:font-medium [&_h2]:tracking-tight">
         <ErrorNotice error={polygon.error} />
         <Link href="/app/polygons">Вернуться к полям</Link>
       </div>
     );
   const p = polygon.data;
   return (
-    <div className="page-pad">
-      <Link href="/app/polygons" className="small muted">
+    <div className="min-w-0 px-4 py-7 sm:px-7 lg:px-10 lg:py-9 [&_h1]:text-[clamp(1.65rem,2.5vw,2.25rem)] [&_h1]:font-normal [&_h1]:leading-tight [&_h1]:tracking-[-0.035em] [&_h2]:text-xl [&_h2]:font-medium [&_h2]:tracking-tight">
+      <Link
+        href="/app/polygons"
+        className="text-sm leading-relaxed text-muted-foreground"
+      >
         ← Все поля
       </Link>
-      <div className="page-heading">
+      <div className="mb-7 flex flex-wrap items-start justify-between gap-5 [&>div:first-child]:min-w-0 [&_h1]:mb-2">
         <div>
-          <p className="eyebrow mt-5">
+          <p className="mb-2 text-xs font-medium text-muted-foreground mt-5">
             Паспорт территории / v{p.current_version}
           </p>
           <h1>{p.name}</h1>
-          <p className="small muted">
+          <p className="text-sm leading-relaxed text-muted-foreground">
             {number(p.area_ha, 2)} га · {p.crop_type || "Культура неизвестна"} ·
             Источник контура: {p.source}
           </p>
@@ -143,87 +171,84 @@ export function FieldDetail({ id }: { id: string }) {
           polygon={p}
         />
       </div>
-      <ErrorNotice error={polygon.error || remove.error || validation} />
-      <div className="grid-2">
-        <section className="panel stack">
+      <ErrorNotice error={polygon.error || remove.error} />
+      <div className="grid min-w-0 gap-6 xl:grid-cols-2">
+        <section className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6 grid min-w-0 gap-4">
           <div>
             <h2>Новый анализ</h2>
-            <p className="small muted">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               История растительности за выбранный период
             </p>
           </div>
-          <div className="grid-2">
-            <label className="field">
-              Начало периода
-              <input
-                type="date"
-                value={from}
-                min={caps.data?.supported_period.from}
-                max={caps.data?.supported_period.to}
-                onChange={(e) => setFrom(e.target.value)}
-              />
-            </label>
-            <label className="field">
-              Конец периода
-              <input
-                type="date"
-                value={to}
-                min={from}
-                max={caps.data?.supported_period.to}
-                onChange={(e) => setTo(e.target.value)}
-              />
-            </label>
+          <div className="grid min-w-0 gap-6 xl:grid-cols-2">
+            <DateField
+              label="Начало периода"
+              value={from}
+              min={caps.data?.supported_period.from}
+              max={caps.data?.supported_period.to}
+              onValueChange={(value) => setFrom(value)}
+            />
+            <DateField
+              label="Конец периода"
+              value={to}
+              min={from}
+              max={caps.data?.supported_period.to}
+              onValueChange={(value) => setTo(value)}
+            />
           </div>
-          <fieldset className="stack">
-            <legend className="field mb-2">Источники данных</legend>
+          <fieldset className="grid min-w-0 gap-4">
+            <legend className="grid min-w-0 gap-2 text-sm font-normal text-muted-foreground mb-2">
+              Источники данных
+            </legend>
             {[
               ["sentinel2", "Sentinel-2 · Earth Search"],
               ["landsat", "Landsat 8/9 · Planetary Computer"],
               ["era5_land", "Погода · ERA5 Seamless"],
             ].map(([s, t]) => (
-              <label className="check-row" key={s}>
-                <input
-                  type="checkbox"
+              <Label
+                className="flex items-center gap-3 text-sm font-normal text-foreground"
+                key={s}
+              >
+                <Checkbox
                   checked={sources.includes(s)}
-                  onChange={(e) =>
+                  onCheckedChange={(checked) =>
                     setSources(
-                      e.target.checked
+                      checked === true
                         ? [...sources, s]
                         : sources.filter((v) => v !== s),
                     )
                   }
                 />
                 {t}
-              </label>
+              </Label>
             ))}
           </fieldset>
-          <label className="field">
+          <Label className="grid min-w-0 gap-2 text-sm font-normal text-muted-foreground">
             Предыдущих сезонов для нормы
-            <select
+            <SelectControl
               value={years}
-              onChange={(e) => setYears(Number(e.target.value))}
+              onValueChange={(value) => setYears(Number(value))}
             >
               {[0, 1, 2, 3, 4, 5].map((y) => (
-                <option key={y} value={y}>
+                <SelectOption key={y} value={y}>
                   {y === 0
                     ? "Без сезонной нормы"
                     : `${y} ${y === 1 ? "сезон" : "сезонов"}`}
-                </option>
+                </SelectOption>
               ))}
-            </select>
-          </label>
-          <p className="micro muted">
+            </SelectControl>
+          </Label>
+          <p className="text-xs leading-relaxed text-muted-foreground">
             Для устойчивой нормы нужно от 3 сезонов. История увеличивает время
             сбора снимков; при недостатке данных результат будет явно отмечен.
           </p>
-          <label className="check-row">
-            <input
-              type="checkbox"
+          <Label className="flex items-center gap-3 text-sm font-normal text-foreground">
+            <Checkbox
               checked={refresh}
-              onChange={(e) => setRefresh(e.target.checked)}
+              onCheckedChange={(checked) => setRefresh(checked === true)}
             />
             Обновить данные источников, минуя кэш
-          </label>
+          </Label>
           <ErrorNotice error={analyse.error || caps.error} />
           <Button
             disabled={analyse.isPending || !caps.data?.active_model}
@@ -240,7 +265,7 @@ export function FieldDetail({ id }: { id: string }) {
             </p>
           )}
         </section>
-        <section className="panel stack">
+        <section className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6 grid min-w-0 gap-4">
           <h2>История анализов</h2>
           <ErrorNotice error={history.error} retry={() => history.refetch()} />
           {history.isPending ? (
@@ -249,14 +274,14 @@ export function FieldDetail({ id }: { id: string }) {
             history.data.map((r) => (
               <Link
                 key={r.id}
-                className="history-row"
+                className="flex flex-wrap items-center justify-between gap-3 border-b border-border/60 py-4 text-sm last:border-0"
                 href={`/app/analyses/${r.id}`}
               >
                 <div>
                   <p>
                     {r.period.from} — {r.period.to}
                   </p>
-                  <small className="muted">
+                  <small className="text-muted-foreground">
                     Версия контура {r.polygon_version}
                     {r.polygon_version !== p.current_version
                       ? " · предыдущая геометрия"
@@ -267,36 +292,38 @@ export function FieldDetail({ id }: { id: string }) {
               </Link>
             ))
           ) : (
-            <div className="empty">Анализов пока нет. Запустите первый.</div>
+            <div className="flex min-h-40 flex-col items-center justify-center gap-4 rounded-md border border-dashed border-border px-6 py-12 text-center text-sm leading-relaxed text-muted-foreground">
+              Анализов пока нет. Запустите первый.
+            </div>
           )}
         </section>
       </div>
-      <section className="panel mt-5">
+      <section className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6 mt-5">
         <h2>Происхождение и история культур</h2>
-        <div className="scroll-table">
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Начало</th>
-                <th>Конец</th>
-                <th>Культура</th>
-                <th>Источник</th>
-              </tr>
-            </thead>
-            <tbody>
+        <div className="max-w-full overflow-auto">
+          <Table className="text-sm">
+            <TableHeader>
+              <TableRow>
+                <TableHead>Начало</TableHead>
+                <TableHead>Конец</TableHead>
+                <TableHead>Культура</TableHead>
+                <TableHead>Источник</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {p.crop_seasons.map((s) => (
-                <tr key={s.id}>
-                  <td>{s.season_start}</td>
-                  <td>{s.season_end}</td>
-                  <td>{s.crop_type || "Неизвестна"}</td>
-                  <td>{s.origin}</td>
-                </tr>
+                <TableRow key={s.id}>
+                  <TableCell>{s.season_start}</TableCell>
+                  <TableCell>{s.season_end}</TableCell>
+                  <TableCell>{s.crop_type || "Неизвестна"}</TableCell>
+                  <TableCell>{s.origin}</TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
         {!p.crop_seasons.length && (
-          <p className="small muted mt-3">
+          <p className="text-sm leading-relaxed text-muted-foreground mt-3">
             Сезонная история не указана. Уверенность сравнения с нормой может
             быть снижена.
           </p>
@@ -309,23 +336,21 @@ export function FieldDetail({ id }: { id: string }) {
           }}
           title="Геометрия и происхождение"
         />
-        <Button
-          variant="destructive"
-          size="sm"
-          className="mt-5"
-          disabled={remove.isPending}
-          onClick={() => {
-            setValidation(null);
-            if (
-              window.confirm(
-                `Удалить поле «${p.name}» и связанную историю? Это действие нельзя отменить.`,
-              )
-            )
-              remove.mutate();
-          }}
+        <ConfirmAction
+          title="Удалить поле?"
+          description={`Поле «${p.name}» и связанная история будут удалены. Это действие нельзя отменить.`}
+          action="Удалить поле"
+          onConfirm={() => remove.mutateAsync()}
         >
-          Удалить поле
-        </Button>
+          <Button
+            variant="destructive"
+            size="sm"
+            className="mt-5"
+            disabled={remove.isPending}
+          >
+            Удалить поле
+          </Button>
+        </ConfirmAction>
       </section>
     </div>
   );
@@ -388,35 +413,35 @@ function FieldEditor({ polygon: p }: { polygon: Polygon }) {
             в истории.
           </DialogDescription>
         </DialogHeader>
-        <div className="stack">
-          <label className="field">
+        <div className="grid min-w-0 gap-4">
+          <Label className="grid min-w-0 gap-2 text-sm font-normal text-muted-foreground">
             Название поля
-            <input
+            <Input
               maxLength={200}
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-          </label>
-          <label className="field">
+          </Label>
+          <Label className="grid min-w-0 gap-2 text-sm font-normal text-muted-foreground">
             Текущая культура
-            <input
+            <Input
               maxLength={100}
               value={crop}
               onChange={(e) => setCrop(e.target.value)}
             />
-          </label>
-          <label className="field">
+          </Label>
+          <Label className="grid min-w-0 gap-2 text-sm font-normal text-muted-foreground">
             Геометрия GeoJSON
-            <textarea
+            <Textarea
               value={geometry}
               onChange={(e) => setGeometry(e.target.value)}
             />
-          </label>
+          </Label>
           <Button variant="outline" onClick={() => setMapOpen(!mapOpen)}>
             {mapOpen ? "Скрыть карту" : "Редактировать контур на карте"}
           </Button>
           {mapOpen && (
-            <div className="edit-map">
+            <div className="[&_.map-wrap]:h-[350px] [&_.map-wrap]:min-h-[350px] [&_.map-legend]:hidden">
               <EditableMap
                 items={[]}
                 focus={mapFocus}
@@ -425,7 +450,7 @@ function FieldEditor({ polygon: p }: { polygon: Polygon }) {
                 onBounds={() => {}}
                 onDraw={(g) => setGeometry(JSON.stringify(g))}
               />
-              <p className="micro muted">
+              <p className="text-xs leading-relaxed text-muted-foreground">
                 Выберите контур, затем перетаскивайте вершины; промежуточные
                 точки добавляют вершины. GeoJSON выше обновляется автоматически.
               </p>
@@ -433,38 +458,35 @@ function FieldEditor({ polygon: p }: { polygon: Polygon }) {
           )}
           <h3>Сезоны культур</h3>
           {seasons.map((s, i) => (
-            <div className="season-row" key={i}>
-              <label className="field">
-                Начало
-                <input
-                  type="date"
-                  value={s.season_start}
-                  onChange={(e) =>
-                    setSeasons(
-                      seasons.map((v, j) =>
-                        i === j ? { ...v, season_start: e.target.value } : v,
-                      ),
-                    )
-                  }
-                />
-              </label>
-              <label className="field">
-                Конец
-                <input
-                  type="date"
-                  value={s.season_end}
-                  onChange={(e) =>
-                    setSeasons(
-                      seasons.map((v, j) =>
-                        i === j ? { ...v, season_end: e.target.value } : v,
-                      ),
-                    )
-                  }
-                />
-              </label>
-              <label className="field">
+            <div
+              className="grid grid-cols-2 items-end gap-3 sm:grid-cols-[1fr_1fr_1fr_32px]"
+              key={i}
+            >
+              <DateField
+                label="Начало"
+                value={s.season_start}
+                onValueChange={(value) =>
+                  setSeasons(
+                    seasons.map((v, j) =>
+                      i === j ? { ...v, season_start: value } : v,
+                    ),
+                  )
+                }
+              />
+              <DateField
+                label="Конец"
+                value={s.season_end}
+                onValueChange={(value) =>
+                  setSeasons(
+                    seasons.map((v, j) =>
+                      i === j ? { ...v, season_end: value } : v,
+                    ),
+                  )
+                }
+              />
+              <Label className="grid min-w-0 gap-2 text-sm font-normal text-muted-foreground">
                 Культура
-                <input
+                <Input
                   value={s.crop_type || ""}
                   onChange={(e) =>
                     setSeasons(
@@ -476,7 +498,7 @@ function FieldEditor({ polygon: p }: { polygon: Polygon }) {
                     )
                   }
                 />
-              </label>
+              </Label>
               <Button
                 aria-label={`Удалить сезон ${i + 1}`}
                 variant="ghost"

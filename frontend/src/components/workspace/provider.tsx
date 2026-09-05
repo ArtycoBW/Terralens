@@ -1,4 +1,6 @@
 "use client";
+import { Button } from "@/components/ui/button";
+
 import {
   createContext,
   useContext,
@@ -77,33 +79,44 @@ export function WorkspaceProvider({ children }: { children: React.ReactNode }) {
   }
   if (error)
     return (
-      <main id="main" className="connection">
+      <main
+        id="main"
+        className="mx-auto my-[15dvh] grid max-w-xl gap-5 px-6 [&_h1]:text-3xl"
+      >
         <h1>Не удалось открыть пространство</h1>
         <p role="alert">{error.message}</p>
-        <button className="primary-link" onClick={connect}>
+        <Button variant="ghost" className="mt-3 w-fit" onClick={connect}>
           Повторить подключение
-        </button>
+        </Button>
       </main>
     );
   if (expired && session)
     return (
-      <main id="main" className="connection">
+      <main
+        id="main"
+        className="mx-auto my-[15dvh] grid max-w-xl gap-5 px-6 [&_h1]:text-3xl"
+      >
         <h1>Сессия истекла</h1>
         <p>Данные предыдущего пространства скрыты. Начните новую сессию.</p>
-        <button
-          className="primary-link"
+        <Button
+          variant="ghost"
+          className="mt-3 w-fit"
           onClick={() => {
             setSession(null);
             void connect();
           }}
         >
           Создать новое пространство
-        </button>
+        </Button>
       </main>
     );
   if (!session)
     return (
-      <main id="main" className="connection" aria-busy="true">
+      <main
+        id="main"
+        className="mx-auto my-[15dvh] grid max-w-xl gap-5 px-6 [&_h1]:text-3xl"
+        aria-busy="true"
+      >
         Подключаем рабочее пространство…
       </main>
     );

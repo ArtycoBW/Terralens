@@ -1,4 +1,15 @@
 "use client";
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from "@/components/ui/table";
+
+import { Badge } from "@/components/ui/badge";
+
 import { useQuery } from "@tanstack/react-query";
 import { allPages, number } from "@/lib/api";
 import { ErrorNotice, JsonDetails } from "@/components/workspace/common";
@@ -42,18 +53,20 @@ export function Models() {
     queryFn: ({ signal }) => allPages<Model>("models", signal),
   });
   return (
-    <div className="page-pad">
-      <div className="page-heading">
+    <div className="min-w-0 px-4 py-7 sm:px-7 lg:px-10 lg:py-9 [&_h1]:text-[clamp(1.65rem,2.5vw,2.25rem)] [&_h1]:font-normal [&_h1]:leading-tight [&_h1]:tracking-[-0.035em] [&_h2]:text-xl [&_h2]:font-medium [&_h2]:tracking-tight">
+      <div className="mb-7 flex flex-wrap items-start justify-between gap-5 [&>div:first-child]:min-w-0 [&_h1]:mb-2">
         <div>
-          <p className="eyebrow">Воспроизводимое восстановление</p>
+          <p className="mb-2 text-xs font-medium text-muted-foreground">
+            Воспроизводимое восстановление
+          </p>
           <h1>Модели и валидация</h1>
-          <p className="small muted">
+          <p className="text-sm leading-relaxed text-muted-foreground">
             Версии артефактов и фактические метрики из реестра сервера.
           </p>
         </div>
       </div>
       <ErrorNotice error={models.error} retry={() => models.refetch()} />
-      <div className="notice mb-5">
+      <div className="rounded-md border border-warning/25 bg-warning/5 px-4 py-3 text-sm leading-relaxed break-words text-warning mb-5">
         Это локальная валидация на анонимном benchmark. Assessment повторно
         использовал известные данные и не является слепым тестом. Официальный
         результат организаторов пока не опубликован.
@@ -61,47 +74,54 @@ export function Models() {
       {models.isPending ? (
         <p>Загружаем реестр…</p>
       ) : !models.data?.length ? (
-        <div className="empty">Модель пока не зарегистрирована оператором.</div>
+        <div className="flex min-h-40 flex-col items-center justify-center gap-4 rounded-md border border-dashed border-border px-6 py-12 text-center text-sm leading-relaxed text-muted-foreground">
+          Модель пока не зарегистрирована оператором.
+        </div>
       ) : (
         models.data.map((m) => (
-          <section className="panel stack mb-5" key={m.id}>
-            <div className="page-heading">
+          <section
+            className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6 grid min-w-0 gap-4 mb-5"
+            key={m.id}
+          >
+            <div className="mb-7 flex flex-wrap items-start justify-between gap-5 [&>div:first-child]:min-w-0 [&_h1]:mb-2">
               <div>
                 <h2>{m.id}</h2>
-                <p className="micro muted">
+                <p className="text-xs leading-relaxed text-muted-foreground">
                   Зарегистрирована{" "}
                   {new Date(m.created_at).toLocaleString("ru-RU")} ·{" "}
                   {m.supported_modes.join(", ")}
                 </p>
               </div>
-              <span className="pill">{m.active ? "Активная" : "Архивная"}</span>
+              <Badge className="w-fit max-w-full shrink-0 border-border bg-secondary text-xs font-normal text-secondary-foreground">
+                {m.active ? "Активная" : "Архивная"}
+              </Badge>
             </div>
-            <p className="micro muted break-all">
+            <p className="text-xs leading-relaxed text-muted-foreground break-all">
               SHA-256 манифеста: {m.artifact_hash}
             </p>
-            <div className="scroll-table">
-              <table className="data-table">
-                <thead>
-                  <tr>
-                    <th>Разбиение / сценарий</th>
-                    <th>RMSE</th>
-                    <th>MAE</th>
-                    <th>N</th>
-                    <th>GapScore</th>
-                  </tr>
-                </thead>
-                <tbody>
+            <div className="max-w-full overflow-auto">
+              <Table className="text-sm">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Разбиение / сценарий</TableHead>
+                    <TableHead>RMSE</TableHead>
+                    <TableHead>MAE</TableHead>
+                    <TableHead>N</TableHead>
+                    <TableHead>GapScore</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
                   {metricRows(m.metrics).map((r, i) => (
-                    <tr key={i}>
-                      <td>{r.split}</td>
-                      <td>{number(r.rmse, 5)}</td>
-                      <td>{number(r.mae, 5)}</td>
-                      <td>{number(r.n, 0)}</td>
-                      <td>{number(r.gap, 2)}</td>
-                    </tr>
+                    <TableRow key={i}>
+                      <TableCell>{r.split}</TableCell>
+                      <TableCell>{number(r.rmse, 5)}</TableCell>
+                      <TableCell>{number(r.mae, 5)}</TableCell>
+                      <TableCell>{number(r.n, 0)}</TableCell>
+                      <TableCell>{number(r.gap, 2)}</TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             </div>
             <JsonDetails
               value={m.metrics}

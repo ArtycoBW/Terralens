@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 export function PlanetView() {
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -47,11 +48,20 @@ export function PlanetView() {
     };
   }, []);
   return (
-    <div className="planet-backdrop" aria-hidden="true">
-      <div className="planet-poster" />
+    <div className="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
+      <Image
+        src="/assets/earth/planet-poster.webp"
+        alt=""
+        fill
+        preload
+        sizes="100vw"
+        className="object-cover"
+      />
       <canvas
         ref={canvas}
-        className={ready ? "planet-canvas ready" : "planet-canvas"}
+        data-planet
+        data-ready={ready}
+        className="absolute inset-0 h-full w-full opacity-0 transition-opacity duration-700 data-[ready=true]:opacity-100"
       />
     </div>
   );
