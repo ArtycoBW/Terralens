@@ -2,7 +2,7 @@
 
 Для изменений действует [единый формат коммитов](../CONTRIBUTING.md): `type(scope): описание на русском`.
 
-Версия проектного контракта v1. Это нормативный дизайн, не текущие работающие endpoints. Реализация генерирует `docs/openapi.json` из DRF и TypeScript-типы из него. Backend и frontend не должны независимо менять enum/поля. Изменения контракта сначала фиксируются здесь/в schema и fixtures.
+Версия контракта v1. Реализованная серверная схема генерируется из DRF в `docs/openapi.json` и проверяется в CI. Генерация TypeScript относится к отдельному этапу frontend. Backend и frontend не должны независимо менять enum/поля. Изменения контракта фиксируются здесь, в schema и fixtures.
 
 ## 1. Общие правила
 
@@ -61,6 +61,7 @@ Error envelope:
 | POST /exports | run_id,format=csv/geojson/json | 202 export_id/job_id |
 | GET /exports/{id} | — | status, filename, hash, expires_at, download_url nullable |
 | GET /exports/{id}/download | session | streaming file /410 expired |
+| GET /exports/{id}/manifest | session | manifest с checksum, конфигурацией, геометрией и provenance /410 expired |
 | GET /models | — | опубликованные ModelSummary, metrics scopes |
 | POST /comparisons | run_ids ≤4,alignment | 200 summaries/series refs, не новые ML-расчёты |
 
@@ -73,6 +74,8 @@ Session создание — исключение для bootstrap без сущ
 `CandidatePolygon`: candidate_id,geometry,bbox,area_ha,name nullable,source,source_ref,source_date,confidence nullable,boundary_kind=`mapped_landuse|derived_cropland_candidate`,expires_at. Не связывать candidate с benchmark AOI.
 
 `Polygon`: id,workspace_id,name,region_id nullable,current_version,geometry,geometry_hash,area_ha,source,source_ref,crop_type nullable,created_at,updated_at,latest_run_id nullable. В список допускается geometry omission при explicit lightweight=true.
+
+`Polygon.crop_seasons`: список `{id,season_start,season_end,crop_type,origin}`. POST/PATCH принимают `crop_seasons` без id/origin; PATCH заменяет список целиком. Сезоны включают обе граничные даты и не пересекаются. Происхождение пользовательской записи — `user`; история фиксируется в конфигурации анализа. Статическая `crop_type` не переносится на прошлые годы. `latest_run_id` относится только к текущей версии геометрии.
 
 Run creation example (UUID значения иллюстративны; это schema example, не реальный run):
 
@@ -117,6 +120,14 @@ Response 202: `{run_id, job_id, state:"queued", reused:false}`. Повтор о�
 ```
 
 Числа примера условны. `reconstructed` — итоговое значение continuous series, включая сохранённое clean observation на наблюдаемой дате; различие указывает origin. `clean_primary` при rejected observation=null, raw остаётся observed_primary. origin=unavailable требует reconstructed=null. Observed coverage считается по пригодным наблюдениям, не по числу восстановленных точек; точное определение `observed_days` закрепить в schema description.
+
+При наличии двух сенсоров primary выбирается после QA по приоритету Sentinel-2 → Landsat → MODIS; `sensors` сохраняет отдельные исходные значения. Несколько сцен одной даты не увеличивают число независимых наблюдаемых дней. Поддерживаемые live-источники текущей версии: Sentinel-2, Landsat 8/9 и Open-Meteo ERA5-Seamless; MODIS в live не подключён. Ключ запроса `era5_land` сохранён для совместимости, но фактический provider — `open_meteo_era5_seamless`: температура ERA5-Land и осадки ERA5 явно указаны в provenance. Чистая модель ERA5-Land не предоставляет осадки в этом API.
+
+В live норма разделяется по сенсорам и предыдущим сезонам. Для gap-дней используется преобладающий сенсор текущего периода с флагом `reference_sensor_*`. Поля `climatology_mean/std` содержат устойчивый центр (медиану годовых медиан) и масштаб 1,4826×MAD; флаг `robust_reference` фиксирует метод. Неизвестная история культуры отражается в качестве и уверенности событий.
+
+`prediction_interval.method=empirical_residual` означает калибровку на отдельной benchmark-выборке; в live используется `empirical_residual_domain_shift` и флаг `domain_shift`. Уровень обозначает номинальное покрытие, а не подтверждённую точность в новом регионе. Наблюдаемые точки и `unavailable` не получают искусственных интервалов.
+
+Сравнение возвращает `axis` и `aligned_series` с исходной датой, оценкой, origin и флагами качества каждого run. `calendar` использует ISO-даты; `day_of_year` — ключ MM-DD, сохраняя 29 февраля. Ряды не заполняются выдуманными значениями. Экспорт содержит `manifest_url` с теми же ограничениями сессии и срока хранения, что и download.
 
 При `resolution=weekly|monthly` возвращается отдельная `AggregatedPoint` schema: bucket_start/end, estimate_mean/min/max, observed_count, available_day_count, total_day_count, minimum_z, quality_flags. Не выдавать агрегированное среднее за daily observed и не усреднять границы prediction interval с заявлением прежнего уровня покрытия. Негативные интервалы всегда запрашиваются независимо в точных датах. Диапазон response включает `actual_resolution`, чтобы frontend подписывал масштаб.
 
