@@ -1,0 +1,9 @@
+node_modules/
+.next/
+references/
+public/
+src/lib/api-schema.ts
+src/data/
+pnpm-lock.yaml
+next-env.d.ts
+src/components/landing/planet.js

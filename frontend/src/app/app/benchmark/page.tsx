@@ -1,2 +1,4 @@
-import {Benchmark} from "@/components/analysis/benchmark";
-export default function Page(){return <Benchmark/>}
+import { Benchmark } from "@/components/analysis/benchmark";
+export default function Page() {
+  return <Benchmark />;
+}
