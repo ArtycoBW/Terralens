@@ -1,0 +1,8 @@
+input: train-dataset.zip
+output: artifacts/model
+algorithm: linear
+seed: 42
+max_gap_days: 60
+max_edge_days: 14
+season_start_month: 1
+clip: false

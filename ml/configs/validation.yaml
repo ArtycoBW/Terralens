@@ -1,0 +1,12 @@
+input: train-dataset.zip
+output: artifacts/evaluation
+seed: 42
+mask_seeds: [42, 137]
+mask_fraction: 0.15
+folds: 5
+holdout_fraction: 0.2
+algorithms: [neighbor_mean, linear, pchip]
+max_gap_days: 60
+max_edge_days: 14
+season_start_month: 1
+clip: false
