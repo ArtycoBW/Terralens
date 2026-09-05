@@ -124,6 +124,11 @@ try {
   await page
     .getByRole("heading", { name: "Севилья · проверка завершена", exact: true })
     .waitFor();
+  const renamed = await (
+    await page.request.get(`${base}/api/v1/polygons/${evidence.run.polygon_id}`)
+  ).json();
+  if (renamed.current_version !== evidence.run.polygon_version)
+    throw new Error("Переименование изменило версию контура");
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(`${base}/app/analyses/${evidence.run_id}`);
   await page.getByRole("tab", { name: "Динамика NDVI" }).waitFor();

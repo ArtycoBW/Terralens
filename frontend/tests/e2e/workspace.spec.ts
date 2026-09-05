@@ -1,5 +1,25 @@
 import { test, expect } from "@playwright/test";
 import { mockApi, polygon, run } from "./fixtures";
+test("переименование не отправляет неизменённую геометрию", async ({
+  page,
+}) => {
+  await mockApi(page);
+  await page.goto(`/app/polygons/${polygon.id}`);
+  await page.getByRole("button", { name: "Редактировать поле" }).click();
+  await page
+    .getByRole("textbox", { name: "Название поля", exact: true })
+    .fill("Новое имя без нового контура");
+  const response = page.waitForResponse(
+    (r) =>
+      r.url().endsWith(`/api/v1/polygons/${polygon.id}`) &&
+      r.request().method() === "PATCH",
+  );
+  await page.getByRole("button", { name: "Сохранить изменения" }).click();
+  const request = (await response).request().postDataJSON();
+  expect(request.name).toBe("Новое имя без нового контура");
+  expect(request).not.toHaveProperty("geometry");
+  expect(request.expected_version).toBe(1);
+});
 test("рисование контура мышью передаёт валидный GeoJSON в форму", async ({
   page,
   isMobile,

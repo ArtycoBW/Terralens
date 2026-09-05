@@ -14,7 +14,12 @@ import {
   type Capabilities,
   type Schema,
 } from "@/lib/api";
-import { parseGeometry, validPeriod, bounds } from "@/lib/geometry";
+import {
+  parseGeometry,
+  validPeriod,
+  bounds,
+  type FieldGeometry,
+} from "@/lib/geometry";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -347,13 +352,19 @@ function FieldEditor({ polygon: p }: { polygon: Polygon }) {
   const mutation = useMutation({
     mutationFn: () => {
       if (!name.trim()) throw new Error("Название обязательно");
+      const parsedGeometry = parseGeometry(geometry);
+      const savedGeometry = p.geometry as FieldGeometry;
+      const geometryChanged =
+        parsedGeometry.type !== savedGeometry.type ||
+        JSON.stringify(parsedGeometry.coordinates) !==
+          JSON.stringify(savedGeometry.coordinates);
       return api<Polygon>(`polygons/${p.id}`, {
         method: "PATCH",
         body: JSON.stringify({
           expected_version: p.current_version,
           name: name.trim(),
           crop_type: crop || null,
-          geometry: parseGeometry(geometry),
+          ...(geometryChanged ? { geometry: parsedGeometry } : {}),
           crop_seasons: seasons,
         }),
       });
