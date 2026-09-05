@@ -1,3 +1,4 @@
+import { isIsoDate } from "./dates";
 import { z } from "zod";
 const position = z.tuple([
   z.number().min(-180).max(180),
@@ -52,6 +53,7 @@ export function validPeriod(
   maximum: string,
   maxDays: number,
 ) {
+  if (!isIsoDate(from) || !isIsoDate(to)) return false;
   const days = (Date.parse(to) - Date.parse(from)) / 86400000 + 1;
   return (
     Number.isFinite(days) &&
