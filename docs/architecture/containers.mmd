@@ -1,0 +1,33 @@
+flowchart TB
+    user[Пользователь · браузер]
+    geocoding[Nominatim · поиск региона]
+    tiles[OpenStreetMap · тайлы]
+    sources[Earth Search / Planetary Computer / Open-Meteo / OSM]
+    subgraph app[TerraLens · Docker Compose]
+        web[Next.js · React / карта / графики]
+        api[Django / DRF · HTTP API]
+        broker[(Redis · Celery broker / cache)]
+        worker[Celery worker · providers + terralens_ml]
+        scheduler[Celery Beat · reconcile / retention]
+        db[(PostgreSQL / PostGIS)]
+        files[(Artifact volume · snapshots / models / exports)]
+        web -->|same-origin /api/v1| api
+        api -->|SQL · транзакции| db
+        api -->|enqueue after commit| broker
+        scheduler -->|периодические задания| broker
+        broker -->|job_id| worker
+        worker -->|progress / результаты| db
+        worker -->|read / write · SHA-256| files
+        api -->|download / registry| files
+    end
+    api -->|HTTPS · geocoding| geocoding
+    user -->|HTTP · localhost:3001| web
+    api -->|HTTPS · geocoding| geocoding
+    user -->|HTTPS · тайлы| tiles
+    worker -->|HTTPS · STAC / COG / JSON| sources
+    subgraph offline[Автономный запуск · API и БД не требуются]
+        input[Test CSV + model / manifest]
+        cli[terralens_ml predict / validate]
+        output[Submission CSV + checksum]
+        input --> cli --> output
+    end

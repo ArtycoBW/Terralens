@@ -1,78 +1,183 @@
-# TerraLens — спутниковая аналитика полей
+# TerraLens
 
+**Спутниковая история поля: от контура на карте до восстановленного NDVI и проверяемого результата.**
 
-TerraLens — рабочее название сервиса мониторинга сельскохозяйственных территорий: выбор поля на карте → автоматический сбор спутниковых и погодных данных → восстановление NDVI → поиск и объяснение негативных аномалий.
+[![Backend and ML](https://github.com/ArtycoBW/Terralens/actions/workflows/backend-ml.yml/badge.svg)](https://github.com/ArtycoBW/Terralens/actions/workflows/backend-ml.yml)
+[![Frontend](https://github.com/ArtycoBW/Terralens/actions/workflows/frontend.yml/badge.svg)](https://github.com/ArtycoBW/Terralens/actions/workflows/frontend.yml)
 
+TerraLens помогает изучить состояние сельскохозяйственной территории за выбранный период. Пользователь сохраняет контур, сервис собирает Sentinel-2, Landsat и погоду, восстанавливает пропуски NDVI и показывает отклонения от истории поля. Наблюдения, оценки модели и отсутствие данных различаются в интерфейсе и экспорте.
 
-## Запуск всего приложения
+В репозитории два проверяемых результата хакатона: **веб-приложение с реальным сбором данных** и **автономный ML-пакет с готовым submission**. Для запуска готовой версии обучение не требуется.
 
-Требуется Docker с запущенным daemon. Из корня:
+[Проверка для жюри](docs/JURY_GUIDE.md) · [Архитектура](docs/ARCHITECTURE.md) · [Контракт API](docs/03_API_CONTRACT.md) · [Модель и эксперименты](ml/README.md) · [Результаты проверок](docs/VERIFICATION.md)
+
+## Быстрый запуск
+
+Нужны Git и Docker с Compose v2 и запущенным daemon. На Windows удобно использовать Docker Desktop в режиме Linux containers. Во время первой сборки и для нового спутникового анализа нужен интернет.
 
 ```sh
+git clone https://github.com/ArtycoBW/Terralens.git
+cd Terralens
 docker compose up --build -d
+docker compose ps
 ```
 
-Откройте [TerraLens](http://localhost:3001), [рабочую карту](http://localhost:3001/app) или [Swagger](http://localhost:8000/api/v1/docs). Compose запускает Next.js, API, очередь, scheduler, PostGIS и Redis; миграции и регистрация модели выполняются автоматически. Next проксирует `/api/v1`, сохраняя единый origin для сессии и CSRF. Readiness: `http://localhost:8000/api/v1/health/ready`. Порты открыты только на loopback; порт frontend задаёт `FRONTEND_PORT` (по умолчанию 3001). Настройки — в `.env.example`; публичному размещению нужны собственные секреты, домен и HTTPS.
+| Адрес | Что проверить |
+|---|---|
+| [localhost:3001](http://localhost:3001) | Лендинг и вход в приложение |
+| [localhost:3001/app](http://localhost:3001/app) | Рабочая карта; гостевая сессия создаётся автоматически |
+| [localhost:8000/api/v1/docs](http://localhost:8000/api/v1/docs) | Swagger с фактической схемой API |
+| [localhost:8000/api/v1/health/ready](http://localhost:8000/api/v1/health/ready) | Готовность API, БД, Redis и зарегистрированной модели |
 
-## Автономный ML
+Compose запускает миграции и регистрирует включённую модель, затем поднимает API, worker, scheduler и frontend. Состояние `migrate: Exited (0)` ожидаемо. База и результаты сохраняются в Docker volumes между перезапусками.
 
-Python 3.12; установка только вычислительного пакета:
+Для локальной проверки `.env` не обязателен: действуют значения Compose. Параметры перечислены в [.env.example](.env.example). Порт frontend меняется через `FRONTEND_PORT`; по умолчанию заняты `3001`, `8000`, `54329`, `56379`, доступ только с этого компьютера. Для публичного размещения задайте свой секрет, разрешённые домены, HTTPS и secure cookies.
 
 ```sh
-python3 -m venv .venv-ml
-.venv-ml/bin/pip install ./ml
-.venv-ml/bin/python -m terralens_ml audit --input test-dataset.csv
-.venv-ml/bin/python -m terralens_ml predict --input test-dataset.csv --output artifacts/submission.csv --model ml/artifacts/final/manifest.json
-.venv-ml/bin/python -m terralens_ml validate-submission --input test-dataset.csv --submission artifacts/submission.csv
+docker compose logs --tail=80 backend worker
+# Остановить, сохранив данные
+docker compose stop
+# Возобновить работу
+docker compose up -d
 ```
 
-В Windows использовать `.venv-ml\Scripts\python.exe` и соответствующий `pip.exe`. После установки инференс не требует сети, Django, БД или Redis. Включённый артефакт — ансамбль трёх CatBoost residual моделей с полным покрытием обучающих целей, качеством контекста и динамикой сенсоров. На одинаковых development folds RMSE: **0,068260** вместо **0,069207** у предыдущей модели; на блоках **0,094173** вместо **0,095374**. Повторная assessment: **0,071194 / 0,092206**; точки улучшились, блоки ухудшились относительно предыдущей модели. Официальный test RMSE неизвестен. [Протокол, калибровка и ограничения](docs/analysis/crop-dynamics/REPORT.md). Готовый [submission](deliverables/submission.csv) содержит 3 112 проверенных строк.
+## Что попробовать за пять минут
 
-Для разработки всего Python workspace: `uv sync --frozen`; команды обучения, проверки и интеграции — в [ML README](ml/README.md) и [backend README](backend/README.md).
+1. Откройте карту. Найдите **Potsdam**, приблизьте территорию и выберите контур OSM либо нарисуйте собственный: минимум три вершины, затем клик по первой точке или Enter. Можно импортировать [готовый GeoJSON](backend/tests/fixtures/potsdam.geojson).
+2. Сохраните поле. В его паспорте выберите **01–10 июня 2024** и запустите анализ. Сбор обращается к внешним сервисам и может занимать несколько минут; прошлые сезоны входят в общий прогресс.
+3. Посмотрите NDVI, погоду, происхождение значений и раздел качества. `Частичные данные` — полноценный результат с перечисленными ограничениями, а не скрытая ошибка.
+4. Запустите другой период или другое поле. В разделе сравнения выберите до четырёх завершённых анализов, переключите календарные даты и совмещение сезонов.
+5. Скачайте CSV, GeoJSON или JSON и manifest. В разделе **Бенчмарк** проверьте готовые прогнозы на предоставленном наборе, а в **Модели** — версию и метрики.
 
-## Документы для начала разработки
+[Подробный маршрут жюри, пограничные случаи и команды воспроизведения](docs/JURY_GUIDE.md).
 
-2. [Продукт, приоритеты и матрица критериев](docs/02_PRODUCT_AND_ACCEPTANCE.md).
-6. [Общий контракт API и данных](docs/03_API_CONTRACT.md).
-7. [Каталог сценариев и пограничных случаев](docs/04_CASES_AND_TESTS.md).
+## Возможности приложения
 
-## Структура
+| Задача | Реализация |
+|---|---|
+| Найти и сохранить поле | Nominatim, контуры Overpass, рисование, GeoJSON, редактирование, версии геометрии и история культур |
+| Собрать наблюдения | Реальные STAC/COG Sentinel-2 и Landsat, маски облаков и качества, агрегация по контуру |
+| Восстановить NDVI | Общий Python runtime для worker и автономного CLI, ансамбль CatBoost, явное происхождение оценок |
+| Дать контекст | Погода, предыдущие сезоны, сезонная норма, интервалы прогноза и предупреждения |
+| Найти отклонения | Периоды снижения, степень уверенности, доступные подтверждения и рекомендации для проверки |
+| Сопоставить результат | До четырёх анализов, календарное/сезонное выравнивание, дневные ряды и качество |
+| Проверить и выгрузить | CSV / GeoJSON / JSON, manifests, SHA-256, snapshots источников, реестр моделей |
+| Управлять вычислениями | Фоновые задачи, общий прогресс, отмена, явный повтор, защита от повторного запуска |
+
+## Архитектура
+
+![Контейнерная архитектура TerraLens](docs/architecture/containers.svg)
+
+Frontend обращается к API через Next.js под одним origin. Django хранит геометрию, версии и задания в PostGIS; Celery исполняет сбор и расчёт в фоне через Redis. Worker импортирует `terralens_ml` и сохраняет результат атомарно. Снимки источников, копии моделей и экспорты лежат в общем файловом volume. Scheduler восстанавливает доставку заданий и обслуживает срок хранения.
+
+ML — самостоятельный Python-пакет, используемый также через CLI. Отдельного ML HTTP-сервиса в приложении нет. [Границы компонентов, последовательность анализа, сущности и поток обучения](docs/ARCHITECTURE.md).
+
+| Уровень | Технологии |
+|---|---|
+| Интерфейс | Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/Radix, TanStack Query |
+| Карта и визуализация | MapLibre GL, Terra Draw, ECharts; Three.js, GSAP и Lenis на лендинге |
+| API и геоданные | Python 3.12, Django 5.2 LTS, GeoDjango, Django REST Framework, PostgreSQL 16 / PostGIS 3.5 |
+| Задания | Celery, Redis 7.4, Celery Beat |
+| Вычисления | pandas, NumPy, SciPy, scikit-learn, CatBoost, rasterio, Shapely |
+| Воспроизводимость | Docker Compose, uv.lock, requirements.lock, pnpm-lock.yaml, GitHub Actions |
+
+## Данные и качество модели
+
+| Набор | Строк | Полигонов | Целевые значения |
+|---|---:|---:|---:|
+| Train | 99 955 | 39 | 30 520 известных |
+| Test | 57 185 | 78 | 3 112 контрольных пропусков |
+| Submission | 3 112 | Только контрольные ключи test | Конечные прогнозы без дублей |
+
+Источники: [профиль данных](docs/analysis/dataset-profile.json), [проверки данных](docs/analysis/dataset-checks.json), [готовый submission](deliverables/submission.csv). CSV не содержит геометрий: анонимные benchmark-полигоны не размещаются на карте по выдуманным координатам.
+
+Опубликованная модель **`131aee618934151e`** — среднее трёх CatBoost residual моделей: seeds 42/107/211, по 400 деревьев глубины 5, 78 признаков календаря, локального контекста и динамики сенсоров. Погода не входит в признаки выбранной модели. Пригодные наблюдения сохраняются, корректируются только пропуски.
+
+| Проверка | N | Предыдущая модель, RMSE ↓ | Текущая модель, RMSE ↓ |
+|---|---:|---:|---:|
+| Development: отдельные точки | 4 482 | 0,069207 | **0,068260** |
+| Development: блоки пропусков | 4 430 | 0,095374 | **0,094173** |
+| Повторная assessment: точки | 511 | 0,072679 | **0,071194** |
+| Повторная assessment: блоки | 514 | **0,090523** | 0,092206 |
+| Temporal 2024: точки | 282 | 0,057872 | **0,057633** |
+| Temporal 2024: блоки | 286 | **0,078942** | 0,080936 |
+
+Development: 21 selection AOI до 2024 года, пять GroupKFold; отдельные пять AOI для калибровки и пять для assessment. Скрытые цели и динамические значения исключаются до построения признаков. Итог обучен на 79 256 примерах, покрывающих 14 977 пригодных целей selection.
+
+**Официальный test RMSE неизвестен.** Assessment и temporal уже просматривались: это повторная диагностика, не новый слепой тест. Текущая модель улучшила точки, но ухудшила блоки на assessment и temporal. Покрытие номинального 90% интервала на повторной assessment — 90,80% для точек и 90,08% для блоков; перенос этих значений на новые поля не подтверждён. [Полный протокол, все четыре кандидата и компромиссы](docs/analysis/crop-dynamics/REPORT.md).
+
+## Воспроизвести submission
+
+После сборки Docker достаточно двух команд; API, БД и Redis для этого запуска не нужны:
+
+```sh
+docker compose run --rm --no-deps batch predict --input test-dataset.csv --output artifacts/submission-check.csv --model ml/artifacts/final/manifest.json
+docker compose run --rm --no-deps batch validate-submission --input test-dataset.csv --submission artifacts/submission-check.csv
+```
+
+Ожидается 3 112 строк, колонки `anon_polygon_id,date,primary_ndvi_pred` и SHA-256:
 
 ```text
-backend/                  Django API, PostGIS, Celery, провайдеры, тесты и SPEC
-frontend/                 Next.js-приложение, лендинг, тесты и SPEC
-  references/ascend/       распакованный исходный Ascend без изменений
-ml/                       самостоятельный terralens_ml, configs, модель и тесты
-docs/                     общие спецификации, критерии и план сдачи
-  analysis/               результаты фактического аудита, текст/рендеры исходных PDF
-scripts/audit_inputs.py    воспроизводимый аудит CSV, архивов и метаданных GLB
+0fd8aebc5297d2e57d9244ca71e401660ac309d4cc2a1a0b2d595963530c02e1
 ```
 
-Исходные пять файлов сохранены в корне. `ml` — отдельный пакет внутри монорепозитория, а не отдельный микросервис: API-worker импортирует тот же код, который использует batch CLI. Ответственность за него входит в backend-направление.
+На Windows: `Get-FileHash artifacts/submission-check.csv -Algorithm SHA256`; на Linux/macOS: `shasum -a 256 artifacts/submission-check.csv`. [Manifest поставки](deliverables/submission.csv.manifest.json) и [проверка автономности](docs/analysis/crop-dynamics/offline_evidence.json).
 
-## Выбранная архитектура
-
-Python 3.12 + Django 5.2 LTS / GeoDjango + Django REST Framework, PostgreSQL/PostGIS, Celery, Redis. ML: pandas, NumPy, SciPy, scikit-learn и CatBoost. Frontend: Next.js App Router, TypeScript strict, shadcn/ui, Tailwind CSS, TanStack Query, MapLibre/Terra Draw, ECharts; Three.js + GSAP + Lenis для Ascend. Зависимости закреплены в uv.lock, requirements.lock и frontend/pnpm-lock.yaml; базовые контейнерные образы — по digest.
-
-## Важные результаты анализа
-
-- Train: 99 955 строк, 39 полигонов, 30 520 известных значений цели.
-- Test: 57 185 строк, 78 полигонов, **3 112** контрольных пропусков.
-- Submission: ровно `anon_polygon_id,date,primary_ndvi_pred`, только контрольные строки.
-- CSV не содержит координат или контуров AOI. Нельзя размещать эти идентификаторы на карте по выдуманным координатам.
-- Требуются две отдельные точки запуска: реальный веб-сервис с автоматическим сбором и автономный batch-инференс.
-- Критерии дают суммарно 100 баллов; 30 из них зависят от RMSE. Лендинг не заменяет основной продукт.
-
-## GetLayers
-
-
-## Повторение аудита
-
-В Python-окружении с pandas и NumPy выполнить из корня:
+Вариант без Docker, Python 3.12:
 
 ```sh
-python scripts/audit_inputs.py
+python -m venv .venv-ml
+# Linux/macOS
+.venv-ml/bin/pip install -c requirements.lock ./ml
+.venv-ml/bin/python -m terralens_ml predict --input test-dataset.csv --output artifacts/submission-check.csv --model ml/artifacts/final/manifest.json
+# Windows: заменить .venv-ml/bin/ на .venv-ml/Scripts/
 ```
 
-Скрипт не изменяет CSV, не извлекает скрытые ответы и не обучает модели. Результаты: `docs/analysis/input-manifest.json`, `dataset-profile.json`, `dataset-checks.json`, `ascend-assets.json`.
+После установки зависимостей инференс работает без сети. [Команды обучения и исследования](ml/README.md).
 
+## Проверки и разработка
+
+[Отчёт проверки текущей версии](docs/VERIFICATION.md) разделяет автоматические тесты, проверки живых источников и исторические эксперименты. CI запускает Python/API/ML, проверяет OpenAPI, миграции, воспроизводимость submission и автономность ML; frontend проходит типы, lint, unit, production build и браузерные сценарии.
+
+```sh
+# Python workspace: Python 3.12 + uv, на Linux нужны GEOS/GDAL/PROJ
+uv sync --frozen
+uv run --frozen ruff check ml backend scripts
+uv run --frozen pytest -q
+uv run --frozen python scripts/api_smoke.py
+# Frontend: Node.js 24, pnpm 11.8.0; команды из frontend/
+cd frontend
+pnpm install --frozen-lockfile
+pnpm typecheck
+pnpm lint
+pnpm test
+pnpm build
+pnpm test:e2e
+```
+
+Python-тестам нужны запущенные PostGIS/Redis (`docker compose up -d postgres redis`), они используют отдельную тестовую БД. Локально Playwright использует установленный Google Chrome; приложение должно работать на `localhost:3001`. CI запускает Chromium. Windows backend удобнее проверять в Linux-контейнере: нативному GeoDjango требуются отдельные DLL. [Backend](backend/README.md) · [Frontend](frontend/README.md) · [Правила вклада](CONTRIBUTING.md).
+
+## Ограничения и происхождение данных
+
+- Анализ ретроспективный: восстановление может использовать наблюдения по обе стороны пропуска. Это не прогноз будущего урожая.
+- Низкое покрытие, облачность, неизвестная история культур, отсутствие трёх сопоставимых сезонов или отказ источника явно отражаются в результате. Аномалия — повод для проверки, а не доказанная причина ущерба.
+- Погода взята из Open-Meteo ERA5-Seamless в центре поля: температура ERA5-Land, осадки ERA5. Это сеточные данные, а не датчик на участке. Источники NDVI — Earth Search Sentinel-2 C1 L2A и Planetary Computer Landsat 8/9 C2 L2.
+- OSM не содержит всех полей. Гостевое пространство хранится семь дней, экспорт — один день. Лимиты по умолчанию: 20 полей, 10 000 га на контур, 5 000 вершин, период до 366 дней, три активные задачи; актуальные значения отдаёт `/capabilities`.
+- Доступность и скорость нового сбора зависят от внешних провайдеров. Реальные проверки двух регионов и их условия сохранены в [live-validation](docs/analysis/live-validation/REPORT.md); это не глобальная оценка точности.
+- Иллюстрации лендинга сгенерированы, рельеф демонстрационный. Они не выдаются за измерения выбранного поля. Атрибуция карты и лицензии компонентов сохранены в [реестре источников](docs/ATTRIBUTION.md).
+
+## Структура репозитория
+
+```text
+backend/          API, модели БД, провайдеры, фоновые задачи и тесты
+frontend/         Next.js, карта, аналитика, лендинг и браузерные тесты
+ml/               автономный пакет, конфигурации, артефакты модели и тесты
+docs/             архитектура, API, сценарии проверки и научные отчёты
+deliverables/     submission и его manifest
+scripts/          аудит данных, live smoke, проверка автономности
+compose.yml       локальный запуск всего приложения
+train-dataset.zip исходный обучающий набор
+test-dataset.csv  исходный контрольный набор
+```
+
+Авторы изменений указаны в [истории проекта](https://github.com/ArtycoBW/Terralens/commits/main/). Результаты экспериментов сопровождаются конфигурациями, метриками и контрольными суммами; артефакты опубликованной модели используются одновременно в приложении и batch-инференсе.

@@ -1,0 +1,247 @@
+{
+  "date": "2026-09-05",
+  "scope": "Local Docker integration with live providers; not a capacity or accuracy benchmark",
+  "model_id": "131aee618934151e",
+  "run_id": "f3ce7a3f-9a05-4970-b33e-4e914f7e0332",
+  "state": "partial",
+  "summary": {
+    "total_days": 10,
+    "summary_rule": "event-max-severity-else-two-clean-days-with-valid-reference-v2",
+    "observed_days": 2,
+    "overall_status": "insufficient_data",
+    "latest_estimate": {
+      "date": "2024-06-10",
+      "value": 0.669115270939407,
+      "origin": "extrapolated"
+    },
+    "longest_gap_days": 7,
+    "unavailable_days": 0,
+    "reconstructed_days": 8,
+    "anomaly_period_count": 0,
+    "observed_coverage_ratio": 0.2
+  },
+  "job_attempt": 1,
+  "job_started_at": "2026-09-05T19:06:55.162754Z",
+  "job_finished_at": "2026-09-05T19:10:17.594794Z",
+  "analysis_progress": [
+    {
+      "state": "queued",
+      "stage": "validating",
+      "progress": null
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.1
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.12
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.13999999999999999
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.16000000000000003
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.18000000000000002
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.2
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.22727272727272727
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.2545454545454546
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.28181818181818186
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.30000000000000004
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.36000000000000004
+    },
+    {
+      "state": "running",
+      "stage": "fetching_satellite",
+      "progress": 0.4
+    },
+    {
+      "state": "running",
+      "stage": "fetching_satellite",
+      "progress": 0.4375
+    },
+    {
+      "state": "running",
+      "stage": "fetching_satellite",
+      "progress": 0.47500000000000003
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.5
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.509375
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.51875
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.5281250000000001
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.5375
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.546875
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.55625
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.565625
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.5750000000000001
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.584375
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.59375
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.7000000000000001
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.7093750000000001
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.71875
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.728125
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.7375
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.7468750000000001
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.7562500000000001
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.765625
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.775
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.784375
+    },
+    {
+      "state": "running",
+      "stage": "fetching_reference",
+      "progress": 0.7937500000000001
+    },
+    {
+      "state": "running",
+      "stage": "fetching_weather",
+      "progress": 0.8
+    },
+    {
+      "state": "succeeded",
+      "stage": "detecting",
+      "progress": 1.0
+    }
+  ],
+  "monotonic_progress": true,
+  "latency": {
+    "requests": 40,
+    "concurrency": 4,
+    "p95_ms": 41.64267994347028,
+    "max_ms": 48.315800027921796,
+    "analysis_post_ms": 327.6001999620348,
+    "scope": "local HTTP smoke, warm small database; not a capacity benchmark"
+  },
+  "exports": {
+    "csv": "7372c6b3b12c6672d5f80e71870314e8604794b6239b4c21e4b9bba829b8795d",
+    "geojson": "e2eb9bd1c4d0819516061d7c63d0f3967f9d7ca9cdfd84c0d952f154d2de59ce",
+    "json": "6b6d93c834e3eaabada98c55918d06af6dfa4457acbe9fc7966b66d4655a83ff"
+  },
+  "submission": {
+    "rows": 3112,
+    "sha256": "0fd8aebc5297d2e57d9244ca71e401660ac309d4cc2a1a0b2d595963530c02e1"
+  },
+  "tests": {
+    "frontend_unit_passed": 21,
+    "browser_passed": 85,
+    "browser_skipped": 1,
+    "python_passed": 146
+  }
+}
