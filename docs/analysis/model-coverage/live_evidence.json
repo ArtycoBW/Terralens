@@ -1,0 +1,45 @@
+{
+  "model_manifest_sha256": "204a0fb37dae6c83e9660fbc56c73a8283ffbeb66ed13171bcf15ce1c6f5716a",
+  "network_blocked": true,
+  "network_attempts": 0,
+  "fields": {
+    "potsdam": {
+      "sha256": "66949d07bcf14e65d860afae678789ad7e10880e29d3591886e132100d43e79a",
+      "summary": {
+        "observed_days": 2,
+        "total_days": 11,
+        "observed_coverage_ratio": 0.18181818181818182,
+        "reconstructed_days": 9,
+        "unavailable_days": 0,
+        "longest_gap_days": 7,
+        "anomaly_period_count": 0,
+        "overall_status": "normal",
+        "summary_rule": "event-max-severity-else-two-clean-days-with-valid-reference-v2",
+        "latest_estimate": {
+          "date": "2024-06-20",
+          "value": 0.7341862213581651,
+          "origin": "extrapolated"
+        }
+      }
+    },
+    "seville": {
+      "sha256": "e51c7adf7ffbddd5a367ce59d2ee8a7115ca229a29dcefe229809eee94de4966",
+      "summary": {
+        "observed_days": 2,
+        "total_days": 11,
+        "observed_coverage_ratio": 0.18181818181818182,
+        "reconstructed_days": 9,
+        "unavailable_days": 0,
+        "longest_gap_days": 5,
+        "anomaly_period_count": 0,
+        "overall_status": "insufficient_data",
+        "summary_rule": "event-max-severity-else-two-clean-days-with-valid-reference-v2",
+        "latest_estimate": {
+          "date": "2024-06-20",
+          "value": 0.32315501713467926,
+          "origin": "observed"
+        }
+      }
+    }
+  }
+}

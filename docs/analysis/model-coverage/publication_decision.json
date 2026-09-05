@@ -1,0 +1,37 @@
+{
+  "accepted": true,
+  "selected": "ensemble",
+  "criteria": {
+    "point_relative_gain_at_least_1pct": true,
+    "no_block_regression": true,
+    "point_improved_folds_at_least4": true,
+    "point_bootstrap_lower_bound_positive": true
+  },
+  "point_improved_folds": 5,
+  "point_comparison": {
+    "aoi_n": 21,
+    "repetitions": 3000,
+    "seed": 42,
+    "gain_rmse_95_aoi_bootstrap": [
+      0.002588014871884723,
+      0.003944517085286523
+    ],
+    "bootstrap_fraction_gain_positive": 1.0,
+    "gain_rmse": 0.003237946499908967,
+    "relative_rmse_reduction": 0.04469514051824508
+  },
+  "block_comparison": {
+    "aoi_n": 21,
+    "repetitions": 3000,
+    "seed": 42,
+    "gain_rmse_95_aoi_bootstrap": [
+      0.0039238096890489805,
+      0.008293277558113283
+    ],
+    "bootstrap_fraction_gain_positive": 1.0,
+    "gain_rmse": 0.006055716324902094,
+    "relative_rmse_reduction": 0.059703692981661186
+  },
+  "phase1_single_predictions_unchanged": true,
+  "assessment_used_for_selection": false
+}

@@ -51,6 +51,7 @@ def checked_config(config=None):
         ("max_edge_days", 14, 0, None),
         ("seed", 42, 0, 2**32 - 1),
         ("boost_iterations", 160, 1, None),
+        ("boost_depth", 4, 1, 10),
         ("training_repeats", 1, 1, 10),
     ]:
         value = result.get(name, default)
@@ -72,9 +73,31 @@ def checked_config(config=None):
     for name in ["clip", "quality_filter", "robust", "use_history", "use_sensors", "use_weather"]:
         if not isinstance(result[name], bool):
             raise DataError(f"{name} должен быть boolean")
-    for name in ["local_features", "training_blocks", "masked_training_priors"]:
+    for name in [
+        "local_features",
+        "training_blocks",
+        "masked_training_priors",
+        "cover_training_targets",
+        "context_quality",
+    ]:
         if name in result and not isinstance(result[name], bool):
             raise DataError(f"{name} должен быть boolean")
+    if result.get("cover_training_targets") and result.get("training_repeats", 1) < 5:
+        raise DataError("Для покрытия обучающих целей требуется не менее пяти повторений")
+    l2 = result.get("boost_l2", 10)
+    if isinstance(l2, bool) or not isinstance(l2, (int, float)) or not np.isfinite(l2) or l2 < 0:
+        raise DataError("boost_l2 должен быть неотрицательным конечным числом")
+    if "ensemble_seeds" in result:
+        seeds = result["ensemble_seeds"]
+        if (
+            not isinstance(seeds, list)
+            or not 2 <= len(seeds) <= 5
+            or any(
+                isinstance(seed, bool) or not isinstance(seed, int) or not 0 <= seed < 2**32 for seed in seeds
+            )
+            or len(set(seeds)) != len(seeds)
+        ):
+            raise DataError("ensemble_seeds должен содержать от двух до пяти разных целочисленных seeds")
     if result.get("residual_base", "neighbor_mean") not in ["neighbor_mean", "linear"]:
         raise DataError("residual_base должен быть neighbor_mean или linear")
     return result
@@ -96,7 +119,9 @@ def fit(training_context: pd.DataFrame, config=None) -> dict:
         raise DataError("В train нет пригодных известных целей для обучения prior")
     frame["month"] = pd.to_datetime(frame.date).dt.month
     model = {
-        "schema_version": 1,
+        "schema_version": 2
+        if config["algorithm"] == "catboost_residual" and config.get("ensemble_seeds")
+        else 1,
         "config": config,
         "global_median": float(frame.primary_ndvi.median()),
         "monthly": {str(k): float(v) for k, v in frame.groupby("month").primary_ndvi.median().items()},
@@ -109,19 +134,38 @@ def fit(training_context: pd.DataFrame, config=None) -> dict:
         "supported_modes": ["retrospective"],
     }
     if config["algorithm"] == "catboost_residual":
-        examples, residuals = [], []
-        for mask in training_masks(training_context, valid, config):
-            context = mask_context(training_context, mask)
-            base_config = {"algorithm": config.get("residual_base", "neighbor_mean")}
-            base_model = fit(context, config | base_config) if config.get("masked_training_priors") else model
-            base = reconstruct(context, base_config, base_model)
-            features = residual_features(base, config)
-            examples.append(features.loc[mask])
-            residuals.append(training_context.loc[mask, "primary_ndvi"] - base.loc[mask, "reconstructed"])
-        examples = pd.concat(examples, ignore_index=True)
-        model["boosting"] = train_booster(examples, pd.concat(residuals, ignore_index=True), config)
-        model["feature_names"] = examples.columns.tolist()
-        model["training_examples"] = len(examples)
+        members, counts = [], []
+        used_targets = pd.Series(False, index=training_context.index)
+        for seed in config.get("ensemble_seeds", [config["seed"]]):
+            member_config = config | {"seed": seed}
+            examples, residuals = [], []
+            member_targets = pd.Series(False, index=training_context.index)
+            for mask in training_masks(training_context, valid, member_config):
+                member_targets |= mask
+                context = mask_context(training_context, mask)
+                base_config = {"algorithm": config.get("residual_base", "neighbor_mean")}
+                base_model = (
+                    fit(context, member_config | base_config)
+                    if config.get("masked_training_priors")
+                    else model
+                )
+                base = reconstruct(context, base_config, base_model)
+                features = residual_features(base, config)
+                examples.append(features.loc[mask])
+                residuals.append(training_context.loc[mask, "primary_ndvi"] - base.loc[mask, "reconstructed"])
+            examples = pd.concat(examples, ignore_index=True)
+            members.append(train_booster(examples, pd.concat(residuals, ignore_index=True), member_config))
+            model["feature_names"] = examples.columns.tolist()
+            used_targets |= member_targets
+            counts.append(
+                {"seed": seed, "examples": len(examples), "unique_targets": int(member_targets.sum())}
+            )
+        model["boosting"] = members[0]
+        if len(members) > 1:
+            model["boosting_members"] = members[1:]
+            model["ensemble_training"] = counts
+        model["training_examples"] = sum(member["examples"] for member in counts)
+        model["training_unique_targets"] = int(used_targets.sum())
     return model
 
 
@@ -141,7 +185,7 @@ def save_model(model, directory, *, input_path=None, metrics=None, validation_ha
     locks = [Path.cwd() / "uv.lock", Path(__file__).resolve().parents[3] / "uv.lock"]
     lock = next((path for path in locks if path.is_file()), locks[0])
     manifest = {
-        "schema_version": 1,
+        "schema_version": model["schema_version"],
         "model_id": canonical_hash(model)[:16],
         "version": "0.1.0",
         "created_at": datetime.now(UTC).isoformat(),
@@ -180,13 +224,13 @@ def load_model(manifest_path):
     manifest_path = Path(manifest_path)
     try:
         manifest = json.loads(manifest_path.read_text())
-        if manifest.get("schema_version") != 1 or set(manifest.get("files", {})) != {"model.json"}:
+        if manifest.get("schema_version") not in [1, 2] or set(manifest.get("files", {})) != {"model.json"}:
             raise DataError("Несовместимая схема артефакта модели")
         path = manifest_path.parent / "model.json"
         if path.is_symlink() or sha256(path) != manifest["files"]["model.json"]:
             raise DataError("Контрольная сумма модели не совпадает")
         model = json.loads(path.read_text())
-        if model["schema_version"] != 1 or not np.isfinite(model["global_median"]):
+        if model["schema_version"] != manifest["schema_version"] or not np.isfinite(model["global_median"]):
             raise DataError("Некорректная модель")
         checked_config(model["config"])
         for name in ["monthly", "crop_monthly"]:
@@ -196,6 +240,23 @@ def load_model(manifest_path):
                 raise DataError("Некорректные сезонные priors модели")
         if model["config"]["algorithm"] == "catboost_residual" and not model.get("boosting"):
             raise DataError("В артефакте отсутствует CatBoost модель")
+        members = model.get("boosting_members", [])
+        expected_members = (
+            len(model["config"].get("ensemble_seeds", [model["config"]["seed"]])) - 1
+            if model["config"]["algorithm"] == "catboost_residual"
+            else 0
+        )
+        if expected_members and model["schema_version"] != 2:
+            raise DataError("Для ансамбля требуется версия артефакта 2")
+        if (
+            not isinstance(members, list)
+            or len(members) != expected_members
+            or any(
+                not isinstance(member, dict) or not {"oblivious_trees", "features_info"} <= member.keys()
+                for member in members
+            )
+        ):
+            raise DataError("Состав ансамбля не соответствует конфигурации")
         calibration = model.get("calibration")
         if calibration:
             radii = [calibration["pooled_radius"]] + [

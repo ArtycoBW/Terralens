@@ -1,0 +1,32 @@
+{
+  "model_id": "50efa0dd0ff8d2d7",
+  "model_manifest_sha256": "204a0fb37dae6c83e9660fbc56c73a8283ffbeb66ed13171bcf15ce1c6f5716a",
+  "schema_version": 2,
+  "source_sha256_matches_runtime": false,
+  "pytest_passed": 130,
+  "warnings": 31,
+  "warning_source": "rasterio/affine pending deprecations",
+  "docker_active_model_id": "50efa0dd0ff8d2d7",
+  "readiness": {
+    "status": "ready",
+    "checks": {
+      "database": true,
+      "queue": true,
+      "model": true
+    }
+  },
+  "standalone_network_disabled": true,
+  "submission_rows": 3112,
+  "linux_macos_standalone_sha256": "409babd0210c70b30980bbd408fc36931e3474a8b99ecd46dbfb85980be3b817",
+  "artifact_source_sha256": "46c1e35f985627f6573b978fbbd79ac649021a829cef94024583bfcc1b4ba650",
+  "runtime_source_sha256": "44a8edbfb5aba08efa256e69d180391cf5259a42a8dcc448cce6b025f24a960f",
+  "source_difference": "Integrated main commit 8cb136c: save_model handles missing Git and subprocess timeout; artifact and native weights unchanged",
+  "only_save_model_ast_changed_after_integration": true,
+  "frontend_benchmark_verified": {
+    "model_id": "50efa0dd0ff8d2d7",
+    "rows": 3112,
+    "sha256": "409babd0210c70b30980bbd408fc36931e3474a8b99ecd46dbfb85980be3b817",
+    "all_points_match_submission": true
+  },
+  "checked_at": "2026-09-05T11:40:28.749919+00:00"
+}

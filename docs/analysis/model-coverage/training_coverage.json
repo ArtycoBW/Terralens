@@ -1,0 +1,18 @@
+{
+  "usable_targets": 14977,
+  "current": {
+    "examples": 15918,
+    "unique_targets": 10285
+  },
+  "random_6": {
+    "examples": 31663,
+    "unique_targets": 13412
+  },
+  "cover_5": {
+    "examples": 26265,
+    "unique_targets": 14977
+  },
+  "scope": "21 selection AOIs before2024; seed42; block masks included",
+  "initial_error_predictions_sha256": "2953bb347d2a2a1e16398df939fcb08e7407f698c54f30b13cf4b6c304ff5444",
+  "selection_predictions_sha256": "67f89c1f09503ff2fa0a99c6e51c27714e0daf91aa68ce39c1da56a5fbd9f1a7"
+}

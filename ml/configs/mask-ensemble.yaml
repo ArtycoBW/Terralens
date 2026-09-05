@@ -1,0 +1,55 @@
+input: train-dataset.zip
+output: artifacts/mask-ensemble
+artifact_output: artifacts/mask-ensemble/model
+prior_split: docs/analysis/baseline/split_manifest.json
+seed: 42
+folds: 5
+mask_seeds:
+- 42
+- 137
+mask_fraction: 0.15
+calibration_fields: 5
+assessment_fields: 5
+calibration_level: 0.9
+max_gap_days: 60
+max_edge_days: 14
+season_start_month: 1
+selection_baseline: single
+assessment_status: Previously inspected assessment and temporal scopes; reused diagnostics
+  only, never used to select these candidates
+prior_selection_sha256: 0b27c5b8211ceef075cda1f3c182c9c4e46dee0c8a8c38281979860afe02c452
+candidates:
+  single:
+    seed: 42
+    max_gap_days: 60
+    max_edge_days: 14
+    season_start_month: 1
+    algorithm: catboost_residual
+    use_weather: false
+    local_features: true
+    masked_training_priors: true
+    boost_iterations: 400
+    training_repeats: 5
+    training_blocks: true
+    cover_training_targets: true
+    context_quality: true
+    boost_depth: 5
+  ensemble:
+    seed: 42
+    max_gap_days: 60
+    max_edge_days: 14
+    season_start_month: 1
+    algorithm: catboost_residual
+    use_weather: false
+    local_features: true
+    masked_training_priors: true
+    boost_iterations: 400
+    training_repeats: 5
+    training_blocks: true
+    cover_training_targets: true
+    context_quality: true
+    boost_depth: 5
+    ensemble_seeds:
+    - 42
+    - 107
+    - 211

@@ -1,0 +1,241 @@
+{
+  "selected": "ensemble",
+  "selection_rule": "minimum pooled development_points RMSE among candidates with pooled development_blocks RMSE no greater than selection_baseline; frozen before calibration and assessment",
+  "assessment_status": "Previously inspected assessment and temporal scopes; reused diagnostics only, never used to select these candidates",
+  "model_id": "50efa0dd0ff8d2d7",
+  "manifest_sha256": "204a0fb37dae6c83e9660fbc56c73a8283ffbeb66ed13171bcf15ce1c6f5716a",
+  "source_sha256": "46c1e35f985627f6573b978fbbd79ac649021a829cef94024583bfcc1b4ba650",
+  "model_json_sha256": "05ba789ff368508f360b09af3afbc22c4f1288f0b760b1bdd90d74781c92a2fc",
+  "training_scope": {
+    "polygon_ids": [
+      "AOI-0002",
+      "AOI-0003",
+      "AOI-0004",
+      "AOI-0007",
+      "AOI-0015",
+      "AOI-0021",
+      "AOI-0023",
+      "AOI-0026",
+      "AOI-0030",
+      "AOI-0033",
+      "AOI-0035",
+      "AOI-0037",
+      "AOI-0038",
+      "AOI-0041",
+      "AOI-0043",
+      "AOI-0045",
+      "AOI-0050",
+      "AOI-0053",
+      "AOI-0064",
+      "AOI-0071",
+      "AOI-0075"
+    ],
+    "years_before": 2024,
+    "excluded_previously_inspected_holdout": [
+      "AOI-0008",
+      "AOI-0011",
+      "AOI-0019",
+      "AOI-0048",
+      "AOI-0052",
+      "AOI-0056",
+      "AOI-0063",
+      "AOI-0077"
+    ],
+    "calibration_ids": [
+      "AOI-0022",
+      "AOI-0040",
+      "AOI-0065",
+      "AOI-0069",
+      "AOI-0076"
+    ],
+    "assessment_ids": [
+      "AOI-0020",
+      "AOI-0027",
+      "AOI-0055",
+      "AOI-0060",
+      "AOI-0070"
+    ]
+  },
+  "ensemble_training": [
+    {
+      "seed": 42,
+      "examples": 26265,
+      "unique_targets": 14977
+    },
+    {
+      "seed": 107,
+      "examples": 26489,
+      "unique_targets": 14977
+    },
+    {
+      "seed": 211,
+      "examples": 26502,
+      "unique_targets": 14977
+    }
+  ],
+  "feature_names": [
+    "base",
+    "support",
+    "gap",
+    "sin_doy",
+    "cos_doy",
+    "fallback",
+    "s2_ndvi",
+    "s2_ndvi_age",
+    "s2_ndvi_span",
+    "s2_evi",
+    "s2_evi_age",
+    "s2_evi_span",
+    "s2_ndwi",
+    "s2_ndwi_age",
+    "s2_ndwi_span",
+    "landsat_ndvi",
+    "landsat_ndvi_age",
+    "landsat_ndvi_span",
+    "landsat_evi",
+    "landsat_evi_age",
+    "landsat_evi_span",
+    "landsat_ndwi",
+    "landsat_ndwi_age",
+    "landsat_ndwi_span",
+    "modis_ndvi",
+    "modis_ndvi_age",
+    "modis_ndvi_span",
+    "modis_evi",
+    "modis_evi_age",
+    "modis_evi_span",
+    "left_1_value",
+    "left_1_days",
+    "left_2_value",
+    "left_2_days",
+    "left_slope",
+    "right_1_value",
+    "right_1_days",
+    "right_2_value",
+    "right_2_days",
+    "right_slope",
+    "neighbor_fraction",
+    "linear_estimate",
+    "window_14_count",
+    "window_14_mean",
+    "window_14_std",
+    "window_30_count",
+    "window_30_mean",
+    "window_30_std",
+    "window_60_count",
+    "window_60_mean",
+    "window_60_std",
+    "sensor_count",
+    "sensor_range",
+    "sensor_std"
+  ],
+  "calibration": {
+    "method": "empirical_residual",
+    "level": 0.9,
+    "pooled_radius": 0.13578841796191793,
+    "n": 1173,
+    "minimum_group": 100,
+    "groups": {
+      "edge": {
+        "n": 71,
+        "radius": 0.13578841796191793,
+        "pooled_fallback": true
+      },
+      "long": {
+        "n": 244,
+        "radius": 0.1459945320875875,
+        "pooled_fallback": false
+      },
+      "prior": {
+        "n": 281,
+        "radius": 0.19659981665211557,
+        "pooled_fallback": false
+      },
+      "short": {
+        "n": 577,
+        "radius": 0.10457111136918912,
+        "pooled_fallback": false
+      }
+    },
+    "domain": "anonymous_benchmark",
+    "unit": "masked_observation",
+    "limitations": "Repeated observations within AOI are dependent; no unconditional coverage guarantee"
+  },
+  "interval_assessment": {
+    "assessment_blocks": {
+      "n": 514,
+      "coverage": 0.9221789883268483,
+      "mean_width": 0.3220463158385175,
+      "nominal_level": 0.9
+    },
+    "assessment_points": {
+      "n": 511,
+      "coverage": 0.9119373776908023,
+      "mean_width": 0.21385229494888516,
+      "nominal_level": 0.9
+    },
+    "calibration_blocks": {
+      "n": 622,
+      "coverage": 0.9003215434083601,
+      "mean_width": 0.32695843231643934,
+      "nominal_level": 0.9
+    },
+    "calibration_points": {
+      "n": 551,
+      "coverage": 0.9074410163339383,
+      "mean_width": 0.2147428340962668,
+      "nominal_level": 0.9
+    },
+    "temporal_blocks": {
+      "n": 286,
+      "coverage": 0.9475524475524476,
+      "mean_width": 0.320379024561336,
+      "nominal_level": 0.9
+    },
+    "temporal_points": {
+      "n": 282,
+      "coverage": 0.950354609929078,
+      "mean_width": 0.21157761545128617,
+      "nominal_level": 0.9
+    }
+  },
+  "split_hash": "592f740e96aaa31f174e74e00ee3dd0d1b9e93b5355b466e7d7710c2014d7917",
+  "mask_hashes": {
+    "development_points-0-42": "265b0bd5e06a37e804f9445961d2af8d09ecfcb2836ef2d1f3339f0b26f03c95",
+    "development_blocks-0-42": "ac654d6383b0f1a5c595559f4f7195d2b35542c3b8418a32f02511f64e1035ea",
+    "development_points-0-137": "3944a5bf561b61f2fd776a3f002966ce70f9a7e5f18acd8f031bf27e1bcadf6b",
+    "development_blocks-0-137": "f2c55c3875e073e7eafd8823f9e4bb201973d44cc50d98161047ab3bd08d631c",
+    "development_points-1-42": "dbcb2d8b73962c76405c3aee3a1ee9767c32dd48db4c63d4cc3786a453ef721b",
+    "development_blocks-1-42": "7a1b76e5c697e228567ffa2bf732766e4ec290de2c66eb65cc1520948524a2ea",
+    "development_points-1-137": "b068ab86059482ce335d03ebf2335854a077acbd4185659e192bea17ef0ccf93",
+    "development_blocks-1-137": "c38683df399a5f1642cc4857d49dfc62d327aebc34194037a8fd72e657708770",
+    "development_points-2-42": "47943b67529fd49eb4ef269eeaeefbc20a2a024fb302768fc86b9bec2d1625c9",
+    "development_blocks-2-42": "4bdf6c7a0b1ce8ca03f1a77c524d3cf00d12b11bd4e74e3cb7ec914cd8303193",
+    "development_points-2-137": "b1b90668c8a21fb4c3dbd477dc5396979ecf4d94879c90a3880570e704ef95d1",
+    "development_blocks-2-137": "3a5a6dc18726c5e2d34761c70e911055025b936e49b00ce17b039cf5ff2e3305",
+    "development_points-3-42": "d1d05db38c7a859f19559524db7023bd4374bd391488691eafc9c4f60b39a044",
+    "development_blocks-3-42": "cf0efd44630a4f8ed04e4fb076c77d21771d62a41cc48a6f37b800fe4d539e8a",
+    "development_points-3-137": "fd74da53b8e300c69ab0d8ac5df74fe58a7f57d8df8c67d6acac2bbb6e455e5e",
+    "development_blocks-3-137": "6a1007815dc585c626a1bf8bfd190634088b12a12681fe3798f897963477685c",
+    "development_points-4-42": "f9810466fe7aab785e288553fa0aaee21db100989ca0c2a2c94f685ab78d6795",
+    "development_blocks-4-42": "b0cc878be783388936c9d0a179417cefae8e583d1557c7b12597e70f0de41d2b",
+    "development_points-4-137": "935aefcbe305208b8827d06dc7746133c0f23368f6ea9590dc8fd5ac9dc37238",
+    "development_blocks-4-137": "2a1877b984432821b45e986c19cbf0bf2ab188c8978eae38adbf3485cc3f0b9e",
+    "calibration_points--1-991": "374020c82185144c319e6670b0fee550da30956f7b045146b9bda95d08cabc04",
+    "calibration_blocks--1-991": "524e1cffd764aa21ff5456d8593e58a965350541a96a9497bdb96dde9783d8ac",
+    "assessment_points--1-2003": "1f03e13ca825f30933ba2dd89e07e720f4b96736f6acbfaed0e0ff5771ce7e98",
+    "assessment_blocks--1-2003": "37b26662f2a602aa1f5c39e8493827fc6cb16ef528df9684f4b151241649cfa7",
+    "temporal_points": "b176470e82d915ae0b6b98d2914feaa7e28172fa9b9e752881bc39866673fde0",
+    "temporal_blocks": "4d2f8a20c25fdfd3c658e460fc55d99c6bd9adc301783e11541570364871c72a"
+  },
+  "predictions_sha256": "8bc4f930d3d09636733d5f430da50b9ec57ad50a77a08200f52a154a1c5fc249",
+  "limitations": [
+    "Official test labels unavailable; no official RMSE",
+    "Previously inspected 8 holdout AOIs excluded entirely",
+    "Previously inspected assessment and temporal scopes; reused diagnostics only, never used to select these candidates",
+    "Calibration points within AOI and repeated masks are dependent; empirical intervals have no unconditional guarantee",
+    "Benchmark has no geography; live regional transfer and agronomic causes remain unvalidated"
+  ],
+  "schema_version": 2,
+  "format_note": "Ensemble schema2 makes older ML runtimes reject unsupported artifacts; native weights unchanged after format update"
+}

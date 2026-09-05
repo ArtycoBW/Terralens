@@ -1,0 +1,13 @@
+{
+  "seconds": {
+    "previous": 2.5863599170115776,
+    "ensemble": 3.066108917002566
+  },
+  "protocol": "one cold inference per model in one process, same parsed input; illustrative latency, not a capacity benchmark",
+  "rows": 57185,
+  "target_rows": 3112,
+  "features": 54,
+  "members": 3,
+  "training_examples": 79256,
+  "training_unique_targets": 14977
+}

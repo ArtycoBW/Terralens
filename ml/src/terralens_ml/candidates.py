@@ -97,6 +97,9 @@ def residual_features(result, config):
         columns += ["era5_temp_c", "era5_precip_mm"]
     for column in columns:
         features[column] = np.nan
+        if config.get("context_quality", False):
+            features[f"{column}_age"] = np.nan
+            features[f"{column}_span"] = np.nan
     for part in field_season_segments(result, config["season_start_month"]):
         days = pd.to_datetime(part.date).to_numpy(dtype="datetime64[D]").astype(np.int64)
         if config.get("local_features", False):
@@ -121,6 +124,14 @@ def residual_features(result, config):
             estimate = np.interp(days, days[valid], values[valid])
             estimate[distance > 14] = np.nan
             features.loc[part.index, column] = estimate
+            if config.get("context_quality", False):
+                features.loc[part.index, f"{column}_age"] = distance
+                features.loc[part.index, f"{column}_span"] = days[valid][right] - days[valid][left]
+    if config.get("context_quality", False) and config.get("use_sensors", True):
+        ndvi = features[["s2_ndvi", "landsat_ndvi", "modis_ndvi"]]
+        features["sensor_count"] = ndvi.count(axis=1)
+        features["sensor_range"] = ndvi.max(axis=1) - ndvi.min(axis=1)
+        features["sensor_std"] = ndvi.std(axis=1, ddof=0)
     # Missing features stay missing: CatBoost handles them explicitly.
     return features
 
@@ -171,16 +182,25 @@ def training_masks(frame, valid, config):
     rng = np.random.default_rng(config["seed"])
     dates = pd.to_datetime(frame.date)
     seasons = dates.dt.year - (dates.dt.month < config["season_start_month"]).astype(int)
-    for _ in range(config.get("training_repeats", 1)):
+    groups = list(frame.loc[valid].groupby([frame.anon_polygon_id, seasons], sort=True))
+    partitions = {}
+    for repeat in range(config.get("training_repeats", 1)):
+        if config.get("cover_training_targets", False) and repeat % 5 == 0:
+            partitions = {
+                key: np.array_split(rng.permutation(part.sort_values("date").index), 5)
+                for key, part in groups
+            }
         for blocks in [False, True] if config.get("training_blocks", False) else [False]:
             mask = pd.Series(False, index=frame.index)
-            for _, part in frame.loc[valid].groupby([frame.anon_polygon_id, seasons], sort=True):
+            for key, part in groups:
                 if blocks:
                     ordered = part.sort_values("date")
                     days = pd.to_datetime(ordered.date).to_numpy(dtype="datetime64[D]").astype(np.int64)
                     start = days[int(rng.integers(len(days)))]
                     width = int(rng.choice([8, 15, 30, 45, 65]))
                     indices = ordered.index[(days >= start) & (days < start + width)]
+                elif config.get("cover_training_targets", False):
+                    indices = partitions[key][repeat % 5]
                 else:
                     indices = rng.choice(part.index, max(1, round(len(part) * 0.2)), replace=False)
                 mask.loc[indices] = True
@@ -192,9 +212,9 @@ def train_booster(features, residual, config):
 
     estimator = CatBoostRegressor(
         iterations=config.get("boost_iterations", 160),
-        depth=4,
+        depth=config.get("boost_depth", 4),
         learning_rate=0.04,
-        l2_leaf_reg=10,
+        l2_leaf_reg=config.get("boost_l2", 10),
         loss_function="RMSE",
         random_seed=config["seed"],
         thread_count=2,
@@ -221,6 +241,9 @@ def _load_booster(key, payload):
 
 
 def predict_booster(model, features):
-    payload = json.dumps(model["boosting"], separators=(",", ":"))
-    estimator = _load_booster(canonical_hash(model["boosting"]), payload)
-    return estimator.predict(features, thread_count=2)
+    predictions = []
+    for member in [model["boosting"], *model.get("boosting_members", [])]:
+        payload = json.dumps(member, separators=(",", ":"))
+        estimator = _load_booster(canonical_hash(member), payload)
+        predictions.append(estimator.predict(features, thread_count=2))
+    return np.mean(predictions, axis=0)

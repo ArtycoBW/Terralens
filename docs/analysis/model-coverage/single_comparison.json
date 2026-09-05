@@ -1,0 +1,422 @@
+{
+  "inputs": {
+    "baseline": {
+      "path": "artifacts/improvement-features/development-predictions.csv",
+      "candidate": "local_mixed",
+      "sha256": "2953bb347d2a2a1e16398df939fcb08e7407f698c54f30b13cf4b6c304ff5444"
+    },
+    "candidate": {
+      "path": "artifacts/mask-coverage/predictions.csv",
+      "candidate": "cover_quality_depth5",
+      "sha256": "67f89c1f09503ff2fa0a99c6e51c27714e0daf91aa68ce39c1da56a5fbd9f1a7"
+    }
+  },
+  "allowed_scopes": [
+    "development_points",
+    "development_blocks"
+  ],
+  "comparison_keys": [
+    "scope",
+    "fold",
+    "mask_seed",
+    "anon_polygon_id",
+    "date"
+  ],
+  "matched_rows": 8912,
+  "truth_and_gap_days_identical": true,
+  "routing_rule": null,
+  "selection": "No fitting, threshold search, weight search or model selection performed",
+  "scopes": {
+    "development_blocks": {
+      "metrics": {
+        "baseline": {
+          "n": 4430,
+          "rmse": 0.10142951000974414,
+          "mae": 0.07366974215309462,
+          "bias": -0.008308037353043937,
+          "p95_absolute_error": 0.21228420874644185
+        },
+        "candidate": {
+          "n": 4430,
+          "rmse": 0.09661739911707605,
+          "mae": 0.06987245378048397,
+          "bias": -0.010517206749693291,
+          "p95_absolute_error": 0.20551993521216572
+        }
+      },
+      "comparisons": {
+        "candidate_vs_baseline": {
+          "aoi_n": 21,
+          "repetitions": 3000,
+          "seed": 42,
+          "gain_rmse_95_aoi_bootstrap": [
+            0.0029036060067291593,
+            0.006866855611182191
+          ],
+          "bootstrap_fraction_gain_positive": 1.0,
+          "gain_rmse": 0.004812110892668087,
+          "relative_rmse_reduction": 0.04744290781061445
+        }
+      }
+    },
+    "development_points": {
+      "metrics": {
+        "baseline": {
+          "n": 4482,
+          "rmse": 0.07244515762484736,
+          "mae": 0.05148352448740545,
+          "bias": -0.0013121410882019863,
+          "p95_absolute_error": 0.14646763513590957
+        },
+        "candidate": {
+          "n": 4482,
+          "rmse": 0.06959093588393345,
+          "mae": 0.04863908974069474,
+          "bias": -0.0001846389969616233,
+          "p95_absolute_error": 0.1408829608317167
+        }
+      },
+      "comparisons": {
+        "candidate_vs_baseline": {
+          "aoi_n": 21,
+          "repetitions": 3000,
+          "seed": 42,
+          "gain_rmse_95_aoi_bootstrap": [
+            0.0020791040284469935,
+            0.0036934853733267435
+          ],
+          "bootstrap_fraction_gain_positive": 1.0,
+          "gain_rmse": 0.0028542217409139176,
+          "relative_rmse_reduction": 0.039398378504389805
+        }
+      }
+    }
+  },
+  "folds": {
+    "0": {
+      "aoi_ids": [
+        "AOI-0003",
+        "AOI-0023",
+        "AOI-0038",
+        "AOI-0075"
+      ],
+      "scopes": {
+        "development_blocks": {
+          "baseline": {
+            "n": 925,
+            "rmse": 0.09654059708800466,
+            "mae": 0.072477928776603,
+            "bias": -0.001125203710298434,
+            "p95_absolute_error": 0.2008643721572409
+          },
+          "candidate": {
+            "n": 925,
+            "rmse": 0.09157648923869881,
+            "mae": 0.068065230686142,
+            "bias": -0.0014407666229135673,
+            "p95_absolute_error": 0.1945448405852622
+          }
+        },
+        "development_points": {
+          "baseline": {
+            "n": 922,
+            "rmse": 0.0707672800478969,
+            "mae": 0.05227738196808233,
+            "bias": -0.00021769463804287355,
+            "p95_absolute_error": 0.13505488668736396
+          },
+          "candidate": {
+            "n": 922,
+            "rmse": 0.06961904084295896,
+            "mae": 0.05011809052786657,
+            "bias": 0.00045950026131639187,
+            "p95_absolute_error": 0.14055211940503662
+          }
+        }
+      }
+    },
+    "1": {
+      "aoi_ids": [
+        "AOI-0002",
+        "AOI-0021",
+        "AOI-0037",
+        "AOI-0064"
+      ],
+      "scopes": {
+        "development_blocks": {
+          "baseline": {
+            "n": 843,
+            "rmse": 0.1039903936095272,
+            "mae": 0.07586185948269518,
+            "bias": -0.0069119559497962235,
+            "p95_absolute_error": 0.22367192344036851
+          },
+          "candidate": {
+            "n": 843,
+            "rmse": 0.0983728084977091,
+            "mae": 0.07166348815510008,
+            "bias": -0.006953197415158038,
+            "p95_absolute_error": 0.2110469083404728
+          }
+        },
+        "development_points": {
+          "baseline": {
+            "n": 886,
+            "rmse": 0.07622764320354586,
+            "mae": 0.05181188350968261,
+            "bias": -0.001123857643730655,
+            "p95_absolute_error": 0.1516510165454389
+          },
+          "candidate": {
+            "n": 886,
+            "rmse": 0.07325156940348698,
+            "mae": 0.049307623069536816,
+            "bias": 0.0009389978124920493,
+            "p95_absolute_error": 0.15248474949459676
+          }
+        }
+      }
+    },
+    "2": {
+      "aoi_ids": [
+        "AOI-0015",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0053"
+      ],
+      "scopes": {
+        "development_blocks": {
+          "baseline": {
+            "n": 941,
+            "rmse": 0.09707460371652889,
+            "mae": 0.06820333707362958,
+            "bias": -0.009647887071340119,
+            "p95_absolute_error": 0.21552119540801196
+          },
+          "candidate": {
+            "n": 941,
+            "rmse": 0.09445936830529297,
+            "mae": 0.06656587457064016,
+            "bias": -0.011267468327233356,
+            "p95_absolute_error": 0.20503325066155498
+          }
+        },
+        "development_points": {
+          "baseline": {
+            "n": 942,
+            "rmse": 0.07108777092465766,
+            "mae": 0.04876905720924419,
+            "bias": 0.0017929034796242299,
+            "p95_absolute_error": 0.1440604463209009
+          },
+          "candidate": {
+            "n": 942,
+            "rmse": 0.06884725851925791,
+            "mae": 0.04603821170792753,
+            "bias": 0.003238447660615701,
+            "p95_absolute_error": 0.13323390961119277
+          }
+        }
+      }
+    },
+    "3": {
+      "aoi_ids": [
+        "AOI-0007",
+        "AOI-0030",
+        "AOI-0041",
+        "AOI-0045"
+      ],
+      "scopes": {
+        "development_blocks": {
+          "baseline": {
+            "n": 783,
+            "rmse": 0.10355538264787051,
+            "mae": 0.07304761211257034,
+            "bias": -0.016701107989802542,
+            "p95_absolute_error": 0.20808403650478213
+          },
+          "candidate": {
+            "n": 783,
+            "rmse": 0.10019032229531215,
+            "mae": 0.07039393429183902,
+            "bias": -0.019101121452138988,
+            "p95_absolute_error": 0.20430138281246193
+          }
+        },
+        "development_points": {
+          "baseline": {
+            "n": 804,
+            "rmse": 0.06625707418487682,
+            "mae": 0.049032843729733044,
+            "bias": -0.004596756768184795,
+            "p95_absolute_error": 0.13576498790179162
+          },
+          "candidate": {
+            "n": 804,
+            "rmse": 0.0623854751260565,
+            "mae": 0.04561136175270901,
+            "bias": -0.002707201639495403,
+            "p95_absolute_error": 0.12188210892277782
+          }
+        }
+      }
+    },
+    "4": {
+      "aoi_ids": [
+        "AOI-0004",
+        "AOI-0026",
+        "AOI-0043",
+        "AOI-0050",
+        "AOI-0071"
+      ],
+      "scopes": {
+        "development_blocks": {
+          "baseline": {
+            "n": 938,
+            "rmse": 0.10617476879203544,
+            "mae": 0.0788781509653639,
+            "bias": -0.00829571842871421,
+            "p95_absolute_error": 0.22203689809037938
+          },
+          "candidate": {
+            "n": 938,
+            "rmse": 0.09894194174995483,
+            "mae": 0.07292683670216513,
+            "bias": -0.014752777783599772,
+            "p95_absolute_error": 0.20744674120378082
+          }
+        },
+        "development_points": {
+          "baseline": {
+            "n": 928,
+            "rmse": 0.07675624997532694,
+            "mae": 0.0552599391579603,
+            "bias": -0.002885438216471832,
+            "p95_absolute_error": 0.16661059908829814
+          },
+          "candidate": {
+            "n": 928,
+            "rmse": 0.07258218261487653,
+            "mae": 0.051794651329143786,
+            "bias": -0.003186628087639385,
+            "p95_absolute_error": 0.1514727404559042
+          }
+        }
+      }
+    }
+  },
+  "gap_slices": {
+    "development_blocks/0-8": {
+      "baseline": {
+        "n": 176,
+        "rmse": 0.08466373911971804,
+        "mae": 0.05444945596919695,
+        "bias": -0.00735356044221219,
+        "p95_absolute_error": 0.18489997039472075
+      },
+      "candidate": {
+        "n": 176,
+        "rmse": 0.0812424341510794,
+        "mae": 0.05287424089096537,
+        "bias": -0.012503724907623042,
+        "p95_absolute_error": 0.16636533864345535
+      }
+    },
+    "development_blocks/9-30": {
+      "baseline": {
+        "n": 935,
+        "rmse": 0.07867324078543479,
+        "mae": 0.056987933984934146,
+        "bias": 0.006460822568438379,
+        "p95_absolute_error": 0.16372077686097744
+      },
+      "candidate": {
+        "n": 935,
+        "rmse": 0.07461701402506771,
+        "mae": 0.05346074895890539,
+        "bias": 0.00544156800121122,
+        "p95_absolute_error": 0.1618856647174459
+      }
+    },
+    "development_blocks/31-60": {
+      "baseline": {
+        "n": 2003,
+        "rmse": 0.0980854934902009,
+        "mae": 0.07220450351724954,
+        "bias": -0.00749062021607856,
+        "p95_absolute_error": 0.20148683387281305
+      },
+      "candidate": {
+        "n": 2003,
+        "rmse": 0.09257743037941675,
+        "mae": 0.06859205519192002,
+        "bias": -0.008342481408795848,
+        "p95_absolute_error": 0.19399938884546075
+      }
+    },
+    "development_blocks/>60": {
+      "baseline": {
+        "n": 1316,
+        "rmse": 0.12096523698175883,
+        "mae": 0.09032257953394092,
+        "bias": -0.020172899426170076,
+        "p95_absolute_error": 0.2457548644624226
+      },
+      "candidate": {
+        "n": 1316,
+        "rmse": 0.11636390117848035,
+        "mae": 0.08575487615861833,
+        "bias": -0.02490003505829334,
+        "p95_absolute_error": 0.2450541332839355
+      }
+    },
+    "development_points/0-8": {
+      "baseline": {
+        "n": 2786,
+        "rmse": 0.06933617304767449,
+        "mae": 0.0486813380957629,
+        "bias": -0.0022480047908976916,
+        "p95_absolute_error": 0.13764541474067554
+      },
+      "candidate": {
+        "n": 2786,
+        "rmse": 0.0664846838257113,
+        "mae": 0.04555038562221954,
+        "bias": -0.001360966742917231,
+        "p95_absolute_error": 0.13264122627318675
+      }
+    },
+    "development_points/9-30": {
+      "baseline": {
+        "n": 1637,
+        "rmse": 0.07692377572478781,
+        "mae": 0.05586151686182475,
+        "bias": 0.0002728940676428685,
+        "p95_absolute_error": 0.15651717309838706
+      },
+      "candidate": {
+        "n": 1637,
+        "rmse": 0.07406577998336947,
+        "mae": 0.053542625184552974,
+        "bias": 0.0015767571070835651,
+        "p95_absolute_error": 0.1468758751448795
+      }
+    },
+    "development_points/31-60": {
+      "baseline": {
+        "n": 59,
+        "rmse": 0.08661323672501633,
+        "mae": 0.06233297821946939,
+        "bias": -0.001098349129011994,
+        "p95_absolute_error": 0.1710132111309025
+      },
+      "candidate": {
+        "n": 59,
+        "rmse": 0.08346322781619916,
+        "mae": 0.058436414358931314,
+        "bias": 0.006490677577790075,
+        "p95_absolute_error": 0.17027377958182205
+      }
+    }
+  }
+}

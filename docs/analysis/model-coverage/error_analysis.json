@@ -1,0 +1,30 @@
+{
+  "all": {
+    "n": 4482,
+    "squared_error_share": 1.0,
+    "truth_outside_neighbors_005_fraction": 0.24542614904060686,
+    "median_neighbor_disagreement": 0.05802083658477346,
+    "truth_min": -0.4026596719541511,
+    "truth_max": 0.943201749249385,
+    "sensor_counts": {
+      "landsat_ndvi": 1963,
+      "s2_ndvi": 1587,
+      "modis_ndvi": 932
+    },
+    "aoi_count": 21
+  },
+  "worst_1pct": {
+    "n": 45,
+    "squared_error_share": 0.19702065055158952,
+    "truth_outside_neighbors_005_fraction": 0.9111111111111111,
+    "median_neighbor_disagreement": 0.056054607663428985,
+    "truth_min": -0.4026596719541511,
+    "truth_max": 0.943201749249385,
+    "sensor_counts": {
+      "s2_ndvi": 25,
+      "landsat_ndvi": 12,
+      "modis_ndvi": 8
+    },
+    "aoi_count": 17
+  }
+}

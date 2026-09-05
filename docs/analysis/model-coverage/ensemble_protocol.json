@@ -1,0 +1,11 @@
+{
+  "base_selected": "cover_quality_depth5",
+  "selection": "minimum development point RMSE with blocks no higher than single; all choices frozen before calibration/assessment inside run_research",
+  "ensemble_seeds": [
+    42,
+    107,
+    211
+  ],
+  "weights": "equal",
+  "publication_gate": "mask-coverage/PROTOCOL.md, only development used"
+}
