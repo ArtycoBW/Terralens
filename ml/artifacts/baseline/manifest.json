@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "model_id": "4d018dd9dec405c6",
+  "version": "0.1.0",
+  "created_at": "2026-09-04T23:39:38.207136+00:00",
+  "git_revision": "d55ba0b347f1a6eed66b404fc4c4802b00216607",
+  "source_sha256": "9667f4409b076f2c9715644a074215bdb0801ceb4de4938bf2de95673e9382cd",
+  "python": "3.12.9",
+  "dependency_lock_sha256": "acc9c1f4d338336194c7c7c20fa538c7be07633f4f5d7fb7c501ac4c510bfd12",
+  "input_sha256": "08e4f724f616459c944050aa25c1a46d16055501c785faeda74edd907c665fc6",
+  "files": {
+    "model.json": "d0ff7361e51d8c9c2d02457f1f4e26e7ca8aaa3ba11a99aae8e50a59ca272e0a"
+  },
+  "config": {
+    "algorithm": "neighbor_mean",
+    "max_gap_days": 60,
+    "max_edge_days": 14,
+    "season_start_month": 1,
+    "clip": false,
+    "seed": 42,
+    "input": "train-dataset.zip",
+    "output": "artifacts/model",
+    "mask_seeds": [
+      42,
+      137
+    ],
+    "mask_fraction": 0.15,
+    "folds": 5,
+    "holdout_fraction": 0.2,
+    "algorithms": [
+      "neighbor_mean",
+      "linear",
+      "pchip"
+    ]
+  },
+  "feature_schema": "neighbors-calendar-crop-v1",
+  "target_filter": "fit finite NDVI in [-1,1]; evaluate unchanged targets",
+  "supported_modes": [
+    "retrospective"
+  ],
+  "metrics": {
+    "development_blocks/linear": {
+      "n": 7124,
+      "rmse": 0.1365375030644948,
+      "mae": 0.09562981433266746,
+      "gap_score": 0,
+      "fallback_rate": 0.3214486243683324
+    },
+    "development_blocks/neighbor_mean": {
+      "n": 7124,
+      "rmse": 0.14076897469217337,
+      "mae": 0.10042385072791706,
+      "gap_score": 0,
+      "fallback_rate": 0.3214486243683324
+    },
+    "development_blocks/pchip": {
+      "n": 7124,
+      "rmse": 0.1393841526848949,
+      "mae": 0.09756939715506276,
+      "gap_score": 0,
+      "fallback_rate": 0.3214486243683324
+    },
+    "development_points/linear": {
+      "n": 7288,
+      "rmse": 0.09437122896994501,
+      "mae": 0.06388842830002368,
+      "gap_score": 1.69,
+      "fallback_rate": 0.004665203073545554
+    },
+    "development_points/neighbor_mean": {
+      "n": 7288,
+      "rmse": 0.09308804041529492,
+      "mae": 0.06300917089996648,
+      "gap_score": 2.07,
+      "fallback_rate": 0.004665203073545554
+    },
+    "development_points/pchip": {
+      "n": 7288,
+      "rmse": 0.09804219878443152,
+      "mae": 0.0666264252044884,
+      "gap_score": 0.59,
+      "fallback_rate": 0.004665203073545554
+    },
+    "locked_blocks/neighbor_mean": {
+      "n": 1021,
+      "rmse": 0.1305547791258058,
+      "mae": 0.09404945663692552,
+      "gap_score": 0,
+      "fallback_rate": 0.43290891283055827
+    },
+    "locked_points/neighbor_mean": {
+      "n": 927,
+      "rmse": 0.09668535500873464,
+      "mae": 0.0671047077730471,
+      "gap_score": 0.99,
+      "fallback_rate": 0.003236245954692557
+    },
+    "temporal/neighbor_mean": {
+      "n": 427,
+      "rmse": 0.06598684030780201,
+      "mae": 0.04645505553082217,
+      "gap_score": 10.2,
+      "fallback_rate": 0.0
+    }
+  },
+  "validation_hashes": {
+    "split": "e0f862ed0bff9e76626d0b6bbe540f47e61120fe9f6682f0492e8a535af46968",
+    "masks": {
+      "development_points-0-42": "a2a72ebfd93334f4d9c159dbf3821626ca9b3f75fd2624e15530fab3a6c95bc3",
+      "development_blocks-0-42": "6a319a84576560aa6473f580f7e933a24ca27925bed2967c07e8d88862fa4bf3",
+      "development_points-0-137": "c9677b524d854cc1d1284f4dce405a0c64b409a43259b31688ff3b5558e0e319",
+      "development_blocks-0-137": "112c177295c64d6aaed25bec3fc96b47196c55a68cea781f8fbbaf8042bd1e0e",
+      "development_points-1-42": "82b8243b27bcf6974f1386cadc5886ad10a80cb2d25ad3b73aab32dcc94e57b2",
+      "development_blocks-1-42": "05a6e94c2b6c7dba75f4b856523ac547255d8dc8e346376b6ab645b555a0abc7",
+      "development_points-1-137": "daeb0f7ee0b7bdba11a9507e66f56fd974b132cd38912a800e41d339f2b9797d",
+      "development_blocks-1-137": "e21e1584e04273abc753de2017f2fb902ad4c80327fb433a045312c6755d4987",
+      "development_points-2-42": "3344641b87f626c93adbb1f5acf09d4e0b37a089e11086adc6c462dbebfc7c73",
+      "development_blocks-2-42": "2de5c02f9c6405029bf4a92b836cf17fdf58a75b6f007fa66f00b42423897c08",
+      "development_points-2-137": "b55ea29e933cd4cafc48fa102b43363769cd32e56d75a40c09d2ccad848dcfeb",
+      "development_blocks-2-137": "f36fa1805334162ce293fa8b5fb30e59d3745d2de5cb6870d64563dbbfec7214",
+      "development_points-3-42": "4a5b7c938da259dbdcb3f8e41d59c4e3ea628a794f2f8647882e4b7b70962af2",
+      "development_blocks-3-42": "0c288312ed8969ae490d552140e464e1dd9eb33e2c4906be691304fbf8dbbd40",
+      "development_points-3-137": "dc96bc2229e7582c295dec5f4d5f63ad0a23594a5ba6c6ecad6e4fc2d3dba2a5",
+      "development_blocks-3-137": "4d6c8f467db66687ac07858fe39e4b60fb3b7d6b379f911ef755eaa4b05df8b2",
+      "development_points-4-42": "f9d0ac00c1ce90daa7041a561a99633c2957e1a79ec2afc386787fbe6c40b04b",
+      "development_blocks-4-42": "b91a250f989302faf45dffa54773377062729f8120a8e8438072eb20c6ca3b9b",
+      "development_points-4-137": "3ed71d12eb8004ae97f2f7132383706fe6c73396fc01a670958758c665e41df8",
+      "development_blocks-4-137": "5f0c5a11e6323d72226bed1600c949c92a3d5234301f229725cceca03bdfc3b6",
+      "locked_points": "8cb3be7eeeb54395a2404004fe22b8299de3e91c881c4b50db088a94e0354482",
+      "locked_blocks": "f93169562518ac9dc6d91f35880ed6884ce469ddd2898bbb794cee2ec29e93c4",
+      "temporal": "fb7237fc5d16eb415e8f53798114c3d72b1faadd74921da4ccfcd32fb8bf53d9"
+    }
+  },
+  "calibration": "not_calibrated",
+  "external_datasets": [],
+  "external_models": []
+}
