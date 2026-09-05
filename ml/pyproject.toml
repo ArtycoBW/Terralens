@@ -1,0 +1,15 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "terralens-ml"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = ["numpy>=2.2,<3", "pandas>=2.2,<3", "scipy>=1.15,<2", "scikit-learn>=1.6,<2", "PyYAML>=6,<7", "catboost>=1.2.8,<2"]
+
+[project.scripts]
+terralens-ml = "terralens_ml.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/terralens_ml"]

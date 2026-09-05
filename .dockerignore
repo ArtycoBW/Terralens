@@ -1,0 +1,15 @@
+.git
+.idea
+.venv
+artifacts
+!ml/artifacts/**
+frontend
+__pycache__
+**/__pycache__
+.pytest_cache
+.ruff_cache
+*.zip
+*.csv
+*.pdf
+.env
+.env.*
