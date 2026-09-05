@@ -215,6 +215,11 @@ test("рельеф поддерживает вращение, масштаб, м
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
+  expect(
+    await page.evaluate(
+      () => matchMedia("(prefers-reduced-motion: reduce)").matches,
+    ),
+  ).toBe(true);
   await page
     .getByRole("button", { name: "Исследовать в 3D", exact: true })
     .click();

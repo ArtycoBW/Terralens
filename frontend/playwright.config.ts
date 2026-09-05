@@ -20,7 +20,7 @@ export default defineConfig({
       : undefined,
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
-    reducedMotion: "reduce",
+    contextOptions: { reducedMotion: "reduce" },
   },
   projects: [
     {

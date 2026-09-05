@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { usePrefersReducedMotion } from "./motion-preference";
+import { usePrefersReducedMotion, useHydrated } from "./motion-preference";
 import {
   IconPlus,
   IconMinus,
@@ -18,6 +18,7 @@ import {
 import { TERRAIN_MARKERS, type TerrainController } from "./terrain-data";
 
 export function TerrainView() {
+  const hydrated = useHydrated();
   const canvas = useRef<HTMLCanvasElement>(null);
   const markers = useRef<(HTMLButtonElement | null)[]>([]);
   const controller = useRef<TerrainController | null>(null);
@@ -185,6 +186,7 @@ export function TerrainView() {
             <Button
               variant="outline"
               className="rounded-full"
+              disabled={!hydrated}
               onClick={() => setStarted(true)}
             >
               <IconRotate3d size={18} />
