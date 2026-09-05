@@ -7,3 +7,4 @@ docs/analysis/field-cases/PROTOCOL.md text eol=lf
 # Хеши общего исходного кода и lock-файла должны совпадать на разных платформах.
 uv.lock text eol=lf
 ml/src/**/*.py text eol=lf
+deliverables/presentation/*.mp4 filter=lfs diff=lfs merge=lfs -text
