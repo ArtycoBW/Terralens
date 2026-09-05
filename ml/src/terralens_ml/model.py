@@ -129,10 +129,15 @@ def save_model(model, directory, *, input_path=None, metrics=None, validation_ha
     directory = Path(directory)
     directory.mkdir(parents=True, exist_ok=True)
     write_json(directory / "model.json", model)
-    revision = (
-        subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
-        or "unknown"
-    )
+    try:
+        revision = (
+            subprocess.run(
+                ["git", "rev-parse", "HEAD"], capture_output=True, text=True, timeout=5
+            ).stdout.strip()
+            or "unknown"
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        revision = "unknown"
     locks = [Path.cwd() / "uv.lock", Path(__file__).resolve().parents[3] / "uv.lock"]
     lock = next((path for path in locks if path.is_file()), locks[0])
     manifest = {
