@@ -69,11 +69,32 @@ def validate_geometry(value):
         sum(abs(Geod(ellps="WGS84").geometry_area_perimeter(orient(p, sign=1))[0]) for p in geometry.geoms)
         / 10000
     )
-    if area <= 0 or area > settings.MAX_POLYGON_AREA_HA:
+    if not math.isfinite(area) or area <= 0:
+        raise DomainError(
+            "invalid_geometry",
+            "Не удалось определить положительную площадь. Проверьте вершины контура.",
+            details={"field": "geometry", "reason": "non_positive_area"},
+        )
+    if area > settings.MAX_POLYGON_AREA_HA:
+
+        def area_label(hectares):
+            def number(value):
+                return f"{value:,.2f}".rstrip("0").rstrip(".").replace(",", "\u202f").replace(".", ",")
+
+            return f"{number(hectares)} га ({number(hectares / 100)} км²)"
+
         raise DomainError(
             "geometry_too_large",
-            "Площадь вне допустимого диапазона",
-            details={"value": area, "limit": settings.MAX_POLYGON_AREA_HA},
+            f"Контур слишком большой: {area_label(area)}. "
+            f"Максимум для одного поля — {area_label(settings.MAX_POLYGON_AREA_HA)}. "
+            "Приблизьте карту и обведите отдельное поле или разделите территорию на несколько контуров.",
+            details={
+                "field": "geometry",
+                "reason": "area_limit",
+                "unit": "ha",
+                "value": area,
+                "limit": settings.MAX_POLYGON_AREA_HA,
+            },
         )
     normalized = normalize(geometry)
     return (

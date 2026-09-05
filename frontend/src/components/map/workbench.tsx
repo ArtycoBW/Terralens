@@ -362,6 +362,14 @@ export function Workbench() {
               <p className="mb-2 font-mono text-[11px] tracking-wide text-muted-foreground">
                 Сохранить поле
               </p>
+              {caps.data && (
+                <p className="mb-4 text-xs leading-relaxed text-muted-foreground">
+                  Один контур — до{" "}
+                  {number(caps.data.limits.max_polygon_area_ha, 2)} га (
+                  {number(caps.data.limits.max_polygon_area_ha / 100, 2)} км²).
+                  Приблизьте карту и выделите отдельное поле.
+                </p>
+              )}
               <form
                 className="grid min-w-0 gap-4"
                 onSubmit={form.handleSubmit((d) => {

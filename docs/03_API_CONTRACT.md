@@ -9,6 +9,7 @@
 - Base URL `/api/v1`. JSON UTF-8, snake_case, UUID строки, timestamps ISO8601 UTC, date `YYYY-MM-DD` без timezone-конвертации в UI.
 - Float finite либо null. NaN/Infinity в JSON запрещены. NDVI — безразмерный; температура °C, осадки мм/сутки, площадь га.
 - GeoJSON Polygon/MultiPolygon, EPSG:4326, координаты `[lon,lat]`. Bbox `[west,south,east,north]`. Geometry version обязательна в run.
+- Лимит площади одинаков для всех стран и приходит в `capabilities.limits.max_polygon_area_ha` (по умолчанию 10 000 га = 100 км²). При превышении POST/PATCH polygon возвращает 422 `geometry_too_large`: `details={field:"geometry",reason:"area_limit",unit:"ha",value:<фактическая площадь>,limit:<предел>}`. Сообщение содержит площадь, предел и подсказку уменьшить контур; геометрия не сохраняется.
 - List envelope: `{items:[], next_cursor:null, total:null}`. Default limit 50, max 200; bbox discovery max задаёт capabilities. Series имеет отдельную временную resolution/pagination схему.
 - Session cookie HttpOnly; CSRF header `X-CSRFToken` на mutations. Cookie/CSRF bootstrap не требует аккаунта. Приватные ответы не кешируются на публичном CDN.
 - `X-Request-ID` на каждом ответе. `Idempotency-Key` обязателен на POST analysis/export/discovery job.

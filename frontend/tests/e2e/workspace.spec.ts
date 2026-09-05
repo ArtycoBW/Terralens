@@ -434,3 +434,81 @@ test("переходит от общего прогресса к результ�
   await expect(page.getByRole("progressbar")).toHaveCount(0);
   expect(seriesRequests).toBe(1);
 });
+
+test("объясняет лимит площади и позволяет сохранить меньший контур", async ({
+  page,
+  isMobile,
+}) => {
+  await mockApi(page, { empty: true });
+  const largeGeometry = {
+    type: "Polygon",
+    coordinates: [
+      [
+        [29.6766475, 55.6156853],
+        [31.3407651, 55.3730105],
+        [29.8084589, 56.2524825],
+        [29.6766475, 55.6156853],
+      ],
+    ],
+  };
+  const smallGeometry = {
+    type: "Polygon",
+    coordinates: [
+      [
+        [37.6, 55.7],
+        [37.61, 55.7],
+        [37.61, 55.71],
+        [37.6, 55.71],
+        [37.6, 55.7],
+      ],
+    ],
+  };
+  let saved = false;
+  await page.route("**/api/v1/polygons", async (route) => {
+    if (route.request().method() !== "POST") return route.fallback();
+    const body = route.request().postDataJSON();
+    if (JSON.stringify(body.geometry) === JSON.stringify(largeGeometry))
+      return route.fulfill({
+        status: 422,
+        json: {
+          error: {
+            code: "geometry_too_large",
+            retryable: false,
+            request_id: "area-test",
+            message:
+              "Контур слишком большой: 384 560,76 га (3 845,61 км²). Максимум для одного поля — 10 000 га (100 км²). Приблизьте карту и обведите отдельное поле или разделите территорию на несколько контуров.",
+          },
+        },
+      });
+    expect(body.geometry).toEqual(smallGeometry);
+    saved = true;
+    return route.fulfill({
+      status: 201,
+      json: { ...polygon, geometry: smallGeometry, name: body.name },
+    });
+  });
+  await page.goto("/app");
+  if (isMobile)
+    await page.getByRole("button", { name: "Показать панель" }).click();
+  await page.getByRole("tab", { name: "Создать", exact: true }).click();
+  await expect(page.getByText(/Один контур — до/)).toContainText(
+    /10\s000 га.*100 км²/,
+  );
+  await page
+    .getByRole("textbox", { name: "Название", exact: true })
+    .fill("Поле в России");
+  await page.getByText("Контур GeoJSON / ввод без карты").click();
+  const input = page.getByRole("textbox", { name: "Геометрия GeoJSON" });
+  await input.fill(JSON.stringify(largeGeometry));
+  await page.getByRole("button", { name: "Сохранить поле" }).click();
+  const error = page
+    .getByRole("tabpanel", { name: "Создать", exact: true })
+    .getByRole("alert");
+  await expect(error).toContainText("384 560,76 га");
+  await expect(error).toContainText("10 000 га (100 км²)");
+  await expect(input).toHaveValue(JSON.stringify(largeGeometry));
+  await input.fill(JSON.stringify(smallGeometry));
+  await page.getByRole("button", { name: "Сохранить поле" }).click();
+  await expect(error).toHaveCount(0);
+  await expect.poll(() => saved).toBe(true);
+});
