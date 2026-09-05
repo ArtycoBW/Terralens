@@ -17,12 +17,6 @@ import {
   SheetDescription,
   SheetTrigger,
 } from "./sheet";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./tooltip";
 import { cn } from "@/lib/utils";
 
 type SidebarState = {
@@ -55,7 +49,7 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
         setMobile,
       }}
     >
-      <TooltipProvider delayDuration={200}>{children}</TooltipProvider>
+      {children}
     </Context.Provider>
   );
 }
@@ -141,8 +135,7 @@ export function SidebarLink({
   mobile?: boolean;
 }) {
   const { open, setMobile } = useSidebar();
-  const [tooltipOpen, setTooltipOpen] = useState(false);
-  const link = (
+  return (
     <Link
       href={href}
       aria-label={label}
@@ -164,13 +157,5 @@ export function SidebarLink({
         {label}
       </span>
     </Link>
-  );
-  return mobile ? (
-    link
-  ) : (
-    <Tooltip open={!open && tooltipOpen} onOpenChange={setTooltipOpen}>
-      <TooltipTrigger asChild>{link}</TooltipTrigger>
-      <TooltipContent side="right">{label}</TooltipContent>
-    </Tooltip>
   );
 }
