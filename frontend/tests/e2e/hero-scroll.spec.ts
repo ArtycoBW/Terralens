@@ -2,6 +2,9 @@ import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
 test.use({ contextOptions: { reducedMotion: "no-preference" } });
+// В CI SwiftShader считает полноразмерный кадр на CPU; захват PNG тоже ждёт GPU.
+// Проверяем те же пиксели и ракурсы, предоставляя программному рендереру больше времени.
+const frameTimeout = process.env.CI ? 45000 : 12000;
 
 async function scrollStory(page: Page, progress: number) {
   // Программная постановка кадра следует после завершения реального wheel-события.
@@ -23,7 +26,7 @@ async function scrollStory(page: Page, progress: number) {
 
 async function oceanCenter(page: Page) {
   // Проверяем изображение, а не только прогресс/координаты Three.js.
-  const png = await page.screenshot();
+  const png = await page.screenshot({ timeout: frameTimeout });
   return page.evaluate(async (base64) => {
     const image = new Image();
     image.src = `data:image/png;base64,${base64}`;
@@ -54,7 +57,7 @@ test("Земля и текст проходят весь hero и возвращ�
   page,
   isMobile,
 }, testInfo) => {
-  test.setTimeout(90000);
+  test.setTimeout(process.env.CI ? 180000 : 90000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
@@ -77,7 +80,9 @@ test("Земля и текст проходят весь hero и возвращ�
     page.viewportSize()!.height,
   );
   await expect
-    .poll(async () => (await oceanCenter(page)).count)
+    .poll(async () => (await oceanCenter(page)).count, {
+      timeout: frameTimeout,
+    })
     .toBeGreaterThan(1000);
   const left = await oceanCenter(page);
   if (!isMobile) expect(left.x).toBeLessThan(0.42);
@@ -90,7 +95,7 @@ test("Земля и текст проходят весь hero и возвращ�
   );
   await expect(first).toHaveCSS("visibility", "hidden");
   await expect
-    .poll(async () => (await oceanCenter(page)).x)
+    .poll(async () => (await oceanCenter(page)).x, { timeout: frameTimeout })
     .toBeGreaterThan(isMobile ? 0.46 : 0.58);
   await page.screenshot({ path: testInfo.outputPath("earth-right.png") });
 
@@ -102,7 +107,9 @@ test("Земля и текст проходят весь hero и возвращ�
   await scrollStory(page, 0.3);
   await expect(first).toHaveCSS("opacity", "1");
   await expect
-    .poll(async () => Math.abs((await oceanCenter(page)).x - left.x))
+    .poll(async () => Math.abs((await oceanCenter(page)).x - left.x), {
+      timeout: frameTimeout,
+    })
     .toBeLessThan(0.04);
   await scrollStory(page, 1);
   const featuresY = (await page.locator("#features").boundingBox())!.y;
@@ -139,7 +146,9 @@ test("Земля и текст проходят весь hero и возвращ�
     "true",
   );
   await expect
-    .poll(async () => (await oceanCenter(page)).count)
+    .poll(async () => (await oceanCenter(page)).count, {
+      timeout: frameTimeout,
+    })
     .toBeGreaterThan(1000);
 });
 
