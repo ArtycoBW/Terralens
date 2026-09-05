@@ -1,0 +1,42 @@
+name: Backend and ML
+on: [push, pull_request]
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgis/postgis:16-3.5@sha256:94146ac37bc61e2322f88016056c5920729cb8c64c8542ed590af8fc2abdac07
+        env:
+          POSTGRES_DB: terralens
+          POSTGRES_USER: terralens
+          POSTGRES_PASSWORD: terralens
+        ports: ["54329:5432"]
+        options: --health-cmd "pg_isready -h 127.0.0.1 -U terralens -d terralens" --health-interval 5s --health-retries 20
+      redis:
+        image: redis:7.4-alpine@sha256:ff02b58f971e7d7d156a1267e283fcbbeee91773b6aa36c49dac28ecfe28eadf
+        ports: ["56379:6379"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: sudo apt-get update && sudo apt-get install -y libgdal-dev libgeos-dev libproj-dev
+      - run: pip install uv==0.12.10 && uv sync --frozen
+      - run: uv run --frozen ruff check ml backend scripts
+      - run: uv run --frozen ruff format --check ml backend scripts
+      - run: uv run --frozen pytest -q
+      - run: uv run --frozen python backend/manage.py makemigrations --check --dry-run
+      - run: uv run --frozen python backend/manage.py spectacular --file /tmp/openapi.json --format openapi-json --validate --fail-on-warn
+      - run: diff docs/openapi.json /tmp/openapi.json
+      - run: uv run --frozen python -m terralens_ml predict --input test-dataset.csv --output artifacts/submission.csv --model ml/artifacts/final/manifest.json
+      - run: uv run --frozen python -m terralens_ml validate-submission --input test-dataset.csv --submission artifacts/submission.csv
+  standalone-ml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install uv==0.12.10
+      - run: uv venv .venv-release && uv pip install --python .venv-release/bin/python -c requirements.lock ./ml
+      - run: .venv-release/bin/python scripts/verify_offline.py --require-standalone

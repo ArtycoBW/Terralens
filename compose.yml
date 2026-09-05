@@ -1,0 +1,106 @@
+x-logging: &service-logging
+  driver: json-file
+  options: {max-size: "10m", max-file: "3"}
+
+services:
+  postgres:
+    image: postgis/postgis:16-3.5@sha256:94146ac37bc61e2322f88016056c5920729cb8c64c8542ed590af8fc2abdac07
+    platform: linux/amd64
+    environment:
+      POSTGRES_DB: terralens
+      POSTGRES_USER: terralens
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-terralens}
+    ports: ["127.0.0.1:54329:5432"]
+    volumes: ["postgres-data:/var/lib/postgresql/data"]
+    restart: unless-stopped
+    logging: *service-logging
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U terralens -d terralens"]
+      interval: 5s
+      retries: 20
+  redis:
+    image: redis:7.4-alpine@sha256:ff02b58f971e7d7d156a1267e283fcbbeee91773b6aa36c49dac28ecfe28eadf
+    ports: ["127.0.0.1:56379:6379"]
+    restart: unless-stopped
+    logging: *service-logging
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 10
+  migrate:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: terralens-backend:local
+    environment: &backend-env
+      POSTGRES_DB: terralens
+      POSTGRES_USER: terralens
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-terralens}
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      REDIS_URL: redis://redis:6379/0
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-local-compose-development-only-change-before-deployment}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1,backend}
+      CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS:-http://localhost:8000,http://localhost:3000,http://127.0.0.1:8000}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      ARTIFACT_ROOT: /app/artifacts
+      ACTIVE_MODEL_MANIFEST: ${ACTIVE_MODEL_MANIFEST:-/app/ml/artifacts/final/manifest.json}
+      MAX_SCENES: ${MAX_SCENES:-80}
+      MAX_ACTIVE_JOBS: ${MAX_ACTIVE_JOBS:-3}
+      MAX_POLYGON_AREA_HA: ${MAX_POLYGON_AREA_HA:-10000}
+      MAX_VERTICES: ${MAX_VERTICES:-5000}
+      MAX_POLYGONS: ${MAX_POLYGONS:-20}
+      MAX_PERIOD_DAYS: ${MAX_PERIOD_DAYS:-366}
+      WORKSPACE_DAYS: ${WORKSPACE_DAYS:-7}
+      EXPORT_DAYS: ${EXPORT_DAYS:-1}
+      SNAPSHOT_RETENTION_DAYS: ${SNAPSHOT_RETENTION_DAYS:-30}
+      ARTIFACT_ORPHAN_GRACE_HOURS: ${ARTIFACT_ORPHAN_GRACE_HOURS:-24}
+    command: ["sh", "-c", "python manage.py migrate --noinput && python manage.py register_model"]
+    volumes: ["artifacts-data:/app/artifacts"]
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+  backend:
+    image: terralens-backend:local
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment: *backend-env
+    ports: ["127.0.0.1:8000:8000"]
+    volumes: ["artifacts-data:/app/artifacts"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8000/api/v1/health/ready"]
+      interval: 15s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+    logging: *service-logging
+  worker:
+    image: terralens-backend:local
+    environment: *backend-env
+    volumes: ["artifacts-data:/app/artifacts"]
+    command: ["celery", "-A", "config", "worker", "--loglevel=INFO", "--concurrency=2"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    restart: unless-stopped
+    logging: *service-logging
+  scheduler:
+    image: terralens-backend:local
+    environment: *backend-env
+    command: ["celery", "-A", "config", "beat", "--loglevel=INFO", "--schedule=/tmp/celerybeat-schedule"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    restart: unless-stopped
+    logging: *service-logging
+  batch:
+    image: terralens-backend:local
+    profiles: ["batch"]
+    working_dir: /data
+    volumes: [".:/data"]
+    entrypoint: ["python", "-m", "terralens_ml"]
+    command: ["--help"]
+volumes:
+  postgres-data:
+  artifacts-data:
