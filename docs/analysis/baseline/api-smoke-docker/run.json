@@ -1,0 +1,60 @@
+{
+  "id": "f42c147b-9c51-47b1-baad-b7185f380c0c",
+  "polygon_id": "342114a1-f9e6-4f8a-9582-bdeda62d6a14",
+  "polygon_version": 1,
+  "mode": "retrospective",
+  "period": {
+    "from": "2024-06-01",
+    "to": "2024-06-10"
+  },
+  "state": "partial",
+  "job_id": "d3b59feb-ffc0-4f88-88b9-7563627b8fea",
+  "model_version": "aec2138ae6ce109d",
+  "config_version": "v1",
+  "created_at": "2026-09-04T23:23:47.678423Z",
+  "completed_at": "2026-09-04T23:29:07.434656Z",
+  "snapshots": [
+    {
+      "id": "37211eef-e32c-4c14-ac3f-a4c7257e4609",
+      "provider": "earth_search",
+      "checksum": "46b45c9cacf1c7cd9ebc9a99cca2772073ef357252a2da522eb57f76ed63052f",
+      "retrieved_at": "2026-09-04T23:29:06.773562Z",
+      "status": "partial"
+    },
+    {
+      "id": "55f38d12-79d1-4299-9572-d2ca4d811a80",
+      "provider": "open_meteo_era5_land",
+      "checksum": "e2056e82bd9e267f315d6f14c1346e398ba72db8521ed42a440e91197adaa56a",
+      "retrieved_at": "2026-09-04T23:29:07.363193Z",
+      "status": "completed"
+    }
+  ],
+  "warnings": [
+    {
+      "code": "scene_limit",
+      "limit": 80,
+      "provider": "earth_search"
+    },
+    {
+      "code": "insufficient_reference",
+      "message": "Не набрано три сопоставимых исторических сезона"
+    }
+  ],
+  "summary": {
+    "total_days": 10,
+    "summary_rule": "event-max-severity-else-at-least-two-clean-days-and-valid-reference-v1",
+    "observed_days": 2,
+    "overall_status": "insufficient_data",
+    "latest_estimate": {
+      "date": "2024-06-10",
+      "value": 0.7425323817076396,
+      "origin": "extrapolated"
+    },
+    "longest_gap_days": 7,
+    "unavailable_days": 0,
+    "reconstructed_days": 8,
+    "anomaly_period_count": 0,
+    "observed_coverage_ratio": 0.2
+  },
+  "result_version": "398eaef65efed43e4135a0bc0d1330d209840f313cd4e48b94a26634241525ab"
+}

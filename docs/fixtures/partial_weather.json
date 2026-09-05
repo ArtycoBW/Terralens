@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "synthetic_example": true,
+    "scenario": "partial_weather",
+    "note": "Условные числа для contract/UI, не спутниковое наблюдение"
+  },
+  "series": {
+    "items": [
+      {
+        "date": "2024-06-14",
+        "observed_primary": 0.54,
+        "clean_primary": 0.54,
+        "reconstructed": 0.54,
+        "origin": "observed",
+        "source_sensor": "sentinel2",
+        "sensors": {
+          "sentinel2": 0.54,
+          "landsat": null,
+          "modis": null
+        },
+        "climatology_mean": 0.62,
+        "climatology_std": 0.08,
+        "zscore": -1.0,
+        "prediction_interval": {
+          "lower": null,
+          "upper": null,
+          "level": null,
+          "method": "not_calibrated"
+        },
+        "weather": {
+          "temperature_c": null,
+          "precipitation_mm": null,
+          "provider": null
+        },
+        "support_count": 1,
+        "gap_days": 0,
+        "quality_flags": [
+          "weather_missing"
+        ],
+        "reference_years": 5
+      }
+    ],
+    "actual_resolution": "daily",
+    "next_cursor": null,
+    "total": null
+  }
+}

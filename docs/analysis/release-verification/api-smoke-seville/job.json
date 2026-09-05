@@ -1,0 +1,19 @@
+{
+  "id": "4afe4b3b-ef93-4ccc-a0f9-40417e19335c",
+  "kind": "analysis",
+  "state": "succeeded",
+  "stage": "detecting",
+  "progress": 1.0,
+  "attempt": 1,
+  "created_at": "2026-09-05T00:13:55.289258Z",
+  "started_at": "2026-09-05T00:13:55.405593Z",
+  "finished_at": "2026-09-05T00:16:01.125615Z",
+  "cancel_requested": false,
+  "retryable": false,
+  "error": null,
+  "result": {
+    "type": "analysis",
+    "id": "eee9aa62-072a-494e-9d56-603aa6e34d9e"
+  },
+  "parent_job_id": null
+}

@@ -1,4 +1,5 @@
 """Воспроизводимый аудит исходных файлов. Не изменяет данные и не обучает модель."""
+
 from __future__ import annotations
 
 import hashlib
@@ -42,11 +43,14 @@ def profile(df):
     reference = df.s2_ndvi.combine_first(df.landsat_ndvi).combine_first(df.modis_ndvi)
     known = df.primary_ndvi.notna()
     return {
-        "rows": len(df), "columns": list(df.columns),
+        "rows": len(df),
+        "columns": list(df.columns),
         "dtypes": df.dtypes.astype(str).to_dict(),
-        "missing": df.isna().sum().to_dict(), "nunique": df.nunique().to_dict(),
+        "missing": df.isna().sum().to_dict(),
+        "nunique": df.nunique().to_dict(),
         "duplicate_keys": int(df.duplicated(KEY).sum()),
-        "date_min": str(dates.min().date()), "date_max": str(dates.max().date()),
+        "date_min": str(dates.min().date()),
+        "date_max": str(dates.max().date()),
         "rows_by_year": dates.dt.year.value_counts().sort_index().to_dict(),
         "crop_rows": df.crop_type.value_counts().to_dict(),
         "crop_polygons": df.groupby("crop_type").anon_polygon_id.nunique().to_dict(),
@@ -70,12 +74,16 @@ def main():
     for file in sorted(ROOT.iterdir()):
         if file.suffix not in {".pdf", ".csv", ".zip"}:
             continue
-        item = {"file": file.name, "bytes": file.stat().st_size,
-                "sha256": hashlib.sha256(file.read_bytes()).hexdigest()}
+        item = {
+            "file": file.name,
+            "bytes": file.stat().st_size,
+            "sha256": hashlib.sha256(file.read_bytes()).hexdigest(),
+        }
         if file.suffix == ".zip":
             with zipfile.ZipFile(file) as archive:
-                item["members"] = [{"path": entry.filename, "bytes": entry.file_size}
-                                   for entry in archive.infolist()]
+                item["members"] = [
+                    {"path": entry.filename, "bytes": entry.file_size} for entry in archive.infolist()
+                ]
                 item["crc_error"] = archive.testzip()
         manifest.append(item)
     write_json("input-manifest.json", manifest)
@@ -93,16 +101,24 @@ def main():
             date = pd.Timestamp(row.date)
             previous = available[available < date]
             following = available[available > date]
-            gap_context.append({"id": polygon, "date": row.date,
-                                "before_days": int((date - previous.iloc[-1]).days) if len(previous) else None,
-                                "after_days": int((following.iloc[0] - date).days) if len(following) else None})
+            gap_context.append(
+                {
+                    "id": polygon,
+                    "date": row.date,
+                    "before_days": int((date - previous.iloc[-1]).days) if len(previous) else None,
+                    "after_days": int((following.iloc[0] - date).days) if len(following) else None,
+                }
+            )
     context = pd.DataFrame(gap_context)
     checks = {
         "overlap_ids": sorted(set(train.anon_polygon_id) & set(test.anon_polygon_id)),
         "overlap_keys": len(train[KEY].merge(test[KEY], on=KEY)),
         "gap_rows": len(gaps),
         "gap_years": pd.to_datetime(gaps.date).dt.year.value_counts().sort_index().to_dict(),
-        "gap_mask_nonnull": gaps.drop(columns=KEY + ["crop_type", "is_synthetic_gap"]).notna().sum().to_dict(),
+        "gap_mask_nonnull": gaps.drop(columns=KEY + ["crop_type", "is_synthetic_gap"])
+        .notna()
+        .sum()
+        .to_dict(),
         "gap_context_test_only": context[["before_days", "after_days"]].describe().to_dict(),
         "gap_without_left_test_only": int(context.before_days.isna().sum()),
         "gap_without_right_test_only": int(context.after_days.isna().sum()),
@@ -117,19 +133,38 @@ def main():
             magic, version, size = struct.unpack_from("<4sII", content)
             chunk_size, chunk_type = struct.unpack_from("<II", content, 12)
             assert magic == b"glTF" and size == len(content) and chunk_type == 0x4E4F534A
-            info = json.loads(content[20:20 + chunk_size])
-            scene[name] = {"version": version, "bytes": size, "asset": info.get("asset"),
-                           "meshes": len(info.get("meshes", [])), "images": len(info.get("images", [])),
-                           "extensionsRequired": info.get("extensionsRequired", []),
-                           "external_uris": [x["uri"] for group in ("images", "buffers")
-                                             for x in info.get(group, []) if "uri" in x]}
+            info = json.loads(content[20 : 20 + chunk_size])
+            scene[name] = {
+                "version": version,
+                "bytes": size,
+                "asset": info.get("asset"),
+                "meshes": len(info.get("meshes", [])),
+                "images": len(info.get("images", [])),
+                "extensionsRequired": info.get("extensionsRequired", []),
+                "external_uris": [
+                    x["uri"] for group in ("images", "buffers") for x in info.get(group, []) if "uri" in x
+                ],
+            }
         lock = json.loads(archive.read("ascend/package-lock.json"))
-        scene["lock_dependencies"] = {name: data.get("version") for name, data in lock["packages"].items()
-                                      if name in {"node_modules/react", "node_modules/react-dom", "node_modules/three",
-                                                  "node_modules/vite", "node_modules/lenis"}}
+        scene["lock_dependencies"] = {
+            name: data.get("version")
+            for name, data in lock["packages"].items()
+            if name
+            in {
+                "node_modules/react",
+                "node_modules/react-dom",
+                "node_modules/three",
+                "node_modules/vite",
+                "node_modules/lenis",
+            }
+        }
     write_json("ascend-assets.json", scene)
-    print(json.dumps({"train_rows": len(train), "test_rows": len(test), "control_rows": len(gaps),
-                      "output": str(OUT)}, ensure_ascii=False))
+    print(
+        json.dumps(
+            {"train_rows": len(train), "test_rows": len(test), "control_rows": len(gaps), "output": str(OUT)},
+            ensure_ascii=False,
+        )
+    )
 
 
 if __name__ == "__main__":

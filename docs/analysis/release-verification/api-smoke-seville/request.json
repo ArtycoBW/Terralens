@@ -1,0 +1,17 @@
+{
+  "polygon_id": "514623e9-1896-4f0d-91ed-5b304d163972",
+  "polygon_version": 1,
+  "period": {
+    "from": "2024-06-10",
+    "to": "2024-06-20"
+  },
+  "mode": "retrospective",
+  "sources": [
+    "sentinel2",
+    "landsat",
+    "era5_land"
+  ],
+  "options": {
+    "climatology_years": 0
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "geometry_sha256": "d794324b88309708576724387f5f431ae0c3614e4fd2cffddfa8a6a83a0f81a6",
+  "satellite_sha256": "a49fcaec2f3acf7e7e785663f6ea7394910400d657ed3892d487c34feb2b16a2",
+  "weather_sha256": "e002fcb3f941162cdb27e2224a54065399ec13c2deefeab38427fe7338d97974",
+  "observations": 6,
+  "usable_observations": 2,
+  "weather_days": 10,
+  "warnings": [
+    {
+      "code": "scene_limit",
+      "provider": "earth_search",
+      "limit": 6
+    }
+  ]
+}

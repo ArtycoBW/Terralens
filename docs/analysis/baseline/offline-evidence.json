@@ -1,0 +1,10 @@
+{
+  "python": "3.12.9",
+  "django_installed": false,
+  "network_connections": "blocked by socket.socket.connect override",
+  "database_configuration": "absent",
+  "deterministic_runs": 2,
+  "rows": 3112,
+  "submission_sha256": "bc5976c26c6b2bde879b8ffd76d82d6a49aba575ea2bf367b97037da7d0f9507",
+  "dependency_lock_sha256": "acc9c1f4d338336194c7c7c20fa538c7be07633f4f5d7fb7c501ac4c510bfd12"
+}

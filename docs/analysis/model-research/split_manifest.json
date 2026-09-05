@@ -1,0 +1,262 @@
+{
+  "config": {
+    "input": "train-dataset.zip",
+    "output": "artifacts/research",
+    "artifact_output": "ml/artifacts/final",
+    "prior_split": "docs/analysis/baseline/split_manifest.json",
+    "seed": 42,
+    "folds": 5,
+    "mask_seeds": [
+      42,
+      137
+    ],
+    "mask_fraction": 0.15,
+    "calibration_fields": 5,
+    "assessment_fields": 5,
+    "calibration_level": 0.9,
+    "max_gap_days": 60,
+    "max_edge_days": 14,
+    "season_start_month": 1,
+    "boost_iterations": 160,
+    "candidates": {
+      "m0": {
+        "algorithm": "neighbor_mean"
+      },
+      "m1": {
+        "algorithm": "linear"
+      },
+      "m2": {
+        "algorithm": "pchip"
+      },
+      "m3": {
+        "algorithm": "robust_smoother"
+      },
+      "m3_without_robust": {
+        "algorithm": "robust_smoother",
+        "robust": false
+      },
+      "m3_raw": {
+        "algorithm": "robust_smoother",
+        "quality_filter": false
+      },
+      "m4": {
+        "algorithm": "history_residual"
+      },
+      "m4_without_history": {
+        "algorithm": "history_residual",
+        "use_history": false
+      },
+      "m5": {
+        "algorithm": "catboost_residual"
+      },
+      "m5_without_weather": {
+        "algorithm": "catboost_residual",
+        "use_weather": false
+      },
+      "m5_without_sensors": {
+        "algorithm": "catboost_residual",
+        "use_sensors": false
+      },
+      "m0_raw": {
+        "algorithm": "neighbor_mean",
+        "quality_filter": false
+      },
+      "m0_clip": {
+        "algorithm": "neighbor_mean",
+        "clip": true
+      }
+    }
+  },
+  "excluded_previously_inspected_holdout": [
+    "AOI-0008",
+    "AOI-0011",
+    "AOI-0019",
+    "AOI-0048",
+    "AOI-0052",
+    "AOI-0056",
+    "AOI-0063",
+    "AOI-0077"
+  ],
+  "selection_ids": [
+    "AOI-0002",
+    "AOI-0003",
+    "AOI-0004",
+    "AOI-0007",
+    "AOI-0015",
+    "AOI-0021",
+    "AOI-0023",
+    "AOI-0026",
+    "AOI-0030",
+    "AOI-0033",
+    "AOI-0035",
+    "AOI-0037",
+    "AOI-0038",
+    "AOI-0041",
+    "AOI-0043",
+    "AOI-0045",
+    "AOI-0050",
+    "AOI-0053",
+    "AOI-0064",
+    "AOI-0071",
+    "AOI-0075"
+  ],
+  "calibration_ids": [
+    "AOI-0022",
+    "AOI-0040",
+    "AOI-0065",
+    "AOI-0069",
+    "AOI-0076"
+  ],
+  "assessment_ids": [
+    "AOI-0020",
+    "AOI-0027",
+    "AOI-0055",
+    "AOI-0060",
+    "AOI-0070"
+  ],
+  "temporal_year": 2024,
+  "folds": [
+    {
+      "fold": 0,
+      "train_ids": [
+        "AOI-0002",
+        "AOI-0004",
+        "AOI-0007",
+        "AOI-0015",
+        "AOI-0021",
+        "AOI-0026",
+        "AOI-0030",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0037",
+        "AOI-0041",
+        "AOI-0043",
+        "AOI-0045",
+        "AOI-0050",
+        "AOI-0053",
+        "AOI-0064",
+        "AOI-0071"
+      ],
+      "validation_ids": [
+        "AOI-0003",
+        "AOI-0023",
+        "AOI-0038",
+        "AOI-0075"
+      ]
+    },
+    {
+      "fold": 1,
+      "train_ids": [
+        "AOI-0003",
+        "AOI-0004",
+        "AOI-0007",
+        "AOI-0015",
+        "AOI-0023",
+        "AOI-0026",
+        "AOI-0030",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0038",
+        "AOI-0041",
+        "AOI-0043",
+        "AOI-0045",
+        "AOI-0050",
+        "AOI-0053",
+        "AOI-0071",
+        "AOI-0075"
+      ],
+      "validation_ids": [
+        "AOI-0002",
+        "AOI-0021",
+        "AOI-0037",
+        "AOI-0064"
+      ]
+    },
+    {
+      "fold": 2,
+      "train_ids": [
+        "AOI-0002",
+        "AOI-0003",
+        "AOI-0004",
+        "AOI-0007",
+        "AOI-0021",
+        "AOI-0023",
+        "AOI-0026",
+        "AOI-0030",
+        "AOI-0037",
+        "AOI-0038",
+        "AOI-0041",
+        "AOI-0043",
+        "AOI-0045",
+        "AOI-0050",
+        "AOI-0064",
+        "AOI-0071",
+        "AOI-0075"
+      ],
+      "validation_ids": [
+        "AOI-0015",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0053"
+      ]
+    },
+    {
+      "fold": 3,
+      "train_ids": [
+        "AOI-0002",
+        "AOI-0003",
+        "AOI-0004",
+        "AOI-0015",
+        "AOI-0021",
+        "AOI-0023",
+        "AOI-0026",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0037",
+        "AOI-0038",
+        "AOI-0043",
+        "AOI-0050",
+        "AOI-0053",
+        "AOI-0064",
+        "AOI-0071",
+        "AOI-0075"
+      ],
+      "validation_ids": [
+        "AOI-0007",
+        "AOI-0030",
+        "AOI-0041",
+        "AOI-0045"
+      ]
+    },
+    {
+      "fold": 4,
+      "train_ids": [
+        "AOI-0002",
+        "AOI-0003",
+        "AOI-0007",
+        "AOI-0015",
+        "AOI-0021",
+        "AOI-0023",
+        "AOI-0030",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0037",
+        "AOI-0038",
+        "AOI-0041",
+        "AOI-0045",
+        "AOI-0053",
+        "AOI-0064",
+        "AOI-0075"
+      ],
+      "validation_ids": [
+        "AOI-0004",
+        "AOI-0026",
+        "AOI-0043",
+        "AOI-0050",
+        "AOI-0071"
+      ]
+    }
+  ],
+  "input_sha256": "08e4f724f616459c944050aa25c1a46d16055501c785faeda74edd907c665fc6",
+  "assessment_status": "Post-selection assessment; these source AOIs appeared in the earlier baseline study, not a new blind holdout"
+}

@@ -1,0 +1,21 @@
+migrate-1  | Operations to perform:
+migrate-1  |   Apply all migrations: auth, contenttypes, core, sessions
+migrate-1  | Running migrations:
+migrate-1  |   Applying contenttypes.0001_initial... OK
+migrate-1  |   Applying contenttypes.0002_remove_content_type_name... OK
+migrate-1  |   Applying auth.0001_initial... OK
+migrate-1  |   Applying auth.0002_alter_permission_name_max_length... OK
+migrate-1  |   Applying auth.0003_alter_user_email_max_length... OK
+migrate-1  |   Applying auth.0004_alter_user_username_opts... OK
+migrate-1  |   Applying auth.0005_alter_user_last_login_null... OK
+migrate-1  |   Applying auth.0006_require_contenttypes_0002... OK
+migrate-1  |   Applying auth.0007_alter_validators_add_error_messages... OK
+migrate-1  |   Applying auth.0008_alter_user_username_max_length... OK
+migrate-1  |   Applying auth.0009_alter_user_last_name_max_length... OK
+migrate-1  |   Applying auth.0010_alter_group_name_max_length... OK
+migrate-1  |   Applying auth.0011_update_proxy_permissions... OK
+migrate-1  |   Applying auth.0012_alter_user_first_name_max_length... OK
+migrate-1  |   Applying core.0001_initial... OK
+migrate-1  |   Applying core.0002_export_manifest_checksum_and_more... OK
+migrate-1  |   Applying sessions.0001_initial... OK
+migrate-1  | Активная модель: 25a39f51737d1012

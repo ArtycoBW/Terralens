@@ -1,0 +1,230 @@
+{
+  "seed": 42,
+  "locked_holdout_ids": [
+    "AOI-0008",
+    "AOI-0011",
+    "AOI-0019",
+    "AOI-0048",
+    "AOI-0052",
+    "AOI-0056",
+    "AOI-0063",
+    "AOI-0077"
+  ],
+  "folds": [
+    {
+      "fold": 0,
+      "train_ids": [
+        "AOI-0002",
+        "AOI-0003",
+        "AOI-0004",
+        "AOI-0015",
+        "AOI-0020",
+        "AOI-0021",
+        "AOI-0022",
+        "AOI-0026",
+        "AOI-0027",
+        "AOI-0030",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0037",
+        "AOI-0040",
+        "AOI-0041",
+        "AOI-0043",
+        "AOI-0045",
+        "AOI-0050",
+        "AOI-0053",
+        "AOI-0055",
+        "AOI-0064",
+        "AOI-0065",
+        "AOI-0069",
+        "AOI-0070",
+        "AOI-0076"
+      ],
+      "validation_ids": [
+        "AOI-0007",
+        "AOI-0023",
+        "AOI-0038",
+        "AOI-0060",
+        "AOI-0071",
+        "AOI-0075"
+      ]
+    },
+    {
+      "fold": 1,
+      "train_ids": [
+        "AOI-0002",
+        "AOI-0003",
+        "AOI-0007",
+        "AOI-0015",
+        "AOI-0020",
+        "AOI-0021",
+        "AOI-0023",
+        "AOI-0026",
+        "AOI-0030",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0038",
+        "AOI-0040",
+        "AOI-0041",
+        "AOI-0043",
+        "AOI-0045",
+        "AOI-0050",
+        "AOI-0055",
+        "AOI-0060",
+        "AOI-0064",
+        "AOI-0065",
+        "AOI-0069",
+        "AOI-0071",
+        "AOI-0075",
+        "AOI-0076"
+      ],
+      "validation_ids": [
+        "AOI-0004",
+        "AOI-0022",
+        "AOI-0027",
+        "AOI-0037",
+        "AOI-0053",
+        "AOI-0070"
+      ]
+    },
+    {
+      "fold": 2,
+      "train_ids": [
+        "AOI-0002",
+        "AOI-0004",
+        "AOI-0007",
+        "AOI-0015",
+        "AOI-0020",
+        "AOI-0022",
+        "AOI-0023",
+        "AOI-0026",
+        "AOI-0027",
+        "AOI-0030",
+        "AOI-0035",
+        "AOI-0037",
+        "AOI-0038",
+        "AOI-0040",
+        "AOI-0041",
+        "AOI-0043",
+        "AOI-0050",
+        "AOI-0053",
+        "AOI-0055",
+        "AOI-0060",
+        "AOI-0064",
+        "AOI-0065",
+        "AOI-0070",
+        "AOI-0071",
+        "AOI-0075",
+        "AOI-0076"
+      ],
+      "validation_ids": [
+        "AOI-0003",
+        "AOI-0021",
+        "AOI-0033",
+        "AOI-0045",
+        "AOI-0069"
+      ]
+    },
+    {
+      "fold": 3,
+      "train_ids": [
+        "AOI-0003",
+        "AOI-0004",
+        "AOI-0007",
+        "AOI-0015",
+        "AOI-0021",
+        "AOI-0022",
+        "AOI-0023",
+        "AOI-0026",
+        "AOI-0027",
+        "AOI-0033",
+        "AOI-0035",
+        "AOI-0037",
+        "AOI-0038",
+        "AOI-0040",
+        "AOI-0041",
+        "AOI-0045",
+        "AOI-0050",
+        "AOI-0053",
+        "AOI-0055",
+        "AOI-0060",
+        "AOI-0064",
+        "AOI-0069",
+        "AOI-0070",
+        "AOI-0071",
+        "AOI-0075",
+        "AOI-0076"
+      ],
+      "validation_ids": [
+        "AOI-0002",
+        "AOI-0020",
+        "AOI-0030",
+        "AOI-0043",
+        "AOI-0065"
+      ]
+    },
+    {
+      "fold": 4,
+      "train_ids": [
+        "AOI-0002",
+        "AOI-0003",
+        "AOI-0004",
+        "AOI-0007",
+        "AOI-0020",
+        "AOI-0021",
+        "AOI-0022",
+        "AOI-0023",
+        "AOI-0027",
+        "AOI-0030",
+        "AOI-0033",
+        "AOI-0037",
+        "AOI-0038",
+        "AOI-0043",
+        "AOI-0045",
+        "AOI-0053",
+        "AOI-0060",
+        "AOI-0065",
+        "AOI-0069",
+        "AOI-0070",
+        "AOI-0071",
+        "AOI-0075"
+      ],
+      "validation_ids": [
+        "AOI-0015",
+        "AOI-0026",
+        "AOI-0035",
+        "AOI-0040",
+        "AOI-0041",
+        "AOI-0050",
+        "AOI-0055",
+        "AOI-0064",
+        "AOI-0076"
+      ]
+    }
+  ],
+  "mask_seeds": [
+    42,
+    137
+  ],
+  "config": {
+    "input": "train-dataset.zip",
+    "output": "artifacts/evaluation",
+    "seed": 42,
+    "mask_seeds": [
+      42,
+      137
+    ],
+    "mask_fraction": 0.15,
+    "folds": 5,
+    "holdout_fraction": 0.2,
+    "algorithms": [
+      "neighbor_mean",
+      "linear",
+      "pchip"
+    ],
+    "max_gap_days": 60,
+    "max_edge_days": 14,
+    "season_start_month": 1,
+    "clip": false
+  }
+}

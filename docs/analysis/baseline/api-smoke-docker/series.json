@@ -1,0 +1,358 @@
+{
+  "items": [
+    {
+      "date": "2024-06-01",
+      "origin": "observed",
+      "zscore": null,
+      "sensors": {
+        "modis": null,
+        "landsat": null,
+        "sentinel2": 0.7294646505925622
+      },
+      "weather": {
+        "provider": "open_meteo_era5_land",
+        "temperature_c": 19.9,
+        "precipitation_mm": null
+      },
+      "gap_days": 0,
+      "clean_primary": 0.7294646505925622,
+      "quality_flags": [
+        "insufficient_reference",
+        "weather_missing"
+      ],
+      "reconstructed": 0.7294646505925622,
+      "source_sensor": "sentinel2",
+      "support_count": 1,
+      "climatology_std": null,
+      "reference_years": 0,
+      "climatology_mean": null,
+      "observed_primary": 0.7294646505925622,
+      "prediction_interval": {
+        "level": null,
+        "lower": null,
+        "upper": null,
+        "method": "not_calibrated"
+      }
+    },
+    {
+      "date": "2024-06-02",
+      "origin": "interpolated",
+      "zscore": null,
+      "sensors": {
+        "modis": null,
+        "landsat": null,
+        "sentinel2": null
+      },
+      "weather": {
+        "provider": "open_meteo_era5_land",
+        "temperature_c": 18.9,
+        "precipitation_mm": null
+      },
+      "gap_days": 8,
+      "clean_primary": null,
+      "quality_flags": [
+        "input_nan",
+        "insufficient_reference",
+        "weather_missing"
+      ],
+      "reconstructed": 0.7359985161501008,
+      "source_sensor": null,
+      "support_count": 2,
+      "climatology_std": null,
+      "reference_years": 0,
+      "climatology_mean": null,
+      "observed_primary": null,
+      "prediction_interval": {
+        "level": null,
+        "lower": null,
+        "upper": null,
+        "method": "not_calibrated"
+      }
+    },
+    {
+      "date": "2024-06-03",
+      "origin": "interpolated",
+      "zscore": null,
+      "sensors": {
+        "modis": null,
+        "landsat": null,
+        "sentinel2": null
+      },
+      "weather": {
+        "provider": "open_meteo_era5_land",
+        "temperature_c": 16.0,
+        "precipitation_mm": null
+      },
+      "gap_days": 8,
+      "clean_primary": null,
+      "quality_flags": [
+        "input_nan",
+        "insufficient_reference",
+        "weather_missing"
+      ],
+      "reconstructed": 0.7359985161501008,
+      "source_sensor": null,
+      "support_count": 2,
+      "climatology_std": null,
+      "reference_years": 0,
+      "climatology_mean": null,
+      "observed_primary": null,
+      "prediction_interval": {
+        "level": null,
+        "lower": null,
+        "upper": null,
+        "method": "not_calibrated"
+      }
+    },
+    {
+      "date": "2024-06-04",
+      "origin": "interpolated",
+      "zscore": null,
+      "sensors": {
+        "modis": null,
+        "landsat": null,
+        "sentinel2": null
+      },
+      "weather": {
+        "provider": "open_meteo_era5_land",
+        "temperature_c": 16.7,
+        "precipitation_mm": null
+      },
+      "gap_days": 8,
+      "clean_primary": null,
+      "quality_flags": [
+        "input_nan",
+        "insufficient_reference",
+        "low_pixel_coverage",
+        "weather_missing"
+      ],
+      "reconstructed": 0.7359985161501008,
+      "source_sensor": "sentinel2",
+      "support_count": 2,
+      "climatology_std": null,
+      "reference_years": 0,
+      "climatology_mean": null,
+      "observed_primary": null,
+      "prediction_interval": {
+        "level": null,
+        "lower": null,
+        "upper": null,
+        "method": "not_calibrated"
+      }
+    },
+    {
+      "date": "2024-06-05",
+      "origin": "interpolated",
+      "zscore": null,
+      "sensors": {
+        "modis": null,
+        "landsat": null,
+        "sentinel2": null
+      },
+      "weather": {
+        "provider": "open_meteo_era5_land",
+        "temperature_c": 16.3,
+        "precipitation_mm": null
+      },
+      "gap_days": 8,
+      "clean_primary": null,
+      "quality_flags": [
+        "input_nan",
+        "insufficient_reference",
+        "weather_missing"
+      ],
+      "reconstructed": 0.7359985161501008,
+      "source_sensor": null,
+      "support_count": 2,
+      "climatology_std": null,
+      "reference_years": 0,
+      "climatology_mean": null,
+      "observed_primary": null,
+      "prediction_interval": {
+        "level": null,
+        "lower": null,
+        "upper": null,
+        "method": "not_calibrated"
+      }
+    },
+    {
+      "date": "2024-06-06",
+      "origin": "interpolated",
+      "zscore": null,
+      "sensors": {
+        "modis": null,
+        "landsat": null,
+        "sentinel2": 0.6909039124389803
+      },
+      "weather": {
+        "provider": "open_meteo_era5_land",
+        "temperature_c": 15.6,
+        "precipitation_mm": null
+      },
+      "gap_days": 8,
+      "clean_primary": null,
+      "quality_flags": [
+        "input_nan",
+        "insufficient_reference",
+        "low_pixel_coverage",
+        "weather_missing"
+      ],
+      "reconstructed": 0.7359985161501008,
+      "source_sensor": "sentinel2",
+      "support_count": 2,
+      "climatology_std": null,
+      "reference_years": 0,
+      "climatology_mean": null,
+      "observed_primary": 0.6909039124389803,
+      "prediction_interval": {
+        "level": null,
+        "lower": null,
+        "upper": null,
+        "method": "not_calibrated"
+      }
+    },
+    {
+      "date": "2024-06-07",
+      "origin": "interpolated",
+      "zscore": null,
+      "sensors": {
+        "modis": null,
+        "landsat": null,
+        "sentinel2": null
+      },
+      "weather": {
+        "provider": "open_meteo_era5_land",
+        "temperature_c": 15.8,
+        "precipitation_mm": null
+      },
+      "gap_days": 8,
+      "clean_primary": null,
+      "quality_flags": [
+        "input_nan",
+        "insufficient_reference",
+        "weather_missing"
+      ],
+      "reconstructed": 0.7359985161501008,
+      "source_sensor": null,
+      "support_count": 2,
+      "climatology_std": null,
+      "reference_years": 0,
+      "climatology_mean": null,
+      "observed_primary": null,
+      "prediction_interval": {
+        "level": null,
+        "lower": null,
+        "upper": null,
+        "method": "not_calibrated"
+      }
+    },
+    {
+      "date": "2024-06-08",
+      "origin": "interpolated",
+      "zscore": null,
+      "sensors": {
+        "modis": null,
+        "landsat": null,
+        "sentinel2": null
+      },
+      "weather": {
+        "provider": "open_meteo_era5_land",
+        "temperature_c": 18.5,
+        "precipitation_mm": null
+      },
+      "gap_days": 8,
+      "clean_primary": null,
+      "quality_flags": [
+        "input_nan",
+        "insufficient_reference",
+        "weather_missing"
+      ],
+      "reconstructed": 0.7359985161501008,
+      "source_sensor": null,
+      "support_count": 2,
+      "climatology_std": null,
+      "reference_years": 0,
+      "climatology_mean": null,
+      "observed_primary": null,
+      "prediction_interval": {
+        "level": null,
+        "lower": null,
+        "upper": null,
+        "method": "not_calibrated"
+      }
+    },
+    {
+      "date": "2024-06-09",
+      "origin": "observed",
+      "zscore": null,
+      "sensors": {
+        "modis": null,
+        "landsat": null,
+        "sentinel2": 0.7425323817076396
+      },
+      "weather": {
+        "provider": "open_meteo_era5_land",
+        "temperature_c": 15.8,
+        "precipitation_mm": null
+      },
+      "gap_days": 0,
+      "clean_primary": 0.7425323817076396,
+      "quality_flags": [
+        "insufficient_reference",
+        "weather_missing"
+      ],
+      "reconstructed": 0.7425323817076396,
+      "source_sensor": "sentinel2",
+      "support_count": 1,
+      "climatology_std": null,
+      "reference_years": 0,
+      "climatology_mean": null,
+      "observed_primary": 0.7425323817076396,
+      "prediction_interval": {
+        "level": null,
+        "lower": null,
+        "upper": null,
+        "method": "not_calibrated"
+      }
+    },
+    {
+      "date": "2024-06-10",
+      "origin": "extrapolated",
+      "zscore": null,
+      "sensors": {
+        "modis": null,
+        "landsat": null,
+        "sentinel2": null
+      },
+      "weather": {
+        "provider": "open_meteo_era5_land",
+        "temperature_c": 14.7,
+        "precipitation_mm": null
+      },
+      "gap_days": 1,
+      "clean_primary": null,
+      "quality_flags": [
+        "edge_gap",
+        "input_nan",
+        "insufficient_reference",
+        "weather_missing"
+      ],
+      "reconstructed": 0.7425323817076396,
+      "source_sensor": null,
+      "support_count": 1,
+      "climatology_std": null,
+      "reference_years": 0,
+      "climatology_mean": null,
+      "observed_primary": null,
+      "prediction_interval": {
+        "level": null,
+        "lower": null,
+        "upper": null,
+        "method": "not_calibrated"
+      }
+    }
+  ],
+  "next_cursor": null,
+  "total": null,
+  "actual_resolution": "daily"
+}

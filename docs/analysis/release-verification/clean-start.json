@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-09-05T00:13:56.381903+00:00",
+  "isolated_project": "terralens-release-check",
+  "empty_postgres_and_artifact_volumes": true,
+  "reserved_password_characters_verified": true,
+  "image_id": "sha256:5943af73be162d812a26a12c3b2be5ffaacc086b69560bafd88edf8bec107238",
+  "readiness": {
+    "status": "ready",
+    "checks": {
+      "database": true,
+      "queue": true,
+      "model": true
+    }
+  },
+  "migration_exit": 0,
+  "fix": "TCP healthcheck excludes temporary Unix-only PostgreSQL init server"
+}

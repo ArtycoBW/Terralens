@@ -1,0 +1,13 @@
+{
+  "metadata": {
+    "synthetic_example": true,
+    "scenario": "invalid_geometry"
+  },
+  "error": {
+    "code": "invalid_geometry",
+    "message": "Контур пересекает сам себя",
+    "details": {},
+    "retryable": false,
+    "request_id": "10000000-0000-4000-8000-000000000002"
+  }
+}

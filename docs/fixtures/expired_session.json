@@ -1,0 +1,13 @@
+{
+  "metadata": {
+    "synthetic_example": true,
+    "scenario": "expired_session"
+  },
+  "error": {
+    "code": "session_expired",
+    "message": "Создайте новую гостевую сессию",
+    "details": {},
+    "retryable": false,
+    "request_id": "10000000-0000-4000-8000-000000000002"
+  }
+}

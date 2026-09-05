@@ -1,0 +1,8 @@
+{
+  "requests": 40,
+  "concurrency": 4,
+  "p95_ms": 25.69743749190818,
+  "max_ms": 74.30987499537878,
+  "analysis_post_ms": 107.03266601194628,
+  "scope": "local HTTP smoke, warm small database; not a capacity benchmark"
+}

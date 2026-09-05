@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "synthetic_example": true,
+    "scenario": "failed_job"
+  },
+  "job": {
+    "id": "10000000-0000-4000-8000-000000000001",
+    "kind": "analysis",
+    "state": "failed",
+    "stage": "fetching_satellite",
+    "progress": null,
+    "attempt": 1,
+    "created_at": "2026-09-05T00:00:00Z",
+    "started_at": "2026-09-05T00:00:01Z",
+    "finished_at": "2026-09-05T00:00:02Z",
+    "cancel_requested": false,
+    "retryable": true,
+    "error": {
+      "code": "provider_timeout",
+      "message": "Источник не ответил"
+    },
+    "result": null,
+    "parent_job_id": null
+  }
+}

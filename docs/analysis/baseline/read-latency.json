@@ -1,0 +1,7 @@
+{
+  "endpoint": "GET /models",
+  "requests": 30,
+  "p95_ms": 48.91588721075095,
+  "median_ms": 5.994604012812488,
+  "environment": "local Docker Desktop; single sequential client; not a load test"
+}

@@ -1,0 +1,92 @@
+{
+  "id": "eee9aa62-072a-494e-9d56-603aa6e34d9e",
+  "polygon_id": "514623e9-1896-4f0d-91ed-5b304d163972",
+  "polygon_version": 1,
+  "mode": "retrospective",
+  "period": {
+    "from": "2024-06-10",
+    "to": "2024-06-20"
+  },
+  "state": "partial",
+  "job_id": "4afe4b3b-ef93-4ccc-a0f9-40417e19335c",
+  "model_version": "25a39f51737d1012",
+  "config_version": "v1",
+  "created_at": "2026-09-05T00:13:55.266292Z",
+  "completed_at": "2026-09-05T00:16:01.124355Z",
+  "snapshots": [
+    {
+      "id": "0f357b10-ae5b-4400-896c-ab55a578d8e6",
+      "provider": "planetary_computer_landsat",
+      "checksum": "208aff82ab21b2c94d6312773656fd6c7dcd270de701388839fc5c7be255a55c",
+      "retrieved_at": "2026-09-05T00:14:48.796517Z",
+      "status": "completed"
+    },
+    {
+      "id": "4ae03296-abd4-4d77-8746-81ca2f613d1a",
+      "provider": "earth_search",
+      "checksum": "1a374a88388a03422ada80ca87c9699bce9b870ff75d6c781623287c5192cf78",
+      "retrieved_at": "2026-09-05T00:15:59.998382Z",
+      "status": "partial"
+    },
+    {
+      "id": "d051f336-b7db-418a-9c6e-a8862bf3e150",
+      "provider": "open_meteo_era5_seamless",
+      "checksum": "ff4009a44f2fe782742b3fcca629bdfaeba94fd87459d30c4b5ce5b3d90f24cf",
+      "retrieved_at": "2026-09-05T00:16:01.042218Z",
+      "status": "completed"
+    }
+  ],
+  "warnings": [
+    {
+      "code": "scene_unavailable",
+      "reason": "RasterioIOError",
+      "provider": "earth_search",
+      "scene_id": "S2A_T30STG_20240614T110942_L2A",
+      "affected_period": {
+        "to": "2024-06-20",
+        "from": "2024-06-10"
+      }
+    },
+    {
+      "code": "scene_unavailable",
+      "reason": "RasterioIOError",
+      "provider": "earth_search",
+      "scene_id": "S2A_T29SQB_20240614T110942_L2A",
+      "affected_period": {
+        "to": "2024-06-20",
+        "from": "2024-06-10"
+      }
+    },
+    {
+      "code": "scene_unavailable",
+      "reason": "RasterioIOError",
+      "provider": "earth_search",
+      "scene_id": "S2B_T30STG_20240619T111619_L2A",
+      "affected_period": {
+        "to": "2024-06-20",
+        "from": "2024-06-10"
+      }
+    },
+    {
+      "code": "insufficient_reference",
+      "message": "Не набрано три сопоставимых исторических сезона"
+    }
+  ],
+  "summary": {
+    "total_days": 11,
+    "summary_rule": "event-max-severity-else-two-clean-days-with-valid-reference-v2",
+    "observed_days": 1,
+    "overall_status": "insufficient_data",
+    "latest_estimate": {
+      "date": "2024-06-20",
+      "value": 0.32315501713467926,
+      "origin": "observed"
+    },
+    "longest_gap_days": 10,
+    "unavailable_days": 0,
+    "reconstructed_days": 10,
+    "anomaly_period_count": 0,
+    "observed_coverage_ratio": 0.09090909090909091
+  },
+  "result_version": "86f09878efe4477f9494a7dc10feaf6a8a5b9970363be33d67e76b94ebf83317"
+}

@@ -1,0 +1,116 @@
+{
+  "potsdam": {
+    "region_search": {
+      "query": "Potsdam",
+      "country": "de",
+      "results": [
+        {
+          "place_id": 144564737,
+          "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+          "osm_type": "relation",
+          "osm_id": 62369,
+          "lat": "52.4009309",
+          "lon": "13.0591397",
+          "category": "boundary",
+          "type": "administrative",
+          "place_rank": 12,
+          "importance": 0.6780444806632925,
+          "addresstype": "city",
+          "name": "Potsdam",
+          "display_name": "Potsdam, Brandenburg, Deutschland",
+          "address": {
+            "city": "Potsdam",
+            "state": "Brandenburg",
+            "ISO3166-2-lvl4": "DE-BB",
+            "country": "Deutschland",
+            "country_code": "de"
+          },
+          "boundingbox": [
+            "52.3420411",
+            "52.5146876",
+            "12.8867757",
+            "13.1681940"
+          ]
+        }
+      ]
+    },
+    "geometry_sha256": "d794324b88309708576724387f5f431ae0c3614e4fd2cffddfa8a6a83a0f81a6",
+    "geometry_file": "backend/tests/fixtures/potsdam.geojson"
+  },
+  "seville": {
+    "region_search": {
+      "query": "Sevilla",
+      "country": "es",
+      "results": [
+        {
+          "place_id": 295081508,
+          "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+          "osm_type": "relation",
+          "osm_id": 342563,
+          "lat": "37.3886303",
+          "lon": "-5.9953403",
+          "category": "boundary",
+          "type": "administrative",
+          "place_rank": 16,
+          "importance": 0.7297329708417591,
+          "addresstype": "city",
+          "name": "Sevilla",
+          "display_name": "Sevilla, Andalucía, España",
+          "address": {
+            "city": "Sevilla",
+            "province": "Sevilla",
+            "ISO3166-2-lvl6": "ES-SE",
+            "state": "Andalucía",
+            "ISO3166-2-lvl4": "ES-AN",
+            "country": "España",
+            "country_code": "es"
+          },
+          "boundingbox": [
+            "37.3002036",
+            "37.4529579",
+            "-6.0329183",
+            "-5.8191571"
+          ]
+        },
+        {
+          "place_id": 295562163,
+          "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+          "osm_type": "relation",
+          "osm_id": 349008,
+          "lat": "37.5192586",
+          "lon": "-5.6504755",
+          "category": "boundary",
+          "type": "administrative",
+          "place_rank": 10,
+          "importance": 0.5982611303074268,
+          "addresstype": "province",
+          "name": "Sevilla",
+          "display_name": "Sevilla, Andalucía, España",
+          "address": {
+            "province": "Sevilla",
+            "ISO3166-2-lvl6": "ES-SE",
+            "state": "Andalucía",
+            "ISO3166-2-lvl4": "ES-AN",
+            "country": "España",
+            "country_code": "es"
+          },
+          "boundingbox": [
+            "36.8421915",
+            "38.1970901",
+            "-6.5385147",
+            "-4.6533503"
+          ]
+        }
+      ]
+    },
+    "geometry_sha256": "000e3fba84af38f44bf79022c5c007225cd3d07d2c46dd5799b89c81a44b9d5c",
+    "geometry_file": "backend/tests/fixtures/seville.geojson",
+    "discovery": {
+      "query": "[out:json][timeout:30];way[\"landuse\"=\"farmland\"](37.4,-5.9,37.5,-5.8);out geom 30;",
+      "returned_elements": 30,
+      "selected_source_ref": "https://www.openstreetmap.org/way/93682488",
+      "raw_path": "artifacts/seville-overpass.json",
+      "sha256": "a2078113a8950b4324a5ffe8eb5d28e667551c5fcffa8ab6242b6eb0d3b7692e"
+    }
+  }
+}
