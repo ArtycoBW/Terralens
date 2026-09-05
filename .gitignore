@@ -18,3 +18,8 @@ htmlcov/
 .DS_Store
 dist/
 build/
+node_modules/
+.next/
+*.tsbuildinfo
+playwright-report/
+test-results/

@@ -9,7 +9,8 @@ DEBUG = os.getenv("DJANGO_DEBUG", "false").lower() == "true"
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "local-development-only-change-before-deployment")
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1,testserver").split(",")
 CSRF_TRUSTED_ORIGINS = os.getenv(
-    "CSRF_TRUSTED_ORIGINS", "http://localhost:8000,http://localhost:3000,http://127.0.0.1:8000"
+    "CSRF_TRUSTED_ORIGINS",
+    "http://localhost:8000,http://localhost:3000,http://localhost:3001,http://127.0.0.1:3000,http://127.0.0.1:3001,http://127.0.0.1:8000",
 ).split(",")
 INSTALLED_APPS = [
     "django.contrib.auth",
