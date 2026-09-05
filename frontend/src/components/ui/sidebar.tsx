@@ -141,6 +141,7 @@ export function SidebarLink({
   mobile?: boolean;
 }) {
   const { open, setMobile } = useSidebar();
+  const [tooltipOpen, setTooltipOpen] = useState(false);
   const link = (
     <Link
       href={href}
@@ -167,7 +168,7 @@ export function SidebarLink({
   return mobile ? (
     link
   ) : (
-    <Tooltip open={open ? false : undefined}>
+    <Tooltip open={!open && tooltipOpen} onOpenChange={setTooltipOpen}>
       <TooltipTrigger asChild>{link}</TooltipTrigger>
       <TooltipContent side="right">{label}</TooltipContent>
     </Tooltip>

@@ -2,7 +2,11 @@
 import { useSyncExternalStore } from "react";
 const subscribeHydration = () => () => {};
 export function useHydrated() {
-  return useSyncExternalStore(subscribeHydration, () => true, () => false);
+  return useSyncExternalStore(
+    subscribeHydration,
+    () => true,
+    () => false,
+  );
 }
 function subscribe(callback: () => void) {
   const media = matchMedia("(prefers-reduced-motion: reduce)");
