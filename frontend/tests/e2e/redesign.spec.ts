@@ -144,10 +144,16 @@ test("ошибка удаления сохраняет подтверждени�
 
 test("Colonnade переключает единственную панель и её ссылку", async ({
   page,
+  isMobile,
 }) => {
   await page.goto("/");
   const tabs = page.getByRole("tablist", { name: "Возможности", exact: true });
   await tabs.getByRole("tab", { name: "Территория", exact: true }).focus();
+  if (!isMobile) {
+    // Во время изменения ширины колонок курсор остаётся внутри секции.
+    // Переразметка не должна перехватывать управление у клавиатуры.
+    await tabs.getByRole("tab", { name: "Территория", exact: true }).hover();
+  }
   await page.keyboard.press("End");
   await expect(
     tabs.getByRole("tab", { name: "Контекст", exact: true }),
@@ -164,6 +170,13 @@ test("Colonnade переключает единственную панель и 
   await expect(page.getByRole("tabpanel").getByRole("heading")).toHaveText(
     "Начните с вашего поля",
   );
+  if (!isMobile) {
+    await tabs.getByRole("tab", { name: "Контекст", exact: true }).hover();
+    await expect(page.getByRole("tabpanel").getByRole("link")).toHaveAttribute(
+      "href",
+      "/app/data-quality",
+    );
+  }
   await expect(page.locator("[data-terrain]")).not.toHaveAttribute(
     "data-ready",
     "true",

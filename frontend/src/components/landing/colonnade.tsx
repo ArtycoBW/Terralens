@@ -157,8 +157,13 @@ export function Colonnade() {
                 tabIndex={active === i ? 0 : -1}
                 variant="ghost"
                 className="absolute inset-0 h-full w-full items-end justify-start rounded-none p-5 text-left font-normal hover:bg-transparent focus-visible:ring-inset min-[861px]:p-7"
-                onPointerEnter={() => {
-                  if (matchMedia("(hover: hover) and (pointer: fine)").matches)
+                onPointerMove={(event) => {
+                  // Изменение ширины колонок под неподвижным курсором не должно
+                  // отменять выбор, сделанный клавиатурой.
+                  if (
+                    (event.movementX !== 0 || event.movementY !== 0) &&
+                    matchMedia("(hover: hover) and (pointer: fine)").matches
+                  )
                     activate(i);
                 }}
                 onClick={() => activate(i)}
