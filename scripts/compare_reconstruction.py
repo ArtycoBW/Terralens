@@ -1,8 +1,8 @@
-"""Compare fixed reconstruction candidates using development predictions only.
+"""Сравнить фиксированные варианты восстановления только на development-прогнозах.
 
-The optional secondary model always uses the preselected rule:
-50% candidate + 50% secondary where gap_days > 30, otherwise candidate.
-This script does not fit or select models, thresholds, or blend weights.
+Дополнительная модель использует заранее выбранное правило:
+50% candidate + 50% secondary при gap_days > 30, иначе только candidate.
+Скрипт не обучает и не выбирает модели, пороги или веса смешивания.
 """
 
 from __future__ import annotations
@@ -29,7 +29,7 @@ def read_development(path, candidate):
         usecols=lambda column: column in REQUIRED,
         dtype={"anon_polygon_id": str, "date": str, "scope": str, "candidate": str},
     )
-    # Assessment, temporal and calibration labels never enter comparisons or selection.
+    # Цели assessment, temporal и calibration не участвуют в сравнении и выборе.
     frame = frame.loc[frame.scope.isin(SCOPES) & frame.candidate.eq(candidate)].copy()
     if set(frame.scope) != set(SCOPES):
         raise ValueError(f"{path}: candidate {candidate!r} must contain both development scopes")

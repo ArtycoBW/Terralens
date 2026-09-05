@@ -2,9 +2,9 @@ import { TERRAIN_MARKERS, type TerrainController } from "./terrain-data";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
-// Original TerraLens scene, authored through GetLayers Scene Lab. Height-field,
-// derivative-smoothed isolines and damped camera informed by Argent Massif.
-// Art direction belongs in CONFIG; this is illustrative terrain, not a DEM.
+// Сцена TerraLens из GetLayers Scene Lab. Поле высот, сглаженные изолинии
+// и инерционная камера адаптируют приёмы Argent Massif.
+// Оформление задаётся в CONFIG; рельеф иллюстративный, без измеренной DEM.
 export const CONFIG = {
   ground: "#13140e",
   earth: "#303d23",

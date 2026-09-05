@@ -18,7 +18,7 @@ export function LandingMotion() {
       lenis.on("scroll", ScrollTrigger.update);
       const tick = (seconds: number) => lenis.raf(seconds * 1000);
       gsap.ticker.add(tick);
-      // Keep the server-rendered hero visible from first paint; no loading gate.
+      // Hero из серверного HTML виден с первого кадра, без ожидания загрузки.
       const context = gsap.context(() => {
         document
           .querySelectorAll("[data-landing] [data-reveal]")

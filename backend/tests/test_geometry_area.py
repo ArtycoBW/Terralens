@@ -4,7 +4,7 @@ from apps.core.models import PolygonVersion
 from .test_api import polygon
 
 
-# Synthetic shapes at Russian coordinates; these are not asserted to be actual farmland.
+# Синтетические геометрии на российских координатах, без утверждения о реальных полях.
 @pytest.mark.django_db
 @pytest.mark.parametrize("lon,lat", [(37.6, 55.7), (38.9, 45.0), (82.9, 55.0), (131.9, 43.1), (33.1, 68.9)])
 def test_small_fields_at_russian_coordinates_are_accepted(client, lon, lat):

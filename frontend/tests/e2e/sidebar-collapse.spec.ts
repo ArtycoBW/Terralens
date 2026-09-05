@@ -20,7 +20,7 @@ test("сворачивание sidebar не оставляет подписи п
     for (const name of ["Мои поля", "Сравнение", "Качество данных", "Модели"]) {
       await rail.getByRole("link", { name, exact: true }).hover();
       await expect(rail).toHaveAttribute("data-open", "true");
-      // Exercise the delayed tooltip callbacks, including while labels are expanded.
+      // Проверить отложенные подсказки, в том числе при раскрытых названиях.
       await page.waitForTimeout(300);
     }
     await heading.hover();

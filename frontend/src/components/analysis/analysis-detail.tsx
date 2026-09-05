@@ -43,7 +43,7 @@ import { Explanation, readableMessage } from "./explanation";
 import { Exports } from "./exports";
 export function AnalysisDetail({ id }: { id: string }) {
   const client = useQueryClient();
-  // Load the chart while the worker runs, so publication needs no second loader.
+  // Загружаем график во время работы worker, чтобы при публикации не возникал второй загрузчик.
   const chartModule = useQuery({
     queryKey: ["analysis-chart-module"],
     queryFn: async () => (await import("./chart")).Chart,

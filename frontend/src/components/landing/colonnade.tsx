@@ -46,7 +46,7 @@ const chapters = [
   },
 ] as const;
 
-// GetLayers Colonnade: preserve the upward conveyor, 900ms curve and silent reset.
+// GetLayers Colonnade: сохраняем движение вверх, кривую 900 мс и незаметный сброс.
 const layer =
   "absolute inset-0 translate-y-[101%] transition-transform duration-900 ease-[cubic-bezier(.76,0,.18,1)] data-[motion=in]:translate-y-0 data-[motion=out]:-translate-y-[101%] motion-reduce:transition-none";
 export function Colonnade() {

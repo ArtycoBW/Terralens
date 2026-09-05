@@ -56,7 +56,7 @@ try {
     { timeout: 60000 },
   );
   await page.getByPlaceholder("Например, Potsdam").focus();
-  // MapLibre fades newly loaded raster tiles after the drawing controls are ready.
+  // MapLibre проявляет загруженные растровые тайлы после готовности контролов рисования.
   await page.waitForTimeout(1500);
   await page.screenshot({ path: `${out}/map-desktop.png` });
   for (const width of [320, 390, 768, 1920]) {

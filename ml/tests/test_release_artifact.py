@@ -1,4 +1,4 @@
-"""The checked-out release must survive Windows Git line-ending conversion."""
+"""Артефакт релиза сохраняет контрольные суммы после checkout на Windows."""
 
 import json
 from hashlib import sha256

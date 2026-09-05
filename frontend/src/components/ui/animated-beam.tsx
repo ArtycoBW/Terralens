@@ -52,7 +52,7 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
   const [pathD, setPathD] = useState("");
   const [svgDimensions, setSvgDimensions] = useState({ width: 0, height: 0 });
 
-  // Calculate the gradient coordinates based on the reverse prop
+  // Рассчитать координаты градиента с учётом reverse
   const gradientCoordinates = reverse
     ? {
         x1: ["90%", "-10%"],
@@ -95,20 +95,20 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
       }
     };
 
-    // Initialize ResizeObserver
+    // Следить за размером контейнера
     const resizeObserver = new ResizeObserver(updatePath);
 
-    // Observe the container element
+    // Подписаться на изменение контейнера
     if (containerRef.current) {
       resizeObserver.observe(containerRef.current);
       if (fromRef.current) resizeObserver.observe(fromRef.current);
       if (toRef.current) resizeObserver.observe(toRef.current);
     }
 
-    // Call the updatePath initially to set the initial path
+    // Установить начальный путь до первого изменения размеров
     updatePath();
 
-    // Clean up the observer on component unmount
+    // Отключить наблюдение при размонтировании компонента
     return () => {
       resizeObserver.disconnect();
     };

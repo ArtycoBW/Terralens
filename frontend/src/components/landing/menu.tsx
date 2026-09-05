@@ -13,7 +13,7 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 export function LandingMenu() {
-  // Keep the server-rendered trigger inert until its event handlers are attached.
+  // Серверная кнопка неактивна до подключения обработчиков событий.
   const hydrated = useHydrated();
   return (
     <Sheet>

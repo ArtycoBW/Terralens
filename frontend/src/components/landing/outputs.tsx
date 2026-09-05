@@ -50,7 +50,7 @@ const P = {
   damp: 0.94,
 };
 
-/** GetLayers Carousel Spotlight: concave preserve-3d ring, inertia and exact snap. */
+/** GetLayers Carousel Spotlight: вогнутое кольцо preserve-3d, инерция и точная остановка. */
 export function Outputs() {
   const hydrated = useHydrated();
   const stage = useRef<HTMLDivElement>(null),

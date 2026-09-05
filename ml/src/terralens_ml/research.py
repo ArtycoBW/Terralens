@@ -1,4 +1,4 @@
-"""Frozen second-stage research without reusing the already inspected holdout."""
+"""Фиксированный второй этап исследования без повторного использования просмотренного holdout."""
 
 from __future__ import annotations
 
@@ -151,7 +151,7 @@ def run_research(frame, config, *, development_only=False):
         write_json(output / "masks" / f"{name}.json", keys)
         mask_hashes[name] = canonical_hash(keys)
         scored = _score_context(data, model, mask, scope, fold, seed)
-        # Raw sensor availability is used only for report stratification, never as a feature.
+        # Наличие сырых сенсорных значений используется только для срезов отчёта, не как признак.
         sensor = pd.Series("unknown", index=data.index)
         for column in ["modis_ndvi", "landsat_ndvi", "s2_ndvi"]:
             if column in data:
@@ -210,7 +210,7 @@ def run_research(frame, config, *, development_only=False):
     if not eligible or any(selection_metrics[name]["rmse"] is None for name in eligible):
         raise DataError("Нет кандидата с конечной development RMSE")
     selected = min(eligible, key=lambda name: selection_metrics[name]["rmse"])
-    # The model and hyperparameters are frozen before any calibration/assessment predictions.
+    # Модель и параметры фиксируются до прогнозов на calibration и assessment.
     selected_config = base | config["candidates"][selected]
     write_json(output / "selected_config.json", selected_config)
     report_options = {
@@ -253,7 +253,7 @@ def run_research(frame, config, *, development_only=False):
     temporal_ids = selection_ids + assessment_ids
     temporal = frame.loc[frame.anon_polygon_id.isin(temporal_ids)]
     temporal_mask = pd.to_datetime(temporal.date).dt.year.eq(final_year)
-    # Earlier visible context is retained for history models; global fitting remains before final_year.
+    # Исторические модели сохраняют прежний видимый контекст; обучение ограничено годами до final_year.
     for blocks in [False, True]:
         mask = make_mask(temporal.loc[temporal_mask], 2003, config["mask_fraction"], blocks=blocks)
         full_mask = mask.reindex(temporal.index, fill_value=False)

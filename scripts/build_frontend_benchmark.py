@@ -1,4 +1,4 @@
-"""Publish only anonymous submission points and verified aggregate metadata for UI."""
+"""Опубликовать для UI только анонимные прогнозы и проверенные сводные метаданные."""
 
 import csv
 import hashlib

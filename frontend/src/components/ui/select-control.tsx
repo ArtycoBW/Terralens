@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "./select";
 
-// Radix reserves the empty value for placeholders; filters need an explicit “all” option.
+// Radix оставляет пустое значение для подсказки; фильтрам нужен отдельный вариант «все».
 const ALL = "__terralens_all__";
 export function SelectControl({
   value,

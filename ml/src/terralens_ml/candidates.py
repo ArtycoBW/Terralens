@@ -1,4 +1,4 @@
-"""CPU candidates; every feature is rebuilt from the masked inference context."""
+"""CPU-модели: все признаки пересчитываются после маскирования контекста."""
 
 from __future__ import annotations
 
@@ -42,7 +42,7 @@ def field_season_segments(frame, season_start_month):
 
 
 def robust_smooth(x, y, query, *, strength=20.0, robust=True):
-    """Daily Whittaker second differences, with optional Huber reweighting."""
+    """Дневное сглаживание Уиттекера по вторым разностям с необязательными весами Хьюбера."""
     days = np.arange(int(x[0]), int(x[-1]) + 1)
     positions = (x - days[0]).astype(int)
     values = np.zeros(len(days))
@@ -66,7 +66,7 @@ def robust_smooth(x, y, query, *, strength=20.0, robust=True):
 
 
 def seasonal_history(frame, part, *, minimum_years=3, window=15):
-    """Only earlier seasons of this field and crop; never the current season."""
+    """Только предыдущие сезоны того же поля и культуры, без текущего сезона."""
     history = frame.loc[
         (frame.anon_polygon_id == part.anon_polygon_id.iloc[0])
         & (frame._season < part._season.iloc[0])
@@ -84,7 +84,7 @@ def seasonal_history(frame, part, *, minimum_years=3, window=15):
         eligible = np.minimum(distances, 366 - distances) <= window
         values = np.broadcast_to(year.clean_primary.to_numpy(), eligible.shape).copy()
         values[~eligible] = np.nan
-        # pandas median handles entirely missing windows without numpy warnings.
+        # Медиана pandas обрабатывает полностью пустые окна без предупреждений numpy.
         annual.append(pd.DataFrame(values.T).median().to_numpy())
     annual = np.asarray(annual)
     result = pd.DataFrame(annual).median().to_numpy()
@@ -93,7 +93,7 @@ def seasonal_history(frame, part, *, minimum_years=3, window=15):
 
 
 def residual_features(result, config):
-    """Calendar/local support and adjacent available sensors/weather, with no AOI ID."""
+    """Календарь, локальный контекст и доступные соседние сенсоры/погода, без ID поля."""
     dates = pd.to_datetime(result.date)
     features = pd.DataFrame(index=result.index)
     features["base"] = result.reconstructed
@@ -155,12 +155,12 @@ def residual_features(result, config):
         features["sensor_count"] = ndvi.count(axis=1)
         features["sensor_range"] = ndvi.max(axis=1) - ndvi.min(axis=1)
         features["sensor_std"] = ndvi.std(axis=1, ddof=0)
-    # Missing features stay missing: CatBoost handles them explicitly.
+    # Пропуски в признаках сохраняются: CatBoost обрабатывает их явно.
     return features
 
 
 def sensor_dynamics_features(days, values, primary, estimate):
-    """Strict calendar neighbors and paired bias from visible data in one crop segment."""
+    """Строгие календарные соседи и парное смещение по видимым данным одного сегмента культуры."""
     valid = np.isfinite(values)
     x, y = days[valid], values[valid]
     result = {}
@@ -193,7 +193,7 @@ def sensor_dynamics_features(days, values, primary, estimate):
 
 
 def local_shape_features(days, values):
-    """Visible target neighbors and windows within one field-season, in calendar days."""
+    """Видимые соседи и окна внутри одного сезона поля с расстояниями в календарных днях."""
     valid = np.isfinite(values)
     x, y = days[valid], values[valid]
     result = {}
@@ -234,7 +234,7 @@ def local_shape_features(days, values):
 
 
 def training_masks(frame, valid, config):
-    """Deterministic self-supervised masks; only clean available targets become labels."""
+    """Воспроизводимые маски самообучения: целями становятся только пригодные известные значения."""
     rng = np.random.default_rng(config["seed"])
     dates = pd.to_datetime(frame.date)
     seasons = dates.dt.year - (dates.dt.month < config["season_start_month"]).astype(int)

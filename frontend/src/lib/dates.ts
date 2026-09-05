@@ -1,4 +1,4 @@
-/** Reject rollover dates (31 February), timestamps and partially entered dates. */
+/** Отклонить невозможные даты (31 февраля), временные метки и неполный ввод. */
 export function isIsoDate(value: string): boolean {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
   const time = Date.parse(value);

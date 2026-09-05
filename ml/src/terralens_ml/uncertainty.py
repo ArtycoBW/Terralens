@@ -1,4 +1,4 @@
-"""Empirical residual intervals; separated spatial calibration and explicit scope."""
+"""Эмпирические интервалы остатков с отдельной пространственной калибровкой."""
 
 from __future__ import annotations
 
@@ -48,7 +48,7 @@ def calibrate(predictions, *, level=0.9, minimum_group=100):
             "radius": quantile(selected) if len(selected) >= minimum_group else result["pooled_radius"],
             "pooled_fallback": len(selected) < minimum_group,
         }
-    # Sparse/long context never receives a narrower band than short interpolation.
+    # Редкий или длинный контекст не получает интервал уже короткой интерполяции.
     short = result["groups"].get("short", {}).get("radius", result["pooled_radius"])
     for group in ["long", "edge", "prior"]:
         if group in result["groups"]:

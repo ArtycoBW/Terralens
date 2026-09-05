@@ -52,7 +52,7 @@ function MagneticLink({
   );
 }
 
-/** User-supplied CinematicFooter: curtain, diagonal ticker, magnetic links, oversized wordmark. */
+/** Предоставленный CinematicFooter: шторка, диагональная строка, магнитные ссылки и крупное название. */
 export function CinematicFooter() {
   const wrapper = useRef<HTMLDivElement>(null);
   const enabled = useMotionEnabled();

@@ -359,7 +359,7 @@ def reconstruct(series: pd.DataFrame, config=None, model=None) -> pd.DataFrame:
                     estimate[available] = history[available] + correction[available]
                 else:
                     estimate[available] = history[available]
-                # Public origin remains stable; provenance is recorded in quality_flags below.
+                # Публичный origin сохраняется; происхождение уточняется ниже в quality_flags.
         observed = part.clean_primary.notna().to_numpy()
         if config["clip"]:
             estimate[~observed] = np.clip(estimate[~observed], -1, 1)

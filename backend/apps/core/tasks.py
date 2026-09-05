@@ -90,8 +90,8 @@ def analyze(job):
     }
     max_scenes = run.config.get("max_scenes", settings.MAX_SCENES)
 
-    # Plan all sensor/season requests before reporting progress. Provider callbacks
-    # count scenes within one request, not within the complete analysis.
+    # Планируем все запросы сенсоров и сезонов до публикации прогресса. Провайдер
+    # считает сцены внутри одного запроса, а не внутри полного анализа.
     batches = []
 
     def collect(provider, fetch, start, end, report):
@@ -172,8 +172,8 @@ def analyze(job):
             target.extend(collect(provider, fetch, start, end, report))
         except ProviderError as exc:
             warn_failure(exc, start, end)
-        # Cached, empty and failed requests also finish their part of the plan.
-        # Cancellation propagates before this checkpoint and never publishes success.
+        # Кеш, пустой ответ и ошибка тоже завершают свою часть плана.
+        # Отмена прерывает выполнение до этой точки и не публикует успех.
         report(1, 1)
     if has_weather:
         checkpoint(job.id, "fetching_weather", satellite_share)

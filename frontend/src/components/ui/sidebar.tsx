@@ -33,7 +33,7 @@ export function useSidebar() {
   if (!context) throw new Error("Sidebar components need SidebarProvider");
   return context;
 }
-/** Adapted from the supplied 21st/Aceternity sidebar; Sheet supplies mobile focus management. */
+/** Адаптация предоставленного sidebar 21st/Aceternity; Sheet управляет фокусом на телефоне. */
 export function SidebarProvider({ children }: { children: ReactNode }) {
   const [hover, setHover] = useState(false),
     [pinned, setPinned] = useState(false),
@@ -57,8 +57,8 @@ export function DesktopSidebar({ children }: { children: ReactNode }) {
   const { open, pinned, setHover, setPinned } = useSidebar();
   const reduce = useReducedMotion();
   return (
-    // Keep the workspace width constant: resizing WebGL/canvas on each animation
-    // frame clears their backing buffers and makes charts and the map flash.
+    // Сохраняем ширину рабочей области: изменение размера WebGL/canvas на каждом
+    // кадре очищает буферы отрисовки и вызывает мерцание карты и графиков.
     <div
       data-pinned={pinned}
       className="sticky top-0 z-30 hidden h-dvh w-[76px] shrink-0 self-start data-[pinned=true]:w-[248px] md:block"
@@ -99,8 +99,8 @@ export function SidebarInset({ children }: { children: ReactNode }) {
   const reduce = useReducedMotion();
   return (
     <motion.div
-      // Reserve space once when pinned. FLIP animates only the position, so
-      // canvases resize once instead of being cleared throughout the transition.
+      // При закреплении резервируем место один раз. FLIP меняет только положение,
+      // поэтому canvas меняет размер один раз за весь переход.
       layout="position"
       layoutDependency={pinned}
       transition={{

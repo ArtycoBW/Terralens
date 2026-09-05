@@ -23,7 +23,7 @@ for (const [name, path, surface] of [
       .poll(async () => (await rail.boundingBox())!.width)
       .toBeCloseTo(76, 0);
 
-    // Track every painted frame, not just the identical start/end positions.
+    // Проверить каждый отрисованный кадр, а не только одинаковые начало и конец.
     const monitor = await page.evaluateHandle((selector) => {
       const main = document.querySelector("main")!;
       const surface = document.querySelector(selector)!;
@@ -66,7 +66,7 @@ for (const [name, path, surface] of [
     }, surface);
 
     for (let cycle = 0; cycle < 2; cycle++) {
-      // Target the fixed icon rail, including when labels are clipped.
+      // Использовать неподвижную полосу иконок, в том числе при скрытых названиях.
       await page.mouse.move(35, 130);
       await expect(rail).toHaveAttribute("data-open", "true");
       await expect
@@ -128,7 +128,7 @@ for (const [name, path, surface] of [
     const resizes = await resizeMonitor.evaluate((value) => value.stop());
     await resizeMonitor.dispose();
     expect(resizes.connected).toBe(true);
-    // Initial measurement plus at most one resize for each pin/unpin action.
+    // Начальный замер и не более одного изменения размера на закрепление или открепление.
     expect(resizes.widths.length).toBeLessThanOrEqual(3);
     expect(new Set(resizes.widths).size).toBe(2);
   });
@@ -158,7 +158,7 @@ test("навигация выдерживает быстрое наведени�
     await page.mouse.move(800, 130);
     await page.waitForTimeout(100);
   }
-  // Release focus left on the pin control before checking hover-only dismissal.
+  // Убрать фокус с закрепления перед проверкой закрытия при уходе курсора.
   await search.focus();
   await expect
     .poll(async () => (await rail.boundingBox())!.width)

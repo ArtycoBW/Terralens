@@ -18,7 +18,7 @@ test("первая вершина действительно отображае�
     y = map.y + map.height * 0.6;
   if (isMobile) await page.touchscreen.tap(x, y);
   else await page.mouse.click(x, y, { delay: 60 });
-  // Inspect actual canvas pixels; valid GeoJSON alone does not prove rendering.
+  // Проверяем пиксели canvas: валидный GeoJSON сам по себе не доказывает отрисовку.
   await expect
     .poll(async () => {
       const png = await page.screenshot({
@@ -69,7 +69,7 @@ test("подсказка не мешает поставить и замкнут�
     .getByText("Добавляйте вершины кликом.", { exact: false })
     .boundingBox();
   if (!map || !hint) throw new Error("Карта и подсказка должны быть видимы");
-  // Start over the instruction overlay: it must not intercept map input.
+  // Начать поверх подсказки: она не должна перехватывать ввод карты.
   const first = [hint.x + hint.width / 2, hint.y + hint.height / 2];
   const points = [
     first,

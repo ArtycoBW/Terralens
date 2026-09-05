@@ -334,7 +334,7 @@ test("боковая навигация раскрывается и сохран
     await expect(dialog).not.toBeVisible();
   } else {
     const rail = page.locator("[data-sidebar]");
-    // Headless Chromium may place its initial pointer at (0, 0), over the rail.
+    // В headless Chromium начальный курсор может находиться в (0, 0), над панелью.
     const heading = page.getByRole("heading", {
       name: "Рабочая карта",
       exact: true,

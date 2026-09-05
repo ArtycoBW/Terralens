@@ -62,7 +62,7 @@
   ::selection {
     @apply bg-primary/25 text-foreground;
   }
-  /* Thin, stable scrollbars for long datasets; controls keep their own shadcn focus. */
+  /* Тонкие стабильные полосы прокрутки; контролы сохраняют собственный фокус shadcn. */
   * {
     scrollbar-width: thin;
     scrollbar-color: #626753 #1b1d15;

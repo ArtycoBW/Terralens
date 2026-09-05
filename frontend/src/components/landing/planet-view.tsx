@@ -67,7 +67,7 @@ export function PlanetView({ scene }: { scene: RefObject<HeroSceneState> }) {
     };
     canvas.current?.addEventListener("webglcontextlost", lost);
     const current = canvas.current;
-    // The local poster paints immediately; expensive shaders start on user input.
+    // Локальный постер виден сразу; тяжёлые шейдеры запускаются при взаимодействии.
     const inputEvents = [
       "pointermove",
       "pointerdown",

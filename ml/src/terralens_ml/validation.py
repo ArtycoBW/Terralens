@@ -86,7 +86,7 @@ def summarize(frame):
     aoi_metrics = [x["rmse"] for x in summary["slices"]["anon_polygon_id"].values()]
     summary["median_aoi_rmse"] = float(np.median(aoi_metrics)) if aoi_metrics else None
     summary["p90_aoi_rmse"] = float(np.quantile(aoi_metrics, 0.9)) if aoi_metrics else None
-    # Resample whole AOIs, preserving the dependence between repeated masks and seasons.
+    # Повторно выбирать целые AOI, сохраняя зависимость масок и сезонов внутри поля.
     groups = [
         (float(np.square(part.reconstructed - part.truth).sum()), len(part))
         for _, part in frame.groupby("anon_polygon_id")
