@@ -35,6 +35,7 @@ reduced motion приостанавливает сцену без потери �
 - Независимый review жизненного цикла, адаптива и доступности выполнен;
   замечания исправлены и повторно проверены.
 
+Сценарий и источники: [архитектура](ARCHITECTURE.md) и [происхождение компонентов](ATTRIBUTION.md).
 Локальные кадры и журналы: `artifacts/redesign/hero-story`, `hero-e2e.log`,
 `hero-build.log`, `visual-smoke/evidence.json` (игнорируются Git).
 
