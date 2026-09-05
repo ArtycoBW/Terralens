@@ -1,0 +1,56 @@
+input: train-dataset.zip
+output: artifacts/improvement-features
+artifact_output: artifacts/improvement-features/model
+prior_split: docs/analysis/baseline/split_manifest.json
+seed: 42
+folds: 5
+mask_seeds: [42, 137]
+mask_fraction: 0.15
+calibration_fields: 5
+assessment_fields: 5
+calibration_level: 0.9
+max_gap_days: 60
+max_edge_days: 14
+season_start_month: 1
+boost_iterations: 160
+selection_baseline: previous
+assessment_status: Previously inspected assessment and temporal scopes; reused diagnostics only, never used to select these candidates
+candidates:
+  previous:
+    algorithm: catboost_residual
+    use_weather: false
+  local_160:
+    algorithm: catboost_residual
+    use_weather: false
+    local_features: true
+    masked_training_priors: true
+  local_400:
+    algorithm: catboost_residual
+    use_weather: false
+    local_features: true
+    masked_training_priors: true
+    boost_iterations: 400
+  local_repeated:
+    algorithm: catboost_residual
+    use_weather: false
+    local_features: true
+    masked_training_priors: true
+    boost_iterations: 400
+    training_repeats: 3
+  local_mixed:
+    algorithm: catboost_residual
+    use_weather: false
+    local_features: true
+    masked_training_priors: true
+    boost_iterations: 400
+    training_repeats: 3
+    training_blocks: true
+  local_mixed_linear:
+    algorithm: catboost_residual
+    use_weather: false
+    local_features: true
+    masked_training_priors: true
+    boost_iterations: 400
+    training_repeats: 3
+    training_blocks: true
+    residual_base: linear

@@ -15,6 +15,20 @@ from scipy.sparse.linalg import spsolve
 from .io import SENSORS, canonical_hash
 
 
+def field_season_segments(frame, season_start_month):
+    """Разделить поле и сезон на непрерывные по времени отрезки одной культуры."""
+    dates = pd.to_datetime(frame.date)
+    seasons = dates.dt.year - (dates.dt.month < season_start_month).astype(int)
+    for _, part in frame.groupby([frame.anon_polygon_id, seasons], sort=False):
+        ordered = part.iloc[np.argsort(pd.to_datetime(part.date).to_numpy(), kind="stable")]
+        # Возврат к прежней культуре после другой культуры начинает новый отрезок.
+        # Все отсутствующие значения культуры имеют один код, отличный от строк.
+        crops, _ = pd.factorize(ordered.crop_type, sort=False)
+        segments = np.cumsum(np.r_[True, crops[1:] != crops[:-1]])
+        for _, segment in ordered.groupby(segments, sort=False):
+            yield segment
+
+
 def robust_smooth(x, y, query, *, strength=20.0, robust=True):
     """Daily Whittaker second differences, with optional Huber reweighting."""
     days = np.arange(int(x[0]), int(x[-1]) + 1)
@@ -81,12 +95,14 @@ def residual_features(result, config):
         columns += SENSORS
     if config.get("use_weather", True):
         columns += ["era5_temp_c", "era5_precip_mm"]
-    season = dates.dt.year - (dates.dt.month < config["season_start_month"]).astype(int)
     for column in columns:
         features[column] = np.nan
-    for _, part in result.groupby([result.anon_polygon_id, season], sort=False):
-        part = part.sort_values("date")
+    for part in field_season_segments(result, config["season_start_month"]):
         days = pd.to_datetime(part.date).to_numpy(dtype="datetime64[D]").astype(np.int64)
+        if config.get("local_features", False):
+            local = local_shape_features(days, part.clean_primary.to_numpy(dtype=float))
+            for name, values in local.items():
+                features.loc[part.index, name] = values
         for column in columns:
             if column not in part:
                 continue
@@ -107,6 +123,68 @@ def residual_features(result, config):
             features.loc[part.index, column] = estimate
     # Missing features stay missing: CatBoost handles them explicitly.
     return features
+
+
+def local_shape_features(days, values):
+    """Visible target neighbors and windows within one field-season, in calendar days."""
+    valid = np.isfinite(values)
+    x, y = days[valid], values[valid]
+    result = {}
+    positions = np.searchsorted(x, days)
+    for side, offsets in [("left", [-1, -2]), ("right", [0, 1])]:
+        for rank, offset in enumerate(offsets, start=1):
+            indices = positions + offset
+            available = (indices >= 0) & (indices < len(x))
+            value, distance = np.full(len(days), np.nan), np.full(len(days), np.nan)
+            value[available] = y[indices[available]]
+            distance[available] = abs(days[available] - x[indices[available]])
+            result[f"{side}_{rank}_value"] = value
+            result[f"{side}_{rank}_days"] = distance
+        span = result[f"{side}_2_days"] - result[f"{side}_1_days"]
+        delta = result[f"{side}_2_value"] - result[f"{side}_1_value"]
+        result[f"{side}_slope"] = np.divide(
+            delta * (-1 if side == "left" else 1),
+            span,
+            out=np.full(len(days), np.nan),
+            where=span > 0,
+        )
+    span = result["left_1_days"] + result["right_1_days"]
+    fraction = np.divide(result["left_1_days"], span, out=np.full(len(days), np.nan), where=span > 0)
+    result["neighbor_fraction"] = fraction
+    result["linear_estimate"] = result["left_1_value"] + fraction * (
+        result["right_1_value"] - result["left_1_value"]
+    )
+    distance = abs(days[:, None] - x[None, :])
+    for window in [14, 30, 60]:
+        weights = distance <= window
+        count = weights.sum(axis=1)
+        mean = np.divide(weights @ y, count, out=np.full(len(days), np.nan), where=count > 0)
+        second = np.divide(weights @ (y * y), count, out=np.full(len(days), np.nan), where=count > 0)
+        result[f"window_{window}_count"] = count
+        result[f"window_{window}_mean"] = mean
+        result[f"window_{window}_std"] = np.sqrt(np.maximum(0, second - mean * mean))
+    return result
+
+
+def training_masks(frame, valid, config):
+    """Deterministic self-supervised masks; only clean available targets become labels."""
+    rng = np.random.default_rng(config["seed"])
+    dates = pd.to_datetime(frame.date)
+    seasons = dates.dt.year - (dates.dt.month < config["season_start_month"]).astype(int)
+    for _ in range(config.get("training_repeats", 1)):
+        for blocks in [False, True] if config.get("training_blocks", False) else [False]:
+            mask = pd.Series(False, index=frame.index)
+            for _, part in frame.loc[valid].groupby([frame.anon_polygon_id, seasons], sort=True):
+                if blocks:
+                    ordered = part.sort_values("date")
+                    days = pd.to_datetime(ordered.date).to_numpy(dtype="datetime64[D]").astype(np.int64)
+                    start = days[int(rng.integers(len(days)))]
+                    width = int(rng.choice([8, 15, 30, 45, 65]))
+                    indices = ordered.index[(days >= start) & (days < start + width)]
+                else:
+                    indices = rng.choice(part.index, max(1, round(len(part) * 0.2)), replace=False)
+                mask.loc[indices] = True
+            yield mask
 
 
 def train_booster(features, residual, config):

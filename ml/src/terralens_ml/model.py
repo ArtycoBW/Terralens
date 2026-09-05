@@ -12,7 +12,15 @@ import numpy as np
 import pandas as pd
 from scipy.interpolate import PchipInterpolator
 
-from .candidates import predict_booster, residual_features, robust_smooth, seasonal_history, train_booster
+from .candidates import (
+    field_season_segments,
+    predict_booster,
+    residual_features,
+    robust_smooth,
+    seasonal_history,
+    train_booster,
+    training_masks,
+)
 from .io import KEY, DataError, canonical_hash, mask_context, parse_bool, sha256, write_json
 from .uncertainty import apply_intervals
 
@@ -37,18 +45,38 @@ def checked_config(config=None):
     result = DEFAULT_CONFIG | (config or {})
     if result["algorithm"] not in ALGORITHMS:
         raise DataError(f"Неизвестная модель: {result['algorithm']}")
+    for name, default, minimum, maximum in [
+        ("season_start_month", 1, 1, 12),
+        ("max_gap_days", 60, 1, None),
+        ("max_edge_days", 14, 0, None),
+        ("seed", 42, 0, 2**32 - 1),
+        ("boost_iterations", 160, 1, None),
+        ("training_repeats", 1, 1, 10),
+    ]:
+        value = result.get(name, default)
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, int)
+            or value < minimum
+            or (maximum is not None and value > maximum)
+        ):
+            raise DataError(f"Некорректный целочисленный параметр {name}")
+    strength = result["smoothing_strength"]
     if (
-        not isinstance(result["season_start_month"], int)
-        or not 1 <= result["season_start_month"] <= 12
-        or result["max_gap_days"] < 1
-        or result["max_edge_days"] < 0
-        or not np.isfinite(result["smoothing_strength"])
-        or result["smoothing_strength"] <= 0
+        isinstance(strength, bool)
+        or not isinstance(strength, (int, float))
+        or not np.isfinite(strength)
+        or strength <= 0
     ):
-        raise DataError("Некорректные параметры сезона или длины пропуска")
+        raise DataError("smoothing_strength должен быть положительным конечным числом")
     for name in ["clip", "quality_filter", "robust", "use_history", "use_sensors", "use_weather"]:
         if not isinstance(result[name], bool):
             raise DataError(f"{name} должен быть boolean")
+    for name in ["local_features", "training_blocks", "masked_training_priors"]:
+        if name in result and not isinstance(result[name], bool):
+            raise DataError(f"{name} должен быть boolean")
+    if result.get("residual_base", "neighbor_mean") not in ["neighbor_mean", "linear"]:
+        raise DataError("residual_base должен быть neighbor_mean или linear")
     return result
 
 
@@ -81,22 +109,19 @@ def fit(training_context: pd.DataFrame, config=None) -> dict:
         "supported_modes": ["retrospective"],
     }
     if config["algorithm"] == "catboost_residual":
-        rng = np.random.default_rng(config["seed"])
-        mask = pd.Series(False, index=training_context.index)
-        for _, part in training_context.loc[valid].groupby(
-            ["anon_polygon_id", pd.to_datetime(training_context.loc[valid].date).dt.year], sort=True
-        ):
-            indices = rng.choice(part.index, max(1, round(len(part) * 0.2)), replace=False)
-            mask.loc[indices] = True
-        context = mask_context(training_context, mask)
-        base = reconstruct(context, {"algorithm": "neighbor_mean"}, model)
-        features = residual_features(base, config)
-        model["boosting"] = train_booster(
-            features.loc[mask],
-            training_context.loc[mask, "primary_ndvi"] - base.loc[mask, "reconstructed"],
-            config,
-        )
-        model["feature_names"] = features.columns.tolist()
+        examples, residuals = [], []
+        for mask in training_masks(training_context, valid, config):
+            context = mask_context(training_context, mask)
+            base_config = {"algorithm": config.get("residual_base", "neighbor_mean")}
+            base_model = fit(context, config | base_config) if config.get("masked_training_priors") else model
+            base = reconstruct(context, base_config, base_model)
+            features = residual_features(base, config)
+            examples.append(features.loc[mask])
+            residuals.append(training_context.loc[mask, "primary_ndvi"] - base.loc[mask, "reconstructed"])
+        examples = pd.concat(examples, ignore_index=True)
+        model["boosting"] = train_booster(examples, pd.concat(residuals, ignore_index=True), config)
+        model["feature_names"] = examples.columns.tolist()
+        model["training_examples"] = len(examples)
     return model
 
 
@@ -200,8 +225,7 @@ def reconstruct(series: pd.DataFrame, config=None, model=None) -> pd.DataFrame:
     supports = np.zeros(len(frame), dtype=int)
     gaps = np.zeros(len(frame), dtype=int)
     flags = [[] for _ in range(len(frame))]
-    for _, part in frame.groupby(["anon_polygon_id", "_season"], sort=False):
-        part = part.sort_values("_day")
+    for part in field_season_segments(frame, config["season_start_month"]):
         index = part.index.to_numpy()
         query = part._day.to_numpy()
         visible = part.loc[part.clean_primary.notna()]
@@ -227,7 +251,10 @@ def reconstruct(series: pd.DataFrame, config=None, model=None) -> pd.DataFrame:
             support = has_left.astype(int) + has_right.astype(int)
             inside = has_left & has_right & (gap <= config["max_gap_days"])
             edge = (support == 1) & (gap <= config["max_edge_days"])
-            if config["algorithm"] in ["neighbor_mean", "catboost_residual"]:
+            algorithm = config["algorithm"]
+            if algorithm == "catboost_residual":
+                algorithm = config.get("residual_base", "neighbor_mean")
+            if algorithm == "neighbor_mean":
                 estimate[inside] = (y[left[inside]] + y[right[inside]]) / 2
             elif config["algorithm"] == "pchip" and len(x) >= 2:
                 estimate[inside] = PchipInterpolator(x, y, extrapolate=False)(query[inside])
