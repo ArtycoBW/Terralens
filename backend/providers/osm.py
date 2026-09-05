@@ -73,7 +73,8 @@ def discover(bbox):
             ):
                 candidates.append(
                     {
-                        "geometry": mapping(geometry),
+                        # Shapely возвращает tuples, а контракт GeoJSON и валидатор — JSON arrays.
+                        "geometry": json.loads(json.dumps(mapping(geometry))),
                         "source_ref": f"https://www.openstreetmap.org/{element['type']}/{element['id']}",
                         "name": element.get("tags", {}).get("name"),
                     }

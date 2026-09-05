@@ -210,6 +210,34 @@ def test_concurrent_posts_create_one_job(client, geometry, active_model, no_disp
     assert Job.objects.count() == 1
 
 
+def test_osm_provider_geometry_survives_worker_validation(client, geometry, no_dispatch, monkeypatch):
+    coordinates = geometry["coordinates"]
+    ring = coordinates[0][0] if geometry["type"] == "MultiPolygon" else coordinates[0]
+    raw = {
+        "elements": [
+            {
+                "type": "way",
+                "id": 542661544,
+                "tags": {"name": "Реальный контур"},
+                "geometry": [{"lon": x, "lat": y} for x, y in ring],
+            }
+        ]
+    }
+    monkeypatch.setattr("providers.osm.get_json", lambda *args, **kwargs: raw)
+    response = client.post(
+        "/api/v1/discoveries",
+        {"bbox": [13.0, 52.49, 13.01, 52.50], "sources": ["osm"]},
+        format="json",
+        HTTP_IDEMPOTENCY_KEY="osm-through-worker",
+    )
+    assert response.status_code == 202
+    execute_job(response.data["job_id"])
+    result = client.get(f"/api/v1/discoveries/{response.data['discovery_id']}").data
+    assert result["status"] == "completed"
+    assert len(result["items"]) == 1
+    assert result["items"][0]["source_ref"].endswith("/way/542661544")
+
+
 def test_discovery_candidates_and_expired_export(
     client, geometry, active_model, providers, no_dispatch, monkeypatch
 ):
