@@ -20,6 +20,8 @@ API должен работать на `127.0.0.1:8000`. Next проксируе
 
 Типы генерируются из общего контракта: `pnpm api:generate`. TypeScript 5.9 закреплён из-за совместимости с openapi-typescript; ESLint 9 — с eslint-plugin-react. Three.js 0.143 сохранён для supplied Ascend, который использует WebGL1Renderer и прежний colour pipeline.
 
+`pnpm dev` и `pnpm build` перед запуском Next копируют MapLibre worker, shared-модуль и лицензию в `public/maplibre`. Эта папка генерируется из установленной версии и не хранится в Git. Не обходите скрипт прямым `next build`: без worker растровая карта видна, но контуры не отрисовываются. [Проверка исправления карты](../docs/MAP_FIX_VERIFICATION.md).
+
 
 Этап 1: сессия и CSRF, навигация, карта, поиск регионов/OSM, рисование и ввод GeoJSON, сохранение полей. Проверки: production build, TypeScript, ESLint, 15 unit tests; Chrome — создание поля по реальному OSM-контуру Потсдама через Next proxy.
 

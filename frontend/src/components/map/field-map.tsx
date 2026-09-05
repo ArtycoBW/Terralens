@@ -50,6 +50,7 @@ export function FieldMap({
     if (!container.current) return;
     let map: maplibregl.Map;
     try {
+      maplibregl.setWorkerUrl("/maplibre/maplibre-gl-worker.mjs");
       map = new maplibregl.Map({
         container: container.current,
         style: {
@@ -132,6 +133,21 @@ export function FieldMap({
         modes: [
           new TerraDrawPolygonMode({
             keyEvents: { cancel: "Escape", finish: "Enter" },
+            showCoordinatePoints: true,
+            styles: {
+              fillColor: "#ebfc72",
+              fillOpacity: 0.2,
+              outlineColor: "#49541e",
+              outlineWidth: 3,
+              closingPointColor: "#ebfc72",
+              closingPointWidth: 7,
+              closingPointOutlineColor: "#13140e",
+              closingPointOutlineWidth: 2,
+              coordinatePointColor: "#ebfc72",
+              coordinatePointWidth: 5,
+              coordinatePointOutlineColor: "#13140e",
+              coordinatePointOutlineWidth: 2,
+            },
           }),
           new TerraDrawSelectMode({
             flags: {
@@ -266,7 +282,7 @@ export function FieldMap({
         role="region"
         aria-label="Карта полей"
       />
-      <div className="absolute top-4 right-14 left-4 flex flex-wrap items-start gap-2">
+      <div className="pointer-events-none absolute top-4 right-14 left-4 flex flex-wrap items-start gap-2 [&_button]:pointer-events-auto">
         <Button
           disabled={!ready}
           onClick={() => {
@@ -290,7 +306,11 @@ export function FieldMap({
           </Button>
         )}
         {drawing && (
-          <Button variant="outline" onClick={() => drawRef.current?.undo()}>
+          <Button
+            variant="outline"
+            className="bg-card! hover:bg-secondary!"
+            onClick={() => drawRef.current?.undo()}
+          >
             Отменить вершину
           </Button>
         )}
@@ -304,13 +324,13 @@ export function FieldMap({
       </div>
       {error && (
         <div
-          className="absolute top-20 left-4 max-w-[260px] rounded-md border border-warning/30 bg-card/95 p-3 text-xs leading-relaxed text-warning"
+          className="pointer-events-none absolute top-20 left-4 max-w-[260px] rounded-md border border-warning/30 bg-card/95 p-3 text-xs leading-relaxed text-warning"
           role="status"
         >
           {error}
         </div>
       )}
-      <div className="map-legend absolute right-4 bottom-8 flex gap-4 rounded-md border border-border bg-card/95 px-3 py-2 text-xs [&_i]:mr-1.5 [&_i]:inline-block [&_i]:size-2 [&_i]:border [&_i]:border-primary [&_i]:bg-primary/20">
+      <div className="map-legend pointer-events-none absolute right-4 bottom-8 flex gap-4 rounded-md border border-border bg-card/95 px-3 py-2 text-xs [&_i]:mr-1.5 [&_i]:inline-block [&_i]:size-2 [&_i]:border [&_i]:border-primary [&_i]:bg-primary/20">
         <span>
           <i />
           Ваши поля

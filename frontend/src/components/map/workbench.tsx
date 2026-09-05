@@ -223,7 +223,7 @@ export function Workbench() {
         className={`group/map grid min-w-0 gap-4 min-[801px]:grid-cols-[300px_minmax(0,1fr)] min-[1280px]:grid-cols-[340px_minmax(0,1fr)] ${mobile ? "is-panel-open" : ""}`}
       >
         <section
-          className="hidden content-start rounded-md border border-border/70 bg-card/50 p-4 min-[801px]:grid min-[801px]:max-h-[calc(100dvh-185px)] min-[801px]:overflow-auto max-[800px]:group-[.is-panel-open]/map:grid grid min-w-0 gap-4"
+          className="hidden min-w-0 content-start gap-5 rounded-2xl border border-border/70 bg-card/50 p-5 min-[801px]:grid min-[801px]:max-h-[calc(100dvh-185px)] min-[801px]:overflow-auto max-[800px]:group-[.is-panel-open]/map:grid"
           aria-label="Управление полями"
         >
           <Tabs
@@ -352,7 +352,7 @@ export function Workbench() {
               </div>
               <Button
                 variant="ghost"
-                className="justify-start px-0 text-primary"
+                className="h-auto min-h-11 justify-start whitespace-normal px-3 py-3 text-left leading-relaxed text-primary"
                 onClick={() => setSelectedPanel("create")}
               >
                 Уже есть контур? Создать поле ↗
