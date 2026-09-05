@@ -321,6 +321,16 @@ test("боковая навигация раскрывается и сохран
     await expect(dialog).not.toBeVisible();
   } else {
     const rail = page.locator("[data-sidebar]");
+    // Headless Chromium may place its initial pointer at (0, 0), over the rail.
+    const heading = page.getByRole("heading", {
+      name: "Рабочая карта",
+      exact: true,
+    });
+    await heading.hover();
+    await expect(rail).toHaveAttribute("data-open", "false");
+    await rail.getByRole("link", { name: "Карта", exact: true }).hover();
+    await expect(rail).toHaveAttribute("data-open", "true");
+    await heading.hover();
     await expect(rail).toHaveAttribute("data-open", "false");
     await rail.getByRole("link", { name: "Карта", exact: true }).focus();
     await expect(rail).toHaveAttribute("data-open", "true");
