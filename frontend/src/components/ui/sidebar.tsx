@@ -54,34 +54,87 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
   );
 }
 export function DesktopSidebar({ children }: { children: ReactNode }) {
-  const { open, setHover } = useSidebar();
+  const { open, pinned, setHover, setPinned } = useSidebar();
   const reduce = useReducedMotion();
   return (
-    <motion.aside
-      data-sidebar
-      data-open={open}
-      className="group/sidebar sticky top-0 hidden h-dvh shrink-0 flex-col overflow-hidden border-r border-border/60 bg-card/45 px-3 py-5 md:flex"
-      animate={{ width: open ? 248 : 76 }}
-      initial={false}
-      transition={{ duration: reduce ? 0 : 0.25, ease: [0.22, 1, 0.36, 1] }}
-      onPointerEnter={(event) => {
-        if (event.pointerType === "mouse") setHover(true);
+    // Keep the workspace width constant: resizing WebGL/canvas on each animation
+    // frame clears their backing buffers and makes charts and the map flash.
+    <div
+      data-pinned={pinned}
+      className="sticky top-0 z-30 hidden h-dvh w-[76px] shrink-0 self-start data-[pinned=true]:w-[248px] md:block"
+    >
+      <motion.aside
+        data-sidebar
+        data-open={open}
+        className="group/sidebar absolute inset-y-0 left-0 overflow-hidden border-r border-border/60 bg-background transition-shadow duration-600 data-[open=true]:shadow-[12px_0_32px_-12px_rgba(0,0,0,0.35)]"
+        animate={{ width: open ? 248 : 76 }}
+        initial={false}
+        transition={{ duration: reduce ? 0 : 0.6, ease: [0.4, 0, 0.2, 1] }}
+        onPointerEnter={(event) => {
+          if (event.pointerType === "mouse") setHover(true);
+        }}
+        onPointerLeave={(event) => {
+          if (!event.currentTarget.contains(document.activeElement))
+            setHover(false);
+        }}
+        onFocusCapture={() => setHover(true)}
+        onBlurCapture={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget))
+            setHover(false);
+        }}
+        onKeyDown={(event) => {
+          if (event.key === "Escape" && !event.defaultPrevented) {
+            setPinned(false);
+            setHover(false);
+          }
+        }}
+      >
+        <div className="flex h-full w-full flex-col px-3 py-5">{children}</div>
+      </motion.aside>
+    </div>
+  );
+}
+export function SidebarInset({ children }: { children: ReactNode }) {
+  const { pinned } = useSidebar();
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      // Reserve space once when pinned. FLIP animates only the position, so
+      // canvases resize once instead of being cleared throughout the transition.
+      layout="position"
+      layoutDependency={pinned}
+      transition={{
+        layout: { duration: reduce ? 0 : 0.6, ease: [0.4, 0, 0.2, 1] },
       }}
-      onPointerLeave={(event) => {
-        if (!event.currentTarget.contains(document.activeElement))
-          setHover(false);
-      }}
-      onFocusCapture={() => setHover(true)}
-      onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setHover(false);
-      }}
+      className="min-w-0 flex-1"
     >
       {children}
-    </motion.aside>
+    </motion.div>
+  );
+}
+export function SidebarLabel({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  const { open } = useSidebar();
+  return (
+    <span
+      aria-hidden={!open}
+      className={cn(
+        "whitespace-nowrap transition-[opacity,transform] duration-300 motion-reduce:transition-none",
+        open ? "translate-x-0 opacity-100" : "-translate-x-1 opacity-0",
+        className,
+      )}
+    >
+      {children}
+    </span>
   );
 }
 export function SidebarToggle() {
-  const { pinned, setPinned } = useSidebar();
+  const { open, pinned, setPinned, setHover } = useSidebar();
   return (
     <Button
       variant="ghost"
@@ -89,7 +142,11 @@ export function SidebarToggle() {
       className="size-11 rounded-xl text-muted-foreground"
       aria-label={pinned ? "Свернуть навигацию" : "Закрепить навигацию"}
       aria-pressed={pinned}
-      onClick={() => setPinned(!pinned)}
+      aria-expanded={open}
+      onClick={() => {
+        setPinned(!pinned);
+        if (pinned) setHover(false);
+      }}
     >
       {pinned ? (
         <IconLayoutSidebarLeftCollapse size={20} />
@@ -134,7 +191,7 @@ export function SidebarLink({
   active?: boolean;
   mobile?: boolean;
 }) {
-  const { open, setMobile } = useSidebar();
+  const { setMobile } = useSidebar();
   return (
     <Link
       href={href}
@@ -148,14 +205,7 @@ export function SidebarLink({
       )}
     >
       <span className="grid size-5 shrink-0 place-items-center">{icon}</span>
-      <span
-        className={cn(
-          "whitespace-nowrap transition-opacity duration-150",
-          open || mobile ? "opacity-100" : "sr-only",
-        )}
-      >
-        {label}
-      </span>
+      {mobile ? <span>{label}</span> : <SidebarLabel>{label}</SidebarLabel>}
     </Link>
   );
 }

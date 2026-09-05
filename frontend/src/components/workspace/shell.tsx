@@ -20,7 +20,8 @@ import {
   MobileSidebar,
   SidebarLink,
   SidebarToggle,
-  useSidebar,
+  SidebarLabel,
+  SidebarInset,
 } from "@/components/ui/sidebar";
 import { useWorkspace } from "./provider";
 const nav = [
@@ -33,7 +34,6 @@ const nav = [
 ] as const;
 function ExitButton({ compact = false }: { compact?: boolean }) {
   const { reset } = useWorkspace();
-  const { open } = useSidebar();
   return (
     <ConfirmAction
       title="Завершить сессию?"
@@ -47,11 +47,9 @@ function ExitButton({ compact = false }: { compact?: boolean }) {
         className="h-12 justify-start gap-3 overflow-hidden rounded-xl px-3 text-muted-foreground"
       >
         <IconLogout className="size-5! shrink-0" />
-        <span
-          className={compact || !open ? "sr-only" : "whitespace-nowrap text-xs"}
-        >
-          Завершить сессию
-        </span>
+        {!compact && (
+          <SidebarLabel className="text-xs">Завершить сессию</SidebarLabel>
+        )}
       </Button>
     </ConfirmAction>
   );
@@ -80,7 +78,6 @@ function Navigation({ mobile = false }: { mobile?: boolean }) {
 }
 function WorkspaceChrome({ children }: { children: React.ReactNode }) {
   const path = usePathname();
-  const { open } = useSidebar();
   const { session } = useWorkspace();
   const current =
     (path.startsWith("/app/analyses/")
@@ -94,33 +91,31 @@ function WorkspaceChrome({ children }: { children: React.ReactNode }) {
       className="flex h-12 items-center gap-3 px-3 text-lg font-medium tracking-tight"
     >
       <IconLeaf size={25} className="shrink-0 text-primary" />
-      <span className={open ? "whitespace-nowrap" : "sr-only"}>TerraLens</span>
+      <SidebarLabel>TerraLens</SidebarLabel>
     </Link>
   );
   return (
-    <div className="min-h-dvh md:flex">
+    <div className="min-h-dvh overflow-x-clip md:flex">
       <DesktopSidebar>
         {brand}
         <div className="mt-8">
           <Navigation />
         </div>
         <div className="mt-auto grid gap-2 pt-8">
-          {open && (
-            <p className="px-3 pb-3 text-xs leading-relaxed text-muted-foreground">
-              Гостевая сессия
-              <br />
-              <span className="text-foreground/80">
-                до {new Date(session.expires_at).toLocaleDateString("ru-RU")}
-              </span>
-            </p>
-          )}
+          <SidebarLabel className="block px-3 pb-3 text-xs leading-relaxed text-muted-foreground">
+            Гостевая сессия
+            <br />
+            <span className="text-foreground/80">
+              до {new Date(session.expires_at).toLocaleDateString("ru-RU")}
+            </span>
+          </SidebarLabel>
           <ExitButton />
           <div className="mt-2 border-t border-border/60 pt-2">
             <SidebarToggle />
           </div>
         </div>
       </DesktopSidebar>
-      <div className="min-w-0 flex-1">
+      <SidebarInset>
         <header className="flex h-16 items-center gap-3 border-b border-border/50 px-4 text-xs text-muted-foreground sm:px-7 lg:px-8">
           <div className="-ml-2 md:hidden">
             <MobileSidebar>
@@ -149,7 +144,7 @@ function WorkspaceChrome({ children }: { children: React.ReactNode }) {
           </div>
         </header>
         <main id="main">{children}</main>
-      </div>
+      </SidebarInset>
     </div>
   );
 }
