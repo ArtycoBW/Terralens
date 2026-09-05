@@ -1,0 +1,178 @@
+{
+  "metadata": {
+    "kind": "recorded_real_provider_response",
+    "source_ref": "https://www.openstreetmap.org/way/542661544",
+    "retrieved_at": "2026-09-04T23:04:03.244547+00:00",
+    "collection": "sentinel-2-c1-l2a",
+    "aggregation": "median masked COG pixels",
+    "note": "Ограниченный live spike, не проверка текущей доступности"
+  },
+  "observations": [
+    {
+      "scene_id": "S2B_T32UQD_20240601T101300_L2A",
+      "date": "2024-06-01",
+      "acquisition_time": "2024-06-01T10:16:14.773000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.7257142857142856,
+      "evi": 0.6331282610388598,
+      "ndwi": 0.3123745819397992,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 199,
+      "pixel_std": 0.06467477712338414,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-metadata-v1",
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T33UUU_20240604T101936_L2A",
+      "date": "2024-06-04",
+      "acquisition_time": "2024-06-04T10:26:12.441000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-metadata-v1",
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2B_T32UQD_20240604T101936_L2A",
+      "date": "2024-06-04",
+      "acquisition_time": "2024-06-04T10:26:13.280000Z",
+      "sensor": "sentinel2",
+      "ndvi": null,
+      "evi": null,
+      "ndwi": null,
+      "valid_pixel_fraction": 0.0,
+      "pixel_count": 0,
+      "pixel_std": null,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-metadata-v1",
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T33UUU_20240606T101605_L2A",
+      "date": "2024-06-06",
+      "acquisition_time": "2024-06-06T10:16:18.586000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.6976903610212384,
+      "evi": 0.532619989671338,
+      "ndwi": 0.23105575200566686,
+      "valid_pixel_fraction": 0.020100502512562814,
+      "pixel_count": 4,
+      "pixel_std": 0.031608876695372864,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-metadata-v1",
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T32UQD_20240606T101605_L2A",
+      "date": "2024-06-06",
+      "acquisition_time": "2024-06-06T10:16:19.253000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.6909039124389803,
+      "evi": 0.5505528542572873,
+      "ndwi": 0.25200769971990805,
+      "valid_pixel_fraction": 0.04020100502512563,
+      "pixel_count": 8,
+      "pixel_std": 0.04312748832192766,
+      "usable": false,
+      "quality_flags": [
+        "low_pixel_coverage"
+      ],
+      "aggregation_version": "s2-median-scl456-scale-metadata-v1",
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    },
+    {
+      "scene_id": "S2A_T33UUU_20240609T102103_L2A",
+      "date": "2024-06-09",
+      "acquisition_time": "2024-06-09T10:26:16.327000Z",
+      "sensor": "sentinel2",
+      "ndvi": 0.7425323817076396,
+      "evi": 0.497577204021118,
+      "ndwi": 0.27404028886355,
+      "valid_pixel_fraction": 1.0,
+      "pixel_count": 199,
+      "pixel_std": 0.059283058803588355,
+      "usable": true,
+      "quality_flags": [],
+      "aggregation_version": "s2-median-scl456-scale-metadata-v1",
+      "ndwi_formula": "(NIR-SWIR)/(NIR+SWIR) moisture index"
+    }
+  ],
+  "weather": [
+    {
+      "date": "2024-06-01",
+      "temperature_c": 19.9,
+      "precipitation_mm": null,
+      "provider": "open_meteo_era5_land"
+    },
+    {
+      "date": "2024-06-02",
+      "temperature_c": 18.9,
+      "precipitation_mm": null,
+      "provider": "open_meteo_era5_land"
+    },
+    {
+      "date": "2024-06-03",
+      "temperature_c": 16.0,
+      "precipitation_mm": null,
+      "provider": "open_meteo_era5_land"
+    },
+    {
+      "date": "2024-06-04",
+      "temperature_c": 16.7,
+      "precipitation_mm": null,
+      "provider": "open_meteo_era5_land"
+    },
+    {
+      "date": "2024-06-05",
+      "temperature_c": 16.3,
+      "precipitation_mm": null,
+      "provider": "open_meteo_era5_land"
+    },
+    {
+      "date": "2024-06-06",
+      "temperature_c": 15.6,
+      "precipitation_mm": null,
+      "provider": "open_meteo_era5_land"
+    },
+    {
+      "date": "2024-06-07",
+      "temperature_c": 15.8,
+      "precipitation_mm": null,
+      "provider": "open_meteo_era5_land"
+    },
+    {
+      "date": "2024-06-08",
+      "temperature_c": 18.5,
+      "precipitation_mm": null,
+      "provider": "open_meteo_era5_land"
+    },
+    {
+      "date": "2024-06-09",
+      "temperature_c": 15.8,
+      "precipitation_mm": null,
+      "provider": "open_meteo_era5_land"
+    },
+    {
+      "date": "2024-06-10",
+      "temperature_c": 14.7,
+      "precipitation_mm": null,
+      "provider": "open_meteo_era5_land"
+    }
+  ]
+}
