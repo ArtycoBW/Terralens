@@ -208,3 +208,53 @@ def test_one_observed_day_with_reference_does_not_imply_normal_period():
     assert summary["observed_days"] == 2
     assert sum(x["clean_primary"] is not None and x["zscore"] is not None for x in daily) == 1
     assert summary["overall_status"] == "insufficient_data"
+
+
+def test_two_referenced_days_do_not_mark_a_mostly_unassessed_period_normal():
+    history = [
+        observation(f"{year}-06-05", value, "landsat")
+        for year, value in [(2021, 0.3), (2022, 0.5), (2023, 0.7)]
+    ]
+    observations = [
+        observation("2024-06-01", 0.5),
+        observation("2024-06-04", 0.5, "landsat"),
+        observation("2024-06-07", 0.5),
+        observation("2024-06-10", 0.5, "landsat"),
+    ]
+    daily, events, summary = calculate(
+        "field", None, date(2024, 6, 1), date(2024, 6, 10), observations, [], baseline(), history
+    )
+    assert sum(row["zscore"] is not None for row in daily) == 2
+    assert events == []
+    assert summary["overall_status"] == "insufficient_data"
+
+    all_same_sensor = [dict(row, sensor="landsat") for row in observations]
+    _, events, complete = calculate(
+        "field", None, date(2024, 6, 1), date(2024, 6, 10), all_same_sensor, [], baseline(), history
+    )
+    assert events == []
+    assert complete["overall_status"] == "normal"
+
+
+def test_negative_observed_signal_remains_visible_with_sparse_reference():
+    history = [
+        observation(f"{year}-06-05", value, "landsat")
+        for year, value in [(2021, 0.5), (2022, 0.6), (2023, 0.7)]
+    ]
+    _, events, summary = calculate(
+        "field",
+        None,
+        date(2024, 6, 1),
+        date(2024, 6, 10),
+        [
+            observation("2024-06-01", 0.5),
+            observation("2024-06-04", 0.1, "landsat"),
+            observation("2024-06-07", 0.5),
+            observation("2024-06-10", 0.1, "landsat"),
+        ],
+        [],
+        baseline(),
+        history,
+    )
+    assert events
+    assert summary["overall_status"] == "critical"

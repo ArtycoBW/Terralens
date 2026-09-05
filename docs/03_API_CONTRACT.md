@@ -8,6 +8,7 @@
 
 - Base URL `/api/v1`. JSON UTF-8, snake_case, UUID строки, timestamps ISO8601 UTC, date `YYYY-MM-DD` без timezone-конвертации в UI.
 - Float finite либо null. NaN/Infinity в JSON запрещены. NDVI — безразмерный; температура °C, осадки мм/сутки, площадь га.
+- `summary.overall_status`: найденные события имеют приоритет. Без событий `normal` требует минимум двух пригодных наблюдаемых дней с конечным z и доступной нормы хотя бы для половины дат периода; иначе `insufficient_data`. Правило фиксируется в `summary_rule` и не меняет старые сохранённые runs.
 - GeoJSON Polygon/MultiPolygon, EPSG:4326, координаты `[lon,lat]`. Bbox `[west,south,east,north]`. Geometry version обязательна в run.
 - Лимит площади одинаков для всех стран и приходит в `capabilities.limits.max_polygon_area_ha` (по умолчанию 10 000 га = 100 км²). При превышении POST/PATCH polygon возвращает 422 `geometry_too_large`: `details={field:"geometry",reason:"area_limit",unit:"ha",value:<фактическая площадь>,limit:<предел>}`. Сообщение содержит площадь, предел и подсказку уменьшить контур; геометрия не сохраняется.
 - List envelope: `{items:[], next_cursor:null, total:null}`. Default limit 50, max 200; bbox discovery max задаёт capabilities. Series имеет отдельную временную resolution/pagination схему.

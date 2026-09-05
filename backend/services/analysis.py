@@ -195,7 +195,12 @@ def calculate(
         current = current + 1 if row["clean_primary"] is None else 0
         longest = max(longest, current)
     latest = next((x for x in reversed(daily) if x["reconstructed"] is not None), None)
-    enough = sum(x["clean_primary"] is not None and x["zscore"] is not None for x in daily) >= 2
+    # Два пригодных дня не характеризуют весь период, если почти вся норма отсутствует.
+    # Отрицательные события сохраняют приоритет; «норма» требует покрытия хотя бы половины дат.
+    referenced_days = sum(x["zscore"] is not None for x in daily)
+    enough = sum(
+        x["clean_primary"] is not None and x["zscore"] is not None for x in daily
+    ) >= 2 and referenced_days * 2 >= len(daily)
     overall = (
         "critical"
         if any(x["severity"] == "critical" for x in events)
@@ -214,7 +219,7 @@ def calculate(
         "longest_gap_days": longest,
         "anomaly_period_count": len(events),
         "overall_status": overall,
-        "summary_rule": "event-max-severity-else-two-clean-days-with-valid-reference-v2",
+        "summary_rule": "event-max-else-two-clean-days-and-half-period-reference-v3",
         "latest_estimate": {
             "date": latest["date"],
             "value": latest["reconstructed"],
