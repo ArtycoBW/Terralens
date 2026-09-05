@@ -960,6 +960,7 @@ export interface components {
          * @description * `validating` - validating
          *     * `discovering` - discovering
          *     * `fetching_satellite` - fetching_satellite
+         *     * `fetching_reference` - fetching_reference
          *     * `fetching_weather` - fetching_weather
          *     * `preprocessing` - preprocessing
          *     * `reconstructing` - reconstructing
@@ -967,7 +968,7 @@ export interface components {
          *     * `exporting` - exporting
          * @enum {string}
          */
-        StageEnum: "validating" | "discovering" | "fetching_satellite" | "fetching_weather" | "preprocessing" | "reconstructing" | "detecting" | "exporting";
+        StageEnum: "validating" | "discovering" | "fetching_satellite" | "fetching_reference" | "fetching_weather" | "preprocessing" | "reconstructing" | "detecting" | "exporting";
         /**
          * @description * `completed` - completed
          *     * `partial` - partial

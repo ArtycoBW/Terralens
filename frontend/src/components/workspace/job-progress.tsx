@@ -1,6 +1,6 @@
 "use client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { api, label, terminalJob, type Job } from "@/lib/api";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,7 @@ export function JobProgress({
   onRetry?: (job: Job) => void;
 }) {
   const client = useQueryClient();
+  const notified = useRef<string | null>(null);
   const job = useQuery({
     queryKey: ["job", id],
     queryFn: ({ signal }) => api<Job>(`jobs/${id}`, { signal }),
@@ -30,11 +31,17 @@ export function JobProgress({
     },
   });
   useEffect(() => {
-    if (job.data?.state && terminalJob(job.data.state)) {
+    const completion = `${id}:${job.data?.state}`;
+    if (
+      job.data?.state &&
+      terminalJob(job.data.state) &&
+      notified.current !== completion
+    ) {
+      notified.current = completion;
       onFinish?.();
       client.invalidateQueries({ queryKey: ["run"] });
     }
-  }, [job.data?.state, onFinish, client]);
+  }, [id, job.data?.state, onFinish, client]);
   return (
     <div className="grid gap-3 rounded-md border border-border bg-secondary/30 p-4">
       <ErrorNotice error={job.error || mutate.error} />
@@ -57,8 +64,8 @@ export function JobProgress({
           >
             {job.data.progress == null
               ? "Ожидаем данные"
-              : `${Math.round(job.data.progress * 100)}%`}{" "}
-            · Попытка {job.data.attempt}
+              : `${Math.round(job.data.progress * 100)}%`}
+            {job.data.attempt > 1 ? ` · Попытка ${job.data.attempt}` : ""}
             {job.data.cancel_requested ? " · Отмена запрошена" : ""}
           </p>
           {job.data.error && (

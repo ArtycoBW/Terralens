@@ -123,6 +123,7 @@ export const label: Record<string, string> = {
   validating: "Проверка",
   discovering: "Поиск контуров",
   fetching_satellite: "Спутниковые снимки",
+  fetching_reference: "Наблюдения прошлых сезонов",
   fetching_weather: "Погодные данные",
   preprocessing: "Очистка данных",
   reconstructing: "Восстановление NDVI",

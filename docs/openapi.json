@@ -4626,6 +4626,7 @@
                     "validating",
                     "discovering",
                     "fetching_satellite",
+                    "fetching_reference",
                     "fetching_weather",
                     "preprocessing",
                     "reconstructing",
@@ -4633,7 +4634,7 @@
                     "exporting"
                 ],
                 "type": "string",
-                "description": "* `validating` - validating\n* `discovering` - discovering\n* `fetching_satellite` - fetching_satellite\n* `fetching_weather` - fetching_weather\n* `preprocessing` - preprocessing\n* `reconstructing` - reconstructing\n* `detecting` - detecting\n* `exporting` - exporting"
+                "description": "* `validating` - validating\n* `discovering` - discovering\n* `fetching_satellite` - fetching_satellite\n* `fetching_reference` - fetching_reference\n* `fetching_weather` - fetching_weather\n* `preprocessing` - preprocessing\n* `reconstructing` - reconstructing\n* `detecting` - detecting\n* `exporting` - exporting"
             },
             "StatusEnum": {
                 "enum": [

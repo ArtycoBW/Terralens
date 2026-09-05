@@ -90,8 +90,12 @@ def analyze(job):
     }
     max_scenes = run.config.get("max_scenes", settings.MAX_SCENES)
 
-    def collect(provider, fetch, start, end):
-        checkpoint(job.id, "fetching_satellite")
+    # Plan all sensor/season requests before reporting progress. Provider callbacks
+    # count scenes within one request, not within the complete analysis.
+    batches = []
+
+    def collect(provider, fetch, start, end, report):
+        report(0, 1)
         records, source = source_snapshot(
             run,
             provider,
@@ -102,7 +106,7 @@ def analyze(job):
                 start,
                 end,
                 max_scenes=max_scenes,
-                progress=lambda i, n: checkpoint(job.id, "fetching_satellite", i / n if n else None),
+                progress=report,
             ),
         )
         snapshots.append(source)
@@ -130,10 +134,7 @@ def analyze(job):
         if sensor not in sources:
             continue
         provider, fetch, first_year = sources[sensor]
-        try:
-            observations.extend(collect(provider, fetch, run.period_from, run.period_to))
-        except ProviderError as exc:
-            warn_failure(exc, run.period_from, run.period_to)
+        batches.append((provider, fetch, run.period_from, run.period_to, observations))
         for delta in range(1, run.config["options"].get("climatology_years", 3) + 1):
 
             def prior_date(day):
@@ -154,12 +155,28 @@ def analyze(job):
                 continue
             # Окно нормы требует контекста по обе стороны даты прошлого сезона.
             start, end = start - timedelta(days=15), end + timedelta(days=15)
-            try:
-                history.extend(collect(provider, fetch, start, end))
-            except ProviderError as exc:
-                warn_failure(exc, start, end)
-    if "era5_land" in run.config["sources"]:
-        checkpoint(job.id, "fetching_weather")
+            batches.append((provider, fetch, start, end, history))
+
+    has_weather = "era5_land" in run.config["sources"]
+    satellite_share = 0.8 if has_weather else 0.9
+    for index, (provider, fetch, start, end, target) in enumerate(batches):
+        stage = "fetching_reference" if target is history else "fetching_satellite"
+        fraction = 0.0
+
+        def report(i, n):
+            nonlocal fraction
+            fraction = max(fraction, min(1.0, max(0.0, i / n if n else 0.0)))
+            checkpoint(job.id, stage, satellite_share * (index + fraction) / len(batches))
+
+        try:
+            target.extend(collect(provider, fetch, start, end, report))
+        except ProviderError as exc:
+            warn_failure(exc, start, end)
+        # Cached, empty and failed requests also finish their part of the plan.
+        # Cancellation propagates before this checkpoint and never publishes success.
+        report(1, 1)
+    if has_weather:
+        checkpoint(job.id, "fetching_weather", satellite_share)
         try:
             weather, source = source_snapshot(
                 run,
@@ -172,7 +189,7 @@ def analyze(job):
             warnings.extend(source.metadata["warnings"])
         except ProviderError as exc:
             warnings.append({"code": exc.code, "provider": exc.provider, "affected_fields": ["weather"]})
-    checkpoint(job.id, "reconstructing")
+    checkpoint(job.id, "reconstructing", 0.9)
     model = worker_model(run.model_version.manifest_path, run.model_version.artifact_hash)
     daily, events, summary = calculate(
         run.polygon_version.polygon_id,
@@ -185,7 +202,7 @@ def analyze(job):
         history,
         crop_seasons=run.config.get("crop_seasons", []),
     )
-    checkpoint(job.id, "detecting")
+    checkpoint(job.id, "detecting", 0.97)
     if not any(x["reference_years"] >= 3 for x in daily):
         warnings.append(
             {"code": "insufficient_reference", "message": "Не набрано три сопоставимых исторических сезона"}

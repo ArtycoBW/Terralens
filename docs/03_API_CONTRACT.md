@@ -137,7 +137,7 @@ Response 202: `{run_id, job_id, state:"queued", reused:false}`. Повтор о�
 
 ## 4. State machine и ошибки
 
-Job state: `queued|running|succeeded|failed|cancelled`; run state: `queued|running|completed|partial|no_data|failed|cancelled`. Job succeeded может иметь run partial/no_data. Job.progress — число 0…1 или null; Job.stage — стабильный enum из backend ТЗ. Frontend не должен считать job succeeded равным run completed без чтения результата.
+Job state: `queued|running|succeeded|failed|cancelled`; run state: `queued|running|completed|partial|no_data|failed|cancelled`. Job succeeded может иметь run partial/no_data. Job.progress — число 0…1 или null; Job.stage — стабильный enum OpenAPI. `fetching_reference` обозначает сбор прошлых сезонов. Прогресс анализа монотонен в рамках одной попытки: 0–80% — все запросы спутников/сезонов (до 90% без погоды), до 90% — погода, 90–97% — расчёт, 100% — только после атомарного сохранения результата. Кеш, пустой ответ и отказ отдельного источника завершают соответствующий шаг плана. Это доля этапов работы, а не оценка оставшегося времени; новый job при явном retry начинает собственный прогресс. Frontend не должен считать job succeeded равным run completed без чтения результата.
 
 `Job`: id,kind,state,stage,progress,attempt,created_at,started_at,finished_at,cancel_requested,retryable,error nullable,result={type,id} nullable,parent_job_id nullable.
 

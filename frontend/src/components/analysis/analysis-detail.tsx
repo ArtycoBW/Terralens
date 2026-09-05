@@ -16,7 +16,6 @@ import {
 import { Label } from "@/components/ui/label";
 
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -42,16 +41,16 @@ import {
 import { JobProgress } from "@/components/workspace/job-progress";
 import { Explanation, readableMessage } from "./explanation";
 import { Exports } from "./exports";
-const Chart = dynamic(() => import("./chart").then((m) => m.Chart), {
-  ssr: false,
-  loading: () => (
-    <div className="flex min-h-40 flex-col items-center justify-center gap-4 rounded-md border border-dashed border-border px-6 py-12 text-center text-sm leading-relaxed text-muted-foreground">
-      Загружаем график…
-    </div>
-  ),
-});
 export function AnalysisDetail({ id }: { id: string }) {
   const client = useQueryClient();
+  // Load the chart while the worker runs, so publication needs no second loader.
+  const chartModule = useQuery({
+    queryKey: ["analysis-chart-module"],
+    queryFn: async () => (await import("./chart")).Chart,
+    staleTime: Infinity,
+    retry: 1,
+  });
+  const Chart = chartModule.data;
   const run = useQuery({
     queryKey: ["run", id],
     queryFn: ({ signal }) => api<Run>(`analyses/${id}`, { signal }),
@@ -90,6 +89,9 @@ export function AnalysisDetail({ id }: { id: string }) {
     () => ndviOption(points.data || [], anomalies.data || [], range),
     [points.data, anomalies.data, range],
   );
+  const preparingResult =
+    complete &&
+    (points.isPending || anomalies.isPending || chartModule.isPending);
   const selected = points.data?.find((p) => p.date === date);
   const visible = anomalies.data?.filter(
     (a) => !severity || a.severity === severity,
@@ -130,7 +132,13 @@ export function AnalysisDetail({ id }: { id: string }) {
         <Status value={r.state} />
       </div>
       <ErrorNotice
-        error={run.error || points.error || anomalies.error || quality.error}
+        error={
+          run.error ||
+          points.error ||
+          anomalies.error ||
+          quality.error ||
+          chartModule.error
+        }
       />
       {polygon.data && polygon.data.current_version !== r.polygon_version && (
         <div className="rounded-md border border-warning/25 bg-warning/5 px-4 py-3 text-sm leading-relaxed break-words text-warning mb-5">
@@ -144,6 +152,19 @@ export function AnalysisDetail({ id }: { id: string }) {
           onRetry={() => client.invalidateQueries({ queryKey: ["run", id] })}
         />
       )}
+      {preparingResult && (
+        <div
+          role="status"
+          className="rounded-md border border-border bg-secondary/30 p-4 text-sm text-muted-foreground"
+        >
+          Анализ рассчитан. Подготавливаем результат…
+        </div>
+      )}
+      {chartModule.isError && (
+        <Button variant="outline" onClick={() => chartModule.refetch()}>
+          Повторить загрузку графика
+        </Button>
+      )}
       <div className="grid min-w-0 gap-4">
         {r.warnings.map((w, i) => (
           <div
@@ -154,7 +175,7 @@ export function AnalysisDetail({ id }: { id: string }) {
           </div>
         ))}
       </div>
-      {s && (
+      {s && !preparingResult && (
         <div className="mb-6 grid grid-cols-2 gap-3 xl:grid-cols-4 [&>div]:border-0 [&>div]:border-l [&>div]:border-border [&>div]:bg-transparent [&>div]:py-3 mt-5">
           <div className="min-w-0 rounded-md border border-border/70 bg-card p-5 sm:p-6">
             <p className="text-sm text-muted-foreground">
@@ -204,7 +225,7 @@ export function AnalysisDetail({ id }: { id: string }) {
           </div>
         </div>
       )}
-      {complete && (
+      {complete && !preparingResult && (
         <Tabs value={tab} onValueChange={setTab} className="mt-5">
           <TabsList className="w-full justify-start overflow-auto">
             <TabsTrigger value="dynamics">Динамика NDVI</TabsTrigger>
@@ -232,17 +253,15 @@ export function AnalysisDetail({ id }: { id: string }) {
                   Сбросить масштаб
                 </Button>
               </div>
-              {points.isPending ? (
-                <div className="flex min-h-40 flex-col items-center justify-center gap-4 rounded-md border border-dashed border-border px-6 py-12 text-center text-sm leading-relaxed text-muted-foreground">
-                  Загружаем ежедневный ряд…
+              {!points.data?.length ? (
+                <div className="flex min-h-40 items-center justify-center rounded-md border border-dashed border-border p-6 text-sm text-muted-foreground">
+                  {points.isError
+                    ? "Ежедневный ряд недоступен"
+                    : "Нет значений за этот период"}
                 </div>
-              ) : !points.data?.length ? (
-                <div className="flex min-h-40 flex-col items-center justify-center gap-4 rounded-md border border-dashed border-border px-6 py-12 text-center text-sm leading-relaxed text-muted-foreground">
-                  Нет значений за этот период
-                </div>
-              ) : (
+              ) : Chart ? (
                 <Chart option={chart} onDate={setDate} />
-              )}
+              ) : null}
               <p className="text-xs leading-relaxed text-muted-foreground">
                 Разброс сезонной нормы (±σ) и интервал прогноза — разные
                 величины. Интервал откалиброван на benchmark; для реальных
@@ -277,7 +296,7 @@ export function AnalysisDetail({ id }: { id: string }) {
               <p className="text-sm leading-relaxed text-muted-foreground">
                 Погода в центре поля · °C и мм на отдельных осях
               </p>
-              {points.data && (
+              {points.data && Chart && (
                 <Chart
                   height={300}
                   option={{

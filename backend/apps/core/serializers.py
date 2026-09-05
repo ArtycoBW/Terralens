@@ -116,6 +116,7 @@ class JobResponse(serializers.Serializer):
             "validating",
             "discovering",
             "fetching_satellite",
+            "fetching_reference",
             "fetching_weather",
             "preprocessing",
             "reconstructing",

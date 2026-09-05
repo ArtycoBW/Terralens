@@ -374,3 +374,63 @@ test("истёкшая сессия скрывает приватный инте
     page.getByRole("navigation", { name: "Основная навигация" }),
   ).not.toBeVisible();
 });
+
+test("переходит от общего прогресса к результату без повторной загрузки рядов", async ({
+  page,
+}) => {
+  await mockApi(page, { state: "running" });
+  let finished = false;
+  let seriesRequests = 0;
+  await page.route(`**/api/v1/analyses/${run.id}`, (route) =>
+    route.fulfill({
+      json: { ...run, state: finished ? "partial" : "running" },
+    }),
+  );
+  await page.route("**/api/v1/jobs/*", (route) =>
+    route.fulfill({
+      json: {
+        id: run.job_id,
+        kind: "analysis",
+        state: finished ? "succeeded" : "running",
+        stage: finished ? "detecting" : "fetching_reference",
+        progress: finished ? 1 : 0.72,
+        attempt: 1,
+        retryable: false,
+        cancel_requested: false,
+      },
+    }),
+  );
+  let releaseSeries!: () => void;
+  const gate = new Promise<void>((resolve) => {
+    releaseSeries = resolve;
+  });
+  await page.route("**/api/v1/analyses/*/series?*", async (route) => {
+    seriesRequests++;
+    await gate;
+    await route.fallback();
+  });
+  await page.goto(`/app/analyses/${run.id}`);
+  await expect(page.getByRole("progressbar")).toHaveAttribute(
+    "aria-valuenow",
+    "72",
+  );
+  await expect(
+    page.getByText("Наблюдения прошлых сезонов", { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText("Попытка 1", { exact: false })).toHaveCount(0);
+  finished = true;
+  await expect(
+    page.getByRole("status").filter({ hasText: "Подготавливаем результат" }),
+  ).toBeVisible();
+  await expect(page.getByRole("tab", { name: "Динамика NDVI" })).toHaveCount(0);
+  releaseSeries();
+  await expect(page.getByRole("tab", { name: "Динамика NDVI" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Растительность в контексте сезона" }),
+  ).toBeVisible();
+  await expect(page.getByText(/Загружаем (ежедневный ряд|график)/)).toHaveCount(
+    0,
+  );
+  await expect(page.getByRole("progressbar")).toHaveCount(0);
+  expect(seriesRequests).toBe(1);
+});
