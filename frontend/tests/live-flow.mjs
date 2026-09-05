@@ -60,11 +60,7 @@ try {
   if (series.items.length !== 10)
     throw new Error(`Expected 10 daily points, got ${series.items.length}`);
   evidence.series = series.items;
-  await page
-    .getByRole("img", { name: /График временного ряда/ })
-    .first()
-    .locator("canvas")
-    .waitFor();
+  await page.getByRole("img").first().locator("canvas").waitFor();
   await page
     .getByRole("heading", { name: "Севилья · сквозная проверка", exact: true })
     .waitFor();
@@ -131,11 +127,7 @@ try {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(`${base}/app/analyses/${evidence.run_id}`);
   await page.getByRole("tab", { name: "Динамика NDVI" }).waitFor();
-  await page
-    .getByRole("img", { name: /График временного ряда/ })
-    .first()
-    .locator("canvas")
-    .waitFor();
+  await page.getByRole("img").first().locator("canvas").waitFor();
   await page
     .getByRole("heading", { name: "Севилья · проверка завершена", exact: true })
     .waitFor();

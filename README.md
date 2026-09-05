@@ -1,10 +1,10 @@
-# TerraLens — спецификация решения для Космохакатона
+# TerraLens — спутниковая аналитика полей
 
 
 TerraLens — рабочее название сервиса мониторинга сельскохозяйственных территорий: выбор поля на карте → автоматический сбор спутниковых и погодных данных → восстановление NDVI → поиск и объяснение негативных аномалий.
 
 
-## Запуск backend
+## Запуск всего приложения
 
 Требуется Docker с запущенным daemon. Из корня:
 
@@ -12,7 +12,7 @@ TerraLens — рабочее название сервиса мониторин�
 docker compose up --build -d
 ```
 
-Compose запускает миграции отдельным одноразовым сервисом и регистрирует включённый в репозиторий модельный артефакт. API: `http://localhost:8000/api/v1`, Swagger: `http://localhost:8000/api/v1/docs`, readiness: `http://localhost:8000/api/v1/health/ready`. Порты открыты только на loopback. Frontend в Compose пока не включён. Настройки локального запуска перечислены в `.env.example`; для публичного размещения нужны собственные секреты, домен и HTTPS.
+Откройте [TerraLens](http://localhost:3001), [рабочую карту](http://localhost:3001/app) или [Swagger](http://localhost:8000/api/v1/docs). Compose запускает Next.js, API, очередь, scheduler, PostGIS и Redis; миграции и регистрация модели выполняются автоматически. Next проксирует `/api/v1`, сохраняя единый origin для сессии и CSRF. Readiness: `http://localhost:8000/api/v1/health/ready`. Порты открыты только на loopback; порт frontend задаёт `FRONTEND_PORT` (по умолчанию 3001). Настройки — в `.env.example`; публичному размещению нужны собственные секреты, домен и HTTPS.
 
 ## Автономный ML
 
@@ -40,7 +40,7 @@ python3 -m venv .venv-ml
 
 ```text
 backend/                  Django API, PostGIS, Celery, провайдеры, тесты и SPEC
-frontend/                 Next.js интерфейс карты и аналитики, SPEC и Ascend
+frontend/                 Next.js-приложение, лендинг, тесты и SPEC
   references/ascend/       распакованный исходный Ascend без изменений
 ml/                       самостоятельный terralens_ml, configs, модель и тесты
 docs/                     общие спецификации, критерии и план сдачи
@@ -52,6 +52,7 @@ scripts/audit_inputs.py    воспроизводимый аудит CSV, арх
 
 ## Выбранная архитектура
 
+Python 3.12 + Django 5.2 LTS / GeoDjango + Django REST Framework, PostgreSQL/PostGIS, Celery, Redis. ML: pandas, NumPy, SciPy, scikit-learn и CatBoost. Frontend: Next.js App Router, TypeScript strict, shadcn/ui, Tailwind CSS, TanStack Query, MapLibre/Terra Draw, ECharts; Three.js + GSAP + Lenis для Ascend. Зависимости закреплены в uv.lock, requirements.lock и frontend/pnpm-lock.yaml; базовые контейнерные образы — по digest.
 
 ## Важные результаты анализа
 
